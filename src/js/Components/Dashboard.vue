@@ -9,50 +9,55 @@
                     </el-col>
                     <el-col :span="12" style="padding: 12px;">
                         <div>
-                            <el-button style="float:right" icon="el-icon-plus" type="primary" size="mini" click="addNew">Add new</el-button>
+                            <el-tooltip effect="dark" style="float:right;"
+                                content="Click to copy shortcode"
+                                title="Click to copy shortcode"
+                                placement="top">
+                                <code class="copy"
+                                        data-clipboard-text='[buymecoffee type="button"]'>
+                                    <i class="el-icon-document"></i> [buymecoffee type="button"]
+                                </code>
+                            </el-tooltip>
                         </div>
                     </el-col>
                 </el-row>
             </el-header>
             <el-main>
                 <el-row class="wpm-template">
-                    <div class="wpm-template-inner"
-                        v-for="template in templates"
-                        :key="template.id">
-                        <div class="wpm-template-top">
-                            <h2>
-                                {{ template.title }}
-                            </h2>
-                            <p>supports: {{template.supports}}</p>
-                            <div style="margin-bottom:20px;">
-                                <el-tag
-                                    v-for="tag in template.methods"
-                                    :key="tag"
-                                    size="mini"
-                                    type="info"
-                                    effect="light">
-                                    {{tag}}
-                                </el-tag>
-                            </div>
-                            <el-tooltip effect="dark"
-                                        content="Click to copy shortcode"
-                                        title="Click to copy shortcode"
-                                        placement="top">
-                                <code class="copy"
-                                      :data-clipboard-text='`[buymecoffee id="${template.id}"]`'>
-                                    <i class="el-icon-document"></i> [buymecoffee id="{{ template.id }}"]
-                                </code>
-                            </el-tooltip>
-                        </div>
-                        <div class="wpm-template-bottom">
-                            <el-button-group style="float:right">
-                                <el-button size="mini" plain type="warning" @click="preview(template.id)">
-                                    <i class="el-icon-edit"></i>
-                                </el-button>
-                                <el-button size="mini" plain type="primary" @click="preview(template.id)">
-                                    <i class="el-icon-view"></i>
-                                </el-button>
-                            </el-button-group>
+                    <div class="wpm-template-inner">
+                        <div class="wpm-bmc-editor">
+                            <el-row :gutter="20">
+                                <el-col :span="12">
+                                    <el-form>
+                                        <el-form-item label="Button text">
+                                            <el-input size="small" type="text" v-model="template.buttonText"></el-input>
+                                        </el-form-item>
+                                        <el-form-item>
+                                            <el-checkbox true-label="yes" false-label="no" v-model="template.enableName">Collect name of donor</el-checkbox>
+                                        </el-form-item>
+                                        <el-form-item>
+                                            <el-checkbox true-label="yes" false-label="no" v-model="template.enableEmail">Collect email of donor</el-checkbox>
+                                        </el-form-item>
+                                        <el-form-item>
+                                            <el-checkbox true-label="yes" false-label="no" v-model="template.enableMessage">Enable message option when donate</el-checkbox>
+                                        </el-form-item>
+                                        <el-form-item label="">
+                                             <p>Enable pay method</p>
+                                              <el-checkbox-group v-model="template.methods">
+                                                <el-checkbox v-for="method in methods" :key="method.value" :label="method.name"></el-checkbox>
+                                            </el-checkbox-group>
+                                        </el-form-item>
+                                        <el-collapse v-model="template.advanced.enable">
+                                            <el-collapse-item title="Advanced" name="yes">
+
+                                            </el-collapse-item>
+                                        </el-collapse>
+                                    </el-form>
+                                </el-col>
+                                <el-col :span="12" class="wpm-btm-preview">
+                                    <button size="medium">{{template.buttonText}}</button>
+                                </el-col>
+                            </el-row>
                         </div>
                     </div>
                 </el-row>
@@ -68,44 +73,31 @@ export default {
     data(){
         return {
             vueJs: 'https://vuejs.org/',
-            templates: [
+            methods: [
                 {
-                    id: '1',
-                    title: 'Yellow Button',
-                    description: 'A yellow button',
-                    supports: 3,
-                    methods: ['stripe', 'paypal'],
-                    created_at: '2022-01-01',
-                    updated_at: '2022-01-01',
+                    name: 'PayPal',
+                    value: 'paypal'
                 },
                 {
-                    id: '2',
-                    title: 'Blue Button',
-                    description: 'A blue button',
-                    supports: 2,
-                    methods: ['stripe', 'paypal'],
-                    created_at: '2022-01-01',
-                    updated_at: '2022-01-01',
-                },
-                {
-                    id: '3',
-                    title: 'Green Button',
-                    description: 'A green button',
-                    supports: 1,
-                    methods: ['stripe', 'paypal'],
-                    created_at: '2022-01-01',
-                    updated_at: '2022-01-01',
-                },
-                {
-                    id: '4',
-                    title: 'Red Button',
-                    description: 'A red button',
-                    supports: 0,
-                    methods: ['stripe', 'paypal'],
-                    created_at: '2022-01-01',
-                    updated_at: '2022-01-01',
+                    name: 'Stripe',
+                    value: 'stripe'
                 }
-            ]
+            ],
+            template: {
+                buttonText: 'Buy Me Coffee',
+                enableMessage: 'yes',
+                enableName: 'yes',
+                enableEmail: 'yes',
+                methods: [],
+                advanced: {
+                    enable: 'yes',
+                    minWidth: '180px',
+                    textAlign: 'center',
+                    minHeight: '43px',
+                    fontSize: '19px'
+                }
+
+            }
         }
     },
     methods: {
