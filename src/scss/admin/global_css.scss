@@ -1,0 +1,76 @@
+.topnav {
+    overflow: hidden;
+    display: flex;
+    min-height: 90vh;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0px 18px;
+
+    /* Style the links inside the navigation bar */
+    a {
+        min-width: 96px;
+        font-family: cursive;
+        float: left;
+        color: black;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        border: 1px solid #ccc;
+        border-radius: 25px;
+        margin-bottom: 33px;
+    }
+
+    a:focus{
+        outline: none !important;
+    }
+    a:active {
+        outline: none !important;
+    }
+    /* Change the color of links on hover */
+    a:hover {
+        outline: none !important;
+        background-color: #ddd;
+        outline: none;
+        color: black;
+    }
+
+    /* Add a color to the active/current link */
+    a.ninja-tab-active {
+        color: #ffa92c;
+        border-bottom: 2px solid #ffa92c;
+    }
+}
+a:focus{
+    outline: none !important;
+    box-shadow: none !important;
+}
+a:active {
+    outline: 0 !important;
+}
+.main-content {
+    background: #f4cc030a;
+    width: 100%;
+    margin-right: 26px;
+    border: 1px solid #ffa92b;
+    border-radius: 15px;
+}
+
+.wpm-template {
+    &-inner {
+        span.el-tag {
+            margin-right: 9px;
+        }
+        box-shadow: rgb(0 0 0 / 10%) 0px 1px 3px;
+        padding: 34px;
+        margin-right: 18px;
+        width: 230px;
+        display: inline-grid;
+        margin-bottom: 18px;
+        background: white;
+        border-radius: 12px;
+    }
+    &-bottom {
+        margin-top: 20px;
+    }
+}
