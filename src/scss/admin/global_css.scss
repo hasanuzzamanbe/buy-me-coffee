@@ -54,6 +54,19 @@ a:active {
     margin-right: 26px;
     border: 1px solid #ffa92b;
     border-radius: 15px;
+    .el-collapse-item__header {
+        background: none;
+    }
+    .el-collapse-item__wrap {
+        background: none;
+    }
+    .wpm-btm-preview {
+        display: flex;
+        align-content: space-around;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
 }
 
 .wpm-template {

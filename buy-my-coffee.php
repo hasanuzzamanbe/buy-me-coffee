@@ -47,8 +47,17 @@ if (!defined('BUYMECOFFEE_VERSION')) {
             if (is_admin()) {
                 $this->adminHooks();
             }
+            $this->loadFiles();
+            $this->registerShortcode();
+
         }
 
+        public function loadFiles()
+        {
+            require BUYMECOFFEE_DIR . 'includes/autoload.php';
+            require BUYMECOFFEE_DIR . 'includes/Controllers/ButtonController.php';
+            require BUYMECOFFEE_DIR . 'includes/Helpers/ArrayHelper.php';
+        }
         public function adminHooks()
         {
             require BUYMECOFFEE_DIR . 'includes/autoload.php';
@@ -64,6 +73,18 @@ if (!defined('BUYMECOFFEE_VERSION')) {
             add_action('buy-me-coffee/render_admin_app', function () {
                 $adminApp = new \buyMeCoffee\Classes\AdminApp();
                 $adminApp->bootView();
+            });
+        }
+
+        public function registerShortcode()
+        {
+            add_shortcode('buymecoffee', function ($args) {
+                $args = shortcode_atts(array(
+                    'type' => '',
+                ), $args);
+
+                $builder = new \buyMeCoffee\Builder\Render();
+                return $builder->render();
             });
         }
 
@@ -92,6 +113,13 @@ if (!defined('BUYMECOFFEE_VERSION')) {
             remove_all_actions('admin_notices');
         }
     });
+
+    // Handle Exterior Pages
+    add_action('init', function () {
+        $demoPage = new \buyMeCoffee\Classes\DemoPage();
+        $demoPage->handleExteriorPages();
+    });
+
 } else {
     add_action('admin_init', function () {
         deactivate_plugins(plugin_basename(__FILE__));

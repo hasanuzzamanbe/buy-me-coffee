@@ -72,7 +72,9 @@ class Menu
         $buyMeCoffeeAdminVars = apply_filters('buy-me-coffee/admin_app_vars', array(
             //'image_upload_url' => admin_url('admin-ajax.php?action=wpf_global_settings_handler&route=wpf_upload_image'),
             'assets_url' => BUYMECOFFEE_URL . 'assets/',
-            'ajaxurl' => admin_url('admin-ajax.php')
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'preview_url' => site_url('?buymecoffee_payment_page=1')
+            // site_url('?buymecoffee_preview=button')
         ));
 
         wp_localize_script('buy-me-coffee_boot', 'buyMeCoffeeAdmin', $buyMeCoffeeAdminVars);
