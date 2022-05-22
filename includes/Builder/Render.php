@@ -48,10 +48,27 @@ class Render
         return $content;
     }
 
-    public function renderInputElements()
+    public static function renderInputElements()
     {
-        $elementName = 'textarea';
-        $attributes = array(
+        $nameAttributes = array(
+            'data-required' => 'no',
+            'data-type' => 'text',
+            'name' => 'wpm-supporter-name',
+            'placeholder' => 'John Doe',
+            'class' => 'wpm-supporter-name',
+            'id' => 'wpm-supporter-name',
+        );
+
+        $emailAttributes = array(
+            'data-required' => 'no',
+            'data-type' => 'email',
+            'name' => 'wpm-supporter-email',
+            'placeholder' => 'example@domain.com',
+            'class' => 'wpm-supporter-email',
+            'id' => 'wpm-supporter-email',
+        );
+
+        $msgAttributes = array(
             'data-required' => 'no',
             'data-type' => 'textarea',
             'name' => 'wpm-message',
@@ -59,19 +76,80 @@ class Render
             'class' => 'wpm-message',
             'id' => 'wpm-message',
         );
+
+        $btnAttributes = array(
+            'data-required' => 'no',
+            'data-type' => 'submit',
+            'name' => 'wpm-submit',
+            'placeholder' => 'Submit',
+            'class' => 'wpm-bmc-submit',
+            'id' => 'wpm-submit',
+        );
+        $template = (new ButtonControllers())->getButton();
+        $enableName= ArrayHelper::get($template, 'enableName') == 'yes' ? true : false;
+        $enableEmail = ArrayHelper::get($template, 'enableEmail') == 'yes' ? true : false;
+        $enableMsg = ArrayHelper::get($template, 'enableMessage') == 'yes' ? true : false;
+
         ob_start();
         ?>
-        <div data-element_type="<?php echo $elementName; ?>" ">
-                    <label for="wpm-message">Message</label>
-                    <div class="wpf_input_content">
-                <textarea <?php echo $this->builtAttributes($attributes); ?>></textarea>
+        <form>
+            <div class="wpm_bmc_payment_item" style="display: flex;align-items: center;">
+                <img width="60px;" src="<?php echo BUYMECOFFEE_URL . 'assets/images/coffee.png'; ?>" alt="Paypal">
+                <div class="wpm_bmc_input_content">
+                    <div style="display: flex;">
+                        <span class="wpm_bmc_currency_prefix">$</span>
+                        <input type="number"
+                            style="
+                                border-top-left-radius: 0px;
+                                border-bottom-left-radius: 0px;
+                                border: 1px solid #ffe3b9;
+                                height: 60px;
+                                font-size:33px;
+                                padding: 0px 20px;"
+                            value="5"
+                            type="text">
+                    </div>
+                </div>
             </div>
+            <?php if ($enableName): ?>
+                <div data-element_type="input" class="wpm_bmc_form_item">
+                        <label for="wpm-supporter-name">Name</label>
+                        <div class="wpm_bmc_input_content">
+                            <input <?php echo self::builtAttributes($nameAttributes); ?>></input>
+                        </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($enableEmail): ?>
+                <div data-element_type="email" class="wpm_bmc_form_item">
+                        <label for="wpm-message">Email</label>
+                        <div class="wpm_bmc_input_content">
+                            <input <?php echo self::builtAttributes($emailAttributes); ?>></input>
+                        </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($enableMsg): ?>
+                <div data-element_type="textarea" class="wpm_bmc_form_item">
+                    <label for="wpm-message">Message</label>
+                    <div class="wpm_bmc_input_content">
+                        <textarea <?php echo self::builtAttributes($msgAttributes); ?>></textarea>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <div data-element_type="textarea" class="wpm_bmc_form_item">
+                <div class="wpm_bmc_input_content">
+                    <button <?php echo self::builtAttributes($btnAttributes); ?>>Support</button>
+                </div>
+            </div>
+        </form>
         </div>
         <?php
         $content = ob_get_clean();
         return $content;
     }
-    public function builtAttributes($attributes)
+    public static function builtAttributes($attributes)
     {
         $atts = ' ';
         foreach ($attributes as $attributeKey => $attribute) {

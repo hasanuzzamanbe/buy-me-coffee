@@ -4,6 +4,7 @@ namespace buyMeCoffee\Classes;
 
 use buyMeCoffee\Classes\AccessControl;
 use buyMeCoffee\Classes\View;
+use \buyMeCoffee\Controllers\ButtonControllers;
 
 class DemoPage
 {
@@ -14,20 +15,19 @@ class DemoPage
             remove_action('wp_head', 'oxy_print_cached_css', 999999);
         }
         if (isset($_GET['buymecoffee_payment_page']) && $_GET['buymecoffee_payment_page'] === '1') {
-            $hasDemoAccess = AccessControl::hasTopLevelMenuPermission();
-            $hasDemoAccess = apply_filters('buymecoffee/can_see_demo_form', $hasDemoAccess);
-            if ($hasDemoAccess) {
-                wp_enqueue_style('dashicons');
-                $this->loadDefaultPageTemplate();
-                $this->renderPreview();
-            }
+            wp_enqueue_style('dashicons');
+            $this->loadDefaultPageTemplate();
+            $this->renderPreview();
         }
     }
 
     public function renderPreview()
     {
-        echo View::make('admin.preview', [
-            'type' => 'button'
+        $btnController = new ButtonControllers();
+        $template = $btnController->getButton();
+        echo View::make('user.payment', [
+            'type' => 'button',
+            'template' => $template,
         ]);
         exit();
     }

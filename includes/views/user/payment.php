@@ -19,7 +19,7 @@
         .buymecoffee_form_preview_wrapper {
             padding: 30px;
             /* width: 60%; */
-            max-width: 900px;
+            max-width: 600px;
             background: white;
             padding: 23px;
             margin: auto;
@@ -44,17 +44,67 @@
             text-align: right;
             font-family: cursive;
         }
+        .wpm_bmc_input_content input,
+        .wpm_bmc_input_content textarea {
+            width: 100% !important;
+            padding: 4px;
+            border: 1px solid #d1d3da;
+            border-radius: 4px;
+            resize: vertical;
+            box-shadow: none;
+            background: white !important;
+        }
+        .wpm_bmc_input_content input:focus,
+        .wpm_bmc_input_content textarea:focus {
+            outline: none;
+            box-shadow: none;
+        }
 
+        .wpm_bmc_form_item {
+            margin-bottom: 14px;
+        }
+
+        .wpm_bmc_payment_item {
+            border: 1px solid #ffe3b9;
+            background: #fff2e059;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 6px;
+        }
+        .wpm_bmc_currency_prefix {
+            font-size: 33px;
+            background: #ff9800;
+            border: 1px solid #ff9800;
+            color: white;
+            width: 41px;
+            text-align: center;
+        }
+        .wpm_bmc_input_content ::placeholder {
+            color: #ccc;
+            font-size: 12px;
+            font-family: cursive;
+        }
+        .wpm-bmc-submit {
+            width: 100%;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
     </style>
 </head>
 <body>
 <div id="buymecoffee_preview_top">
     <div class="buymecoffee_preview_header">
-        <h3><?php esc_html_e('Buy Me Coffee Button preview:', 'buymecoffee') ?></h3>
+        <h3><?php esc_html_e('', 'buymecoffee') ?></h3>
     </div>
     <div class="buymecoffee_preview_body">
         <div class="buymecoffee_form_preview_wrapper">
-            <?php echo do_shortcode('[buymecoffee type="button"]'); ?>
+            <span style="font-size:30px;" class="dashicons dashicons-coffee"></span>
+            <h3 style="font-family: cursive;">Thanks for your appreciation.</h3>
+            <hr>
+            <?php
+                $form =  \buyMeCoffee\Builder\Render::renderInputElements();
+                echo $form;
+            ?>
         </div>
     </div>
     <div class="buymecoffee_preview_footer">
