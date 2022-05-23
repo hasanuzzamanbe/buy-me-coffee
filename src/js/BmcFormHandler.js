@@ -39,14 +39,13 @@ class BmcFormHandler {
     }
 
     handleFormSubmit(form) {
-        console.log('submit form', this.form);
             form.find('button.wpm_submit_button').attr('disabled', true);
             form.addClass('wpm_submitting_form');
             form.parent().find('.wpm_form_notices').hide();
 
             jQuery.post(window.wpm_buymecoffee_general.ajax_url, {
                 action: 'wpm_buymecoffee_submit',
-                payment_total: form.data('payment_total'),
+                payment_total: form.data('wpm_payment_total'),
                 form_data: jQuery(form).serialize()
             })
                 .then(response => {
@@ -56,6 +55,9 @@ class BmcFormHandler {
 
     calculatePayments() {
         console.log('recalculating payments');
+        let amount = this.form.find('.wpm_buymecoffee_payment').first().val();
+        let amountCents = parseInt(parseFloat(amount) * 100);
+        this.form.data('wpm_payment_total', amountCents);
     }
 
     initPaymentMethodChange() {

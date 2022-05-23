@@ -9,4 +9,4 @@ mix
     .js('src/js/BmcFormHandler.js', 'assets/js/BmcFormHandler.js')
     .copy('src/images', 'assets/images')
     .sass('src/scss/admin/app.scss', 'assets/css/element.css')
-    .sass('src/scss/public/public.scss', 'assets/css/public.css');
+    .sass('src/scss/public/public-style.scss', 'assets/css/public-style.css');

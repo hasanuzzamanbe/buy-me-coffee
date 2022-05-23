@@ -1,0 +1,29 @@
+form.wpm_submitting_form {
+    span.wpm_txt_normal {
+      display: none !important;
+    }
+
+    span.wpm_txt_loading {
+      display: block !important;
+    }
+}
+.wpm_loading_svg {
+  display: none;
+}
+form.wpm_submitting_form {
+  background: #fff;
+  .wpm_loading_svg {
+    position: absolute;
+    margin-left: 19px;
+    display: inline-block;
+  }
+}
+.wpm_submit_button {
+    &:hover {
+      background: #ff9800;
+    }
+    &:disabled {
+      background: #f1cd16;
+      opacity: 1!important;
+    }
+}
