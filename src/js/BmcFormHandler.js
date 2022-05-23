@@ -26,6 +26,13 @@ class BmcFormHandler {
             this.calculatePayments();
         });
 
+        this.selectedMethods();
+        this.form.find('.wpm_bmc_pay_method input').on('change', (e) => {
+            this.selectedMethods();
+        });
+
+
+
         // this.initPaymentMethodChange();
 
         //stripe_checkout
@@ -51,6 +58,12 @@ class BmcFormHandler {
                 .then(response => {
                     console.log(response)
                 });
+    }
+
+    selectedMethods() {
+        console.log('hello')
+
+        this.form.find('.wpm_bmc_pay_method input')
     }
 
     calculatePayments() {

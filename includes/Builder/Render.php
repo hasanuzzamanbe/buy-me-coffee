@@ -141,6 +141,33 @@ class Render
                 </div>
             <?php endif; ?>
 
+            <div class="wpm_bmc_form_item wpm_bmc_pay_methods">
+                <div class="wpm_bmc_pay_method">
+                    <label class="" for="wpm_stripe_card">
+                        <img width="60px" src="<?php echo BUYMECOFFEE_URL . 'assets/images/credit-card.png'; ?>" alt="">
+                        <input
+                            style="outline: none;"
+                            type="radio" class="wpm_stripe_card" id="wpm_stripe_card"
+                            value="stripe">
+                        <span style="font-size:14px;">
+                            <strong>Stripe</strong>
+                        </span>
+                    </label>
+
+                    <!-- <label class="" for="wpm_paypal_card">
+                        <img width="60px" src="<?php echo BUYMECOFFEE_URL . 'assets/images/credit-card.png'; ?>" alt="">
+                        <input
+                            style="outline: none;"
+                            type="radio" class="wpm_paypal_card" id="wpm_paypal_card"
+                            value="paypal">
+                        <span style="font-size:14px;">
+                            <strong>PayPal</strong>
+                        </span>
+                    </label>
+                </div> -->
+<!-- paypal -->
+            </div>
+
             <div data-element_type="submit" class="wpm_bmc_form_item">
                 <div class="wpm_bmc_input_content">
                     <button <?php echo self::builtAttributes($btnAttributes); ?>>Support
