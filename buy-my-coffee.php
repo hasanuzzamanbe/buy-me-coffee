@@ -2,8 +2,8 @@
 
 /*
 Plugin Name: Buy me coffee - with custom payments
-Plugin URI: http://www.wpminers.com/buy-me-coffee/
-Description: A WordPress boilerplate plugin with Vue js.
+Plugin URI: http://www.wpminers.com/
+Description: This plugin allows you to add a custom payment/donation system to your website.
 Version: 1.0.0
 Author: wpminers
 Author URI: http://www.wpminers.com
@@ -47,6 +47,7 @@ if (!defined('BUYMECOFFEE_VERSION')) {
             if (is_admin()) {
                 $this->adminHooks();
             }
+            $this->commonActions();
             $this->loadFiles();
             $this->registerShortcode();
 
@@ -58,6 +59,7 @@ if (!defined('BUYMECOFFEE_VERSION')) {
             require BUYMECOFFEE_DIR . 'includes/Controllers/ButtonController.php';
             require BUYMECOFFEE_DIR . 'includes/Helpers/ArrayHelper.php';
         }
+
         public function adminHooks()
         {
             require BUYMECOFFEE_DIR . 'includes/autoload.php';
@@ -86,6 +88,15 @@ if (!defined('BUYMECOFFEE_VERSION')) {
                 $builder = new \buyMeCoffee\Builder\Render();
                 return $builder->render();
             });
+        }
+
+        public function commonActions()
+        {
+            require BUYMECOFFEE_DIR . 'includes/Controllers/SubmissionHandler.php';
+            // Submission Handler
+            $submissionHandler = new \buyMeCoffee\Controllers\SubmissionHandler();
+            add_action('wp_ajax_wpm_buymecoffee_submit', array($submissionHandler, 'handleSubmission'));
+            add_action('wp_ajax_nopriv_wpm_buymecoffee_submit', array($submissionHandler, 'handleSubmission'));
         }
 
         public function textDomain()

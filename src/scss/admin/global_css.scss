@@ -37,6 +37,7 @@
 
     /* Add a color to the active/current link */
     a.ninja-tab-active {
+        background: white;
         color: #ffa92c;
         border-bottom: 2px solid #ffa92c;
     }
@@ -49,7 +50,7 @@ a:active {
     outline: 0 !important;
 }
 .main-content {
-    background: #f4cc030a;
+    background: white;
     width: 100%;
     margin-right: 26px;
     border: 1px solid #ffa92b;

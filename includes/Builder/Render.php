@@ -50,6 +50,8 @@ class Render
 
     public static function renderInputElements()
     {
+        self::addAssets();
+
         $nameAttributes = array(
             'data-required' => 'no',
             'data-type' => 'text',
@@ -69,7 +71,7 @@ class Render
         );
 
         $msgAttributes = array(
-            'data-required' => 'no',
+            'data-required' => 'yes',
             'data-type' => 'textarea',
             'name' => 'wpm-message',
             'placeholder' => 'Write your message here',
@@ -80,10 +82,10 @@ class Render
         $btnAttributes = array(
             'data-required' => 'no',
             'data-type' => 'submit',
-            'name' => 'wpm-submit',
+            'name' => 'wpm_submit_button',
             'placeholder' => 'Submit',
-            'class' => 'wpm-bmc-submit',
-            'id' => 'wpm-submit',
+            'class' => 'wpm_submit_button',
+            'id' => 'wpm_submit_button',
         );
         $template = (new ButtonControllers())->getButton();
         $enableName= ArrayHelper::get($template, 'enableName') == 'yes' ? true : false;
@@ -92,13 +94,13 @@ class Render
 
         ob_start();
         ?>
-        <form>
+        <form class="wpm_buymecoffee_form">
             <div class="wpm_bmc_payment_item" style="display: flex;align-items: center;">
                 <img width="60px;" src="<?php echo BUYMECOFFEE_URL . 'assets/images/coffee.png'; ?>" alt="Paypal">
                 <div class="wpm_bmc_input_content">
                     <div style="display: flex;">
                         <span class="wpm_bmc_currency_prefix">$</span>
-                        <input type="number"
+                        <input type="number" class="wpm_buymecoffee_payment"
                             style="
                                 border-top-left-radius: 0px;
                                 border-bottom-left-radius: 0px;
@@ -107,6 +109,7 @@ class Render
                                 font-size:33px;
                                 padding: 0px 20px;"
                             value="5"
+                            data-price="5"
                             type="text">
                     </div>
                 </div>
@@ -149,6 +152,16 @@ class Render
         $content = ob_get_clean();
         return $content;
     }
+
+    public static function addAssets()
+    {
+        wp_enqueue_style('wpm_buymecoffee_css', BUYMECOFFEE_URL . 'assets/css/public.css', array(), BUYMECOFFEE_VERSION);
+        wp_enqueue_script('wpm_buymecoffee', BUYMECOFFEE_URL . 'assets/js/BmcPublic.js', array('jquery'), BUYMECOFFEE_VERSION, true);
+        wp_localize_script('wpm_buymecoffee', 'wpm_buymecoffee_general', array(
+            'ajax_url'  => admin_url('admin-ajax.php')
+        ));
+    }
+
     public static function builtAttributes($attributes)
     {
         $atts = ' ';

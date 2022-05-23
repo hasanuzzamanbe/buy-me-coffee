@@ -84,7 +84,7 @@
             font-size: 12px;
             font-family: cursive;
         }
-        .wpm-bmc-submit {
+        .wpm_submit_button {
             width: 100%;
             border-radius: 4px;
             margin-top: 12px;
