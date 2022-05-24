@@ -26,9 +26,9 @@ class BmcFormHandler {
             this.calculatePayments();
         });
 
-        this.selectedMethods();
+        this.selectedMethod();
         this.form.find('.wpm_bmc_pay_method input').on('change', (e) => {
-            this.selectedMethods();
+            this.selectedMethod();
         });
 
 
@@ -53,6 +53,7 @@ class BmcFormHandler {
             jQuery.post(window.wpm_buymecoffee_general.ajax_url, {
                 action: 'wpm_buymecoffee_submit',
                 payment_total: form.data('wpm_payment_total'),
+                payment_method: form.data('wpm_selected_payment_method'),
                 form_data: jQuery(form).serialize()
             })
                 .then(response => {
@@ -60,10 +61,9 @@ class BmcFormHandler {
                 });
     }
 
-    selectedMethods() {
-        console.log('hello')
-
-        this.form.find('.wpm_bmc_pay_method input')
+    selectedMethod() {
+        let paymentMethod = this.form.find('.wpm_bmc_pay_method input:checked').val();
+        this.form.data('wpm_selected_payment_method', paymentMethod);
     }
 
     calculatePayments() {
@@ -71,17 +71,6 @@ class BmcFormHandler {
         let amount = this.form.find('.wpm_buymecoffee_payment').first().val();
         let amountCents = parseInt(parseFloat(amount) * 100);
         this.form.data('wpm_payment_total', amountCents);
-    }
-
-    initPaymentMethodChange() {
-        let paymentMethod = this.form.find('[data-wpm_buymecoffee_payment_method]').data('wpm_buymecoffee_payment_method');
-        if (paymentMethod) {
-            this.form.data('selected_payment_method', paymentMethod);
-        }
-    }
-
-    handlePaymentMethodChange(paymentMethod) {
-        this.form.data('selected_payment_method', paymentMethod);
     }
 
 }

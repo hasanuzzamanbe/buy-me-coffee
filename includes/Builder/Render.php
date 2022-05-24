@@ -143,29 +143,8 @@ class Render
 
             <div class="wpm_bmc_form_item wpm_bmc_pay_methods">
                 <div class="wpm_bmc_pay_method">
-                    <label class="" for="wpm_stripe_card">
-                        <img width="60px" src="<?php echo BUYMECOFFEE_URL . 'assets/images/credit-card.png'; ?>" alt="">
-                        <input
-                            style="outline: none;"
-                            type="radio" class="wpm_stripe_card" id="wpm_stripe_card"
-                            value="stripe">
-                        <span style="font-size:14px;">
-                            <strong>Stripe</strong>
-                        </span>
-                    </label>
-
-                    <!-- <label class="" for="wpm_paypal_card">
-                        <img width="60px" src="<?php echo BUYMECOFFEE_URL . 'assets/images/credit-card.png'; ?>" alt="">
-                        <input
-                            style="outline: none;"
-                            type="radio" class="wpm_paypal_card" id="wpm_paypal_card"
-                            value="paypal">
-                        <span style="font-size:14px;">
-                            <strong>PayPal</strong>
-                        </span>
-                    </label>
-                </div> -->
-<!-- paypal -->
+                    <?php echo self::payMethod($template); ?>
+                </div>
             </div>
 
             <div data-element_type="submit" class="wpm_bmc_form_item">
@@ -191,6 +170,14 @@ class Render
         <?php
         $content = ob_get_clean();
         return $content;
+    }
+
+    public static function payMethod($template)
+    {
+        $methods = ArrayHelper::get($template, 'methods');
+        foreach ($methods as $method) {
+            do_action( 'wpm_buymecoffee_render_component_' . $method, $template );
+        }
     }
 
     public static function addAssets()

@@ -10,7 +10,9 @@ class ButtonControllers
                 "enableMessage" => 'yes',
                 "enableName" => 'yes',
                 "enableEmail" => 'yes',
-                "methods" => [],
+                "methods" => [
+                    'stripe', 'paypal'
+                ],
                 "advanced" => array (
                     "enable" => 'yes',
                     "bgColor" => 'rgba(250, 212, 0, 1)',

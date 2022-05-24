@@ -27,3 +27,18 @@ form.wpm_submitting_form {
       opacity: 1!important;
     }
 }
+
+.wpm_bmc_pay_methods {
+  padding: 14px 12px;
+  border-radius: 4px;
+  background: #fefbf4;
+  border: 1px solid #feefd7;
+}
+
+.wpm_bmc_pay_method {
+  display: flex;
+  label {
+    margin-right: 23px;
+    cursor: pointer;
+  }
+}
