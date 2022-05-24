@@ -6,7 +6,15 @@ namespace buyMeCoffee\Builder\Methods;
     public function __construct()
     {
         parent::__construct('paypal');
+        add_action( 'wpm_buymecoffee_make_payment_paypal' , array( $this , 'makePayment' ) , 10 , 3);
     }
+
+    public function makePayment($transactionId, $entryId, $form_data)
+    {
+        var_dump('from paypal');
+        die();
+    }
+
     public function render($template)
     {
         ?>

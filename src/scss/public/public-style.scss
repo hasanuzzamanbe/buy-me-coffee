@@ -36,6 +36,13 @@ form.wpm_submitting_form {
 }
 
 .wpm_bmc_pay_method {
+  img {
+    border: 1px solid #dedede;
+    border-radius: 6px;
+  }
+  img:hover {
+    transform: scale(1.1);
+  }
   display: flex;
   label {
     margin-right: 23px;

@@ -73,10 +73,10 @@ class Render
         $msgAttributes = array(
             'data-required' => 'yes',
             'data-type' => 'textarea',
-            'name' => 'wpm-message',
+            'name' => 'wpm-supporter-message',
             'placeholder' => 'Write your message here',
-            'class' => 'wpm-message',
-            'id' => 'wpm-message',
+            'class' => 'wpm-supporter-message',
+            'id' => 'wpm-supporter-message',
         );
 
         $btnAttributes = array(

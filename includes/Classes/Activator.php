@@ -38,25 +38,63 @@ class Activator
         /*
         * database creation commented out,
         * If you need any database just active this function bellow
-        * and write your own query at createBookmarkTable function
+        * and write your own query at function
         */
 
-        // $this->createBookmarkTable();
+        $this->createSupportersTable();
+        $this->createTransactionTable();
     }
 
-    public function createBookmarkTable()
+    public function createSupportersTable()
     {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
-        $table_name = $wpdb->prefix . 'buy-me-coffee';
+        $table_name = $wpdb->prefix . 'wpm_bmc_supporters';
         $sql = "CREATE TABLE $table_name (
-                                             pl_id int(10) NOT NULL AUTO_INCREMENT,
-                                             pl_name varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-                                             chart_values varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-                                             created_at timestamp NULL DEFAULT NULL,
-                                             updated_at timestamp NULL DEFAULT NULL,
-                                             PRIMARY KEY (chart_id)
-                                            ) $charset_collate;";
+				id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				supporters_name varchar(255),
+				supporters_email varchar(255),
+                supporters_message text,
+				form_data_raw longtext,
+				currency varchar(255),
+				payment_status varchar(255),
+				entry_hash varchar (255),
+				payment_total int(11),
+				payment_mode varchar(255),
+				payment_method varchar(255),
+				status varchar(255),
+				ip_address varchar (45),
+				other_infos longtext,
+				created_at timestamp NULL,
+				updated_at timestamp NULL
+			) $charset_collate;";
+
+        $this->runSQL($sql, $table_name);
+    }
+
+    public function createTransactionTable()
+    {
+        global $wpdb;
+        $charset_collate = $wpdb->get_charset_collate();
+        $table_name = $wpdb->prefix . 'wpm_bmc_transactions';
+        $sql = "CREATE TABLE $table_name (
+				id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                entry_id int(11),
+				entry_hash varchar (255),
+				subscription_id int(11) NULL,
+				transaction_type varchar(255) DEFAULT 'one_time',
+				payment_method varchar(255),
+				card_last_4 int(4),
+				card_brand varchar(255),
+				charge_id varchar(255),
+				payment_total int(11) DEFAULT 1,
+				status varchar(255),
+				currency varchar(255),
+				payment_mode varchar(255),
+				payment_note longtext,
+				created_at timestamp NULL,
+				updated_at timestamp NULL
+        ) $charset_collate;";
 
         $this->runSQL($sql, $table_name);
     }

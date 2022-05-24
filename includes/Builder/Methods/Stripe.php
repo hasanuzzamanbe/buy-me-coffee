@@ -6,6 +6,13 @@ class Stripe extends BaseMethods
     public function __construct()
     {
         parent::__construct('stripe');
+       add_action('wpm_buymecoffee_make_payment_stripe' , array( $this , 'makePayment' ) , 10 , 3);
+    }
+
+    public function makePayment($transactionId, $entryId, $form_data)
+    {
+        var_dump('from stripe');
+        die();
     }
 
     public function render($template)

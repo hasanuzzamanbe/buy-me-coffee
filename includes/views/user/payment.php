@@ -18,8 +18,7 @@
 
         .buymecoffee_form_preview_wrapper {
             padding: 30px;
-            /* width: 60%; */
-            max-width: 600px;
+            max-width: 555px;
             background: white;
             padding: 23px;
             margin: auto;
@@ -98,8 +97,12 @@
     </div>
     <div class="buymecoffee_preview_body">
         <div class="buymecoffee_form_preview_wrapper">
-            <span style="font-size:30px;" class="dashicons dashicons-coffee"></span>
-            <h3 style="font-family: cursive;">Thanks for your appreciation.</h3>
+            <div style="display: flex;">
+                <span style="font-size:30px;margin-right: 23px;line-height: 40px;"
+                    class="dashicons dashicons-coffee"></span>
+                <h3 style="font-family: cursive;">Thanks for your appreciation.</h3>
+            </div>
+
             <hr>
             <?php
                 $form =  \buyMeCoffee\Builder\Render::renderInputElements();
