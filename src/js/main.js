@@ -10,7 +10,14 @@ window.buyMeCoffee.Vue.mixin({
         $adminGet: window.buyMeCoffee.$adminGet,
         $adminPost: window.buyMeCoffee.$adminPost,
         $post: window.buyMeCoffee.$post,
-        $publicAssets: window.buyMeCoffee.$publicAssets
+        $publicAssets: window.buyMeCoffee.$publicAssets,
+        $t(str) {
+            let transString = buyMeCoffeeAdmin.i18n[str];
+            if(transString) {
+                return transString;
+            }
+            return str;
+        }
     }
 });
 

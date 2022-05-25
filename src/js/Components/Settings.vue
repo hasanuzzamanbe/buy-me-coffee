@@ -1,15 +1,33 @@
 <template>
-    <div>
-        <el-container>
-            <el-header>
-                <h1> <i class="el-icon-bank-card" ></i> Setup payment methods</h1>
-            </el-header>
-      </el-container>
+    <div class="wpm_bmc_payment_settings">
+        <el-tabs v-model="activeName">
+            <el-tab-pane label="Stripe" name="stripe">
+                <Stripe/>
+            </el-tab-pane>
+            <el-tab-pane label="PayPal" name="paypal">
+                <PayPal/>
+            </el-tab-pane>
+        </el-tabs>
     </div>
 </template>
-<script>
-export default {
-    name: 'Settings'
-}
+
+<script type="text/babel">
+import Stripe from './Stripe.vue';
+import PayPal from './PayPal.vue';
+
+    export default {
+        name: 'settings',
+        components: {
+            Stripe,
+            PayPal
+        },
+        data() {
+            return {
+                activeName: 'stripe'
+            }
+        },
+    }
 </script>
 
+<style lang="scss">
+</style>
