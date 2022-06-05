@@ -54,7 +54,7 @@
             getSettings() {
                 this.fetching = true;
                 this.$get({
-                    action: 'wpm_bmc_payment_setting',
+                    action: 'wpm_bmc_admin_ajax',
                     route: 'get_paypal_Settings'
                 })
                     .then((response) => {
@@ -71,7 +71,7 @@
             saveSettings() {
                 this.saving = true;
                 this.$post({
-                    action: 'wpm_bmc_payment_setting',
+                    action: 'wpm_bmc_admin_ajax',
                     route: 'save_payment_settings',
                     method: 'paypal',
                     settings: this.settings,

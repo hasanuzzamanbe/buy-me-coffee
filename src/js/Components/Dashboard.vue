@@ -23,7 +23,7 @@
                 </el-row>
             </el-header>
             <el-main>
-                <el-row class="wpm-template">
+                <el-row class="wpm-template" v-loading="saving">
                     <div class="wpm-template-inner">
                         <div class="wpm-bmc-editor">
                             <el-row :gutter="20">
@@ -76,6 +76,11 @@
                                                 </el-form-item>
                                             </el-collapse-item>
                                         </el-collapse>
+                                        <div>
+                                            <el-button style="float:right;margin-top:12px;" @click="saveTemplates" type="warning" size="mini">
+                                                Save Settings
+                                            </el-button>
+                                        </div>
                                     </el-form>
                                 </el-col>
                                 <el-col :span="12" class="wpm-btm-preview">
@@ -112,7 +117,7 @@ export default {
     name: 'Dashboard',
     data(){
         return {
-            vueJs: 'https://vuejs.org/',
+            saving: false,
             methods: [
                 {
                     name: 'PayPal',
@@ -140,35 +145,45 @@ export default {
                 '#c7158577'
             ],
             template: {
-                buttonText: 'Buy Me Coffee',
-                enableMessage: 'yes',
-                enableName: 'yes',
-                enableEmail: 'yes',
-                methods: [],
-                advanced: {
-                    enable: 'yes',
-                    bgColor: 'rgba(250, 212, 0, 1)',
-                    color: 'rgba(0, 0, 0, 1)',
-                    minWidth: '180',
-                    textAlign: 'center',
-                    minHeight: '43px',
-                    fontSize: 21,
-                    radius: 4
-
-                }
-
             }
         }
     },
     methods: {
+        getSettings() {
+            this.$get({
+                    action: 'wpm_bmc_admin_ajax',
+                    route: 'get_settings'
+                }).then(res => {
+                    this.template = res.data;
+
+            });
+
+        },
+        saveTemplates() {
+            this.saving = true;
+                this.$post({
+                    action: 'wpm_bmc_admin_ajax',
+                    settings: this.template,
+                    route: 'save_settings'
+                })
+                    .then(response => {
+                        this.$message.success(response.data.message);
+                        this.saving = false;
+                    })
+                    .fail(error => {
+                        this.$message.error(error.responseJSON.data.message);
+                    })
+                    .always(() => {
+                        this.saving = false;
+                    });
+
+        },
         previewButton(){
             window.open(window.buyMeCoffeeAdmin.preview_url);
         },
-        addNew(){
-            console.log('add new');
-        }
     },
     mounted() {
+        this.getSettings();
         if(!window.wpm_clip_inited) {
             var clipboard = new Clipboard('.copy');
             clipboard.on('success', (e) => {

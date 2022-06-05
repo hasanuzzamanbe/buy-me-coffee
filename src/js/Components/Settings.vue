@@ -1,5 +1,5 @@
 <template>
-    <div class="wpm_bmc_payment_settings">
+    <div class="wpm_bmc_admin_ajax">
         <el-tabs v-model="activeName">
             <el-tab-pane label="Stripe" name="stripe">
                 <Stripe/>

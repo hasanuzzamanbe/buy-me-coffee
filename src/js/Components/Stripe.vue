@@ -73,7 +73,7 @@
             getSettings() {
                 this.fetching = true;
                 this.$get({
-                    action: 'wpm_bmc_payment_setting',
+                    action: 'wpm_bmc_admin_ajax',
                     route: 'get_data'
                 })
                     .then((response) => {
@@ -90,7 +90,7 @@
             saveSettings() {
                 this.saving = true;
                 this.$post({
-                    action: 'wpm_bmc_payment_setting',
+                    action: 'wpm_bmc_admin_ajax',
                     settings: this.settings,
                     method: 'stripe',
                     route: 'save_payment_settings'
@@ -113,7 +113,7 @@
 </script>
 
 <style lang="scss">
-   .wpm_bmc_payment_settings {
+   .wpm_bmc_admin_ajax {
         max-width: 500px;
         margin: 0 auto;
         padding:23px 12px;
