@@ -9,13 +9,12 @@
     /* Style the links inside the navigation bar */
     a {
         min-width: 96px;
-        font-family: cursive;
         float: left;
         color: black;
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
-        font-size: 17px;
+        font-size: 15px;
         border: 1px solid #ccc;
         border-radius: 25px;
         margin-bottom: 33px;
@@ -77,4 +76,14 @@ a:active {
     &-bottom {
         margin-top: 20px;
     }
+}
+.wpm_bmc_main_container {
+    padding: 23px;
+}
+.wpm_bmc_menu_title {
+    font-weight: 200;
+}
+input::placeholder {
+    font-style: italic;
+    font-weight: 100;
 }

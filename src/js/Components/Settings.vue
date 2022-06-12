@@ -1,13 +1,16 @@
 <template>
-    <div class="wpm_bmc_admin_ajax">
-        <el-tabs v-model="activeName">
-            <el-tab-pane label="Stripe" name="stripe">
-                <Stripe/>
-            </el-tab-pane>
-            <el-tab-pane label="PayPal" name="paypal">
-                <PayPal/>
-            </el-tab-pane>
-        </el-tabs>
+    <div class="wpm_bmc_main_container">
+        <h1 class="wpm_bmc_menu_title">Payments</h1>
+        <div class="wpm_bmc_settings_wrap">
+            <el-tabs v-model="activeName">
+                <el-tab-pane label="Stripe" name="stripe">
+                    <Stripe/>
+                </el-tab-pane>
+                <el-tab-pane label="PayPal" name="paypal">
+                    <PayPal/>
+                </el-tab-pane>
+            </el-tabs>
+        </div>
     </div>
 </template>
 

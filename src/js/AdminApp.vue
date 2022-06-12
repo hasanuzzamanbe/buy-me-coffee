@@ -61,6 +61,5 @@
 #buy-me-coffee_app {
     display: flex;
     padding-top: 23px;
-    font-family: cursive;
 }
 </style>

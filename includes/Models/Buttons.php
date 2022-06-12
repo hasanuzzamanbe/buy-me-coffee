@@ -1,11 +1,11 @@
 <?php
-namespace buyMeCoffee\Controllers;
+namespace buyMeCoffee\Models;
 
-class ButtonControllers
+class Buttons
 {
     public function getButton()
     {
-        return array(
+        $defaults =  array(
                 "buttonText" => 'Buy Me Coffee',
                 "enableMessage" => 'yes',
                 "enableName" => 'yes',
@@ -24,5 +24,8 @@ class ButtonControllers
                     "radius" => 4
                 )
         );
+
+        $settings = get_option('wpm_bmc_payment_setting', array());
+        return wp_parse_args($settings, $defaults);
     }
 }

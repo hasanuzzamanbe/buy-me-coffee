@@ -3,7 +3,7 @@
 namespace buyMeCoffee\Classes;
 use buyMeCoffee\Models\Supporters;
 
-use buyMeCoffee\Controllers\ButtonControllers;
+use buyMeCoffee\Models\Buttons;
 
 class AdminAjaxHandler
 {
@@ -125,11 +125,7 @@ class AdminAjaxHandler
 
     public function getSettings()
     {
-
-        $defaults = (new ButtonControllers())->getButton();
-        $settings = get_option('wpm_bmc_payment_setting', array());
-
-        $settings = wp_parse_args($settings, $defaults);
+        $settings = (new Buttons())->getButton();
 
         wp_send_json_success(
            $settings, 200

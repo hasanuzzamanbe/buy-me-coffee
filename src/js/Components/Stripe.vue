@@ -113,8 +113,8 @@
 </script>
 
 <style lang="scss">
-   .wpm_bmc_admin_ajax {
-        max-width: 500px;
+   .wpm_bmc_settings_wrap {
+        max-width: 800px;
         margin: 0 auto;
         padding:23px 12px;
    }

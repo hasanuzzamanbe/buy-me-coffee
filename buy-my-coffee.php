@@ -56,7 +56,7 @@ if (!defined('BUYMECOFFEE_VERSION')) {
         public function loadFiles()
         {
             require BUYMECOFFEE_DIR . 'includes/autoload.php';
-            require BUYMECOFFEE_DIR . 'includes/Controllers/ButtonController.php';
+            require BUYMECOFFEE_DIR . 'includes/Models/Buttons.php';
             require BUYMECOFFEE_DIR . 'includes/Helpers/ArrayHelper.php';
         }
 

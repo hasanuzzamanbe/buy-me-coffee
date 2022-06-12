@@ -1,16 +1,18 @@
 <template>
-    <div style="padding:23px;">
-        <h1>Supporters:</h1>
+    <div class="wpm_bmc_main_container">
+        <h1 class="wpm_bmc_menu_title">Supporters:</h1>
         <el-table
             :data="supporters"
             style="width: 100%">
             <el-table-column
+                 width="180"
                 label="Date">
                 <template slot-scope="scope">
                     <span>{{ scope.row.created_at }}</span>
                 </template>
             </el-table-column>
             <el-table-column
+                width="180"
                 label="Name">
                 <template slot-scope="scope">
                     <span>{{ scope.row.supporters_name }}</span>

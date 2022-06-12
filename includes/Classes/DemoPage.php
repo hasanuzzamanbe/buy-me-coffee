@@ -2,9 +2,8 @@
 
 namespace buyMeCoffee\Classes;
 
-use buyMeCoffee\Classes\AccessControl;
 use buyMeCoffee\Classes\View;
-use \buyMeCoffee\Controllers\ButtonControllers;
+use \buyMeCoffee\Models\Buttons;
 
 class DemoPage
 {
@@ -23,7 +22,7 @@ class DemoPage
 
     public function renderPreview()
     {
-        $btnController = new ButtonControllers();
+        $btnController = new Buttons();
         $template = $btnController->getButton();
         echo View::make('user.payment', [
             'type' => 'button',

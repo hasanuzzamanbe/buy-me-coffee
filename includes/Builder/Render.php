@@ -2,7 +2,7 @@
 
 namespace buyMeCoffee\Builder;
 
-use buyMeCoffee\Controllers\ButtonControllers;
+use buyMeCoffee\Models\Buttons;
 use buyMeCoffee\Helpers\ArrayHelper;
 
 
@@ -11,7 +11,7 @@ class Render
 
     public function render()
     {
-        $template = (new ButtonControllers())->getButton();
+        $template = (new Buttons())->getButton();
 
         $buttonText = ArrayHelper::get($template, 'buttonText');
         $bgColor = ArrayHelper::get($template, 'advanced.bgColor');
@@ -25,7 +25,8 @@ class Render
         $styling = "<style>.wpm-buymecoffee-container .wpm-buymecoffee-button{
             outline: none;
             box-shadow: none;
-            font-family: cursive;
+            height: 50px;
+            line-height: 0px;
             background-color: $bgColor;
             color: $color;
             min-width: {$minWidth}px;
@@ -39,7 +40,7 @@ class Render
         <div class="wpm-buymecoffee-container">
             <a target="_blank" href="<?php echo $paymentPageUrl; ?>">
                 <button class="wpm-buymecoffee-button">
-                    <?php echo  $buttonText; ?>
+                    <?php echo $buttonText; ?>
                 </button>
             </a>
         </div>
@@ -87,7 +88,7 @@ class Render
             'class' => 'wpm_submit_button',
             'id' => 'wpm_submit_button',
         );
-        $template = (new ButtonControllers())->getButton();
+        $template = (new Buttons())->getButton();
         $enableName= ArrayHelper::get($template, 'enableName') == 'yes' ? true : false;
         $enableEmail = ArrayHelper::get($template, 'enableEmail') == 'yes' ? true : false;
         $enableMsg = ArrayHelper::get($template, 'enableMessage') == 'yes' ? true : false;

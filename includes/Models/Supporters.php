@@ -10,10 +10,10 @@ class Supporters
 
         $offset = intval( $args['page'] * $args['posts_per_page']);
 
-       $query =  wpmBmcDB()->table('wpm_bmc_supporters')
-       ->orderBy('ID', 'DESC')
-       ->offset($offset)
-       ->limit($args['posts_per_page']);
+        $query =  wpmBmcDB()->table('wpm_bmc_supporters')
+        ->orderBy('ID', 'DESC')
+        ->offset($offset)
+        ->limit($args['posts_per_page']);
 
         $total = $query->count();
 
@@ -24,6 +24,7 @@ class Supporters
         foreach ($supporters as $supporter) {
             $supporter->amount_formatted = PaymentHelper::getFormattedAmount($supporter->payment_total, $supporter->currency);
         }
+
         PaymentHelper::currencySymbol($lastPage);
 
         wp_send_json_success(

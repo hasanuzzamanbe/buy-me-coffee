@@ -31,7 +31,6 @@
             padding: 0px 20px 0px 0px;
             background-color: #ebedee;
             color: black;
-            font-family: cursive;
         }
 
         .buymecoffee_preview_header h3 {
@@ -41,7 +40,6 @@
         .buymecoffee_preview_footer {
             padding: 10px;
             text-align: right;
-            font-family: cursive;
         }
         .wpm_bmc_input_content input,
         .wpm_bmc_input_content textarea {
@@ -81,7 +79,6 @@
         .wpm_bmc_input_content ::placeholder {
             color: #ccc;
             font-size: 12px;
-            font-family: cursive;
         }
         .wpm_submit_button {
             width: 100%;
