@@ -37,10 +37,17 @@ class Supporters
         );
     }
 
-    public function find()
+    public function updateData($entryId, $data)
     {
-        return array(
-            'hello there'
-        );
+        $supporters = wpmBmcDB()->table('wpm_bmc_supporters')->where('id', $entryId)->update($data);
+        return $supporters;
+    }
+
+    public function find($id)
+    {
+        $supporter = wpmBmcDB()->table('wpm_bmc_supporters')
+        ->first();
+
+        return $supporter;
     }
 }

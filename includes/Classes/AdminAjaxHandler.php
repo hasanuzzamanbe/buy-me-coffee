@@ -2,6 +2,7 @@
 
 namespace buyMeCoffee\Classes;
 use buyMeCoffee\Models\Supporters;
+use buyMeCoffee\Builder\Methods\PayPal;
 
 use buyMeCoffee\Models\Buttons;
 
@@ -94,24 +95,11 @@ class AdminAjaxHandler
     public function getPayPalSettings()
     {
         wp_send_json_success(array(
-            'settings'       => $this->paypalSettings(),
+            'settings'       => (new PayPal())->getSettings(),
             'webhook_url'    => site_url() . '?wpm_bmc_paypal_listener=1'
         ), 200);
 
     }
-
-    public function paypalSettings()
-    {
-        $settings = get_option('wpm_bmc_paypal_payment_settings', array());
-        $defaults = array(
-            'enable' => 'no',
-            'payment_mode'    => 'test',
-            'paypal_email'    => '',
-            'disable_ipn_verification' => 'no',
-        );
-        return wp_parse_args($settings, $defaults);
-    }
-
 
     public function saveSettings()
     {

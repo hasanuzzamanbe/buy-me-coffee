@@ -58,6 +58,9 @@ class BmcFormHandler {
             })
                 .then(response => {
                     console.log(response)
+                    if (response.data.redirectTo) {
+                        window.open(response.data.redirectTo);
+                    }
                 });
     }
 
