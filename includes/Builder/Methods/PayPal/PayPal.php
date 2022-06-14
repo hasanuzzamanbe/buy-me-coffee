@@ -123,7 +123,7 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
 
     public function ipnVerification()
     {
-        if (isset($_GET['wpm_bmc__paypal_ipn'])) {
+        if (isset($_REQUEST['wpm_bmc__paypal_ipn'])) {
             (new IPN())->ipnVerificationProcess();
         }
     }
@@ -148,7 +148,6 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
             return;
         }
 
-        $supportersModel = new Supporters();
 
         if ($transaction->payment_method != 'paypal') {
             return;
@@ -202,14 +201,18 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
         $transactionModel = new Transactions();
 
         $updateData = array(
-            'status' => $status,
-            'updated_at' => current_time('Y-m-d H:i:s')
+            'payment_status' => $status,
+            'updated_at' => current_time('mysql')
         );
 
         $supportersModel->updateData($transaction->entry_id, $updateData);
 
         if (!empty($data) && isset($data['txn_id'])) {
-            $updateData['charge_id'] = $data['txn_id'];
+            $updateData = [
+                'status' => $status,
+                'updated_at' => current_time('mysql'),
+                $updateData['charge_id'] = $data['txn_id']
+            ];
         }
 
         $transactionModel->updateData($transaction->id, $updateData);
