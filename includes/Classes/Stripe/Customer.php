@@ -31,7 +31,7 @@ class Customer
                 return self::errorHandler($errotType, $errorCode. $response->error->message);
             }
             if ( false !== $response ) {
-                do_action( 'wppayform/stripe_customer_created', $response, $customerArgs );
+                do_action( 'wpm_bmc_stripe_customer_created', $response, $customerArgs );
                 return $response;
             }
         } catch ( \Exception $e ) {

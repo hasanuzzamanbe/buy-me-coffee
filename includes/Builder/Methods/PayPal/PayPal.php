@@ -1,9 +1,9 @@
 <?php
-namespace buyMeCoffee\Builder\Methods;
+namespace buyMeCoffee\Builder\Methods\PayPal;
 
 use buyMeCoffee\Models\Supporters;
 use buyMeCoffee\Models\Transactions;
-use buyMeCoffee\Helpers\ArrayHelper;
+use buyMeCoffee\Builder\Methods\BaseMethods;
 
  class PayPal extends BaseMethods
 {
@@ -11,6 +11,8 @@ use buyMeCoffee\Helpers\ArrayHelper;
     {
         parent::__construct('paypal');
         add_action( 'wpm_buymecoffee_make_payment_paypal' , array( $this , 'makePayment' ) , 10 , 3);
+        add_action('init', array($this, 'ipnVerification'));
+        add_action('wpm_bmc_paypal_action_web_accept', array($this, 'updateStatus'), 10, 2);
     }
 
     public function getSettings()
@@ -62,6 +64,7 @@ use buyMeCoffee\Helpers\ArrayHelper;
             return;
         }
         $paypal_args = array_merge($payment_item, $paypal_args);
+
         $paypal_args = apply_filters('wpm_bmc_paypal_payment_args', $paypal_args);
 
         if (!$payment_item && $paypal_args['cmd'] == '_cart') {
@@ -92,10 +95,11 @@ use buyMeCoffee\Helpers\ArrayHelper;
     public function cartItems($item)
     {
         $paypal_args = array(
-            'wpm_coffee_payment' => '_coffee_payment',
-            'wpm_coffee_quantity' => 1,
-            'wpm_coffee_amount' => round($item->payment_total / 100, 2)
+            'item_name_1' => 'coffee_payment',
+            'quantity_1' => 1,
+            'amount_1' => round($item->payment_total / 100, 2)
         );
+
         return $paypal_args;
     }
 
@@ -115,6 +119,100 @@ use buyMeCoffee\Helpers\ArrayHelper;
             'wpm_bmc_submission' => $supporter->entry_hash,
             'payment_method' => 'paypal'
         ), home_url());
+    }
+
+    public function ipnVerification()
+    {
+        if (isset($_GET['wpm_bmc__paypal_ipn'])) {
+            (new IPN())->ipnVerificationProcess();
+        }
+    }
+
+    public function updateStatus($data, $payment_id)
+    {
+        if ($data['txn_type'] != 'web_accept' && $data['txn_type'] != 'cart' && $data['payment_status'] != 'Refunded') {
+            return;
+        }
+
+        if (empty($payment_id)) {
+            return;
+        }
+
+        $transaction = (new Transactions())->find($payment_id);
+
+        if (defined('PAYFORM_PAYPAL_IPN_DEBUG')) {
+            error_log('IPN For Transaction: ' . json_encode($transaction));
+        }
+
+        if (!$transaction) {
+            return;
+        }
+
+        $supportersModel = new Supporters();
+
+        if ($transaction->payment_method != 'paypal') {
+            return;
+        }
+        $business_email = isset($data['business']) && is_email($data['business']) ? trim($data['business']) : trim($data['receiver_email']);
+
+        $paypalSettings = $this->getSettings();
+
+        if (strcasecmp($business_email, trim($paypalSettings['paypal_email'])) != 0) {
+            $this->changeStatus('failed');
+            return;
+        }
+
+        $currency_code = strtolower($data['mc_currency']);
+
+        if ($currency_code != strtolower($transaction->currency)) {
+            $this->changeStatus('failed');
+            return;
+        }
+
+        $payment_status = strtolower($data['payment_status']);
+
+        $paypal_amount = $data['mc_gross'];
+        $isMismatchAmount = false;
+        if (number_format((float)($transaction->payment_total / 100), 2) - number_format((float)$paypal_amount, 2) > 1) {
+            $isMismatchAmount = true;
+        }
+        if ($isMismatchAmount) {
+            $this->changeStatus('failed');
+            return;
+        }
+
+        if ($data['custom'] != $transaction->id) {
+            $this->changeStatus('failed');
+            return;
+        }
+
+        if ('completed' == $payment_status || $transaction->payment_mode == 'test') {
+            $this->changeStatus('paid', $data, $transaction);
+            return;
+        }
+
+        if ('pending' == $payment_status && isset($data['pending_reason'])) {
+            $this->changeStatus('processing', $data, $transaction);
+        }
+    }
+
+    public function changeStatus($status, $data = array(), $transaction = null)
+    {
+        $supportersModel = new Supporters();
+        $transactionModel = new Transactions();
+
+        $updateData = array(
+            'status' => $status,
+            'updated_at' => current_time('Y-m-d H:i:s')
+        );
+
+        $supportersModel->updateData($transaction->entry_id, $updateData);
+
+        if (!empty($data) && isset($data['txn_id'])) {
+            $updateData['charge_id'] = $data['txn_id'];
+        }
+
+        $transactionModel->updateData($transaction->id, $updateData);
     }
 
     public function render($template)

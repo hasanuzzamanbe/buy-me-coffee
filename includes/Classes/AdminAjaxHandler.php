@@ -2,7 +2,7 @@
 
 namespace buyMeCoffee\Classes;
 use buyMeCoffee\Models\Supporters;
-use buyMeCoffee\Builder\Methods\PayPal;
+use buyMeCoffee\Builder\Methods\PayPal\PayPal;
 
 use buyMeCoffee\Models\Buttons;
 

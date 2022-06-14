@@ -1,5 +1,7 @@
 <?php
-namespace buyMeCoffee\Builder\Methods;
+namespace buyMeCoffee\Builder\Methods\Stripe;
+
+use buyMeCoffee\Builder\Methods\BaseMethods;
 
 class Stripe extends BaseMethods
 {

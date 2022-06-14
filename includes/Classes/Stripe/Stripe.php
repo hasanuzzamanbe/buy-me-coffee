@@ -27,20 +27,20 @@ class Stripe
         new StripeCardElementComponent();
 
         // Register The Action and Filters
-        add_filter('wppayform/parsed_entry', array($this, 'addAddressToView'), 10, 2);
-        add_filter('wppayform/submission_data_formatted', array($this, 'pushAddressToInput'), 10, 3);
-        add_action('wppayform/form_submission_make_payment_stripe', array($this, 'makeFormPayment'), 10, 5);
-        add_filter('wppayform/entry_transactions', array($this, 'addTransactionUrl'), 10, 2);
-        add_filter('wppayform/choose_payment_method_for_submission', array($this, 'choosePaymentMethod'), 10, 4);
-        add_action('wppayform/wpf_before_submission_data_insert_stripe', array($this, 'validateStripeToken'), 10, 2);
+        add_filter('wpm_bmc_parsed_entry', array($this, 'addAddressToView'), 10, 2);
+        add_filter('wpm_bmc_submission_data_formatted', array($this, 'pushAddressToInput'), 10, 3);
+        add_action('wpm_bmc_form_submission_make_payment_stripe', array($this, 'makeFormPayment'), 10, 5);
+        add_filter('wpm_bmc_entry_transactions', array($this, 'addTransactionUrl'), 10, 2);
+        add_filter('wpm_bmc_choose_payment_method_for_submission', array($this, 'choosePaymentMethod'), 10, 4);
+        add_action('wpm_bmc_wpf_before_submission_data_insert_stripe', array($this, 'validateStripeToken'), 10, 2);
 
         // ajax endpoints
         add_action('wp_ajax_wpf_save_stripe_settings', array($this, 'savePaymentSettings'));
         add_action('wp_ajax_wpf_get_stripe_settings', array($this, 'getPaymentSettings'));
 
-        add_filter('wppayform/checkout_vars', array($this, 'addLocalizeVars'));
+        add_filter('wpm_bmc_checkout_vars', array($this, 'addLocalizeVars'));
 
-        add_filter('wppayform/submitted_payment_items_stripe', array($this, 'maybeSignupFeeToPaymentItems'), 10, 4);
+        add_filter('wpm_bmc_submitted_payment_items_stripe', array($this, 'maybeSignupFeeToPaymentItems'), 10, 4);
 
     }
 
@@ -80,7 +80,7 @@ class Stripe
 
     public function makeFormPayment($transactionId, $submissionId, $form_data, $form, $hasSubscriptions)
     {
-        $transactionModel = new Transaction();
+        $transactionModel = new Transactions();
         $transaction = $transactionModel->getTransaction($transactionId);
 
         $hasTransaction = $transaction && $transaction->payment_total;
@@ -147,12 +147,12 @@ class Stripe
         }
 
         $transaction = $transactionModel->getTransaction($transactionId);
-        do_action('wppayform/form_payment_success_stripe', $submission, $transaction, $submission->form_id, $charge);
-        do_action('wppayform/form_payment_success', $submission, $transaction, $submission->form_id, $charge);
+        do_action('wpm_bmc_form_payment_success_stripe', $submission, $transaction, $submission->form_id, $charge);
+        do_action('wpm_bmc_form_payment_success', $submission, $transaction, $submission->form_id, $charge);
 
         if ($subscribedItems) {
-            do_action('wppayform/form_recurring_subscribed_stripe', $submission, $subscribedItems, $submission->form_id);
-            do_action('wppayform/form_recurring_subscribed', $submission, $subscribedItems, $submission->form_id);
+            do_action('wpm_bmc_form_recurring_subscribed_stripe', $submission, $subscribedItems, $submission->form_id);
+            do_action('wpm_bmc_form_recurring_subscribed', $submission, $subscribedItems, $submission->form_id);
         }
 
     }
@@ -180,7 +180,7 @@ class Stripe
             $metadata['customer_name'] = $submission->customer_name;
         }
 
-        $metadata = apply_filters('wppayform/stripe_onetime_payment_metadata', $metadata, $submission);
+        $metadata = apply_filters('wpm_bmc_stripe_onetime_payment_metadata', $metadata, $submission);
 
         $paymentArgs['metadata'] = $metadata;
 
@@ -236,8 +236,8 @@ class Stripe
     public function handlePaymentChargeError($message, $submission, $transaction, $form, $charge = false, $type = 'general')
     {
         $paymentMode = $this->getMode();
-        do_action('wppayform/form_payment_stripe_failed', $submission, $transaction, $form, $charge, $type);
-        do_action('wppayform/form_payment_failed', $submission, $transaction, $form, $charge, $type);
+        do_action('wpm_bmc_form_payment_stripe_failed', $submission, $transaction, $form, $charge, $type);
+        do_action('wpm_bmc_form_payment_failed', $submission, $transaction, $form, $charge, $type);
 
         $submissionModel = new Submission();
         $transactionModel = new Transaction();
@@ -382,9 +382,9 @@ class Stripe
             $data['send_meta_data'] = sanitize_text_field($settings['send_meta_data']);
         }
 
-        do_action('wppayform/before_save_stripe_settings', $data);
+        do_action('wpm_bmc_before_save_stripe_settings', $data);
         update_option('wppayform_stripe_payment_settings', $data, false);
-        do_action('wppayform/after_save_stripe_settings', $data);
+        do_action('wpm_bmc_after_save_stripe_settings', $data);
 
         wp_send_json_success(array(
             'message' => __('Settings successfully updated', 'wppayform')
@@ -460,7 +460,7 @@ class Stripe
     {
         // @todo: need to make it configarable
         $status = defined('WPPAYFORM_CREATE_CUSTOMER') && WPPAYFORM_CREATE_CUSTOMER;
-        return apply_filters('wppayform/stripe_create_customer', $status, $submission);
+        return apply_filters('wpm_bmc_stripe_create_customer', $status, $submission);
     }
 
     private function createCustomer($token, $submission, $transaction, $form, $metadata)
@@ -485,7 +485,7 @@ class Stripe
             'metadata'    => $customerMeta,
             'source'      => $token
         );
-        $customerArgs = apply_filters('wppayform/stripe_customer_args', $customerArgs, $metadata, $submission);
+        $customerArgs = apply_filters('wpm_bmc_stripe_customer_args', $customerArgs, $metadata, $submission);
         $customer = Customer::createCustomer($customerArgs);
 
         $customerStatus = true;
@@ -618,7 +618,7 @@ class Stripe
             if ($subscriptionItem['initial_amount']) {
                 $signupLabel = __('Signup Fee for', 'wppayform');
                 $signupLabel .= ' ' . $subscriptionItem['item_name'];
-                $signupLabel = apply_filters('wppayform/signup_fee_label', $signupLabel, $subscriptionItem, $form_data);
+                $signupLabel = apply_filters('wpm_bmc_signup_fee_label', $signupLabel, $subscriptionItem, $form_data);
                 $paymentItems[] = array(
                     'type'          => 'signup_fee',
                     'parent_holder' => $subscriptionItem['element_id'],

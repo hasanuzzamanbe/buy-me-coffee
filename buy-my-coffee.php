@@ -94,11 +94,11 @@ if (!defined('BUYMECOFFEE_VERSION')) {
         {
             require BUYMECOFFEE_DIR . 'includes/Controllers/SubmissionHandler.php';
             require BUYMECOFFEE_DIR . 'includes/Builder/Methods/BaseMethods.php';
-            require BUYMECOFFEE_DIR . 'includes/Builder/Methods/Stripe.php';
-            require BUYMECOFFEE_DIR . 'includes/Builder/Methods/PayPal.php';
+            require BUYMECOFFEE_DIR . 'includes/Builder/Methods/Stripe/Stripe.php';
+            require BUYMECOFFEE_DIR . 'includes/Builder/Methods/PayPal/PayPal.php';
 
-            $submissionHandler = new \buyMeCoffee\Builder\Methods\PayPal();
-            $submissionHandler = new \buyMeCoffee\Builder\Methods\Stripe();
+            new \buyMeCoffee\Builder\Methods\PayPal\PayPal();
+            new \buyMeCoffee\Builder\Methods\Stripe\Stripe();
             // Submission Handler
             $submissionHandler = new \buyMeCoffee\Controllers\SubmissionHandler();
             add_action('wp_ajax_wpm_buymecoffee_submit', array($submissionHandler, 'handleSubmission'));

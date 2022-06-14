@@ -57,9 +57,8 @@ class BmcFormHandler {
                 form_data: jQuery(form).serialize()
             })
                 .then(response => {
-                    console.log(response)
                     if (response.data.redirectTo) {
-                        window.open(response.data.redirectTo);
+                        window.location.href = response.data.redirectTo;
                     }
                 });
     }

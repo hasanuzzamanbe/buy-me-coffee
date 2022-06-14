@@ -14,8 +14,8 @@ class StripeCardElementComponent extends BaseComponent
     public function __construct()
     {
         parent::__construct('stripe_card_element', 6);
-        add_action('wppayform/payment_method_choose_element_render_stripe', array($this, 'renderForMultiple'), 10, 3);
-        add_filter('wppayform/available_payment_methods', array($this, 'pushPaymentMethod'), 1, 1);
+        add_action('wpm_bmc_payment_method_choose_element_render_stripe', array($this, 'renderForMultiple'), 10, 3);
+        add_filter('wpm_bmc_available_payment_methods', array($this, 'pushPaymentMethod'), 1, 1);
     }
 
     public function pushPaymentMethod($methods)

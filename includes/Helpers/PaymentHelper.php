@@ -17,7 +17,7 @@ class PaymentHelper
         }
         $currency = strtoupper($currency);
 
-        $symbols = apply_filters('wppayform/currency_symbols', array(
+        $symbols = apply_filters('wpm_bmc_currency_symbols', array(
             'AED' => '&#x62f;.&#x625;',
             'AFN' => '&#x60b;',
             'ALL' => 'L',

@@ -11,9 +11,22 @@ class Transactions
 
     public function find($id)
     {
-        $supporter = wpmBmcDB()->table('wpm_bmc_transactions')
-        ->first();
+        $supporter = wpmBmcDB()->table('wpm_bmc_transactions');
+        if ($id) {
+            $supporter = $supporter->where('id', $id);
+        }
+        return $supporter->first();
+    }
 
-        return $supporter;
+    public function getByPaymentId($chargeId)
+    {
+        $payment = wpmBmcDB()->table('wpm_bmc_transactions')
+            ->where('charge_id', $chargeId)
+            ->where('payment_method', 'paypal')
+            ->first();
+        if ($payment) {
+            return $payment->id;
+        }
+        return false;
     }
 }
