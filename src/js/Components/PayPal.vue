@@ -24,12 +24,12 @@
                         <el-input type="text" size="small" v-model="settings.paypal_email"
                                   placeholder="Paypal Email Address"/>
                     </el-form-item>
-                    <el-form-item label="Disable PayPal IPN Verification">
+                    <!-- <el-form-item label="Disable PayPal IPN Verification">
                         <el-switch active-value="yes" inactive-value="no" v-model="settings.disable_ipn_verification"/>
                         <p>If you are unable to use Payment Data Transfer and payments are not getting marked as
                             complete, then check this box. This forces the site to use a slightly less secure method of
                             verifying purchases.</p>
-                    </el-form-item>
+                    </el-form-item> -->
 
                     <div class="action_right">
                         <el-button @click="saveSettings()" type="primary" size="small">Save PayPal Settings</el-button>
