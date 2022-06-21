@@ -25,6 +25,7 @@ class AdminAjaxHandler
             'get_supporters' => 'getSupporters',
             'edit_supporter' => 'editSupporter',
             'delete_supporter' => 'deleteSupporter',
+            'reset_template_settings' => 'resetDefaultSettings'
         );
         if (isset($validRoutes[$route])) {
             do_action('buy-me-coffee/doing_ajax_forms_' . $route);
@@ -97,6 +98,18 @@ class AdminAjaxHandler
         wp_send_json_success(array(
             'settings'       => (new PayPal())->getSettings(),
             'webhook_url'    => site_url() . '?wpm_bmc_paypal_listener=1'
+        ), 200);
+
+    }
+    public function resetDefaultSettings()
+    {
+        $settings = (new Buttons())->getButton($isDefault = true);
+        update_option('wpm_bmc_payment_setting', $settings, false);
+        do_action('wpm_bmc_after_reset_template', $settings);
+
+        wp_send_json_success(array(
+            'settings' => $settings,
+            'message' => __("Settings successfully updated", 'buymecoffee')
         ), 200);
 
     }

@@ -33,15 +33,15 @@ class Menu
             $menuPermission,
             'admin.php?page=buy-me-coffee.php#/',
         );
+        $submenu['buy-me-coffee.php']['supporters'] = array(
+            __('Supporters', 'textdomain'),
+            $menuPermission,
+            'admin.php?page=buy-me-coffee.php#/supporters',
+        );
         $submenu['buy-me-coffee.php']['settings'] = array(
             __('Settings', 'textdomain'),
             $menuPermission,
             'admin.php?page=buy-me-coffee.php#/settings',
-        );
-        $submenu['buy-me-coffee.php']['supports'] = array(
-            __('Supports', 'textdomain'),
-            $menuPermission,
-            'admin.php?page=buy-me-coffee.php#/supports',
         );
     }
 
@@ -73,7 +73,7 @@ class Menu
             //'image_upload_url' => admin_url('admin-ajax.php?action=wpf_global_settings_handler&route=wpf_upload_image'),
             'assets_url' => BUYMECOFFEE_URL . 'assets/',
             'ajaxurl' => admin_url('admin-ajax.php'),
-            'preview_url' => site_url('?buymecoffee_payment_page=1')
+            'preview_url' => site_url('?appreciate-your-support-bmc=1')
             // site_url('?buymecoffee_preview=button')
         ));
 

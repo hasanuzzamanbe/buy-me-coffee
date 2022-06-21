@@ -59,6 +59,7 @@
             </template>
             </el-table-column>
         </el-table>
+        <br/>
         <el-pagination
             @current-change="handleSizeChange"
             :page-size="posts_per_page"

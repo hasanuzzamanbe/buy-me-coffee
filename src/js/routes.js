@@ -1,6 +1,6 @@
 import Dashboard from './Components/Dashboard';
 import Settings from './Components/Settings';
-import Supports from './Components/Supports';
+import Supporters from './Components/Supports';
 
 export const routes = [
     {
@@ -14,8 +14,8 @@ export const routes = [
         component: Settings
     },
     {
-        path: '/supports',
-        name: 'supports',
-        component: Supports
+        path: '/supporters',
+        name: 'supporters',
+        component: Supporters
     }
 ];

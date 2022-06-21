@@ -13,7 +13,7 @@ class DemoPage
             // oxygen page compatibility
             remove_action('wp_head', 'oxy_print_cached_css', 999999);
         }
-        if (isset($_GET['buymecoffee_payment_page']) && $_GET['buymecoffee_payment_page'] === '1') {
+        if (isset($_GET['appreciate-your-support-bmc']) && $_GET['appreciate-your-support-bmc'] === '1') {
             wp_enqueue_style('dashicons');
             $this->loadDefaultPageTemplate();
             $this->renderPreview();

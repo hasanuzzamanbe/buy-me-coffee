@@ -20,7 +20,7 @@ class Render
         $fontSize = ArrayHelper::get($template, 'advanced.fontSize');
         $radius = ArrayHelper::get($template, 'advanced.radius');
 
-        $paymentPageUrl = site_url('?buymecoffee_payment_page=1');
+        $paymentPageUrl = site_url('?appreciate-your-support-bmc=1');
 
         $styling = "<style>.wpm-buymecoffee-container .wpm-buymecoffee-button{
             outline: none;

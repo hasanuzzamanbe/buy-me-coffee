@@ -45,7 +45,7 @@
                     icon: 'el-icon-bank-card'
                   },
                   {
-                    route: 'supports',
+                    route: 'supporters',
                     title: 'Supporters',
                     icon: 'el-icon-user'
                   }

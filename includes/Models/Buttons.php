@@ -3,7 +3,7 @@ namespace buyMeCoffee\Models;
 
 class Buttons
 {
-    public function getButton()
+    public function getButton($isDefault = false)
     {
         $defaults =  array(
                 "buttonText" => 'Buy Me Coffee',
@@ -24,6 +24,10 @@ class Buttons
                     "radius" => 4
                 )
         );
+
+        if ($isDefault) {
+            return $defaults;
+        }
 
         $settings = get_option('wpm_bmc_payment_setting', array());
         return wp_parse_args($settings, $defaults);
