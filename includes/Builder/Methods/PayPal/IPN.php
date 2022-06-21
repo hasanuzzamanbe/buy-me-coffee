@@ -11,6 +11,9 @@ class IPN
         if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] != 'POST') {
             return;
         }
+
+        header("HTTP/1.1 200 OK");
+
         $post_data = '';
         if (ini_get('allow_url_fopen')) {
             $post_data = file_get_contents('php://input');
