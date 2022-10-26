@@ -1,9 +1,6 @@
-let mix = require('laravel-mix');
-mix.setPublicPath('assets');
-
-mix.setResourceRoot('../');
+const mix = require('./src/mix');
 mix
-    .js('src/js/boot.js', 'assets/js/boot.js')
+    .js('src/js/boot.js', 'assets/js/boot.js').vue({ version: 3 })
     .js('src/js/main.js', 'assets/js/plugin-main-js-file.js')
     .js('src/js/BmcPublic.js', 'assets/js/BmcPublic.js')
     .js('src/js/BmcFormHandler.js', 'assets/js/BmcFormHandler.js')

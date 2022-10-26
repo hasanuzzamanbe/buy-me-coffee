@@ -24,6 +24,7 @@ class View
      */
     public static function make($path, $data = [])
     {
+        var_dump($path); die();
         if (file_exists($path = self::getFilePath($path))) {
             ob_start();
             extract($data);

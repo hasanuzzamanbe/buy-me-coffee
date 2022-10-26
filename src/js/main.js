@@ -1,38 +1,23 @@
-window.buyMeCoffeeBus = new window.buyMeCoffee.Vue();
+import routes from './routes';
+import { createWebHashHistory, createRouter } from 'vue-router'
+import BuyMeCoffee from './plugin_main_js_file.js';
 
-window.buyMeCoffee.Vue.mixin({
-    methods: {
-        applyFilters: window.buyMeCoffee.applyFilters,
-        addFilter: window.buyMeCoffee.addFilter,
-        addAction: window.buyMeCoffee.addFilter,
-        doAction: window.buyMeCoffee.doAction,
-        $get: window.buyMeCoffee.$get,
-        $adminGet: window.buyMeCoffee.$adminGet,
-        $adminPost: window.buyMeCoffee.$adminPost,
-        $post: window.buyMeCoffee.$post,
-        $publicAssets: window.buyMeCoffee.$publicAssets,
-        $t(str) {
-            let transString = buyMeCoffeeAdmin.i18n[str];
-            if(transString) {
-                return transString;
-            }
-            return str;
-        }
+const router = createRouter({
+    history: createWebHashHistory(),
+    routes
+});
+
+
+const framework = new BuyMeCoffee();
+
+framework.app.config.globalProperties.appVars = window.buyMeCoffeeAdmin;
+
+window.buyMeCoffeeApp = framework.app.use(router).mount('#buy-me-coffee_app');
+
+router.afterEach((to, from) => {
+    jQuery('.buymecoffee_menu_item').removeClass('active');
+    let active = to.meta.active;
+    if(active) {
+        jQuery('.buymecoffee_main-menu-items').find('li[data-key='+active+']').addClass('active');
     }
 });
-
-import {routes} from './routes';
-
-const router = new window.buyMeCoffee.Router({
-    routes: window.buyMeCoffee.applyFilters('buyMeCoffee_global_vue_routes', routes),
-    linkActiveClass: 'active'
-});
-
-import App from './AdminApp';
-
-new window.buyMeCoffee.Vue({
-    el: '#buy-me-coffee_app',
-    render: h => h(App),
-    router: router
-});
-

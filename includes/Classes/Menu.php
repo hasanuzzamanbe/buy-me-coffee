@@ -2,6 +2,8 @@
 
 namespace buyMeCoffee\Classes;
 
+use buyMeCoffee\Classes\view;
+
 class Menu
 {
     public function register()
@@ -18,36 +20,52 @@ class Menu
 
         $title = __('Buy Me Coffee', 'textdomain');
         global $submenu;
+
+        $capability = 'manage_options';
+
         add_menu_page(
-            $title,
-            $title,
-            $menuPermission,
+            __('Buy Me Coffee', 'wpcrud'),
+            __('Buy Me Coffee', 'wpcrud'),
+            $capability,
             'buy-me-coffee.php',
-            array($this, 'enqueueAssets'),
+            [$this, 'render'],
             'dashicons-coffee',
-            25
+            6
         );
 
-        $submenu['buy-me-coffee.php']['my_profile'] = array(
-            __('Plugin Dashboard', 'textdomain'),
-            $menuPermission,
-            'admin.php?page=buy-me-coffee.php#/',
+        // $submenu['buy-me-coffee.php']['my_profile'] = array(
+        //     __('Plugin Dashboard', 'textdomain'),
+        //     $menuPermission,
+        //     'admin.php?page=buy-me-coffee.php#/',
+        // );
+        // $submenu['buy-me-coffee.php']['supporters'] = array(
+        //     __('Supporters', 'textdomain'),
+        //     $menuPermission,
+        //     'admin.php?page=buy-me-coffee.php#/supporters',
+        // );
+        // $submenu['buy-me-coffee.php']['settings'] = array(
+        //     __('Settings', 'textdomain'),
+        //     $menuPermission,
+        //     'admin.php?page=buy-me-coffee.php#/settings',
+        // );
+    }
+
+    public function render()
+    {
+         view::make(
+            'render.php'
+
         );
-        $submenu['buy-me-coffee.php']['supporters'] = array(
-            __('Supporters', 'textdomain'),
-            $menuPermission,
-            'admin.php?page=buy-me-coffee.php#/supporters',
-        );
-        $submenu['buy-me-coffee.php']['settings'] = array(
-            __('Settings', 'textdomain'),
-            $menuPermission,
-            'admin.php?page=buy-me-coffee.php#/settings',
-        );
+        return;
+        exit();
     }
 
     public function enqueueAssets()
     {
         do_action('buy-me-coffee/render_admin_app');
+
+        
+
         wp_enqueue_script(
             'buy-me-coffee_boot',
             BUYMECOFFEE_URL . 'assets/js/boot.js',
@@ -76,6 +94,7 @@ class Menu
             'preview_url' => site_url('?appreciate-your-support-bmc=1')
             // site_url('?buymecoffee_preview=button')
         ));
+
 
         wp_localize_script('buy-me-coffee_boot', 'buyMeCoffeeAdmin', $buyMeCoffeeAdminVars);
     }

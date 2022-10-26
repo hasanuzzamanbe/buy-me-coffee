@@ -134,7 +134,6 @@
     </div>
 </template>
 <script>
-import Clipboard from 'clipboard';
 export default {
     name: 'Dashboard',
     data(){

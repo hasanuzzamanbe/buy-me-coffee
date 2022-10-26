@@ -8,7 +8,7 @@ Version: 1.0.0
 Author: wpminers
 Author URI: http://www.wpminers.com
 License: A "Slug" license name e.g. GPL2
-Text Domain: textdomain
+Text Domain: buy-me-coffee
 */
 
 
