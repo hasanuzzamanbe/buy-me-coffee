@@ -1,6 +1,6 @@
 import Dashboard from './Components/Dashboard.vue';
-// import Settings from './Components/Settings';
-// import Supporters from './Components/Supports';
+import Settings from './Components/Settings.vue';
+import Supporters from './Components/Supports.vue';
 
 
 export default [
@@ -12,14 +12,14 @@ export default [
             active: 'dashboard'
         }
     },
-    // {
-    //     path: '/settings',
-    //     name: 'settings',
-    //     component: Settings
-    // },
-    // {
-    //     path: '/supporters',
-    //     name: 'supporters',
-    //     component: Supporters
-    // }
+    {
+        path: '/settings',
+        name: 'settings',
+        component: Settings
+    },
+    {
+        path: '/supporters',
+        name: 'supporters',
+        component: Supporters
+    }
 ];

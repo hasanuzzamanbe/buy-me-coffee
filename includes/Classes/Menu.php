@@ -2,7 +2,7 @@
 
 namespace buyMeCoffee\Classes;
 
-use buyMeCoffee\Classes\view;
+use buyMeCoffee\Classes\View;
 
 class Menu
 {
@@ -24,8 +24,8 @@ class Menu
         $capability = 'manage_options';
 
         add_menu_page(
-            __('Buy Me Coffee', 'wpcrud'),
-            __('Buy Me Coffee', 'wpcrud'),
+            $title,
+            $title,
             $capability,
             'buy-me-coffee.php',
             [$this, 'render'],
@@ -33,58 +33,65 @@ class Menu
             6
         );
 
-        // $submenu['buy-me-coffee.php']['my_profile'] = array(
-        //     __('Plugin Dashboard', 'textdomain'),
-        //     $menuPermission,
-        //     'admin.php?page=buy-me-coffee.php#/',
-        // );
-        // $submenu['buy-me-coffee.php']['supporters'] = array(
-        //     __('Supporters', 'textdomain'),
-        //     $menuPermission,
-        //     'admin.php?page=buy-me-coffee.php#/supporters',
-        // );
-        // $submenu['buy-me-coffee.php']['settings'] = array(
-        //     __('Settings', 'textdomain'),
-        //     $menuPermission,
-        //     'admin.php?page=buy-me-coffee.php#/settings',
-        // );
+        $submenu['buy-me-coffee.php']['my_profile'] = array(
+            __('Plugin Dashboard', 'textdomain'),
+            $menuPermission,
+            'admin.php?page=buy-me-coffee.php#/',
+        );
+        $submenu['buy-me-coffee.php']['supporters'] = array(
+            __('Supporters', 'textdomain'),
+            $menuPermission,
+            'admin.php?page=buy-me-coffee.php#/supporters',
+        );
+        $submenu['buy-me-coffee.php']['settings'] = array(
+            __('Settings', 'textdomain'),
+            $menuPermission,
+            'admin.php?page=buy-me-coffee.php#/settings',
+        );
     }
 
     public function render()
     {
-         view::make(
-            'render.php'
+        $this->enqueueAssets();
 
-        );
-        return;
-        exit();
+        ob_start();
+        ?>
+            <div id="buy-me-coffee_app" class="buy-me-coffee_app">
+                <h1>Menu Here</h1>
+                <div class="buymecoffee_body">
+                    <div class="bmc_route_wrapper">
+                        <router-view></router-view>
+                    </div>
+                </div>
+            </div>
+        <?php
+        echo ob_get_clean();
     }
 
     public function enqueueAssets()
     {
         do_action('buy-me-coffee/render_admin_app');
 
-        
-
         wp_enqueue_script(
             'buy-me-coffee_boot',
             BUYMECOFFEE_URL . 'assets/js/boot.js',
-            array('jquery'),
+            array(),
             BUYMECOFFEE_VERSION,
             true
         );
 
         // 3rd party developers can now add their scripts here
         do_action('buy-me-coffee/booting_admin_app');
-        wp_enqueue_script(
-            'buy-me-coffee_js',
-            BUYMECOFFEE_URL . 'assets/js/plugin-main-js-file.js',
-            array('buy-me-coffee_boot'),
-            BUYMECOFFEE_VERSION,
-            true
-        );
 
-        //enque css file
+	    wp_enqueue_script(
+            'buy-me-coffee_js',
+		    BUYMECOFFEE_URL . 'assets/js/plugin-main-js-file.js',
+		    array('jquery'),
+		    BUYMECOFFEE_VERSION,
+		    true
+	    );
+
+        //enqueue css file
         wp_enqueue_style('buy-me-coffee_admin_css', BUYMECOFFEE_URL . 'assets/css/element.css');
 
         $buyMeCoffeeAdminVars = apply_filters('buy-me-coffee/admin_app_vars', array(

@@ -227,17 +227,6 @@ export default {
     },
     mounted() {
         this.getSettings();
-        if(!window.wpm_clip_inited) {
-            var clipboard = new Clipboard('.copy');
-            clipboard.on('success', (e) => {
-                this.$message({
-                    message: 'Copied to Clipboard!',
-                    type: 'success',
-                    offset: 32
-                });
-            });
-            window.wpm_clip_inited = true;
-        }
     }
 }
 </script>

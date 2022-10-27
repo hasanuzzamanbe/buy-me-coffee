@@ -24,7 +24,6 @@ class View
      */
     public static function make($path, $data = [])
     {
-        var_dump($path); die();
         if (file_exists($path = self::getFilePath($path))) {
             ob_start();
             extract($data);
@@ -42,7 +41,7 @@ class View
     protected static function getFilePath($path)
     {
         $path = str_replace('.', DIRECTORY_SEPARATOR, $path);
-        $viewName = BUYMECOFFEE_DIR.DIRECTORY_SEPARATOR.'includes'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.$path;
+        $viewName = BUYMECOFFEE_DIR.'includes'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.$path;
         $fullPath = $viewName.'.php';
         return apply_filters('buymecoffee/template_view_path', $fullPath, $path);
     }

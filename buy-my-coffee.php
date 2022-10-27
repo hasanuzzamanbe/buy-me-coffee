@@ -50,7 +50,6 @@ if (!defined('BUYMECOFFEE_VERSION')) {
             $this->commonActions();
             $this->loadFiles();
             $this->registerShortcode();
-
         }
 
         public function loadFiles()
@@ -71,11 +70,6 @@ if (!defined('BUYMECOFFEE_VERSION')) {
             // Top Level Ajax Handlers
             $ajaxHandler = new \buyMeCoffee\Classes\AdminAjaxHandler();
             $ajaxHandler->registerEndpoints();
-
-            add_action('buy-me-coffee/render_admin_app', function () {
-                $adminApp = new \buyMeCoffee\Classes\AdminApp();
-                $adminApp->bootView();
-            });
         }
 
         public function registerShortcode()
