@@ -1,6 +1,6 @@
 <template>
-    <div v-loading="fetching">
-        <div class="wpm_bmc_wrapper">
+    <div class="wpm_bmc_main_container" v-loading="fetching">
+        <div class="wpm_bmc_wrapper wpm_bmc_payment_settings">
             <div class="wpm_bmc_header">
                 <h3 class="wpm_bmc_title">
                     <!-- {{ $t('PayPal Gateway Settings') }} -->
@@ -77,7 +77,7 @@
                     settings: this.settings,
                 })
                     .then(response => {
-                        this.$message.success(response.data.message);
+                        this.$handleSuccess(response.data.message);
                     })
                     .fail(error => {
                         this.$message.error(error.responseJSON.data.message);

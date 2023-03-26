@@ -13,7 +13,7 @@ class Stripe extends BaseMethods
 
     public function makePayment($transactionId, $entryId, $form_data)
     {
-        var_dump('from stripe');
+        dd($transactionId, $entryId, $form_data,'from stripe');
         die();
     }
 

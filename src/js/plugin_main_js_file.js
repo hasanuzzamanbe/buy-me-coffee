@@ -49,6 +49,7 @@ export default class BuyMeCoffee {
                 // $del: self.$del,
                 // $put: self.$put,
                 // $patch: self.$patch,
+                $handleSuccess: self.handleSuccess,
                 $handleError: self.handleError,
                 $saveData: self.saveData,
                 $getData: self.getData,
@@ -184,6 +185,16 @@ export default class BuyMeCoffee {
             .replace(/\\-\\-+/g, '-') // Replace multiple - with single -
             .replace(/^-+/, '') // Trim - from start of text
             .replace(/-+$/, ''); // Trim - from end of text
+    }
+
+    handleSuccess(message) {
+        ElNotification({
+            type: 'success',
+            title: 'Success',
+            message: message,
+            offset: 32,
+            dangerouslyUseHTMLString: true
+        });
     }
 
     handleError(response) {

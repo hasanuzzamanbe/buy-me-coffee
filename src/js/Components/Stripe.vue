@@ -1,6 +1,6 @@
 <template>
-    <div v-loading="fetching">
-        <div class="wpm_bmc_wrapper">
+    <div class="wpm_bmc_main_container" v-loading="fetching">
+        <div class="wpm_bmc_wrapper wpm_bmc_payment_settings">
                 <h3 class="wpm_bmc_title">
                     <!-- {{ $t('PayPal Gateway Settings') }} -->
                     Stripe Gateway Settings:
@@ -96,7 +96,7 @@
                     route: 'save_payment_settings'
                 })
                     .then(response => {
-                        this.$message.success(response.data.message);
+                        this.$handleSuccess(response.data.message);
                     })
                     .fail(error => {
                         this.$message.error(error.responseJSON.data.message);

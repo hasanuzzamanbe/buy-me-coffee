@@ -47,5 +47,8 @@ form.wpm_submitting_form {
   label {
     margin-right: 23px;
     cursor: pointer;
+    display: grid;
+    justify-items: center;
+    align-items: center;
   }
 }

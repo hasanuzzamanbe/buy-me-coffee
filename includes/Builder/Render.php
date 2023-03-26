@@ -32,7 +32,12 @@ class Render
             min-width: {$minWidth}px;
             font-size: {$fontSize}px;
             border-radius: {$radius}px;
-        }</style>";
+            cursor: pointer;
+        }
+        .wpm-buymecoffee-button:hover {
+            box-shadow: 4px 3px 6px 2px #ccc;
+        }
+        </style>";
 
         ob_start();
         echo $styling;

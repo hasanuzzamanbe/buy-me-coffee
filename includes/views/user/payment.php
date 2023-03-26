@@ -83,7 +83,10 @@
         .wpm_submit_button {
             width: 100%;
             border-radius: 4px;
+            border: 1px solid #ccc;
             margin-top: 12px;
+            min-height: 38px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -94,10 +97,10 @@
     </div>
     <div class="buymecoffee_preview_body">
         <div class="buymecoffee_form_preview_wrapper">
-            <div style="display: flex;">
-                <span style="font-size:30px;margin-right: 23px;line-height: 40px;"
+            <div style="display: flex; align-items: center;">
+                <span style="font-size:38px;margin-right: 23px;line-height: 23px;"
                     class="dashicons dashicons-coffee"></span>
-                <h3 style="font-family: cursive;">Thanks for your appreciation.</h3>
+                <h3>Thanks for your appreciation.</h3>
             </div>
 
             <hr>

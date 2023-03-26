@@ -1,48 +1,31 @@
 import { createApp } from 'vue';
 
-import {
-    ElRow,
-    ElCol,
-    ElTable,
-    ElTableColumn,
-    ElButtonGroup,
-    ElButton,
-    ElForm,
-    ElFormItem,
-    ElInput,
-    ElPagination,
-    ElLoading,
-    ElMessage,
-    ElNotification
-} from 'element-plus';
+import 'element-plus/dist/index.css';   
+import {Upload, Top, Bottom, Edit, Delete, View, Tools, Back, Plus, CircleCheck, SuccessFilled, CoffeeCup} from '@element-plus/icons-vue'
 
-const app = createApp({});
-
-const components = [
-    ElButton,
-    ElButtonGroup,
-    ElTable,
-    ElTableColumn,
-    ElInput,
-    ElForm,
-    ElFormItem,
-    ElRow,
-    ElCol,
-    ElPagination,
+const elPlusIcons = [
+    Top,
+    Bottom,
+    Edit,
+    View,
+    Delete,
+    Tools,
+    Back,
+    Upload,
+    Plus,
+    CircleCheck,
+    SuccessFilled,
+    CoffeeCup
 ];
 
-components.forEach(component => {
+
+const app = createApp({});
+app.use(ElLoading);
+app.use(ElIcon);
+
+elPlusIcons.forEach(component => {
     app.component(component.name, component)
 })
 
-const plugins = [
-    components,
-    ElLoading,
-    ElNotification
-];
-
-plugins.forEach(plugin => {
-    app.use(plugin)
-});
 
 export default app;

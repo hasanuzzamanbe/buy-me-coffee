@@ -50,4 +50,11 @@ class Supporters
 
         return $supporter;
     }
+    public function delete($id)
+    {
+        $supporter = wpmBmcDB()->table('wpm_bmc_supporters')->where('id', $id)->delete();
+
+        return $supporter;
+    }
+
 }

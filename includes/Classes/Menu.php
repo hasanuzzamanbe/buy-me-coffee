@@ -18,7 +18,7 @@ class Menu
             return;
         }
 
-        $title = __('Buy Me Coffee', 'textdomain');
+        $title = __('Buy Me Coffee', 'buy-me-coffee');
         global $submenu;
 
         $capability = 'manage_options';
@@ -34,19 +34,19 @@ class Menu
         );
 
         $submenu['buy-me-coffee.php']['my_profile'] = array(
-            __('Plugin Dashboard', 'textdomain'),
+            __('Dashboard', 'buy-me-coffee'),
             $menuPermission,
             'admin.php?page=buy-me-coffee.php#/',
         );
         $submenu['buy-me-coffee.php']['supporters'] = array(
-            __('Supporters', 'textdomain'),
+            __('Supporters', 'buy-me-coffee'),
             $menuPermission,
             'admin.php?page=buy-me-coffee.php#/supporters',
         );
-        $submenu['buy-me-coffee.php']['settings'] = array(
-            __('Settings', 'textdomain'),
+        $submenu['buy-me-coffee.php']['gateways'] = array(
+            __('Gateways', 'buy-me-coffee'),
             $menuPermission,
-            'admin.php?page=buy-me-coffee.php#/settings',
+            'admin.php?page=buy-me-coffee.php#/gateway',
         );
     }
 
@@ -57,7 +57,6 @@ class Menu
         ob_start();
         ?>
             <div id="buy-me-coffee_app" class="buy-me-coffee_app">
-                <h1>Menu Here</h1>
                 <div class="buymecoffee_body">
                     <div class="bmc_route_wrapper">
                         <router-view></router-view>

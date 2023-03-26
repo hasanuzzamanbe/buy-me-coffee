@@ -2,7 +2,7 @@
     <div class="wpm_bmc_main_container">
         <el-row>
             <el-col :span="12">
-                <h1 class="wpm_bmc_menu_title">Buy Me <i style="color: #ff7800;" class="el-icon-coffee" ></i>- Button templates</h1>
+                <h1 class="wpm_bmc_menu_title">Buy Me <CoffeeCup style="width:23px;"/>- Global settings</h1>
             </el-col>
             <el-col :span="12">
             </el-col>
@@ -13,62 +13,62 @@
                     <el-row :gutter="20">
                         <el-col :md="24" :lg="12">
                             <el-form label-position="left" label-width="140px" v-if="!fetching">
-                                <el-form-item label="Button text">
-                                    <el-input size="small" type="text" v-model="template.buttonText"></el-input>
-                                </el-form-item>
-                                <el-form-item>
-                                    <el-checkbox true-label="yes" false-label="no" v-model="template.enableName">Collect name of donor</el-checkbox>
-                                </el-form-item>
-                                <el-form-item>
-                                    <el-checkbox true-label="yes" false-label="no" v-model="template.enableEmail">Collect email of donor</el-checkbox>
-                                </el-form-item>
-                                <el-form-item>
-                                    <el-checkbox true-label="yes" false-label="no" v-model="template.enableMessage">Enable message option when donate</el-checkbox>
-                                </el-form-item>
-                                <el-form-item label="">
-                                        <p>Enable pay method</p>
-                                        <el-checkbox-group v-model="template.methods">
-                                        <el-checkbox v-for="method in methods" :key="method.value" :label="method.name"></el-checkbox>
-                                    </el-checkbox-group>
-                                </el-form-item>
-                                <el-collapse>
-                                    <el-collapse-item title="Advanced style:" name="yes">
-                                        <el-form-item label="Button color">
-                                            <el-color-picker
-                                                size="small"
-                                                v-model="template.advanced.bgColor"
-                                                show-alpha
-                                                :predefine="predefineColors">
-                                            </el-color-picker>
+                                <el-tabs>
+                                    <el-tab-pane label="General">
+                                        <el-form-item label="Button text">
+                                            <el-input size="small" type="text" v-model="template.buttonText"></el-input>
                                         </el-form-item>
-                                            <el-form-item label="Button Text color">
-                                            <el-color-picker
-                                                size="small"
-                                                v-model="template.advanced.color"
-                                                show-alpha
-                                                :predefine="predefineColors">
-                                            </el-color-picker>
+                                        <el-form-item>
+                                            <el-checkbox true-label="yes" false-label="no" v-model="template.enableName">Collect name of donor</el-checkbox>
                                         </el-form-item>
-                                            <el-form-item label="Button Radius(px)">
-                                            <el-input
-                                                style="width:50%"
-                                                type="number"
-                                                size="small"
-                                                v-model="template.advanced.radius"
-                                                >
-                                            </el-input>
+                                        <el-form-item>
+                                            <el-checkbox true-label="yes" false-label="no" v-model="template.enableEmail">Collect email of donor</el-checkbox>
                                         </el-form-item>
-                                    </el-collapse-item>
-                                </el-collapse>
-                                <div>
-                                    <el-button style="margin-top:12px;" @click="resetDefault" type="danger" size="small">
-                                        Reset Default
-                                    </el-button>
-                                    <el-button style="margin-top:12px;" @click="saveTemplates" type="primary" size="small">
-                                        Save Settings
-                                    </el-button>
-
-                                </div>
+                                        <el-form-item>
+                                            <el-checkbox true-label="yes" false-label="no" v-model="template.enableMessage">Enable message option when donate</el-checkbox>
+                                        </el-form-item>
+                                        <el-form-item label="Enable pay method">
+                                                <el-checkbox-group v-model="template.methods">
+                                                <el-checkbox v-for="method in methods" :key="method.value" :label="method.name"></el-checkbox>
+                                            </el-checkbox-group>
+                                        </el-form-item>
+                                    </el-tab-pane>
+                                    <el-tab-pane label="Styles">
+                                                <el-form-item label="Button color">
+                                                    <el-color-picker
+                                                        size="small"
+                                                        v-model="template.advanced.bgColor"
+                                                        show-alpha
+                                                        :predefine="predefineColors">
+                                                    </el-color-picker>
+                                                </el-form-item>
+                                                    <el-form-item label="Button Text color">
+                                                    <el-color-picker
+                                                        size="small"
+                                                        v-model="template.advanced.color"
+                                                        show-alpha
+                                                        :predefine="predefineColors">
+                                                    </el-color-picker>
+                                                </el-form-item>
+                                                    <el-form-item label="Button Radius(px)">
+                                                    <el-input
+                                                        style="width:50%"
+                                                        type="number"
+                                                        size="small"
+                                                        v-model="template.advanced.radius"
+                                                        >
+                                                    </el-input>
+                                                </el-form-item>
+                                    </el-tab-pane>
+                                    <div>
+                                        <el-button style="margin-top:12px;" @click="resetDefault" type="danger" size="small">
+                                            Reset Default
+                                        </el-button>
+                                        <el-button style="margin-top:12px;" @click="saveTemplates" type="primary" size="small">
+                                            Save Settings
+                                        </el-button>
+                                    </div>
+                                </el-tabs>
                             </el-form>
                             <div v-else>
                                 <p>fetching, please wait...</p>
@@ -107,6 +107,7 @@
                                         title="Click to copy shortcode"
                                         placement="top">
                                         <code class="copy"
+                                                data-clipboard-action="copy"
                                                 data-clipboard-text='[buymecoffee type="button"]'>
                                             <i class="el-icon-document"></i> [buymecoffee type="button"]
                                         </code>
@@ -134,6 +135,7 @@
     </div>
 </template>
 <script>
+import ClipboardJS from 'clipboard';
 export default {
     name: 'Dashboard',
     data(){
@@ -192,7 +194,7 @@ export default {
                     route: 'reset_template_settings'
                 })
                     .then(response => {
-                        this.$message.success(response.data.message);
+                        this.$handleSuccess(response.data.message);
                         this.template = response.data.settings;
                         this.saving = false;
                     })
@@ -211,11 +213,12 @@ export default {
                     route: 'save_settings'
                 })
                     .then(response => {
-                        this.$message.success(response.data.message);
+                        this.$handleSuccess(response.data.message);
                         this.saving = false;
                     })
                     .fail(error => {
-                        this.$message.error(error.responseJSON.data.message);
+                        console.log(error)
+                        // this.$message.error(error.responseJSON.data.message);
                     })
                     .always(() => {
                         this.saving = false;
@@ -227,6 +230,16 @@ export default {
     },
     mounted() {
         this.getSettings();
+        jQuery(document).ready(function($) {
+            var clipboard = new ClipboardJS('.copy');
+            clipboard.on('success', function(e) {
+                $(e.trigger).text("Copied!");
+                e.clearSelection();
+                setTimeout(function() {
+                    $(e.trigger).text(e.text);
+                }, 1500);
+            });
+        });
     }
 }
 </script>

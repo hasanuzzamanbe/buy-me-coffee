@@ -56,9 +56,9 @@ class AdminAjaxHandler
     public function deleteSupporter()
     {
         $id = sanitize_text_field($_REQUEST['id']);
-        $supporter = (new Supporters())->find($id);
-        if ($supporter) {
-            $supporter->delete();
+        $supporter = (new Supporters());
+        if ($supporter->find($id)) {
+            $supporter->delete($id);
             wp_send_json_success($supporter);
         }
         wp_send_json_error();
