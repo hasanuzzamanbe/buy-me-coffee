@@ -9,22 +9,49 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
 {
     public function __construct()
     {
-        parent::__construct('paypal');
+        parent::__construct(
+            'PayPal',
+            'paypal',
+            'PayPal is the faster, safer way to send money, make an online payment, receive money or set up a merchant account.',
+            BUYMECOFFEE_URL. 'assets/images/paypal.png'
+        );
         add_action( 'wpm_buymecoffee_make_payment_paypal' , array( $this , 'makePayment' ) , 10 , 3);
         add_action('init', array($this, 'ipnVerification'));
         add_action('wpm_bmc_paypal_action_web_accept', array($this, 'updateStatus'), 10, 2);
     }
 
+    public function sanitize($settings)
+    {
+        foreach ($settings as $key => $value) {
+            if ($key === 'paypal_email') {
+                $settings[$key] = sanitize_email($value);
+            } else {
+                $settings[$key] = sanitize_text_field($value);
+            }
+        }
+        return $settings;
+    }
+
+    public function getPaymentSettings()
+    {
+        wp_send_json_success(array(
+            'settings'       => $this->getSettings(),
+            'webhook_url'    => site_url() . '?wpm_bmc_paypal_listener=1'
+        ), 200);
+    }
+
     public function getSettings()
     {
-        $settings = get_option('wpm_bmc_paypal_payment_settings', array());
+        $settings = get_option('wpm_bmc_payment_settings_' . $this->method, array());
+        
         $defaults = array(
             'enable' => 'no',
             'payment_mode'    => 'test',
             'paypal_email'    => '',
             'disable_ipn_verification' => 'no',
         );
-        return wp_parse_args($settings, $defaults);
+
+        return  wp_parse_args($settings, $defaults);
     }
 
     public function makePayment($transactionId, $entryId, $form_data)

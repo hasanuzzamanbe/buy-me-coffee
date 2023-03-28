@@ -3,8 +3,7 @@
         <div class="wpm_bmc_wrapper wpm_bmc_payment_settings">
             <div class="wpm_bmc_header">
                 <h3 class="wpm_bmc_title">
-                    <!-- {{ $t('PayPal Gateway Settings') }} -->
-                    PayPal Gateway Settings:
+                    <router-link style="text-decoration: none;" :to="{name: 'Gateway'}">Gateways / </router-link>PayPal Gateway Settings:
                 </h3>
             </div>
             <div style="margin-bottom: 23px;">
@@ -55,7 +54,8 @@
                 this.fetching = true;
                 this.$get({
                     action: 'wpm_bmc_admin_ajax',
-                    route: 'get_paypal_Settings'
+                    route: 'get_data',
+                    method: this.$route.name,
                 })
                     .then((response) => {
                         this.settings = response.data.settings;
@@ -73,7 +73,7 @@
                 this.$post({
                     action: 'wpm_bmc_admin_ajax',
                     route: 'save_payment_settings',
-                    method: 'paypal',
+                    method: this.$route.name,
                     settings: this.settings,
                 })
                     .then(response => {

@@ -2,8 +2,7 @@
     <div class="wpm_bmc_main_container" v-loading="fetching">
         <div class="wpm_bmc_wrapper wpm_bmc_payment_settings">
                 <h3 class="wpm_bmc_title">
-                    <!-- {{ $t('PayPal Gateway Settings') }} -->
-                    Stripe Gateway Settings:
+                    <router-link style="text-decoration: none;" :to="{name: 'Gateway'}">Gateways / </router-link>Stripe Gateway Settings:
                 </h3>
             <div style="margin-bottom: 23px;">
                 <label>Enable Stripe Payment
@@ -74,7 +73,8 @@
                 this.fetching = true;
                 this.$get({
                     action: 'wpm_bmc_admin_ajax',
-                    route: 'get_data'
+                    route: 'get_data',
+                    method: this.$route.name
                 })
                     .then((response) => {
                         this.settings = response.data.settings;
@@ -92,7 +92,7 @@
                 this.$post({
                     action: 'wpm_bmc_admin_ajax',
                     settings: this.settings,
-                    method: 'stripe',
+                    method: this.$route.name,
                     route: 'save_payment_settings'
                 })
                     .then(response => {

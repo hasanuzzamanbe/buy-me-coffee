@@ -3,6 +3,9 @@
 namespace buyMeCoffee\Classes;
 use buyMeCoffee\Models\Supporters;
 use buyMeCoffee\Builder\Methods\PayPal\PayPal;
+use buyMeCoffee\Helpers\ArrayHelper;
+use buyMeCoffee\Controllers\PaymentHandler;
+use buyMeCoffee\Builder\Methods\Stripe\Stripe;
 
 use buyMeCoffee\Models\Buttons;
 
@@ -17,21 +20,32 @@ class AdminAjaxHandler
         $route = sanitize_text_field($_REQUEST['route']);
 
         $validRoutes = array(
-            'get_data' => 'getStripeData',
-            'get_paypal_Settings' => 'getPayPalSettings',
+            'get_data' => 'getPaymentSettings',
             'save_payment_settings' => 'savePaymentSettings',
+
+            'gateways' => 'getAllMethods',
+
             'save_settings' => 'saveSettings',
             'get_settings' => 'getSettings',
+            'reset_template_settings' => 'resetDefaultSettings',
+            
             'get_supporters' => 'getSupporters',
             'edit_supporter' => 'editSupporter',
             'delete_supporter' => 'deleteSupporter',
-            'reset_template_settings' => 'resetDefaultSettings'
+
         );
         if (isset($validRoutes[$route])) {
             do_action('buy-me-coffee/doing_ajax_forms_' . $route);
             return $this->{$validRoutes[$route]}($_REQUEST);
         }
         do_action('buy-me-coffee/admin_ajax_handler_catch', $route);
+    }
+
+    public function getAllMethods()
+    {
+
+        return PaymentHandler::getAllMethods();
+
     }
 
     public function getSupporters()
@@ -64,43 +78,12 @@ class AdminAjaxHandler
         wp_send_json_error();
     }
 
-    public function getStripeData()
+    public function getPaymentSettings()
     {
-        // AccessControl::checkAndPresponseError('get_payment_settings', 'global');
-        wp_send_json_success(array(
-            'settings'       => $this->getStripeSettings(),
-            'webhook_url'    => site_url() . '?wpm_bmc_stripe_listener=1'
-        ), 200);
+        $method = sanitize_text_field(ArrayHelper::get($_REQUEST, 'method'));
+        do_action('buy-me-coffee/get_payment_settings_' . $method);
     }
 
-    public function getMode()
-    {
-        $paymentSettings = $this->getStripeSettings();
-        return ($paymentSettings['payment_mode'] == 'live') ? 'live' : 'test';
-    }
-
-    private function getStripeSettings()
-    {
-        $settings = get_option('wpm_bmc_stripe_payment_settings', array());
-        $defaults = array(
-            'enable' => 'no',
-            'payment_mode'    => 'test',
-            'live_pub_key'    => '',
-            'live_secret_key' => '',
-            'test_pub_key'    => '',
-            'test_secret_key' => ''
-        );
-        return wp_parse_args($settings, $defaults);
-    }
-
-    public function getPayPalSettings()
-    {
-        wp_send_json_success(array(
-            'settings'       => (new PayPal())->getSettings(),
-            'webhook_url'    => site_url() . '?wpm_bmc_paypal_listener=1'
-        ), 200);
-
-    }
     public function resetDefaultSettings()
     {
         $settings = (new Buttons())->getButton($isDefault = true);
@@ -135,15 +118,8 @@ class AdminAjaxHandler
 
     public function savePaymentSettings($data = array())
     {
-        $method = $data['method'] . '_payment_settings';
-        do_action('wpm_bmc_before_save_' .$method, $data);
-
-        update_option('wpm_bmc_' .$method, $data['settings'], false);
-
-        do_action('wpm_bmc_after_save_' . $method, $data);
-
-        wp_send_json_success(array(
-            'message' => __("Settings ({$data['method']}) successfully updated", 'buymecoffee')
-        ), 200);
+        $settings = ArrayHelper::get($data, 'settings');
+        $method = ArrayHelper::get($data, 'method');
+        return (new PaymentHandler())->saveSettings($method, $settings);
     }
 }

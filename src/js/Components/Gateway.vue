@@ -10,7 +10,7 @@
         <el-row>
             <div v-for="(gateway, index) in gateways" :key="index" :offset="index > 0 ? 2 : 0">
                 <el-card :body-style="{ padding: '10px' }" style="width: 250px;margin-right:12px;">
-                    <img :src="getImage(gateway.image)"
+                    <img :src="gateway.image"
                         class="image" />
                     <div style="padding: 14px">
                         <h3>{{ gateway.title }}</h3>
@@ -51,8 +51,17 @@
         goto() {
             this.$router.push({ name: 'stripe' })
         },
-        getImage(image) {
-            return window.buyMeCoffeeAdmin.assets_url + '/images/' + image;
+        getAllMethods() {
+            this.$get({
+                action: 'wpm_bmc_admin_ajax',
+                route: 'gateways',
+            })
+                .then((response) => {
+                    this.gateways = response.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
     },
     computed: {
@@ -60,6 +69,10 @@
     },
     watch: {
         // All watchers go here
+    }
+    ,
+    mounted() {
+        this.getAllMethods();
     }
  }
 </script>

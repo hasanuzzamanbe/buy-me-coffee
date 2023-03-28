@@ -393,7 +393,7 @@ class Stripe
 
     public function getPaymentSettings()
     {
-        AccessControl::checkAndPresponseError('get_payment_settings', 'global');
+        // AccessControl::checkAndPresponseError('get_payment_settings', 'global');
         wp_send_json_success(array(
             'settings'       => $this->getStripeSettings(),
             'webhook_url'    => site_url() . '?wpf_stripe_listener=1',
