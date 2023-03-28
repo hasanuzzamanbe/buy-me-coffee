@@ -4,6 +4,7 @@ namespace buyMeCoffee\Builder;
 
 use buyMeCoffee\Models\Buttons;
 use buyMeCoffee\Helpers\ArrayHelper;
+use buyMeCoffee\Classes\DemoPage;
 
 
 class Render
@@ -43,11 +44,23 @@ class Render
         echo $styling;
         ?>
         <div class="wpm-buymecoffee-container">
-            <a target="_blank" href="<?php echo $paymentPageUrl; ?>">
+
+            <!-- The button used to open the form page -->
+            <!-- <a target="_blank" href="<?php /*echo $paymentPageUrl; */?>">
                 <button class="wpm-buymecoffee-button">
-                    <?php echo $buttonText; ?>
+                    <?php /*echo $buttonText; */?>
                 </button>
-            </a>
+            </a> -->
+
+            <!--  The Modal button -->
+            <button class="wpm-buymecoffee-button" id="bmc_open_modal_btn"><?php echo $buttonText; ?></button>
+
+            <div id="bmc_modal_wrapper" class="modal">
+                <div class="bmc_modal_content">
+                    <span class="close">&times;</span>
+                    <?php (new DemoPage())->loadFormContent(); ?>
+                </div>
+            </div>
         </div>
         <?php
         $content = ob_get_clean();
@@ -97,6 +110,7 @@ class Render
         $enableName= ArrayHelper::get($template, 'enableName') == 'yes' ? true : false;
         $enableEmail = ArrayHelper::get($template, 'enableEmail') == 'yes' ? true : false;
         $enableMsg = ArrayHelper::get($template, 'enableMessage') == 'yes' ? true : false;
+        $defaultAmount = intval(ArrayHelper::get($template, 'defaultAmount', '5'));
 
         ob_start();
         ?>
@@ -114,8 +128,8 @@ class Render
                                 height: 60px;
                                 font-size:33px;
                                 padding: 0px 20px;"
-                            value="5"
-                            data-price="5"
+                            value="<?php echo $defaultAmount; ?>"
+                            data-price="<?php echo $defaultAmount; ?>"
                             type="text">
                     </div>
                 </div>

@@ -11,16 +11,13 @@
     ?>
     <style type="text/css">
         .buymecoffee_preview_body {
-            padding: 40px 0px 40px 0px;
             width: 100%;
             min-height: 85vh;
         }
 
         .buymecoffee_form_preview_wrapper {
-            padding: 30px;
             max-width: 555px;
             background: white;
-            padding: 23px;
             margin: auto;
         }
 

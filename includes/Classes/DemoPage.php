@@ -14,13 +14,18 @@ class DemoPage
             remove_action('wp_head', 'oxy_print_cached_css', 999999);
         }
         if (isset($_GET['appreciate-your-support-bmc']) && $_GET['appreciate-your-support-bmc'] === '1') {
-            wp_enqueue_style('dashicons');
-            $this->loadDefaultPageTemplate();
-            $this->renderPreview();
+            $this->loadFormContent($type = 'page');
         }
     }
 
-    public function renderPreview()
+    public function loadFormContent($type = '')
+    {
+        wp_enqueue_style('dashicons');
+        $this->loadDefaultPageTemplate();
+        $this->renderPreview($type);
+    }
+
+    public function renderPreview($type)
     {
         $btnController = new Buttons();
         $template = $btnController->getButton();
@@ -28,7 +33,10 @@ class DemoPage
             'type' => 'button',
             'template' => $template,
         ]);
-        exit();
+
+        if ($type === 'page') {
+            exit();
+        }
     }
 
     public function loadDefaultPageTemplate()

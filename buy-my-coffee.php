@@ -79,9 +79,21 @@ if (!defined('BUYMECOFFEE_VERSION')) {
                     'type' => '',
                 ), $args);
 
+                $this->addAssets();
+
                 $builder = new \buyMeCoffee\Builder\Render();
                 return $builder->render();
             });
+        }
+
+        public function addAssets()
+        {
+            wp_enqueue_style('buymecoffee', BUYMECOFFEE_URL . 'assets/css/public-style.css', array(), BUYMECOFFEE_VERSION);
+            wp_enqueue_script('buymecoffee', BUYMECOFFEE_URL . 'assets/js/BmcPublic.js', array('jquery'), BUYMECOFFEE_VERSION, true);
+            wp_localize_script('buymecoffee', 'wpm_buymecoffee', array(
+                'ajax_url' => admin_url('admin-ajax.php'),
+                'nonce' => wp_create_nonce('wpm_buymecoffee_nonce'),
+            ));
         }
 
         public function commonActions()

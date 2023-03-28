@@ -10,6 +10,7 @@ class Buttons
                 "enableMessage" => 'yes',
                 "enableName" => 'yes',
                 "enableEmail" => 'yes',
+                "defaultAmount" => '5',
                 "methods" => [
                     'stripe', 'paypal'
                 ],

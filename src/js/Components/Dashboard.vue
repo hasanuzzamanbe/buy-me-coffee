@@ -27,6 +27,9 @@
                                         <el-form-item>
                                             <el-checkbox true-label="yes" false-label="no" v-model="template.enableMessage">Enable message option when donate</el-checkbox>
                                         </el-form-item>
+                                        <el-form-item label="Default amount">
+                                            <el-input type="number" v-model="template.defaultAmount"></el-input>
+                                        </el-form-item>
                                         <el-form-item label="Enable pay method">
                                                 <el-checkbox-group v-model="template.methods">
                                                 <el-checkbox v-for="method in methods" :key="method.value" :label="method.name"></el-checkbox>
@@ -115,6 +118,7 @@
                                 </div>
                                 <br/>
                                 <div>
+                                    <h3>Also you can share support link to get instant payment:</h3>
                                     <el-tooltip effect="dark"
                                         content="Click to copy shortcode"
                                         title="Click to copy shortcode"
@@ -235,9 +239,10 @@ export default {
             clipboard.on('success', function(e) {
                 $(e.trigger).text("Copied!");
                 e.clearSelection();
-                setTimeout(function() {
-                    $(e.trigger).text(e.text);
-                }, 1500);
+                //todo: add timeout to revert text
+                // setTimeout(function() {
+                //     $(e.trigger).text(e.text);
+                // }, 1500);
             });
         });
     }
