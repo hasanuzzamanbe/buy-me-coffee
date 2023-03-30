@@ -20,7 +20,7 @@ form.wpm_submitting_form {
 }
 .wpm_submit_button {
     &:hover {
-      background: #ff9800;
+      background: #ffcf88;
     }
     &:disabled {
       background: #f1cd16;
@@ -28,14 +28,10 @@ form.wpm_submitting_form {
     }
 }
 
-.wpm_bmc_pay_methods {
-  padding: 14px 12px;
-  border-radius: 4px;
-  background: #fefbf4;
-  border: 1px solid #feefd7;
-}
-
 .wpm_bmc_pay_method {
+  // input {
+  //   display: none;
+  // }
   img {
     border: 1px solid #dedede;
     border-radius: 6px;
@@ -70,10 +66,13 @@ form.wpm_submitting_form {
 
 .bmc_modal_content {
   background-color: #fefefe;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #888;
+  margin: 10vh auto;
+  padding: 0px 20px;
+  border: 4px solid #e4e3e1;
+  max-width: 550px;
   width: 60%;
+  height: 80vh;
+  overflow-y: auto;
 }
 
 .close {

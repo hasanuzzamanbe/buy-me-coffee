@@ -9,12 +9,15 @@
     <?php
     wp_head();
     ?>
-    <style type="text/css">
+    <style type="text/css" lang="scss">
         .buymecoffee_preview_body {
             width: 100%;
-            min-height: 85vh;
         }
 
+        .bmc_appreciation_title {
+            font-weight: 100;
+            margin: 0;
+        }
         .buymecoffee_form_preview_wrapper {
             max-width: 555px;
             background: white;
@@ -37,6 +40,10 @@
         .buymecoffee_preview_footer {
             padding: 10px;
             text-align: right;
+            font-size: 13px;
+            color: #a0a0a0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-style: italic;
         }
         .wpm_bmc_input_content input,
         .wpm_bmc_input_content textarea {
@@ -47,6 +54,7 @@
             resize: vertical;
             box-shadow: none;
             background: white !important;
+            height: 33px;
         }
         .wpm_bmc_input_content input:focus,
         .wpm_bmc_input_content textarea:focus {
@@ -58,19 +66,14 @@
             margin-bottom: 14px;
         }
 
-        .wpm_bmc_payment_item {
-            border: 1px solid #ffe3b9;
-            background: #fff2e059;
-            padding: 16px;
-            margin-bottom: 16px;
-            border-radius: 6px;
-        }
         .wpm_bmc_currency_prefix {
             font-size: 33px;
-            background: #ff9800;
-            border: 1px solid #ff9800;
+            background: #000000;
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px;
             color: white;
-            width: 41px;
+            width: 59px;
+            height: 62px;
             text-align: center;
         }
         .wpm_bmc_input_content ::placeholder {
@@ -94,21 +97,14 @@
     </div>
     <div class="buymecoffee_preview_body">
         <div class="buymecoffee_form_preview_wrapper">
-            <div style="display: flex; align-items: center;">
-                <span style="font-size:38px;margin-right: 23px;line-height: 23px;"
-                    class="dashicons dashicons-coffee"></span>
-                <h3>Thanks for your appreciation.</h3>
+            <div style="margin-bottom:23px;">
+                <h4 class="bmc_appreciation_title">Thanks for your appreciation.</h4>
             </div>
-
-            <hr>
             <?php
                 $form =  \buyMeCoffee\Builder\Render::renderInputElements();
                 echo $form;
             ?>
         </div>
-    </div>
-    <div class="buymecoffee_preview_footer">
-        copyright @buymecoffee
     </div>
 </div>
 <?php

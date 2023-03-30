@@ -116,7 +116,6 @@ class Render
         ?>
         <form class="wpm_buymecoffee_form">
             <div class="wpm_bmc_payment_item" style="display: flex;align-items: center;">
-                <img width="60px;" src="<?php echo BUYMECOFFEE_URL . 'assets/images/coffee.png'; ?>" alt="Paypal">
                 <div class="wpm_bmc_input_content">
                     <div style="display: flex;">
                         <span class="wpm_bmc_currency_prefix">$</span>
@@ -129,10 +128,11 @@ class Render
                                 font-size:33px;
                                 padding: 0px 20px;"
                             value="<?php echo $defaultAmount; ?>"
-                            data-price="<?php echo $defaultAmount; ?>"
+                            data-price="<?php echo $defaultAmount * 100; ?>"
                             type="text">
                     </div>
                 </div>
+                <img width="60px;" src="<?php echo BUYMECOFFEE_URL . 'assets/images/coffee.png'; ?>" alt="Paypal">
             </div>
             <?php if ($enableName): ?>
                 <div data-element_type="input" class="wpm_bmc_form_item">
