@@ -30,7 +30,7 @@ class Menu
             'buy-me-coffee.php',
             [$this, 'render'],
             'dashicons-coffee',
-            6
+            80
         );
 
         $submenu['buy-me-coffee.php']['my_profile'] = array(

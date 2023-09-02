@@ -192,6 +192,7 @@ class Render
                     </button>
                 </div>
             </div>
+            <p class="wpm_buymecoffee_no_signup">No signup required</p>
         </form>
         <?php
         $content = ob_get_clean();

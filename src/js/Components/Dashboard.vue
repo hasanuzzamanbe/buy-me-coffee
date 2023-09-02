@@ -97,7 +97,7 @@
                                 </el-tabs>
                             </el-form>
                             <div v-else>
-                                <p>fetching, please wait...</p>
+                              <el-skeleton :rows="5" />
                             </div>
                         </el-col>
                         <el-col :md="24" :lg="12" class="wpm-btm-preview">
