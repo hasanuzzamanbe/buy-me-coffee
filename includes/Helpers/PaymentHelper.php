@@ -1,6 +1,8 @@
 <?php
 namespace buyMeCoffee\Helpers;
 
+use buyMeCoffee\Models\Buttons;
+
 class PaymentHelper
 {
 
@@ -15,6 +17,11 @@ class PaymentHelper
         return $sign .' '. $amount;
     }
 
+    public static function getCurrency()
+    {
+        $settings = (new Buttons())->getButton();
+        return $settings['currency'];
+    }
     public static function currencySymbol($currency = '')
     {
         if (!$currency) {

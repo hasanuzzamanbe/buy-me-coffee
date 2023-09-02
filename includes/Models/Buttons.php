@@ -14,6 +14,7 @@ class Buttons
                 "enableEmail" => 'yes',
                 "defaultAmount" => '5',
                 "openMode" => 'modal',
+                "currency" => 'USD',
                 "methods" => [
                     'stripe', 'paypal'
                 ],

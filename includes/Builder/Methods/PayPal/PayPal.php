@@ -1,6 +1,7 @@
 <?php
 namespace buyMeCoffee\Builder\Methods\PayPal;
 
+use buyMeCoffee\Helpers\ArrayHelper;
 use buyMeCoffee\Models\Supporters;
 use buyMeCoffee\Models\Transactions;
 use buyMeCoffee\Builder\Methods\BaseMethods;
@@ -40,23 +41,79 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
         ), 200);
     }
 
-    public function getSettings()
+    public function getSettings($key = null)
     {
         $settings = get_option('wpm_bmc_payment_settings_' . $this->method, array());
         
         $defaults = array(
             'enable' => 'no',
             'payment_mode'    => 'test',
+            'payment_type'    => 'standard',
+            'test_public_key' => '',
+            'test_secret_key' => '',
+            'live_public_key' => '',
+            'live_secret_key' => '',
             'paypal_email'    => '',
             'disable_ipn_verification' => 'no',
         );
 
-        return  wp_parse_args($settings, $defaults);
+        $data = wp_parse_args($settings, $defaults);
+        return $key && isset($data[$key]) ? $data[$key] : $data;
     }
+
+     public function maybeShowModal($transactions, $paypalSettings)
+     {
+         $paymentIntent = $this->modalPaymentIntent($transactions);
+         $responseData = [
+             'nextAction'       => 'paypal',
+             'actionName'       => 'custom',
+             'buttonState'      => 'hide',
+             'purchase_units'   => $paymentIntent,
+             'confirmation_url' => $this->successUrl($transactions),
+             'message_to_show'  => __('Payment Modal is opening, Please complete the payment', 'buy-me-coffee'),
+         ];
+
+         wp_send_json_success($responseData, 200);
+     }
+
+     public function modalPaymentIntent($transactions)
+     {
+         $total = $transactions->payment_total ? $transactions->payment_total : 5;
+         $total = $total / 100;
+         $currencyCode = $transactions->currency;
+         $intent = [
+             'amount' => [
+                 'value' => $total,
+                 'breakdown' => [
+                     'item_total' => [
+                         'currency_code' => $currencyCode,
+                         'value' => $total,
+                     ]
+                 ]
+             ],
+             'items' => array([
+                 'name'        => 'Buy coffee for you',
+                 'unit_amount' => [
+                     'currency_code' => $currencyCode,
+                     'value' => $total,
+                 ],
+                 'quantity'    => '1',
+             ])
+         ];
+
+         return apply_filters('wpm_buymecoffee_paypal_modal_payment_intent', $intent, $transactions);
+     }
 
     public function makePayment($transactionId, $entryId, $form_data)
     {
         $paypalSettings = $this->getSettings();
+        $transactionModel = new Transactions();
+        $transaction = $transactionModel->find($transactionId);
+
+        if ($paypalSettings['payment_type'] === 'pro') {
+            $this->maybeShowModal($transaction, $paypalSettings);
+        }
+
         $paypal_redirect = 'https://www.sandbox.paypal.com/cgi-bin/webscr/?';
 
         if ($paypalSettings['payment_mode'] === 'live') {
@@ -83,8 +140,6 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
             'image_url'     => '',
         );
 
-        $transactionModel = new Transactions();
-        $transaction = $transactionModel->find($transactionId);
         $payment_item = $this->cartItems($transaction);
 
         if (!$payment_item) {
@@ -133,6 +188,7 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
     public function successUrl($supporter)
     {
         return add_query_arg(array(
+            'appreciate-your-support-bmc' => 1,
             'wpm_bmc__paypal_success' => 1,
             'wpm_bmc_submission' => $supporter->entry_hash,
             'payment_method' => 'paypal'
@@ -143,6 +199,7 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
     {
         return add_query_arg(array(
             'wpm_bmc__paypal_failed' => 1,
+            'appreciate-your-support-bmc' => 1,
             'wpm_bmc_submission' => $supporter->entry_hash,
             'payment_method' => 'paypal'
         ), home_url());
@@ -245,8 +302,26 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
         $transactionModel->updateData($transaction->id, $updateData);
     }
 
+    public function maybeLoadModalScript()
+    {
+        $settings = $this->getSettings();
+        if ( $settings['payment_type'] == 'standard') {
+            return;
+        };
+
+        $mode = $settings['payment_mode'];
+        $clientId = $mode === 'test' ? $settings['test_public_key'] : $settings['live_public_key'];
+
+        wp_enqueue_script('wpm-buymecoffee-checkout-sdk-' . $this->method, 'https://www.paypal.com/sdk/js?client-id=' . $clientId, [], null, false);
+
+        wp_enqueue_script('wpm-buymecoffee-checkout-handler-' . $this->method, BUYMECOFFEE_URL . 'assets/js/PaymentMethods/paypal-checkout.js', ['wpm-buymecoffee-checkout-sdk-paypal'], '1.0.1', false);
+
+    }
+
     public function render($template)
     {
+        $this->maybeLoadModalScript();
+
         ?>
             <label class="wpm_paypal_card_label" for="wpm_paypal_card">
                 <img width="50px" src="<?php echo BUYMECOFFEE_URL . 'assets/images/paypal.png'; ?>" alt="">

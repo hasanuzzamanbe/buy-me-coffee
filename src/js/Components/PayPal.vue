@@ -13,25 +13,52 @@
             </div>
             <div class="wpm_bmc_section_body" :class="settings.enable !== 'yes' ? 'payment-inactive' : ''">
                 <el-form :label-position="labelPosition" rel="paypal_settings" :model="settings" label-width="220px">
-                    <el-form-item label="PayPal Payment Mode">
-                        <el-radio-group v-model="settings.payment_mode">
-                            <el-radio label="test">Sandbox Mode</el-radio>
-                            <el-radio label="live">Live Mode</el-radio>
-                        </el-radio-group>
-                    </el-form-item>
-                    <el-form-item label="Paypal Email">
-                        <el-input type="text" size="small" v-model="settings.paypal_email"
-                                  placeholder="Paypal Email Address"/>
-                    </el-form-item>
-                    <!-- <el-form-item label="Disable PayPal IPN Verification">
-                        <el-switch active-value="yes" inactive-value="no" v-model="settings.disable_ipn_verification"/>
-                        <p>If you are unable to use Payment Data Transfer and payments are not getting marked as
+                  <el-form-item label="PayPal Payment Mode">
+                    <el-radio-group v-model="settings.payment_mode">
+                      <el-radio label="test">Sandbox Mode</el-radio>
+                      <el-radio label="live">Live Mode</el-radio>
+                    </el-radio-group>
+                  </el-form-item>
+                  <el-tabs v-model="settings.payment_type" class="demo-tabs" @tab-click="handleClick">
+                    <el-tab-pane label="PayPal pro" name="pro">
+                      <div v-if="settings.payment_mode === 'test'">
+                        <el-form-item label="Test Public key">
+                          <el-input type="text" size="small" v-model="settings.test_public_key"
+                                    placeholder="Public key from paypal dashboard"/>
+                        </el-form-item>
+                        <el-form-item label="Test Secret key">
+                          <el-input type="password" size="small" v-model="settings.test_secret_key"
+                                    placeholder="Secret key from paypal dashboard"/>
+                        </el-form-item>
+                      </div>
+                      <div v-else>
+                        <el-form-item label="Live Public key">
+                          <el-input type="text" size="small" v-model="settings.live_public_key"
+                                    placeholder="Public key from paypal dashboard"/>
+                        </el-form-item>
+                        <el-form-item label="live Secret key">
+                          <el-input type="password" size="small" v-model="settings.live_secret_key"
+                                    placeholder="Secret key from paypal dashboard"/>
+                        </el-form-item>
+                      </div>
+
+                    </el-tab-pane>
+                    <el-tab-pane label="Paypal Standard" name="standard">
+                        <el-form-item label="Paypal Email">
+                          <el-input type="text" size="small" v-model="settings.paypal_email"
+                                    placeholder="Paypal Email Address"/>
+                        </el-form-item>
+                        <el-form-item label="Disable PayPal IPN Verification">
+                          <el-switch active-value="yes" inactive-value="no" v-model="settings.disable_ipn_verification"/>
+                          <p>If you are unable to use Payment Data Transfer and payments are not getting marked as
                             complete, then check this box. This forces the site to use a slightly less secure method of
                             verifying purchases.</p>
-                    </el-form-item> -->
+                        </el-form-item>
+                    </el-tab-pane>
+                  </el-tabs>
 
                     <div class="action_right">
-                        <el-button @click="saveSettings()" type="primary" size="small">Save PayPal Settings</el-button>
+                        <el-button @click="saveSettings()" type="primary" size="default">Save PayPal Settings</el-button>
                     </div>
                 </el-form>
             </div>

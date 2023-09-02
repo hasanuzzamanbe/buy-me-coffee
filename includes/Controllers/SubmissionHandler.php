@@ -2,6 +2,7 @@
 namespace buyMeCoffee\Controllers;
 
 use buyMeCoffee\Helpers\ArrayHelper;
+use buyMeCoffee\Helpers\PaymentHelper;
 class SubmissionHandler
 {
     public function handleSubmission()
@@ -10,6 +11,11 @@ class SubmissionHandler
 
         $paymentMethod = ArrayHelper::get($_REQUEST, 'payment_method');
         $paymentTotal = intval(ArrayHelper::get($_REQUEST, 'payment_total'));
+
+        $currency = ArrayHelper::get($_REQUEST, 'currency', false);
+        if (!$currency) {
+            $currency = PaymentHelper::getCurrency();
+        }
 
         $form_data['payment_method'] = $paymentMethod;
         $form_data['payment_total'] = intval($paymentTotal);
@@ -24,11 +30,11 @@ class SubmissionHandler
             'supporters_email' => sanitize_email($supportersEmail),
             'supporters_message' => sanitize_text_field($supportersMessage),
             'form_data_raw' => maybe_serialize($form_data),
-            'currency' => 'USD',
+            'currency' => sanitize_text_field($currency),
             'payment_method' => sanitize_text_field($paymentMethod),
             'payment_status' => 'pending',
             'entry_hash' => sanitize_text_field($hash),
-            'payment_total' => $paymentTotal,
+            'payment_total' => intval($paymentTotal),
             'status' => 'new',
             'created_at' => current_time('mysql'),
             'updated_at' => current_time('mysql'),

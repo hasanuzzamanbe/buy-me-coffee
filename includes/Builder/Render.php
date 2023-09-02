@@ -117,12 +117,35 @@ class Render
         $enableMsg = ArrayHelper::get($template, 'enableMessage') == 'yes' ? true : false;
         $defaultAmount = intval(ArrayHelper::get($template, 'defaultAmount', '5'));
 
-        $symbool = PaymentHelper::currencySymbol(ArrayHelper::get($template, 'currency', 'USD'));
+        $currency = ArrayHelper::get($template, 'currency', 'USD');
+        $symbool = PaymentHelper::currencySymbol();
 
         ob_start();
         ?>
-        <form class="wpm_buymecoffee_form">
-            <div class="wpm_bmc_payment_item" style="display: flex;align-items: center;">
+        <form class="wpm_buymecoffee_form" data-wpm_currency="<?php echo esc_html_e($currency) ;?>">
+            <div class="wpm_bmc_payment_item">
+                <div class="wpm_bmc_input_content">
+                    <div class="wpm_bmc_coffee_selector">
+                        <img width="50" src="<?php echo BUYMECOFFEE_URL . 'assets/images/coffee.png'; ?>" >
+                        <span>x</span>
+
+                        <div class="bmc_coffee">
+                            <input id="radio_1" value="1" class="coffee-select" name="radio-group" type="radio" checked>
+                            <label for="radio_1">1</label>
+
+                            <input id="radio_2" value="2" class="coffee-select" name="radio-group" type="radio">
+                            <label for="radio_2">2</label>
+
+                            <input id="radio_3" value="3" class="coffee-select" name="radio-group" type="radio">
+                            <label for="radio_3">3</label>
+                        </div>
+                        <input class="wpm_bmc_custom_quantity" type="number" value="5" data-quantity="5">
+
+                    </div>
+                </div>
+            </div>
+<!--   This custom quantity will update in any future feature       /-->
+            <div class="wpm_bmc_payment_item" style="display: none !important; align-items: center;">
                 <div class="wpm_bmc_input_content">
                     <div style="display: flex;">
                         <span class="wpm_bmc_currency_prefix"><?php echo esc_html($symbool);?></span>
@@ -202,6 +225,7 @@ class Render
     public static function payMethod($template)
     {
         $methods = ArrayHelper::get($template, 'methods');
+
         foreach ($methods as $method) {
             do_action( 'wpm_buymecoffee_render_component_' . $method, $template );
         }

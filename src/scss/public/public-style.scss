@@ -11,7 +11,7 @@ form.wpm_submitting_form {
   display: none;
 }
 form.wpm_submitting_form {
-  background: #fff;
+  //background: #fff;
   .wpm_loading_svg {
     position: absolute;
     margin-left: 19px;
@@ -83,7 +83,7 @@ form.wpm_submitting_form {
   margin: 10vh auto;
   padding: 0px;
   border: 4px solid #e4e3e1;
-  max-width: 550px;
+  max-width: 700px;
   width: 60%;
   height: 80vh;
   overflow-y: auto;
@@ -103,3 +103,4 @@ form.wpm_submitting_form {
   text-decoration: none;
   cursor: pointer;
 }
+

@@ -2,6 +2,7 @@ class BmcFormHandler {
     constructor(form, config) {
         this.form = form;
         this.selector = '.wpm_buymecoffee_form';
+        this.customQuantity = false;
         this.config = config;
         this.paymentMethod = '';
         this.generalConfig = window.wp_payform_general;
@@ -21,8 +22,19 @@ class BmcFormHandler {
 
         // Init Calculate Payments and on change re-calculate
         this.calculatePayments();
-        this.form.find('.wpm_buymecoffee_payment').on('change', (e) => {
+        this.form.find('.wpm_buymecoffee_payment, .bmc_coffee input[type="radio"]').on('change', (e) => {
             this.calculatePayments();
+        });
+
+        // on change select radio button quantity
+        this.form.find('.bmc_coffee input[type="radio"]').on('change', (e) => {
+            this.toggleCustomQuantity(false);
+        });
+
+        // on change custom quantity
+        this.form.find('.wpm_bmc_custom_quantity').on('change', (e) => {
+            this.form.find('.bmc_coffee input[type="radio"]').prop('checked', false);
+            this.toggleCustomQuantity(true);
         });
 
         this.selectedMethod();
@@ -56,13 +68,27 @@ class BmcFormHandler {
                 action: 'wpm_buymecoffee_submit',
                 payment_total: form.data('wpm_payment_total'),
                 payment_method: form.data('wpm_selected_payment_method'),
+                currency: form.data('wpm_currency'),
                 form_data: jQuery(form).serialize()
             })
                 .then(response => {
-                    if (response.data.redirectTo) {
+                    if (response.data?.redirectTo) {
                         window.location.href = response.data.redirectTo;
                     }
+                    if (response.data?.actionName == 'custom') {
+                        this.fireCustomEvent(response.data.nextAction, response);
+                        return;
+                    }
                 });
+    }
+
+    fireCustomEvent(eventName, response) {
+        window.dispatchEvent(new CustomEvent('wpm_bmc_payment_next_action_' + response?.data?.nextAction, {
+            detail: {
+                form: this.form,
+                response: response
+            }
+        }));
     }
 
     selectedMethod() {
@@ -71,11 +97,27 @@ class BmcFormHandler {
         paymentMethod.parent().addClass('wpm_payment_active');
     }
 
+    toggleCustomQuantity(val) {
+        this.customQuantity = val;
+        const customQuantityInput = this.form.find('.wpm_bmc_custom_quantity');
+        this.customQuantity ? customQuantityInput.addClass('custom_quantity_active') : customQuantityInput.removeClass('custom_quantity_active');
+        this.calculatePayments();
+    }
+
     calculatePayments() {
         let amount = this.form.find('.wpm_buymecoffee_payment').first().val();
-        let amountCents = parseInt(parseFloat(amount) * 100);
+
+        //quantity
+        let quantity = 1;
+        quantity = this.form.find('.bmc_coffee input[type="radio"]:checked')?.val();
+        if (this.customQuantity) {
+            quantity = this.form.find('.wpm_bmc_custom_quantity').val();
+        }
+
+        let amountCents = parseInt(parseFloat(amount) * 100 * quantity);
         this.form.data('wpm_payment_total', amountCents);
-        this.form.find('#wpm_submit_button .wpm_payment_total_amount').html(amount);
+        //set total
+        this.form.find('#wpm_submit_button .wpm_payment_total_amount').html(parseInt(amount * quantity));
     }
 
 }

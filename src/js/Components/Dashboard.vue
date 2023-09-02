@@ -30,7 +30,7 @@
                                         <el-form-item>
                                             <el-checkbox true-label="yes" false-label="no" v-model="template.enableMessage">Enable message option when donate</el-checkbox>
                                         </el-form-item>
-                                        <el-form-item label="Default amount">
+                                        <el-form-item label="Per coffee price">
                                             <el-input type="number" v-model="template.defaultAmount"></el-input>
                                         </el-form-item>
                                       <el-form-item label="Open mode">
@@ -147,7 +147,7 @@
                                         title="Click to copy shortcode"
                                         placement="top">
                                         <code class="copy"
-                                                data-clipboard-text='[buymecoffee type="button"]'>
+                                                :data-clipboard-text='previewUrl'>
                                             <i class="el-icon-document"></i> {{previewUrl}}
                                         </code>
                                     </el-tooltip>

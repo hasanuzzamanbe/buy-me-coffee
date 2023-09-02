@@ -49,10 +49,11 @@
 
         .buymecoffee_form_preview_wrapper {
             max-width: 400px;
-            background: white;
+            background: #e1f6ff75;
             width: 70%;
-            border-left: 1px solid #f4f4f4;
+            border: 1px solid #f4f4f4;
             padding: 0px 36px;
+            border-radius: 8px;
         }
 
         .buymecoffee_preview_header {
@@ -113,13 +114,45 @@
             color: #ccc;
             font-size: 12px;
         }
+        /*.wpm_submit_button {*/
+        /*    width: 100%;*/
+        /*    border: 1px solid #ccc;*/
+        /*    margin-top: 12px;*/
+        /*    min-height: 43px;*/
+        /*    cursor: pointer;*/
+        /*    color: #232323;*/
+        /*    border-radius: 23px;*/
+        /*}*/
+
         .wpm_submit_button {
+            margin-top: 10px;
             width: 100%;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            margin-top: 12px;
-            min-height: 38px;
+            height: 45px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 500;
+            color: #000;
+            background-color: #ffc568;
+            border: none;
+            border-radius: 45px;
+            box-shadow: 0px 8px 15px rgb(0 0 0 / 10%);
+            transition: all 0.3s ease 0s;
             cursor: pointer;
+            outline: none;
+        }
+
+        .wpm_submit_button:hover {
+            background-color: #2EE59D !important;
+            box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+            color: #fff;
+            transform: translateY(-7px);
+        }
+
+        .bmc_coffee input:hover+label {
+            background: #ffc568;
+            transition-duration: 1s;
         }
         .buymecoffee_profile_section_image {
           display: flex;
@@ -128,7 +161,7 @@
             border-radius: 50%;
             width: 130px;
             height: 130px;
-            border: 4px solid #dadada;
+            border: 4px solid #f9f9f9;
             margin: 0 auto;
             z-index: 999;
             background: #fff;
@@ -144,6 +177,43 @@
             font-size: 12px;
             font-family: sans-serif;
             text-align: center;
+        }
+        .bmc_coffee {
+            display: flex;
+        }
+        .wpm_bmc_coffee_selector {
+            display: flex;
+            align-items: center;
+        }
+        .bmc_coffee input {
+            visibility: hidden;
+        }
+        .bmc_coffee label {
+            cursor: pointer;
+            border: 1px solid #ccc;
+            padding: 5px 14px;
+            border-radius: 50%;
+        }
+        .bmc_coffee input:checked+label {
+            background: #ffc568 !important;
+        }
+        .wpm_bmc_custom_quantity {
+            max-width: 40px;
+            margin-left: 15px;
+            text-align: center;
+        }
+        input.custom_quantity_active {
+            background: #ffc568 !important;
+        }
+        .wpm_bmc_payment_item {
+            min-width: 300px;
+            border: 1px solid #fff9f0;
+            border-radius: 5px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            background: #fffbf5;
+            padding: 12px;
         }
     </style>
 <div id="buymecoffee_preview_top">

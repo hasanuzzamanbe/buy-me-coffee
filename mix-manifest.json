@@ -3,9 +3,11 @@
     "/assets/js/plugin-main-js-file.js": "/assets/js/plugin-main-js-file.js",
     "/assets/js/BmcPublic.js": "/assets/js/BmcPublic.js",
     "/assets/js/BmcFormHandler.js": "/assets/js/BmcFormHandler.js",
+    "/assets/js/PaymentMethods/paypal-checkout.js": "/assets/js/PaymentMethods/paypal-checkout.js",
     "/assets/css/public-style.css": "/assets/css/public-style.css",
     "/assets/css/element.css": "/assets/css/element.css",
     "/assets/images/coffee.png": "/assets/images/coffee.png",
+    "/assets/images/coffee_logo.png": "/assets/images/coffee_logo.png",
     "/assets/images/credit-card.png": "/assets/images/credit-card.png",
     "/assets/images/logo.png": "/assets/images/logo.png",
     "/assets/images/paypal.png": "/assets/images/paypal.png"
