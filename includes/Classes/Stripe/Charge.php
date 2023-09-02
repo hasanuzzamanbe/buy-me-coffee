@@ -59,7 +59,7 @@ class Charge
         $errors = array();
         // check if the currency is right or not
         if(isset($args['currency'])) {
-            $supportedCurrncies = GeneralSettings::getCurrencies();
+            $supportedCurrncies = PaymentHelper::getCurrencies();
             if(!isset($supportedCurrncies[$args['currency']])) {
                 $errors['currency'] = __('Invalid currency', 'wppayform');
             }

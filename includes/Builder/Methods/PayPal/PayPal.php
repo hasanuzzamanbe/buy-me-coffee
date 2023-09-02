@@ -254,9 +254,9 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
                     style="outline: none;"
                     type="radio" name="wpm_payment_method" class="wpm_paypal_card" id="wpm_paypal_card"
                     value="paypal">
-                <span style="font-size:14px;">
-                    <strong>PayPal</strong>
-                </span>
+<!--                <span class="payment_method_name">-->
+<!--                    PayPal-->
+<!--                </span>-->
             </label>
         <?php
     }

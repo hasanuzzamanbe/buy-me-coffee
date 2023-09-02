@@ -64,9 +64,9 @@ class Stripe extends BaseMethods
                     style="outline: none;"
                     type="radio" class="wpm_stripe_card" name="wpm_payment_method" id="wpm_stripe_card"
                     value="stripe">
-                <span style="font-size:14px;">
-                    <strong>Stripe</strong>
-                </span>
+<!--                <span class="payment_method_name">-->
+<!--                    stripe-->
+<!--                </span>-->
             </label>
         <?php
     }

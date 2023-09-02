@@ -1,6 +1,5 @@
 class BmcFormHandler {
     constructor(form, config) {
-        console.log(form)
         this.form = form;
         this.selector = '.wpm_buymecoffee_form';
         this.config = config;
@@ -29,8 +28,11 @@ class BmcFormHandler {
         this.selectedMethod();
         this.form.find('.wpm_bmc_pay_method input').on('change', (e) => {
             this.selectedMethod();
-        });
 
+            //class add for active methods label
+            this.form.find('.wpm_bmc_pay_methods label').removeClass('wpm_payment_active');
+            jQuery(e.target).parent().addClass('wpm_payment_active');
+        });
 
 
         // this.initPaymentMethodChange();
@@ -64,15 +66,16 @@ class BmcFormHandler {
     }
 
     selectedMethod() {
-        let paymentMethod = this.form.find('.wpm_bmc_pay_method input:checked').val();
-        this.form.data('wpm_selected_payment_method', paymentMethod);
+        let paymentMethod = this.form.find('.wpm_bmc_pay_method input:checked');
+        this.form.data('wpm_selected_payment_method', paymentMethod.val());
+        paymentMethod.parent().addClass('wpm_payment_active');
     }
 
     calculatePayments() {
-        console.log('recalculating payments');
         let amount = this.form.find('.wpm_buymecoffee_payment').first().val();
         let amountCents = parseInt(parseFloat(amount) * 100);
         this.form.data('wpm_payment_total', amountCents);
+        this.form.find('#wpm_submit_button .wpm_payment_total_amount').html(amount);
     }
 
 }

@@ -26,18 +26,27 @@ form.wpm_submitting_form {
       background: #f1cd16;
       opacity: 1!important;
     }
+    background: #ffc569;
 }
 
 .wpm_bmc_pay_method {
-  // input {
-  //   display: none;
-  // }
+  .payment_method_name {
+    font-size:12px;
+    font-weight: lighter;
+  }
+  input[type='radio'] {
+    z-index:999;
+    position: relative;
+    margin: -53px 0px 0px -35px;
+    visibility: hidden;
+  }
   img {
     border: 1px solid #dedede;
     border-radius: 6px;
+    opacity: 0.4;
   }
   img:hover {
-    transform: scale(1.1);
+    opacity: 1;
   }
   display: flex;
   label {
@@ -46,6 +55,11 @@ form.wpm_submitting_form {
     display: grid;
     justify-items: center;
     align-items: center;
+  }
+  .wpm_payment_active {
+    img {
+      opacity: 1;
+    }
   }
 }
 
@@ -67,7 +81,7 @@ form.wpm_submitting_form {
 .bmc_modal_content {
   background-color: #fefefe;
   margin: 10vh auto;
-  padding: 0px 20px;
+  padding: 0px;
   border: 4px solid #e4e3e1;
   max-width: 550px;
   width: 60%;
@@ -80,6 +94,7 @@ form.wpm_submitting_form {
   float: right;
   font-size: 28px;
   font-weight: bold;
+  padding: 2px 12px;
 }
 
 .close:hover,

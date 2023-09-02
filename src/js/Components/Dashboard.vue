@@ -15,6 +15,9 @@
                             <el-form label-position="left" label-width="140px" v-if="!fetching">
                                 <el-tabs>
                                     <el-tab-pane label="General">
+                                      <el-form-item label="You Name">
+                                        <el-input size="small" type="text" v-model="template.yourName"></el-input>
+                                      </el-form-item>
                                         <el-form-item label="Button text">
                                             <el-input size="small" type="text" v-model="template.buttonText"></el-input>
                                         </el-form-item>
@@ -30,10 +33,26 @@
                                         <el-form-item label="Default amount">
                                             <el-input type="number" v-model="template.defaultAmount"></el-input>
                                         </el-form-item>
+                                      <el-form-item label="Open mode">
+                                        <el-radio-group v-model="template.openMode">
+                                          <el-radio label="modal">Modal</el-radio>
+                                          <el-radio label="page">Page</el-radio>
+                                        </el-radio-group>
+                                      </el-form-item>
                                         <el-form-item label="Enable pay method">
                                                 <el-checkbox-group v-model="template.methods">
                                                 <el-checkbox v-for="method in methods" :key="method.value" :label="method.name"></el-checkbox>
                                             </el-checkbox-group>
+                                        </el-form-item>
+                                        <el-form-item label="Currency">
+                                          <el-select filterable v-model="template.currency" placeholder="Select Currency">
+                                            <el-option
+                                                v-for="(currencyName, currenyKey) in currencies"
+                                                :key="currenyKey"
+                                                :label="currencyName"
+                                                :value="currenyKey">
+                                            </el-option>
+                                          </el-select>
                                         </el-form-item>
                                     </el-tab-pane>
                                     <el-tab-pane label="Styles">
@@ -64,10 +83,14 @@
                                                 </el-form-item>
                                     </el-tab-pane>
                                     <div>
-                                        <el-button style="margin-top:12px;" @click="resetDefault" type="danger" size="small">
+                                      <el-popconfirm @confirm="resetDefault" title="Are you sure to reset to default settings?">
+                                        <template #reference>
+                                          <el-button style="margin-top:12px;" type="danger" size="default">
                                             Reset Default
-                                        </el-button>
-                                        <el-button style="margin-top:12px;" @click="saveTemplates" type="primary" size="small">
+                                          </el-button>
+                                        </template>
+                                      </el-popconfirm>
+                                        <el-button style="margin-top:12px;" @click="saveTemplates" type="primary" size="default">
                                             Save Settings
                                         </el-button>
                                     </div>
@@ -90,7 +113,7 @@
                                             'height' : '50px',
                                             'font-size': template.advanced.fontSize + 'px',
                                         }"
-                                    size="medium"
+                                    size="default"
                                     @click="previewButton"
                                     >
                                     {{template.buttonText}}
@@ -145,6 +168,7 @@ export default {
     data(){
         return {
             saving: false,
+            currencies: {},
             fetching: true,
             previewUrl: window.buyMeCoffeeAdmin.preview_url,
             methods: [
@@ -186,7 +210,8 @@ export default {
                     action: 'wpm_bmc_admin_ajax',
                     route: 'get_settings'
                 }).then(res => {
-                    this.template = res.data;
+                    this.template = res.data.template;
+                    this.currencies = res.data.currencies;
                     this.fetching = false;
             });
 

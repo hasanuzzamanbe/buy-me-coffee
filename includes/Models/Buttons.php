@@ -5,12 +5,15 @@ class Buttons
 {
     public function getButton($isDefault = false)
     {
+        global $current_user;
         $defaults =  array(
+                "yourName" => $current_user->display_name,
                 "buttonText" => 'Buy Me Coffee',
                 "enableMessage" => 'yes',
                 "enableName" => 'yes',
                 "enableEmail" => 'yes',
                 "defaultAmount" => '5',
+                "openMode" => 'modal',
                 "methods" => [
                     'stripe', 'paypal'
                 ],

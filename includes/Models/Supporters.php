@@ -25,8 +25,6 @@ class Supporters
             $supporter->amount_formatted = PaymentHelper::getFormattedAmount($supporter->payment_total, $supporter->currency);
         }
 
-        PaymentHelper::currencySymbol($lastPage);
-
         wp_send_json_success(
             array(
                 'supporters' => $supporters,

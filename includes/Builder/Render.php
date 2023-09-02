@@ -5,6 +5,7 @@ namespace buyMeCoffee\Builder;
 use buyMeCoffee\Models\Buttons;
 use buyMeCoffee\Helpers\ArrayHelper;
 use buyMeCoffee\Classes\DemoPage;
+use buyMeCoffee\Helpers\PaymentHelper;
 
 
 class Render
@@ -22,11 +23,12 @@ class Render
         $radius = ArrayHelper::get($template, 'advanced.radius');
 
         $paymentPageUrl = site_url('?appreciate-your-support-bmc=1');
+        $openMode = ArrayHelper::get($template, 'openMode');
 
         $styling = "<style>.wpm-buymecoffee-container .wpm-buymecoffee-button{
             outline: none;
             box-shadow: none;
-            height: 50px;
+            padding: 10px 23px;
             line-height: 0px;
             background-color: $bgColor;
             color: $color;
@@ -34,6 +36,9 @@ class Render
             font-size: {$fontSize}px;
             border-radius: {$radius}px;
             cursor: pointer;
+        }
+        button.wpm-buymecoffee-button {
+            height: 50px;
         }
         .wpm-buymecoffee-button:hover {
             box-shadow: 4px 3px 6px 2px #ccc;
@@ -44,17 +49,17 @@ class Render
         echo $styling;
         ?>
         <div class="wpm-buymecoffee-container">
-
-            <!-- The button used to open the form page -->
-            <!-- <a target="_blank" href="<?php /*echo $paymentPageUrl; */?>">
-                <button class="wpm-buymecoffee-button">
-                    <?php /*echo $buttonText; */?>
-                </button>
-            </a> -->
-
             <!--  The Modal button -->
-            <button class="wpm-buymecoffee-button" id="bmc_open_modal_btn"><?php echo $buttonText; ?></button>
-
+            <?php
+            if ($openMode === 'modal') {
+                ?>
+                    <button class="wpm-buymecoffee-button" id="bmc_open_modal_btn"  ><?php echo $buttonText; ?></button>
+                <?php
+            } else {
+                ?>
+                    <a class="wpm-buymecoffee-button" target="_blank" href="<?php echo esc_url($paymentPageUrl);?>"><?php echo $buttonText; ?></a>
+                <?php
+            } ?>
             <div id="bmc_modal_wrapper" class="modal">
                 <div class="bmc_modal_content">
                     <span class="close">&times;</span>
@@ -69,7 +74,7 @@ class Render
 
     public static function renderInputElements()
     {
-        self::addAssets();
+        static::addAssets();
 
         $nameAttributes = array(
             'data-required' => 'no',
@@ -93,7 +98,7 @@ class Render
             'data-required' => 'yes',
             'data-type' => 'textarea',
             'name' => 'wpm-supporter-message',
-            'placeholder' => 'Write your message here',
+            'placeholder' => 'Love to hear from you!',
             'class' => 'wpm-supporter-message',
             'id' => 'wpm-supporter-message',
         );
@@ -112,13 +117,15 @@ class Render
         $enableMsg = ArrayHelper::get($template, 'enableMessage') == 'yes' ? true : false;
         $defaultAmount = intval(ArrayHelper::get($template, 'defaultAmount', '5'));
 
+        $symbool = PaymentHelper::currencySymbol(ArrayHelper::get($template, 'currency', 'USD'));
+
         ob_start();
         ?>
         <form class="wpm_buymecoffee_form">
             <div class="wpm_bmc_payment_item" style="display: flex;align-items: center;">
                 <div class="wpm_bmc_input_content">
                     <div style="display: flex;">
-                        <span class="wpm_bmc_currency_prefix">$</span>
+                        <span class="wpm_bmc_currency_prefix"><?php echo esc_html($symbool);?></span>
                         <input type="number" class="wpm_buymecoffee_payment"
                             style="
                                 border-top-left-radius: 0px;
@@ -126,50 +133,49 @@ class Render
                                 border: 1px solid #ffe3b9;
                                 height: 60px;
                                 font-size:33px;
-                                padding: 0px 20px;"
+                                padding: 0px 20px; margin-bottom: 14px;"
                             value="<?php echo $defaultAmount; ?>"
                             data-price="<?php echo $defaultAmount * 100; ?>"
                             type="text">
                     </div>
                 </div>
-                <img width="60px;" src="<?php echo BUYMECOFFEE_URL . 'assets/images/coffee.png'; ?>" alt="Paypal">
             </div>
             <?php if ($enableName): ?>
                 <div data-element_type="input" class="wpm_bmc_form_item">
-                        <label for="wpm-supporter-name">Name</label>
+<!--                        <label for="wpm-supporter-name">Name</label>-->
                         <div class="wpm_bmc_input_content">
-                            <input <?php echo self::builtAttributes($nameAttributes); ?>></input>
+                            <input <?php echo static::builtAttributes($nameAttributes); ?>></input>
                         </div>
                 </div>
             <?php endif; ?>
 
             <?php if ($enableEmail): ?>
                 <div data-element_type="email" class="wpm_bmc_form_item">
-                        <label for="wpm-message">Email</label>
+<!--                        <label for="wpm-message">Email</label>-->
                         <div class="wpm_bmc_input_content">
-                            <input <?php echo self::builtAttributes($emailAttributes); ?>></input>
+                            <input <?php echo static::builtAttributes($emailAttributes); ?>></input>
                         </div>
                 </div>
             <?php endif; ?>
 
             <?php if ($enableMsg): ?>
                 <div data-element_type="textarea" class="wpm_bmc_form_item">
-                    <label for="wpm-message">Message</label>
+<!--                    <label for="wpm-message">Message</label>-->
                     <div class="wpm_bmc_input_content">
-                        <textarea <?php echo self::builtAttributes($msgAttributes); ?>></textarea>
+                        <textarea rows="6" <?php echo static::builtAttributes($msgAttributes); ?>></textarea>
                     </div>
                 </div>
             <?php endif; ?>
 
             <div class="wpm_bmc_form_item wpm_bmc_pay_methods">
-                <div class="wpm_bmc_pay_method">
-                    <?php echo self::payMethod($template); ?>
+                <div class="wpm_bmc_pay_method" data-payment_selected="none">
+                    <?php echo static::payMethod($template); ?>
                 </div>
             </div>
 
             <div data-element_type="submit" class="wpm_bmc_form_item">
                 <div class="wpm_bmc_input_content">
-                    <button <?php echo self::builtAttributes($btnAttributes); ?>>Support
+                    <button <?php echo static::builtAttributes($btnAttributes); ?>>Support
                         <div class="wpm_loading_svg">
                             <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px"
@@ -182,11 +188,11 @@ class Render
                                                     to="360 20 20" dur="0.5s" repeatCount="indefinite"/>
                                 </path></svg>
                         </div>
+                        <?php echo $symbool; ?></php> <span class="wpm_payment_total_amount"><?php echo $defaultAmount;?></span>
                     </button>
                 </div>
             </div>
         </form>
-        </div>
         <?php
         $content = ob_get_clean();
         return $content;

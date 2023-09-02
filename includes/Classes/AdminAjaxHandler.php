@@ -6,6 +6,8 @@ use buyMeCoffee\Builder\Methods\PayPal\PayPal;
 use buyMeCoffee\Helpers\ArrayHelper;
 use buyMeCoffee\Controllers\PaymentHandler;
 use buyMeCoffee\Builder\Methods\Stripe\Stripe;
+use buyMeCoffee\Helpers\PaymentHelper;
+use buyMeCoffee\Helpers\Currencies;
 
 use buyMeCoffee\Models\Buttons;
 
@@ -112,7 +114,11 @@ class AdminAjaxHandler
         $settings = (new Buttons())->getButton();
 
         wp_send_json_success(
-           $settings, 200
+            array(
+                'template' => $settings,
+                'currencies' => Currencies::all()
+            ),
+        200
         );
     }
 

@@ -3,6 +3,11 @@ namespace buyMeCoffee\Helpers;
 
 class PaymentHelper
 {
+
+    public function getCurrencies()
+    {
+        return Currencies::all();
+    }
     public static function getFormattedAmount($amount, $currency)
     {
         $amount = floatval($amount / 100);
