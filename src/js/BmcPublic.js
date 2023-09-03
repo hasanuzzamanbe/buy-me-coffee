@@ -1,14 +1,16 @@
 import BmcFormHandler from './BmcFormHandler.js';
 
-var buyMeCoffeeApp = {};
+let buyMeCoffeeApp = {};
 
 (function ($) {
     buyMeCoffeeApp = {
         forms: {},
         general: window.wpm_buymecoffee_general,
         formData: {},
+        initiated: false,
         init() {
             this.forms = $('.wpm_buymecoffee_form');
+            console.log('initiating', this.forms)
             $.each(this.forms, function ($form) {
                 let form = $(this);
                 // let formInstance = form.attr('wpm_buymecoffee_form');
@@ -18,6 +20,7 @@ var buyMeCoffeeApp = {};
             });
 
             this.initOther();
+            this.initiated = true;
         },
         initOther() {
             $('.wpm_buymecoffee_form input').on('keypress', function (e) {
@@ -33,25 +36,24 @@ var buyMeCoffeeApp = {};
     };
 
     $(window).on('load', function () {
-        buyMeCoffeeApp.init();
+        console.log('window loaded', buyMeCoffeeApp.initiated)
+        if (!buyMeCoffeeApp?.initiated) {
+            console.log('initiating');
+            buyMeCoffeeApp.init();
+        }
     });
 
     $(document).ready(function() {
-        // Get the modal
-        var modal = $('#bmc_modal_wrapper');
-        // Get the button that opens the modal
-        var btn = $('#bmc_open_modal_btn');
-        // Get the <span> element that closes the modal
-        var span = $('.close');
-        // When the user clicks on the button, open the modal
+        let modal = $('#bmc_modal_wrapper');
+        let btn = $('#bmc_open_modal_btn');
+        let span = $('.close');
         btn.click(function() {
             modal.show();
         });
-        // When the user clicks on <span> (x), close the modal
         span.click(function() {
             modal.hide();
         });
-        // When the user clicks anywhere outside of the modal, close it
+        // When the templates clicks anywhere outside the modal, close it
         $(window).click(function(event) {
             if (event.target == modal[0]) {
                 modal.hide();

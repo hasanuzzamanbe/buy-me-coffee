@@ -70,11 +70,12 @@ if (!defined('BUYMECOFFEE_VERSION')) {
             // Top Level Ajax Handlers
             $ajaxHandler = new \buyMeCoffee\Classes\AdminAjaxHandler();
             $ajaxHandler->registerEndpoints();
+
         }
 
         public function registerShortcode()
         {
-            add_shortcode('buymecoffee', function ($args) {
+            add_shortcode('buymecoffee_button', function ($args) {
                 $args = shortcode_atts(array(
                     'type' => '',
                 ), $args);
@@ -84,6 +85,10 @@ if (!defined('BUYMECOFFEE_VERSION')) {
                 $builder = new \buyMeCoffee\Builder\Render();
                 return $builder->render();
             });
+
+            $demoPage = new \buyMeCoffee\Classes\DemoPage();
+            add_shortcode('buymecoffee_form', [$demoPage, 'renderFormOnly']);
+
         }
 
         public function addAssets()
@@ -99,12 +104,14 @@ if (!defined('BUYMECOFFEE_VERSION')) {
         public function commonActions()
         {
             require BUYMECOFFEE_DIR . 'includes/Controllers/SubmissionHandler.php';
+
+            //payment methods init
             require BUYMECOFFEE_DIR . 'includes/Builder/Methods/BaseMethods.php';
             require BUYMECOFFEE_DIR . 'includes/Builder/Methods/Stripe/Stripe.php';
             require BUYMECOFFEE_DIR . 'includes/Builder/Methods/PayPal/PayPal.php';
-
             new \buyMeCoffee\Builder\Methods\PayPal\PayPal();
             new \buyMeCoffee\Builder\Methods\Stripe\Stripe();
+
             // Submission Handler
             $submissionHandler = new \buyMeCoffee\Controllers\SubmissionHandler();
             add_action('wp_ajax_wpm_buymecoffee_submit', array($submissionHandler, 'handleSubmission'));
@@ -140,7 +147,7 @@ if (!defined('BUYMECOFFEE_VERSION')) {
     // Handle Exterior Pages
     add_action('init', function () {
         $demoPage = new \buyMeCoffee\Classes\DemoPage();
-        $demoPage->handleExteriorPages();
+        $demoPage->register();
     });
 
 } else {

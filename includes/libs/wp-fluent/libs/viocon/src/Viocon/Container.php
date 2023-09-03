@@ -97,7 +97,7 @@ class Container
             return $this->singletons[$key];
         }
 
-        // If we don't have a registered object with the key then assume user
+        // If we don't have a registered object with the key then assume templates
         // is trying to build a class with the given key/name
 
         if (!array_key_exists($key, $this->registry)) {

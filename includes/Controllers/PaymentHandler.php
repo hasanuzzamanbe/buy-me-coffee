@@ -5,7 +5,6 @@ use buyMeCoffee\Helpers\ArrayHelper;
 
 class PaymentHandler
 {
-
     public static function getAllMethods()
     {
         $methods =  apply_filters('wpm_buymecoffee_get_all_methods', []);

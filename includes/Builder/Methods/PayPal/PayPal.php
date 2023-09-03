@@ -189,7 +189,7 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
     {
         return add_query_arg(array(
             'appreciate-your-support-bmc' => 1,
-            'wpm_bmc__paypal_success' => 1,
+            'wpm_bmc_success' => 1,
             'wpm_bmc_submission' => $supporter->entry_hash,
             'payment_method' => 'paypal'
         ), home_url());
@@ -198,7 +198,7 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
     public function failedUrl($supporter)
     {
         return add_query_arg(array(
-            'wpm_bmc__paypal_failed' => 1,
+            'wpm_bmc_failed' => 1,
             'appreciate-your-support-bmc' => 1,
             'wpm_bmc_submission' => $supporter->entry_hash,
             'payment_method' => 'paypal'

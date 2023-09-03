@@ -47,7 +47,7 @@
                   {
                     route: 'supporters',
                     title: 'Supporters',
-                    icon: 'el-icon-user'
+                    icon: 'el-icon-templates'
                   }
               ])
           }

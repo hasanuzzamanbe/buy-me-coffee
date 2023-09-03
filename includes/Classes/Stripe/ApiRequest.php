@@ -47,7 +47,7 @@ class ApiRequest
     }
 
     /**
-     * Generates the user agent we use to pass to API request so
+     * Generates the templates agent we use to pass to API request so
      * Stripe can identify our application.
      *
      * @since 4.0.0

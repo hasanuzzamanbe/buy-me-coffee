@@ -39,4 +39,5 @@ mix
     .js('src/js/PaymentMethods/paypal-checkout.js', 'assets/js/PaymentMethods/paypal-checkout.js')
     .copy('src/images', 'assets/images')
     .sass('src/scss/admin/app.scss', 'assets/css/element.css')
+    .sass('src/scss/public/BasicTemplate.scss', 'assets/css/BasicTemplate.css')
     .sass('src/scss/public/public-style.scss', 'assets/css/public-style.css');

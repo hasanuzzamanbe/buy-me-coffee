@@ -11,7 +11,7 @@ class Buttons
                 "buttonText" => 'Buy Me Coffee',
                 "enableMessage" => 'yes',
                 "enableName" => 'yes',
-                "enableEmail" => 'yes',
+                "enableEmail" => 'no',
                 "defaultAmount" => '5',
                 "openMode" => 'modal',
                 "currency" => 'USD',

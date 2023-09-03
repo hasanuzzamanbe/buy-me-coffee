@@ -33,10 +33,10 @@
                                         <el-form-item label="Per coffee price">
                                             <el-input type="number" v-model="template.defaultAmount"></el-input>
                                         </el-form-item>
-                                      <el-form-item label="Open mode">
+                                      <el-form-item label="Button click action">
                                         <el-radio-group v-model="template.openMode">
-                                          <el-radio label="modal">Modal</el-radio>
-                                          <el-radio label="page">Page</el-radio>
+                                          <el-radio label="modal">Open in Modal</el-radio>
+                                          <el-radio label="page">Open in Page</el-radio>
                                         </el-radio-group>
                                       </el-form-item>
                                         <el-form-item label="Enable pay method">

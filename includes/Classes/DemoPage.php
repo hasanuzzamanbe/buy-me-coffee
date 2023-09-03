@@ -7,6 +7,27 @@ use \buyMeCoffee\Models\Buttons;
 
 class DemoPage
 {
+    public function register()
+    {
+       $this->handleExteriorPages();
+    }
+
+    public function loadTemplateStyles()
+    {
+        wp_enqueue_style('wpm_buymecoffee_template_style', BUYMECOFFEE_URL . 'assets/css/BasicTemplate.css', array(), BUYMECOFFEE_VERSION);
+
+    }
+
+    public function renderFormOnly()
+    {
+        $this->loadTemplateStyles();
+        $btnController = new Buttons();
+        $template = $btnController->getButton();
+        ob_start();
+        include BUYMECOFFEE_DIR . 'includes/views/templates/FormTemplate.php';
+        return ob_get_clean();
+    }
+
     public function handleExteriorPages()
     {
         if (defined('CT_VERSION')) {
@@ -27,13 +48,14 @@ class DemoPage
 
     public function renderPreview($type)
     {
+        $this->loadTemplateStyles();
+
         $btnController = new Buttons();
         $template = $btnController->getButton();
-        echo View::make('user.payment', [
+        echo View::make('templates.BasicTemplate', [
             'type' => 'button',
             'template' => $template,
         ]);
-
         if ($type === 'page') {
             exit();
         }
