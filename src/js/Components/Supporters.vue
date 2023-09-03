@@ -42,17 +42,19 @@
             <el-table-column
                 label="Operations">
             <template #default="scope">
-                <el-button-group>
                     <el-button
                     size="default"
                     icon="View"
-                    @click="handleEdit(scope.row.id)"></el-button>
-                <el-button
-                    size="default"
-                    type="danger"
-                    icon="Delete"
-                    @click="handleDelete(scope.row.id)"></el-button>
-                </el-button-group>
+                    @click="handleGet(scope.row.id)"></el-button>
+                  <el-popconfirm @confirm="handleDelete(scope.row.id)" title="Are you sure to delete this?">
+                    <template #reference>
+                      <el-button
+                          size="default"
+                          type="danger"
+                          icon="Delete">
+                      </el-button>
+                    </template>
+                  </el-popconfirm>
             </template>
             </el-table-column>
         </el-table>
@@ -68,7 +70,7 @@
 </template>
 <script>
 export default {
-    name: 'Supports',
+    name: 'Supporters',
     data() {
         return {
             limit: 20,
@@ -105,12 +107,8 @@ export default {
                 });
 
         },
-        handleEdit(id) {
-            this.$post({
-                action: 'wpm_bmc_admin_ajax',
-                route: 'edit_supporter',
-                id: id
-            })
+        handleGet(id) {
+            this.$router.push({ name: 'Supporter', params: { id: id } })
         },
         handleDelete(id) {
             this.$post({

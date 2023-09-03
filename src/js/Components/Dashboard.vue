@@ -22,10 +22,10 @@
                                             <el-input size="small" type="text" v-model="template.buttonText"></el-input>
                                         </el-form-item>
                                         <el-form-item>
-                                            <el-checkbox true-label="yes" false-label="no" v-model="template.enableName">Collect name of donor</el-checkbox>
+                                            <el-checkbox true-label="yes" false-label="no" v-model="template.enableName">Collect name of supporter</el-checkbox>
                                         </el-form-item>
                                         <el-form-item>
-                                            <el-checkbox true-label="yes" false-label="no" v-model="template.enableEmail">Collect email of donor</el-checkbox>
+                                            <el-checkbox true-label="yes" false-label="no" v-model="template.enableEmail">Collect email of supporter</el-checkbox>
                                         </el-form-item>
                                         <el-form-item>
                                             <el-checkbox true-label="yes" false-label="no" v-model="template.enableMessage">Enable message option when donate</el-checkbox>
@@ -33,12 +33,6 @@
                                         <el-form-item label="Per coffee price">
                                             <el-input type="number" v-model="template.defaultAmount"></el-input>
                                         </el-form-item>
-                                      <el-form-item label="Button click action">
-                                        <el-radio-group v-model="template.openMode">
-                                          <el-radio label="modal">Open in Modal</el-radio>
-                                          <el-radio label="page">Open in Page</el-radio>
-                                        </el-radio-group>
-                                      </el-form-item>
                                         <el-form-item label="Enable pay method">
                                                 <el-checkbox-group v-model="template.methods">
                                                 <el-checkbox v-for="method in methods" :key="method.value" :label="method.name"></el-checkbox>
@@ -81,6 +75,12 @@
                                                         >
                                                     </el-input>
                                                 </el-form-item>
+                                                <el-form-item label="Button click action">
+                                                  <el-radio-group v-model="template.openMode">
+                                                    <el-radio label="modal">Modal (recommended)</el-radio>
+                                                    <el-radio label="page">Open in Page</el-radio>
+                                                  </el-radio-group>
+                                                </el-form-item>
                                     </el-tab-pane>
                                     <div>
                                       <el-popconfirm @confirm="resetDefault" title="Are you sure to reset to default settings?">
@@ -122,11 +122,13 @@
                             <div class="wpm-btm-render-options">
                                 <br/>
                                 <br/>
-                                <p>
-                                    <i class="el-icon-info"></i>
-                                    You can embed the shortcode on your posts/pages if you want to use the button above.
-                                    Or use the URL bellow to get collect payments from your supporters.
-                                </p>
+                              <h3>Available ShortCodes:</h3>
+                              <p>
+                                <i class="el-icon-info"></i>
+                                You can embed the shortcode on your posts/pages if you want to use the button above.
+                                Or use the URL bellow to get collect payments from your supporters.
+                              </p>
+                              <h4>Button:</h4>
                                 <div>
                                     <el-tooltip effect="dark"
                                         content="Click to copy shortcode"
@@ -134,14 +136,27 @@
                                         placement="top">
                                         <code class="copy"
                                                 data-clipboard-action="copy"
-                                                data-clipboard-text='[buymecoffee type="button"]'>
-                                            <i class="el-icon-document"></i> [buymecoffee type="button"]
+                                                data-clipboard-text='[buymecoffee_button]'>
+                                            <i class="el-icon-document"></i> [buymecoffee_button]
                                         </code>
                                     </el-tooltip>
                                 </div>
                                 <br/>
+                              <div>
+                                <h4>Form:</h4>
+                                <el-tooltip effect="dark"
+                                            content="Click to copy shortcode"
+                                            title="Click to copy shortcode"
+                                            placement="top">
+                                  <code class="copy"
+                                        data-clipboard-action="copy"
+                                        data-clipboard-text='[buymecoffee_form]'>
+                                    <i class="el-icon-document"></i> [buymecoffee_form]
+                                  </code>
+                                </el-tooltip>
+                              </div>
                                 <div>
-                                    <h3>Also you can share support link to get instant payment:</h3>
+                                    <h4>Page with designed template(recomended):</h4>
                                     <el-tooltip effect="dark"
                                         content="Click to copy shortcode"
                                         title="Click to copy shortcode"
@@ -265,9 +280,9 @@ export default {
                 $(e.trigger).text("Copied!");
                 e.clearSelection();
                 //todo: add timeout to revert text
-                // setTimeout(function() {
-                //     $(e.trigger).text(e.text);
-                // }, 1500);
+                setTimeout(function() {
+                    $(e.trigger).text(e.text);
+                }, 1000);
             });
         });
     }

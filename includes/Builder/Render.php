@@ -63,7 +63,7 @@ class Render
             <div id="bmc_modal_wrapper" class="modal">
                 <div class="bmc_modal_content">
                     <span class="close">&times;</span>
-                    <?php (new DemoPage())->loadFormContent(); ?>
+                    <?php (new DemoPage())->loadModalContent(); ?>
                 </div>
             </div>
         </div>

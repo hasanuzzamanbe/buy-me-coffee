@@ -95,3 +95,18 @@ input::placeholder {
 .wpm_bmc_payment_settings {
     max-width: 680px;
 }
+
+.upcoming_feature_notice {
+    position: absolute;
+    z-index: 99;
+    background: #99e9b4;
+    width: 448px;
+    box-shadow: 1px 2px 11px #ccc;
+    text-align: center;
+    font-size: 25px;
+    padding: 36px 0px;
+    border-radius: 16px;
+    margin: 125px auto;
+    color: #636363;
+    font-family: monospace;
+}

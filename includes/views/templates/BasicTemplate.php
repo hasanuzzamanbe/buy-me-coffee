@@ -10,7 +10,9 @@
         wp_head();
     ?>
 <?php
+
         include BUYMECOFFEE_DIR . 'includes/views/templates/FormTemplate.php';
+
         wp_footer();
 ?>
 </body>

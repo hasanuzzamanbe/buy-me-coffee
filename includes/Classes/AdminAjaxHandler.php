@@ -3,7 +3,7 @@
 namespace buyMeCoffee\Classes;
 use buyMeCoffee\Models\Supporters;
 use buyMeCoffee\Builder\Methods\PayPal\PayPal;
-use buyMeCoffee\Helpers\ArrayHelper;
+use buyMeCoffee\Helpers\ArrayHelper as Arr;
 use buyMeCoffee\Controllers\PaymentHandler;
 use buyMeCoffee\Builder\Methods\Stripe\Stripe;
 use buyMeCoffee\Helpers\PaymentHelper;
@@ -33,6 +33,7 @@ class AdminAjaxHandler
             
             'get_supporters' => 'getSupporters',
             'edit_supporter' => 'editSupporter',
+            'get_supporter' => 'getSupporter',
             'delete_supporter' => 'deleteSupporter',
 
         );
@@ -45,11 +46,18 @@ class AdminAjaxHandler
 
     public function getAllMethods()
     {
-
         return PaymentHandler::getAllMethods();
-
     }
 
+    public function getSupporter()
+    {
+        $id = sanitize_text_field($_REQUEST['id']);
+        $supporter = (new Supporters())->find($id);
+        if ($supporter) {
+            wp_send_json_success($supporter, 200);
+        }
+        wp_send_json_error();
+    }
     public function getSupporters()
     {
         return (new Supporters())->index($_REQUEST);
@@ -60,11 +68,11 @@ class AdminAjaxHandler
         $id = sanitize_text_field($_REQUEST['id']);
         $supporter = (new Supporters())->find($id);
         if ($supporter) {
-            $supporter->name = sanitize_text_field($_REQUEST['name']);
-            $supporter->email = sanitize_text_field($_REQUEST['email']);
-            $supporter->amount = sanitize_text_field($_REQUEST['amount']);
+            $supporter->name = sanitize_text_field(Arr::get($_REQUEST, 'name', ''));
+            $supporter->email = sanitize_text_field(Arr::get($_REQUEST, 'email', ''));
+            $supporter->amount = sanitize_text_field(Arr::get($_REQUEST, 'amount'));
             $supporter->save();
-            wp_send_json_success($supporter);
+            wp_send_json_success($supporter, 200);
         }
         wp_send_json_error();
     }
@@ -75,14 +83,14 @@ class AdminAjaxHandler
         $supporter = (new Supporters());
         if ($supporter->find($id)) {
             $supporter->delete($id);
-            wp_send_json_success($supporter);
+            wp_send_json_success($supporter, 200);
         }
         wp_send_json_error();
     }
 
     public function getPaymentSettings()
     {
-        $method = sanitize_text_field(ArrayHelper::get($_REQUEST, 'method'));
+        $method = sanitize_text_field(Arr::get($_REQUEST, 'method'));
         do_action('buy-me-coffee/get_payment_settings_' . $method);
     }
 
@@ -124,8 +132,8 @@ class AdminAjaxHandler
 
     public function savePaymentSettings($data = array())
     {
-        $settings = ArrayHelper::get($data, 'settings');
-        $method = ArrayHelper::get($data, 'method');
+        $settings = Arr::get($data, 'settings');
+        $method = Arr::get($data, 'method');
         return (new PaymentHandler())->saveSettings($method, $settings);
     }
 }

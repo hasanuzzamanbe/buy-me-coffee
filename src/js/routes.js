@@ -1,8 +1,9 @@
 import Dashboard from './Components/Dashboard.vue';
-import Supporters from './Components/Supports1.vue';
+import Supporters from './Components/Supporters.vue';
 import PayPal from './Components/PayPal.vue';
 import Stripe from './Components/Stripe.vue';
 import Gateway from './Components/Gateway.vue';
+import Supporter from "./Components/Supporter.vue";
 
 
 export default [
@@ -16,8 +17,13 @@ export default [
     },
     {
         path: '/supporters',
-        name: 'supporters',
-        component: Supporters
+        name: 'Supporters',
+        component: Supporters,
+    },
+    {
+        path: '/supporters/:id',
+        name: 'Supporter',
+        component: Supporter,
     },
     {
         path: '/gateway',

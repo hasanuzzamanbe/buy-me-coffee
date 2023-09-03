@@ -12,17 +12,9 @@
         <h3><?php esc_html_e('', 'buymecoffee') ?></h3>
     </div>
     <div class="buymecoffee_preview_body">
-        <div class="buymecoffee_form_preview_wrapper">
-            <h3 class="buymecoffee_form_to">
-                Buy
-                <span class="buymecoffee_form_to"><?php esc_html_e($template['yourName'], 'buymecoffee') ?></span> <br/>
-                a coffee
-            </h3>
-            <?php
-            $form =  \buyMeCoffee\Builder\Render::renderInputElements();
-            echo $form;
-            ?>
-        </div>
+        <?php
+            include BUYMECOFFEE_DIR . 'includes/views/templates/FormSection.php';
+        ?>
         <div class="buymecoffee_your_content_wrapper">
             <div class="buymecoffee_your_content">
                 <div class="buymecoffee_your_content_title">
