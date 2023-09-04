@@ -5,7 +5,7 @@ class BmcFormHandler {
         this.customQuantity = false;
         this.config = config;
         this.paymentMethod = '';
-        this.generalConfig = window.wp_payform_general;
+        this.generalConfig = window.wpm_bmc_general;
         this.$formNoticeWrapper = form.parent().find('.wpm_bmc_form_notices');
     }
 
