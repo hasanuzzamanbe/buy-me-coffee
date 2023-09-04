@@ -102,7 +102,7 @@ class AdminAjaxHandler
 
         wp_send_json_success(array(
             'settings' => $settings,
-            'message' => __("Settings successfully updated", 'buymecoffee')
+            'message' => __("Settings successfully updated", 'buy-me-coffee')
         ), 200);
 
     }
@@ -113,7 +113,7 @@ class AdminAjaxHandler
         do_action('wpm_bmc_after_save_template', $_REQUEST['settings']);
 
         wp_send_json_success(array(
-            'message' => __("Settings successfully updated", 'buymecoffee')
+            'message' => __("Settings successfully updated", 'buy-me-coffee')
         ), 200);
     }
 

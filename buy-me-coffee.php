@@ -1,9 +1,9 @@
 <?php
 
 /*
-Plugin Name: Buy me coffee - with custom payments
+Plugin Name: Buy me coffee - fundraise into own account
 Plugin URI: http://www.wpminers.com/
-Description: This plugin allows you to add a custom payment/donation system to your website.
+Description: Collect "buy me a coffee" amount directly your own Stripe and Paypal
 Version: 1.0.0
 Author: wpminers
 Author URI: http://www.wpminers.com

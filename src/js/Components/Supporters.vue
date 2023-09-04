@@ -42,19 +42,21 @@
             <el-table-column
                 label="Operations">
             <template #default="scope">
+              <el-button-group>
                     <el-button
-                    size="default"
+                    size="small"
                     icon="View"
                     @click="handleGet(scope.row.id)"></el-button>
                   <el-popconfirm @confirm="handleDelete(scope.row.id)" title="Are you sure to delete this?">
                     <template #reference>
                       <el-button
-                          size="default"
+                          size="small"
                           type="danger"
                           icon="Delete">
                       </el-button>
                     </template>
                   </el-popconfirm>
+              </el-button-group>
             </template>
             </el-table-column>
         </el-table>

@@ -71,7 +71,7 @@ class SubmissionHandler
         }
 
         wp_send_json_success(array(
-            'message'       => __('Thanks for your support! <3', 'wppayform'),
+            'message'       => __('Thanks for your support! <3', 'buy-me-coffee'),
             'submission_id' => $entryId
         ), 200);
 

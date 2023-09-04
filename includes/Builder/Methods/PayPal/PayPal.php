@@ -166,10 +166,10 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
         $paypal_redirect .= http_build_query($paypal_args);
 
         wp_send_json_success(array(
-                'message' => __('You are redirected for payment.', 'buymecoffee'),
+                'message' => __('You are redirected for payment.', 'buy-me-coffee'),
                 'id' => $entryId,
                 'redirectTo' => $paypal_redirect,
-                'messageToShow' => __('Your are redirecting to paypal now', 'wppayform')
+                'messageToShow' => __('Your are redirecting to paypal now', 'buy-me-coffee')
         ), 200);
         exit;
     }
