@@ -235,7 +235,7 @@ class Render
             }
         }
         if (!$hasActiveMethod) {
-            return '<p style="color:#fb7373; font-size:16px;">Please active at least one payment method!</p>';
+            return '<p style="color:#fb7373; font-size:16px; margin: 0 auto;">Please active at least one payment method!</p>';
         }
     }
 

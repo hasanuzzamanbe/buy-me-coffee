@@ -37,34 +37,23 @@ class BmcFormHandler {
             this.toggleCustomQuantity(true);
         });
 
-        //Select first payment method
-        let hasFirstMethod = this.form.find("input:radio[name='wpm_payment_method']:first");
-        if (hasFirstMethod.length) {
-            hasFirstMethod.attr('checked', true);
-        } else {
-            this.form.find('button.wpm_submit_button:first').css('cursor', 'not-allowed').attr('disabled', true);
-        }
-
-        this.selectedMethod();
+        // Payment Method set and handle change event
+        this.maybeSelectFirstPaymentMethod();
+        this.setSelectedMethod();
         this.form.find('.wpm_bmc_pay_method input').on('change', (e) => {
-            this.selectedMethod();
+            this.setSelectedMethod();
             //class add for active methods label
             this.form.find('.wpm_bmc_pay_methods label').removeClass('wpm_payment_active');
             jQuery(e.target).parent().addClass('wpm_payment_active');
         });
-
-
-        // this.initPaymentMethodChange();
-
-        //stripe_checkout
-        // this.paymentMethod = 'stripe';
-        // this.stripe = Stripe(this.config.stripe_pub_key);
 
         jQuery(document).on('submit', this.selector, (e) => {
             e.preventDefault();
             this.handleFormSubmit(this.form);
         });
     }
+
+
 
     handleFormSubmit(form) {
             form.find('button.wpm_submit_button').attr('disabled', true);
@@ -74,6 +63,7 @@ class BmcFormHandler {
             jQuery.post(window.wpm_buymecoffee_general.ajax_url, {
                 action: 'wpm_buymecoffee_submit',
                 payment_total: form.data('wpm_payment_total'),
+                coffee_count: form.data('coffee_count'),
                 payment_method: form.data('wpm_selected_payment_method'),
                 currency: form.data('wpm_currency'),
                 form_data: jQuery(form).serialize()
@@ -98,7 +88,19 @@ class BmcFormHandler {
         }));
     }
 
-    selectedMethod() {
+    maybeSelectFirstPaymentMethod() {
+        let hasFirstMethod = this.form.find("input:radio[name='wpm_payment_method']");
+        if (hasFirstMethod.length === 1) {
+            hasFirstMethod.closest('.wpm_bmc_pay_methods')?.hide();
+        }
+        if (hasFirstMethod.first().length) {
+            hasFirstMethod.first().attr('checked', true);
+        } else {
+            this.form.find('button.wpm_submit_button').css('cursor', 'not-allowed').attr('disabled', true);
+        }
+    }
+
+    setSelectedMethod() {
         let paymentMethod = this.form.find('.wpm_bmc_pay_method input:checked');
         this.form.data('wpm_selected_payment_method', paymentMethod.val());
         paymentMethod.parent().addClass('wpm_payment_active');
@@ -107,20 +109,22 @@ class BmcFormHandler {
     toggleCustomQuantity(val) {
         this.customQuantity = val;
         const customQuantityInput = this.form.find('.wpm_bmc_custom_quantity');
-        this.customQuantity ? customQuantityInput.addClass('custom_quantity_active') : customQuantityInput.removeClass('custom_quantity_active');
+        let quantity;
+        if (this.customQuantity) {
+            customQuantityInput.addClass('custom_quantity_active');
+            quantity = this.form.find('.wpm_bmc_custom_quantity').val();
+        } else {
+            quantity = this.form.find('.bmc_coffee input[type="radio"]:checked')?.val();
+            customQuantityInput.removeClass('custom_quantity_active');
+        }
+        this.form.data('coffee_count', quantity ? quantity : 1);
+
         this.calculatePayments();
     }
 
     calculatePayments() {
         let amount = this.form.find('.wpm_buymecoffee_payment').first().val();
-
-        //quantity
-        let quantity = 1;
-        quantity = this.form.find('.bmc_coffee input[type="radio"]:checked')?.val();
-        if (this.customQuantity) {
-            quantity = this.form.find('.wpm_bmc_custom_quantity').val();
-        }
-
+        let quantity = this.form.data('coffee_count');
         let amountCents = parseInt(parseFloat(amount) * 100 * quantity);
         this.form.data('wpm_payment_total', amountCents);
         //set total

@@ -11,8 +11,9 @@ class SubmissionHandler
 
         $paymentMethod = ArrayHelper::get($_REQUEST, 'payment_method');
         $paymentTotal = intval(ArrayHelper::get($_REQUEST, 'payment_total'));
-
+        $quantity = ArrayHelper::get($_REQUEST, 'coffee_count', 1);
         $currency = ArrayHelper::get($_REQUEST, 'currency', false);
+
         if (!$currency) {
             $currency = PaymentHelper::getCurrency();
         }
@@ -23,6 +24,7 @@ class SubmissionHandler
         $supportersName = ArrayHelper::get($form_data, 'wpm-supporter-name');
         $supportersEmail = ArrayHelper::get($form_data, 'wpm-supporter-email');
         $supportersMessage = ArrayHelper::get($form_data, 'wpm-supporter-message');
+
         $hash = $this->getHash();
 
         $entries = array(
@@ -34,7 +36,8 @@ class SubmissionHandler
             'payment_method' => sanitize_text_field($paymentMethod),
             'payment_status' => 'pending',
             'entry_hash' => sanitize_text_field($hash),
-            'payment_total' => intval($paymentTotal),
+            'payment_total' => $paymentTotal,
+            'coffee_count' => intval($quantity),
             'status' => 'new',
             'created_at' => current_time('mysql'),
             'updated_at' => current_time('mysql'),
@@ -54,7 +57,7 @@ class SubmissionHandler
             'entry_id' => $entryId,
             'charge_id' => '',
             'payment_method' => sanitize_text_field($paymentMethod),
-            'payment_total' => intval($paymentTotal),
+            'payment_total' => $paymentTotal,
             'currency' => 'USD',
             'status' => 'pending',
             'created_at' => current_time('mysql'),

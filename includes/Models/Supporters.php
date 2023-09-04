@@ -7,7 +7,6 @@ class Supporters
 {
     public function index($args)
     {
-
         $offset = intval( $args['page'] * $args['posts_per_page']);
 
         $query =  wpmBmcDB()->table('wpm_bmc_supporters')
@@ -44,7 +43,7 @@ class Supporters
     public function find($id)
     {
         $supporter = wpmBmcDB()->table('wpm_bmc_supporters')
-        ->first();
+        ->where('id', $id)->first();
 
         return $supporter;
     }

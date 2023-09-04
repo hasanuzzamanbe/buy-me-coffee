@@ -52,12 +52,11 @@ class AdminAjaxHandler
 
     public function getSupporter()
     {
-        $id = sanitize_text_field($_REQUEST['id']);
+        $id = intval($_REQUEST['id']);
         $supporter = (new Supporters())->find($id);
         if ($supporter) {
             wp_send_json_success($supporter, 200);
         }
-        wp_send_json_error();
     }
     public function getSupporters()
     {

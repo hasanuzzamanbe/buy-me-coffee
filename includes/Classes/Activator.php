@@ -60,6 +60,7 @@ class Activator
 				payment_status varchar(255),
 				entry_hash varchar (255),
 				payment_total int(11),
+                coffee_count int(11),
 				payment_mode varchar(255),
 				payment_method varchar(255),
 				status varchar(255),

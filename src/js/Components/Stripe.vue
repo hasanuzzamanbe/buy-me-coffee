@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="action_right">
-                        <el-button @click="saveSettings()" type="primary" size="small">Save Settings</el-button>
+                        <el-button @click="saveSettings()" type="primary" size="default">Save Settings</el-button>
                     </div>
                 </el-form>
             </div>

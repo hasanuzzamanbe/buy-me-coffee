@@ -38,7 +38,7 @@ class PaypalCheckout {
 
     this.form.find('#wpm_buymecoffee_order_btn').hide()
 
-    jQuery('.wpm_bmc_pay_methods').append(paypalButtonContainer)
+    jQuery('.wpm_bmc_pay_methods')?.parent().append(paypalButtonContainer)
   }
 }
 
