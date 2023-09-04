@@ -7,7 +7,7 @@ Description: Collect "buy me a coffee" amount directly your own Stripe and Paypa
 Version: 1.0.0
 Author: wpminers
 Author URI: http://www.wpminers.com
-License: A "Slug" license name e.g. GPL2
+License: GPLv2 or later
 Text Domain: buy-me-coffee
 */
 

@@ -1,6 +1,6 @@
 === Buy me coffee button & widget - fundraise into own account ===
 Contributors: wpminers
-Tags: buy me a coffee, donations, payments, stripe payments, PayPal, fundraise
+Tags: Buy me a coffee, donations, payments, stripe, PayPal, fundraise
 Requires at least: 4.5
 Tested up to: 6.3
 Stable tag: 1.0.0

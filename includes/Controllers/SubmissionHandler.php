@@ -45,7 +45,7 @@ class SubmissionHandler
 
         $entries = apply_filters('wpm_bmc_supporter_entries', $entries);
 
-        do_action('wpm_bmc_BEFORE_supporters_data_insert', $entries);
+        do_action('wpm_bmc_before_supporters_data_insert', $entries);
 
         // DO ENTRIES INSERT
         $entryId = wpmBmcDB()->table('wpm_bmc_supporters')->insert($entries);
