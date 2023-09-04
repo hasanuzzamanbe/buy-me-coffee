@@ -1,10 +1,10 @@
 <?php
-namespace buyMeCoffee\Builder\Methods\PayPal;
+namespace BuyMeCoffee\Builder\Methods\PayPal;
 
-use buyMeCoffee\Helpers\ArrayHelper;
-use buyMeCoffee\Models\Supporters;
-use buyMeCoffee\Models\Transactions;
-use buyMeCoffee\Builder\Methods\BaseMethods;
+use BuyMeCoffee\Helpers\ArrayHelper;
+use BuyMeCoffee\Models\Supporters;
+use BuyMeCoffee\Models\Transactions;
+use BuyMeCoffee\Builder\Methods\BaseMethods;
 
  class PayPal extends BaseMethods
 {
@@ -14,7 +14,7 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
             'PayPal',
             'paypal',
             'PayPal is the faster, safer way to send money, make an online payment, receive money or set up a merchant account.',
-            BUYMECOFFEE_URL. 'assets/images/paypal.png'
+            WPM_BMC_URL. 'assets/images/paypal.png'
         );
         add_action( 'wpm_bmc_make_payment_paypal' , array( $this , 'makePayment' ) , 10 , 3);
         add_action('init', array($this, 'ipnVerification'));
@@ -314,7 +314,7 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
 
         wp_enqueue_script('wpm-buymecoffee-checkout-sdk-' . $this->method, 'https://www.paypal.com/sdk/js?client-id=' . $clientId, [], null, false);
 
-        wp_enqueue_script('wpm-buymecoffee-checkout-handler-' . $this->method, BUYMECOFFEE_URL . 'assets/js/PaymentMethods/paypal-checkout.js', ['wpm-buymecoffee-checkout-sdk-paypal'], '1.0.1', false);
+        wp_enqueue_script('wpm-buymecoffee-checkout-handler-' . $this->method, WPM_BMC_URL . 'assets/js/PaymentMethods/paypal-checkout.js', ['wpm-buymecoffee-checkout-sdk-paypal'], '1.0.1', false);
 
     }
 
@@ -324,7 +324,7 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
 
         ?>
             <label class="wpm_paypal_card_label" for="wpm_paypal_card">
-                <img width="50px" src="<?php echo BUYMECOFFEE_URL . 'assets/images/paypal.png'; ?>" alt="">
+                <img width="50px" src="<?php echo WPM_BMC_URL . 'assets/images/paypal.png'; ?>" alt="">
                 <input
                     style="outline: none;"
                     type="radio" name="wpm_payment_method" class="wpm_paypal_card" id="wpm_paypal_card"

@@ -1,5 +1,5 @@
 <?php
-namespace buyMeCoffee\Models;
+namespace BuyMeCoffee\Models;
 
 class Buttons
 {

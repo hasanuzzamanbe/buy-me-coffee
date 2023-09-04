@@ -10,9 +10,9 @@ const router = createRouter({
 
 const framework = new BuyMeCoffee();
 
-framework.app.config.globalProperties.appVars = window.buyMeCoffeeAdmin;
+framework.app.config.globalProperties.appVars = window.BuyMeCoffeeAdmin;
 
-window.buyMeCoffeeApp = framework.app.use(router).mount('#buy-me-coffee_app');
+window.BuyMeCoffeeApp = framework.app.use(router).mount('#buy-me-coffee_app');
 
 router.afterEach((to, from) => {
     jQuery('.buymecoffee_menu_item').removeClass('active');

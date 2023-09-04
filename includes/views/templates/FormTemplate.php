@@ -3,7 +3,7 @@
         <div class="buymecoffee_profile_hr">
         </div>
         <div class="buymecoffee_profile_section_image">
-            <img src="<?php echo BUYMECOFFEE_URL . 'assets/images/coffee.png';?>"
+            <img src="<?php echo WPM_BMC_URL . 'assets/images/coffee.png';?>"
                  alt="Profile Image">
         </div>
 
@@ -13,7 +13,7 @@
     </div>
     <div class="buymecoffee_preview_body">
         <?php
-            include BUYMECOFFEE_DIR . 'includes/views/templates/FormSection.php';
+            include WPM_BMC_DIR . 'includes/views/templates/FormSection.php';
         ?>
         <div class="buymecoffee_your_content_wrapper">
             <div class="buymecoffee_your_content">

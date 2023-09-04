@@ -1,7 +1,7 @@
 <?php
 
 /*
-Plugin Name: Buy me coffee - fundraise into own account
+Plugin Name: Buy me coffee widgets - fundraise into own account
 Plugin URI: http://www.wpminers.com/
 Description: Collect "buy me a coffee" amount directly your own Stripe and Paypal
 Version: 1.0.0
@@ -32,15 +32,15 @@ Text Domain: buy-me-coffee
 if (!defined('ABSPATH')) {
     exit;
 }
-if (!defined('BUYMECOFFEE_VERSION')) {
-    define('BUYMECOFFEE_VERSION_LITE', true);
-    define('BUYMECOFFEE_VERSION', '1.1.0');
-    define('BUYMECOFFEE_MAIN_FILE', __FILE__);
-    define('BUYMECOFFEE_URL', plugin_dir_url(__FILE__));
-    define('BUYMECOFFEE_DIR', plugin_dir_path(__FILE__));
-    define('BUYMECOFFEE_UPLOAD_DIR', '/buy-me-coffee');
+if (!defined('WPM_BMC_VERSION')) {
+    define('WPM_BMC_VERSION_LITE', true);
+    define('WPM_BMC_VERSION', '1.1.0');
+    define('WPM_BMC_MAIN_FILE', __FILE__);
+    define('WPM_BMC_URL', plugin_dir_url(__FILE__));
+    define('WPM_BMC_DIR', plugin_dir_path(__FILE__));
+    define('WPM_BMC_UPLOAD_DIR', '/buy-me-coffee');
 
-    class buyMeCoffee
+    class BuyMeCoffee
     {
         public function boot()
         {
@@ -54,21 +54,21 @@ if (!defined('BUYMECOFFEE_VERSION')) {
 
         public function loadFiles()
         {
-            require BUYMECOFFEE_DIR . 'includes/autoload.php';
-            require BUYMECOFFEE_DIR . 'includes/Models/Buttons.php';
-            require BUYMECOFFEE_DIR . 'includes/Helpers/ArrayHelper.php';
+            require WPM_BMC_DIR . 'includes/autoload.php';
+            require WPM_BMC_DIR . 'includes/Models/Buttons.php';
+            require WPM_BMC_DIR . 'includes/Helpers/ArrayHelper.php';
         }
 
         public function adminHooks()
         {
-            require BUYMECOFFEE_DIR . 'includes/autoload.php';
+            require WPM_BMC_DIR . 'includes/autoload.php';
 
             //Register Admin menu
-            $menu = new \buyMeCoffee\Classes\Menu();
+            $menu = new \BuyMeCoffee\Classes\Menu();
             $menu->register();
 
             // Top Level Ajax Handlers
-            $ajaxHandler = new \buyMeCoffee\Classes\AdminAjaxHandler();
+            $ajaxHandler = new \BuyMeCoffee\Classes\AdminAjaxHandler();
             $ajaxHandler->registerEndpoints();
 
         }
@@ -82,20 +82,20 @@ if (!defined('BUYMECOFFEE_VERSION')) {
 
                 $this->addAssets();
 
-                $builder = new \buyMeCoffee\Builder\Render();
+                $builder = new \BuyMeCoffee\Builder\Render();
                 return $builder->render();
             });
 
-            $demoPage = new \buyMeCoffee\Classes\DemoPage();
+            $demoPage = new \BuyMeCoffee\Classes\DemoPage();
             add_shortcode('buymecoffee_form', [$demoPage, 'renderFormOnly']);
 
         }
 
         public function addAssets()
         {
-            wp_enqueue_style('buymecoffee', BUYMECOFFEE_URL . 'assets/css/public-style.css', array(), BUYMECOFFEE_VERSION);
-            wp_enqueue_script('buymecoffee', BUYMECOFFEE_URL . 'assets/js/BmcPublic.js', array('jquery'), BUYMECOFFEE_VERSION, true);
-            wp_localize_script('buymecoffee', 'wpm_bmc', array(
+            wp_enqueue_style('wpm_bmc_style', WPM_BMC_URL . 'assets/css/public-style.css', array(), WPM_BMC_VERSION);
+            wp_enqueue_script('wpm_bmc_script', WPM_BMC_URL . 'assets/js/BmcPublic.js', array('jquery'), WPM_BMC_VERSION, true);
+            wp_localize_script('wpm_bmc_script', 'wpm_bmc', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('wpm_bmc_nonce'),
             ));
@@ -103,17 +103,17 @@ if (!defined('BUYMECOFFEE_VERSION')) {
 
         public function commonActions()
         {
-            require BUYMECOFFEE_DIR . 'includes/Controllers/SubmissionHandler.php';
+            require WPM_BMC_DIR . 'includes/Controllers/SubmissionHandler.php';
 
             //payment methods init
-            require BUYMECOFFEE_DIR . 'includes/Builder/Methods/BaseMethods.php';
-            require BUYMECOFFEE_DIR . 'includes/Builder/Methods/Stripe/Stripe.php';
-            require BUYMECOFFEE_DIR . 'includes/Builder/Methods/PayPal/PayPal.php';
-            new \buyMeCoffee\Builder\Methods\PayPal\PayPal();
-            new \buyMeCoffee\Builder\Methods\Stripe\Stripe();
+            require WPM_BMC_DIR . 'includes/Builder/Methods/BaseMethods.php';
+            require WPM_BMC_DIR . 'includes/Builder/Methods/Stripe/Stripe.php';
+            require WPM_BMC_DIR . 'includes/Builder/Methods/PayPal/PayPal.php';
+            new \BuyMeCoffee\Builder\Methods\PayPal\PayPal();
+            new \BuyMeCoffee\Builder\Methods\Stripe\Stripe();
 
             // Submission Handler
-            $submissionHandler = new \buyMeCoffee\Controllers\SubmissionHandler();
+            $submissionHandler = new \BuyMeCoffee\Controllers\SubmissionHandler();
             add_action('wp_ajax_wpm_bmc_submit', array($submissionHandler, 'handleSubmission'));
             add_action('wp_ajax_nopriv_wpm_bmc_submit', array($submissionHandler, 'handleSubmission'));
         }
@@ -125,12 +125,12 @@ if (!defined('BUYMECOFFEE_VERSION')) {
     }
 
     add_action('plugins_loaded', function () {
-        (new buyMeCoffee())->boot();
+        (new BuyMeCoffee())->boot();
     });
 
     register_activation_hook(__FILE__, function ($newWorkWide) {
-        require_once(BUYMECOFFEE_DIR . 'includes/Classes/Activator.php');
-        $activator = new \buyMeCoffee\Classes\Activator();
+        require_once(WPM_BMC_DIR . 'includes/Classes/Activator.php');
+        $activator = new \BuyMeCoffee\Classes\Activator();
         $activator->migrateDatabases($newWorkWide);
     });
 
@@ -146,7 +146,7 @@ if (!defined('BUYMECOFFEE_VERSION')) {
 
     // Handle Exterior Pages
     add_action('init', function () {
-        $demoPage = new \buyMeCoffee\Classes\DemoPage();
+        $demoPage = new \BuyMeCoffee\Classes\DemoPage();
         $demoPage->register();
     });
 

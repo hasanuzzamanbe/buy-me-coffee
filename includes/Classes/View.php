@@ -1,6 +1,6 @@
 <?php
 
-namespace buyMeCoffee\Classes;
+namespace BuyMeCoffee\Classes;
 
 class View
 {
@@ -41,7 +41,7 @@ class View
     protected static function getFilePath($path)
     {
         $path = str_replace('.', DIRECTORY_SEPARATOR, $path);
-        $viewName = BUYMECOFFEE_DIR.'includes'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.$path;
+        $viewName = WPM_BMC_DIR.'includes'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.$path;
         $fullPath = $viewName.'.php';
         return apply_filters('buymecoffee/template_view_path', $fullPath, $path);
     }

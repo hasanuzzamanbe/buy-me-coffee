@@ -1,7 +1,7 @@
 <?php
-namespace buyMeCoffee\Helpers;
+namespace BuyMeCoffee\Helpers;
 
-use buyMeCoffee\Models\Buttons;
+use BuyMeCoffee\Models\Buttons;
 
 class PaymentHelper
 {

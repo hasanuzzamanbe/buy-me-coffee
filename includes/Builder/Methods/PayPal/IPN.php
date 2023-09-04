@@ -1,8 +1,8 @@
 <?php
-namespace buyMeCoffee\Builder\Methods\PayPal;
+namespace BuyMeCoffee\Builder\Methods\PayPal;
 
-use buyMeCoffee\Models\Supporters;
-use buyMeCoffee\Models\Transactions;
+use BuyMeCoffee\Models\Supporters;
+use BuyMeCoffee\Models\Transactions;
 
 class IPN
 {

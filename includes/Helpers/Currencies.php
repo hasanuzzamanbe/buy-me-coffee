@@ -1,6 +1,6 @@
 <?php
 
-namespace buyMeCoffee\Helpers;
+namespace BuyMeCoffee\Helpers;
 
 class Currencies
 {

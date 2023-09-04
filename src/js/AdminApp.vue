@@ -30,7 +30,7 @@
       },
       methods: {
           fullPath(path) {
-              return window.buyMeCoffeeAdmin.assets_url + 'images/' + path;
+              return window.BuyMeCoffeeAdmin.assets_url + 'images/' + path;
           },
           setTopmenu() {
               this.topMenus = this.applyFilters('buy-me-coffee_top_level_menu', [

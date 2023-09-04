@@ -1,12 +1,12 @@
 <?php
 
-namespace buyMeCoffee\Builder;
+namespace BuyMeCoffee\Builder;
 
-use buyMeCoffee\Controllers\PaymentHandler;
-use buyMeCoffee\Models\Buttons;
-use buyMeCoffee\Helpers\ArrayHelper as Arr;
-use buyMeCoffee\Classes\DemoPage;
-use buyMeCoffee\Helpers\PaymentHelper;
+use BuyMeCoffee\Controllers\PaymentHandler;
+use BuyMeCoffee\Models\Buttons;
+use BuyMeCoffee\Helpers\ArrayHelper as Arr;
+use BuyMeCoffee\Classes\DemoPage;
+use BuyMeCoffee\Helpers\PaymentHelper;
 
 
 class Render
@@ -127,7 +127,7 @@ class Render
             <div class="wpm_bmc_payment_item">
                 <div class="wpm_bmc_input_content">
                     <div class="wpm_bmc_coffee_selector">
-                        <img width="50" src="<?php echo BUYMECOFFEE_URL . 'assets/images/coffee.png'; ?>" >
+                        <img width="50" src="<?php echo WPM_BMC_URL . 'assets/images/coffee.png'; ?>" >
                         <span>x</span>
 
                         <div class="bmc_coffee">
@@ -241,8 +241,8 @@ class Render
 
     public static function addAssets()
     {
-        wp_enqueue_style('wpm_bmc_css', BUYMECOFFEE_URL . 'assets/css/public-style.css', array(), BUYMECOFFEE_VERSION);
-        wp_enqueue_script('wpm_bmc', BUYMECOFFEE_URL . 'assets/js/BmcPublic.js', array('jquery'), BUYMECOFFEE_VERSION, true);
+        wp_enqueue_style('wpm_bmc_css', WPM_BMC_URL . 'assets/css/public-style.css', array(), WPM_BMC_VERSION);
+        wp_enqueue_script('wpm_bmc', WPM_BMC_URL . 'assets/js/BmcPublic.js', array('jquery'), WPM_BMC_VERSION, true);
         wp_localize_script('wpm_bmc', 'wpm_bmc_general', array(
             'ajax_url'  => admin_url('admin-ajax.php')
         ));

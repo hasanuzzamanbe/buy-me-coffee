@@ -1,9 +1,9 @@
 <?php
 
-namespace buyMeCoffee\Classes;
+namespace BuyMeCoffee\Classes;
 
-use buyMeCoffee\Classes\View;
-use \buyMeCoffee\Models\Buttons;
+use BuyMeCoffee\Classes\View;
+use \BuyMeCoffee\Models\Buttons;
 
 class DemoPage
 {
@@ -14,7 +14,7 @@ class DemoPage
 
     public function loadTemplateStyles()
     {
-        wp_enqueue_style('wpm_bmc_template_style', BUYMECOFFEE_URL . 'assets/css/BasicTemplate.css', array(), BUYMECOFFEE_VERSION);
+        wp_enqueue_style('wpm_bmc_template_style', WPM_BMC_URL . 'assets/css/BasicTemplate.css', array(), WPM_BMC_VERSION);
     }
 
     public function renderFormOnly()
@@ -23,7 +23,7 @@ class DemoPage
         $btnController = new Buttons();
         $template = $btnController->getButton();
         ob_start();
-        include BUYMECOFFEE_DIR . 'includes/views/templates/FormShortCode.php';
+        include WPM_BMC_DIR . 'includes/views/templates/FormShortCode.php';
         return ob_get_clean();
     }
 

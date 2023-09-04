@@ -1,8 +1,8 @@
 <?php
-namespace buyMeCoffee\Controllers;
+namespace BuyMeCoffee\Controllers;
 
-use buyMeCoffee\Helpers\ArrayHelper;
-use buyMeCoffee\Helpers\PaymentHelper;
+use BuyMeCoffee\Helpers\ArrayHelper;
+use BuyMeCoffee\Helpers\PaymentHelper;
 class SubmissionHandler
 {
     public function handleSubmission()

@@ -1,5 +1,5 @@
 <?php
-namespace buyMeCoffee\Helpers;
+namespace BuyMeCoffee\Helpers;
 
 if (!defined('ABSPATH')) {
     exit;

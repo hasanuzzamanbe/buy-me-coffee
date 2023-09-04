@@ -5,7 +5,7 @@
         a coffee
     </h3>
     <?php
-    $form =  \buyMeCoffee\Builder\Render::renderInputElements();
+    $form =  \BuyMeCoffee\Builder\Render::renderInputElements();
     echo $form;
     ?>
 </div>

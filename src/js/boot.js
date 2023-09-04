@@ -1,3 +1,3 @@
-import buyMeCoffee from './plugin_main_js_file';
+import BuyMeCoffee from './plugin_main_js_file';
 
-window.buyMeCoffee = new buyMeCoffee();
+window.BuyMeCoffee = new BuyMeCoffee();

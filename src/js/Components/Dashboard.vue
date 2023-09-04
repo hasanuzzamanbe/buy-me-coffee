@@ -185,7 +185,7 @@ export default {
             saving: false,
             currencies: {},
             fetching: true,
-            previewUrl: window.buyMeCoffeeAdmin.preview_url,
+            previewUrl: window.BuyMeCoffeeAdmin.preview_url,
             methods: [
                 {
                     name: 'PayPal',
@@ -269,7 +269,7 @@ export default {
                     });
         },
         previewButton(){
-            window.open(window.buyMeCoffeeAdmin.preview_url);
+            window.open(window.BuyMeCoffeeAdmin.preview_url);
         },
     },
     mounted() {

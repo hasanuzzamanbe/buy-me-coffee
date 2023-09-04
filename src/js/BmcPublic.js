@@ -1,9 +1,9 @@
 import BmcFormHandler from './BmcFormHandler.js';
 
-let buyMeCoffeeApp = {};
+let BuyMeCoffeeApp = {};
 
 (function ($) {
-    buyMeCoffeeApp = {
+    BuyMeCoffeeApp = {
         forms: {},
         general: window.wpm_bmc_general,
         formData: {},
@@ -36,10 +36,10 @@ let buyMeCoffeeApp = {};
     };
 
     $(window).on('load', function () {
-        console.log('window loaded', buyMeCoffeeApp.initiated)
-        if (!buyMeCoffeeApp?.initiated) {
+        console.log('window loaded', BuyMeCoffeeApp.initiated)
+        if (!BuyMeCoffeeApp?.initiated) {
             console.log('initiating');
-            buyMeCoffeeApp.init();
+            BuyMeCoffeeApp.init();
         }
     });
 

@@ -1,5 +1,5 @@
 <?php
-namespace buyMeCoffee\Builder\Methods;
+namespace BuyMeCoffee\Builder\Methods;
 
 abstract class BaseMethods
 {

@@ -2,14 +2,14 @@
 /**
  * Autoloader
  *
- * @package buyMeCoffee
+ * @package BuyMeCoffee
  */
 
 if (!defined('ABSPATH')) {
     exit;
 }
 include 'global_functions.php';
-if (!function_exists('buyMeCoffeeAutoload')) {
+if (!function_exists('BuyMeCoffeeAutoload')) {
     /**
      * Plugin autoloader.
      *
@@ -21,10 +21,10 @@ if (!function_exists('buyMeCoffeeAutoload')) {
      *
      * @param $class
      */
-    function buyMeCoffeeAutoload($class)
+    function BuyMeCoffeeAutoload($class)
     {
         // Do not load unless in plugin domain.
-        $namespace = 'buyMeCoffee';
+        $namespace = 'BuyMeCoffee';
         if (strpos($class, $namespace) !== 0) {
             return;
         }
@@ -43,5 +43,5 @@ if (!function_exists('buyMeCoffeeAutoload')) {
         }
     }
     // Register the autoloader.
-    spl_autoload_register('buyMeCoffeeAutoload');
+    spl_autoload_register('BuyMeCoffeeAutoload');
 }

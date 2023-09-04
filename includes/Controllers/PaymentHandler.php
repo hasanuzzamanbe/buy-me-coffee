@@ -1,7 +1,7 @@
 <?php
-namespace buyMeCoffee\Controllers;
+namespace BuyMeCoffee\Controllers;
 
-use buyMeCoffee\Helpers\ArrayHelper;
+use BuyMeCoffee\Helpers\ArrayHelper;
 
 class PaymentHandler
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace buyMeCoffee\Classes;
+namespace BuyMeCoffee\Classes;
 
 if (!defined('ABSPATH')) {
     exit;

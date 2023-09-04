@@ -1,15 +1,15 @@
 <?php
 
-namespace buyMeCoffee\Classes;
-use buyMeCoffee\Models\Supporters;
-use buyMeCoffee\Builder\Methods\PayPal\PayPal;
-use buyMeCoffee\Helpers\ArrayHelper as Arr;
-use buyMeCoffee\Controllers\PaymentHandler;
-use buyMeCoffee\Builder\Methods\Stripe\Stripe;
-use buyMeCoffee\Helpers\PaymentHelper;
-use buyMeCoffee\Helpers\Currencies;
+namespace BuyMeCoffee\Classes;
+use BuyMeCoffee\Models\Supporters;
+use BuyMeCoffee\Builder\Methods\PayPal\PayPal;
+use BuyMeCoffee\Helpers\ArrayHelper as Arr;
+use BuyMeCoffee\Controllers\PaymentHandler;
+use BuyMeCoffee\Builder\Methods\Stripe\Stripe;
+use BuyMeCoffee\Helpers\PaymentHelper;
+use BuyMeCoffee\Helpers\Currencies;
 
-use buyMeCoffee\Models\Buttons;
+use BuyMeCoffee\Models\Buttons;
 
 class AdminAjaxHandler
 {

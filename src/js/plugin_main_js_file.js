@@ -21,7 +21,7 @@ export default class BuyMeCoffee {
         this.addAction = addAction;
         this.applyFilters = applyFilters;
         this.removeAllActions = removeAllActions;
-        this.appVars = window.buyMeCoffeeAdmin;
+        this.appVars = window.BuyMeCoffeeAdmin;
         this.app = this.extendVueConstructor();
     }
 
@@ -93,29 +93,29 @@ export default class BuyMeCoffee {
     }
 
     $publicAssets(path){
-        return (window.buyMeCoffeeAdmin.assets_url + path);
+        return (window.BuyMeCoffeeAdmin.assets_url + path);
     }
 
     $get(options) {
-        return window.jQuery.get(window.buyMeCoffeeAdmin.ajaxurl, options);
+        return window.jQuery.get(window.BuyMeCoffeeAdmin.ajaxurl, options);
     }
 
     $adminGet(options) {
         options.action = 'buy-me-coffee_admin_ajax';
-        return window.jQuery.get(window.buyMeCoffeeAdmin.ajaxurl, options);
+        return window.jQuery.get(window.BuyMeCoffeeAdmin.ajaxurl, options);
     }
 
     $post(options) {
-        return window.jQuery.post(window.buyMeCoffeeAdmin.ajaxurl, options);
+        return window.jQuery.post(window.BuyMeCoffeeAdmin.ajaxurl, options);
     }
 
     $adminPost(options) {
         options.action = 'buy-me-coffee_admin_ajax';
-        return window.jQuery.post(window.buyMeCoffeeAdmin.ajaxurl, options);
+        return window.jQuery.post(window.BuyMeCoffeeAdmin.ajaxurl, options);
     }
 
     $getJSON(options) {
-        return window.jQuery.getJSON(window.buyMeCoffeeAdmin.ajaxurl, options);
+        return window.jQuery.getJSON(window.BuyMeCoffeeAdmin.ajaxurl, options);
     }
     dateTimeFormat(date, format) {
         const dateString = (date === undefined) ? null : date;
@@ -248,7 +248,7 @@ export default class BuyMeCoffee {
         const endTime = new Date();
         const timeDiff = endTime - appStartTime; // in ms
         const dateObj = moment(dateString);
-        return dateObj.from(moment(window.buyMeCoffeeAdmin.server_time).add(timeDiff, 'milliseconds'));
+        return dateObj.from(moment(window.BuyMeCoffeeAdmin.server_time).add(timeDiff, 'milliseconds'));
     }
 
     waitingTime(time1, time2) {

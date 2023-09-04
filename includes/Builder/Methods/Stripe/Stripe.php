@@ -1,7 +1,7 @@
 <?php
-namespace buyMeCoffee\Builder\Methods\Stripe;
+namespace BuyMeCoffee\Builder\Methods\Stripe;
 
-use buyMeCoffee\Builder\Methods\BaseMethods;
+use BuyMeCoffee\Builder\Methods\BaseMethods;
 
 class Stripe extends BaseMethods
 {
@@ -11,7 +11,7 @@ class Stripe extends BaseMethods
             'Stripe',
             'stripe',
             'Stripe is a payment gateway that allows you to accept payments from your customers.',
-            BUYMECOFFEE_URL . 'assets/images/credit-card.png'
+            WPM_BMC_URL . 'assets/images/credit-card.png'
         );
 
         add_action('wpm_bmc_make_payment_stripe' , array( $this , 'makePayment' ) , 10 , 3);
@@ -19,8 +19,7 @@ class Stripe extends BaseMethods
 
     public function makePayment($transactionId, $entryId, $form_data)
     {
-        dd($transactionId, $entryId, $form_data,'from stripe');
-        die();
+       // TO-Do will implement later on upcoming version
     }
 
     public function sanitize($settings)
@@ -58,7 +57,7 @@ class Stripe extends BaseMethods
     {
         ?>
             <label class="wpm_stripe_card_label" for="wpm_stripe_card">
-                <img width="50px" src="<?php echo BUYMECOFFEE_URL . 'assets/images/credit-card.png'; ?>" alt="">
+                <img width="50px" src="<?php echo WPM_BMC_URL . 'assets/images/credit-card.png'; ?>" alt="">
                 <input
                     style="outline: none;"
                     type="radio" class="wpm_stripe_card" name="wpm_payment_method" id="wpm_stripe_card"

@@ -11,7 +11,7 @@
     ?>
 <?php
 
-        include BUYMECOFFEE_DIR . 'includes/views/templates/FormTemplate.php';
+        include WPM_BMC_DIR . 'includes/views/templates/FormTemplate.php';
 
         wp_footer();
 ?>

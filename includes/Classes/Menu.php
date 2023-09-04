@@ -1,8 +1,8 @@
 <?php
 
-namespace buyMeCoffee\Classes;
+namespace BuyMeCoffee\Classes;
 
-use buyMeCoffee\Classes\View;
+use BuyMeCoffee\Classes\View;
 
 class Menu
 {
@@ -73,9 +73,9 @@ class Menu
 
         wp_enqueue_script(
             'buy-me-coffee_boot',
-            BUYMECOFFEE_URL . 'assets/js/boot.js',
+            WPM_BMC_URL . 'assets/js/boot.js',
             array(),
-            BUYMECOFFEE_VERSION,
+            WPM_BMC_VERSION,
             true
         );
 
@@ -84,24 +84,24 @@ class Menu
 
 	    wp_enqueue_script(
             'buy-me-coffee_js',
-		    BUYMECOFFEE_URL . 'assets/js/plugin-main-js-file.js',
+		    WPM_BMC_URL . 'assets/js/plugin-main-js-file.js',
 		    array('jquery'),
-		    BUYMECOFFEE_VERSION,
+		    WPM_BMC_VERSION,
 		    true
 	    );
 
         //enqueue css file
-        wp_enqueue_style('buy-me-coffee_admin_css', BUYMECOFFEE_URL . 'assets/css/element.css');
+        wp_enqueue_style('buy-me-coffee_admin_css', WPM_BMC_URL . 'assets/css/element.css');
 
-        $buyMeCoffeeAdminVars = apply_filters('buy-me-coffee/admin_app_vars', array(
+        $BuyMeCoffeeAdminVars = apply_filters('buy-me-coffee/admin_app_vars', array(
             //'image_upload_url' => admin_url('admin-ajax.php?action=wpf_global_settings_handler&route=wpf_upload_image'),
-            'assets_url' => BUYMECOFFEE_URL . 'assets/',
+            'assets_url' => WPM_BMC_URL . 'assets/',
             'ajaxurl' => admin_url('admin-ajax.php'),
             'preview_url' => site_url('?appreciate-your-support-bmc=1')
             // site_url('?buymecoffee_preview=button')
         ));
 
 
-        wp_localize_script('buy-me-coffee_boot', 'buyMeCoffeeAdmin', $buyMeCoffeeAdminVars);
+        wp_localize_script('buy-me-coffee_boot', 'BuyMeCoffeeAdmin', $BuyMeCoffeeAdminVars);
     }
 }
