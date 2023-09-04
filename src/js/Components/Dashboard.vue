@@ -33,11 +33,11 @@
                                         <el-form-item label="Per coffee price">
                                             <el-input type="number" v-model="template.defaultAmount"></el-input>
                                         </el-form-item>
-                                        <el-form-item label="Enable pay method">
-                                                <el-checkbox-group v-model="template.methods">
-                                                <el-checkbox v-for="method in methods" :key="method.value" :label="method.name"></el-checkbox>
-                                            </el-checkbox-group>
-                                        </el-form-item>
+<!--                                        <el-form-item label="Enable pay method">-->
+<!--                                                <el-checkbox-group v-model="template.methods">-->
+<!--                                                <el-checkbox v-for="method in methods" :key="method.value" :label="method.name"></el-checkbox>-->
+<!--                                            </el-checkbox-group>-->
+<!--                                        </el-form-item>-->
                                         <el-form-item label="Currency">
                                           <el-select filterable v-model="template.currency" placeholder="Select Currency">
                                             <el-option

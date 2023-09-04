@@ -8,7 +8,7 @@ class PaymentHandler
     public static function getAllMethods()
     {
         $methods =  apply_filters('wpm_buymecoffee_get_all_methods', []);
-        wp_send_json_success($methods, 200);
+        return $methods;
     }
     
     public function saveSettings($method, $settings)

@@ -46,7 +46,8 @@ class AdminAjaxHandler
 
     public function getAllMethods()
     {
-        return PaymentHandler::getAllMethods();
+        $methods = PaymentHandler::getAllMethods();
+        wp_send_json_success($methods, 200);
     }
 
     public function getSupporter()

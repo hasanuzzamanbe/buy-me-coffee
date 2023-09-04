@@ -335,4 +335,11 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
             </label>
         <?php
     }
-}
+
+     public function isEnabled()
+     {
+         // TODO: Implement isEnabled() method.
+            $settings = $this->getSettings();
+            return $settings['enable'] === 'yes';
+     }
+ }

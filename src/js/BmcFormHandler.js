@@ -37,10 +37,17 @@ class BmcFormHandler {
             this.toggleCustomQuantity(true);
         });
 
+        //Select first payment method
+        let hasFirstMethod = this.form.find("input:radio[name='wpm_payment_method']:first");
+        if (hasFirstMethod.length) {
+            hasFirstMethod.attr('checked', true);
+        } else {
+            this.form.find('button.wpm_submit_button:first').css('cursor', 'not-allowed').attr('disabled', true);
+        }
+
         this.selectedMethod();
         this.form.find('.wpm_bmc_pay_method input').on('change', (e) => {
             this.selectedMethod();
-
             //class add for active methods label
             this.form.find('.wpm_bmc_pay_methods label').removeClass('wpm_payment_active');
             jQuery(e.target).parent().addClass('wpm_payment_active');

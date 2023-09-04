@@ -2,8 +2,9 @@
 
 namespace buyMeCoffee\Builder;
 
+use buyMeCoffee\Controllers\PaymentHandler;
 use buyMeCoffee\Models\Buttons;
-use buyMeCoffee\Helpers\ArrayHelper;
+use buyMeCoffee\Helpers\ArrayHelper as Arr;
 use buyMeCoffee\Classes\DemoPage;
 use buyMeCoffee\Helpers\PaymentHelper;
 
@@ -15,15 +16,15 @@ class Render
     {
         $template = (new Buttons())->getButton();
 
-        $buttonText = ArrayHelper::get($template, 'buttonText');
-        $bgColor = ArrayHelper::get($template, 'advanced.bgColor');
-        $color = ArrayHelper::get($template, 'advanced.color');
-        $minWidth = ArrayHelper::get($template, 'advanced.minWidth');
-        $fontSize = ArrayHelper::get($template, 'advanced.fontSize');
-        $radius = ArrayHelper::get($template, 'advanced.radius');
+        $buttonText = Arr::get($template, 'buttonText');
+        $bgColor = Arr::get($template, 'advanced.bgColor');
+        $color = Arr::get($template, 'advanced.color');
+        $minWidth = Arr::get($template, 'advanced.minWidth');
+        $fontSize = Arr::get($template, 'advanced.fontSize');
+        $radius = Arr::get($template, 'advanced.radius');
 
         $paymentPageUrl = site_url('?appreciate-your-support-bmc=1');
-        $openMode = ArrayHelper::get($template, 'openMode');
+        $openMode = Arr::get($template, 'openMode');
 
         $styling = "<style>.wpm-buymecoffee-container .wpm-buymecoffee-button{
             outline: none;
@@ -112,12 +113,12 @@ class Render
             'id' => 'wpm_submit_button',
         );
         $template = (new Buttons())->getButton();
-        $enableName= ArrayHelper::get($template, 'enableName') == 'yes' ? true : false;
-        $enableEmail = ArrayHelper::get($template, 'enableEmail') == 'yes' ? true : false;
-        $enableMsg = ArrayHelper::get($template, 'enableMessage') == 'yes' ? true : false;
-        $defaultAmount = intval(ArrayHelper::get($template, 'defaultAmount', '5'));
+        $enableName= Arr::get($template, 'enableName') == 'yes' ? true : false;
+        $enableEmail = Arr::get($template, 'enableEmail') == 'yes' ? true : false;
+        $enableMsg = Arr::get($template, 'enableMessage') == 'yes' ? true : false;
+        $defaultAmount = intval(Arr::get($template, 'defaultAmount', '5'));
 
-        $currency = ArrayHelper::get($template, 'currency', 'USD');
+        $currency = Arr::get($template, 'currency', 'USD');
         $symbool = PaymentHelper::currencySymbol();
 
         ob_start();
@@ -224,10 +225,17 @@ class Render
 
     public static function payMethod($template)
     {
-        $methods = ArrayHelper::get($template, 'methods');
+        $methods = PaymentHandler::getAllMethods();
+        $hasActiveMethod = false;
 
         foreach ($methods as $method) {
-            do_action( 'wpm_buymecoffee_render_component_' . $method, $template );
+            if (isset($method['status']) && $method['status'] == 'yes'){
+                $hasActiveMethod = true;
+                do_action( 'wpm_buymecoffee_render_component_' . $method['route'], $template );
+            }
+        }
+        if (!$hasActiveMethod) {
+            return '<p style="color:#fb7373; font-size:16px;">Please active at least one payment method!</p>';
         }
     }
 

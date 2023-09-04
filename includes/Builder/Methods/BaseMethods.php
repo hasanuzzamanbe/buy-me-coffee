@@ -34,6 +34,7 @@ abstract class BaseMethods
             'route' => $this->method,
             'description' => $this->description,
             'image' => $this->image,
+            "status" => $this->isEnabled(),
         );
         return static::$methods;
     }
@@ -42,6 +43,8 @@ abstract class BaseMethods
     {
         add_action('wpm_buymecoffee_render_component_' . $method, array($this, 'render'), 10, 1);
     }
+
+    abstract public function isEnabled();
 
     public function getMode()
     {
