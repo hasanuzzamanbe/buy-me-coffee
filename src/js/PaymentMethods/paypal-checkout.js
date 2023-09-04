@@ -36,7 +36,7 @@ class PaypalCheckout {
       })
       .render(paypalButtonContainer[0])
 
-    this.form.find('#wpm_buymecoffee_order_btn').hide()
+    this.form.find('#wpm_bmc_order_btn').hide()
 
     jQuery('.wpm_bmc_pay_methods')?.parent().append(paypalButtonContainer)
   }

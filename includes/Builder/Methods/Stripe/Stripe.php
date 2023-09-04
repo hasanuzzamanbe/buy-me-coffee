@@ -14,7 +14,7 @@ class Stripe extends BaseMethods
             BUYMECOFFEE_URL . 'assets/images/credit-card.png'
         );
 
-        add_action('wpm_buymecoffee_make_payment_stripe' , array( $this , 'makePayment' ) , 10 , 3);
+        add_action('wpm_bmc_make_payment_stripe' , array( $this , 'makePayment' ) , 10 , 3);
     }
 
     public function makePayment($transactionId, $entryId, $form_data)

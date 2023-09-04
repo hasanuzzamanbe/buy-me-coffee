@@ -1,12 +1,12 @@
 class BmcFormHandler {
     constructor(form, config) {
         this.form = form;
-        this.selector = '.wpm_buymecoffee_form';
+        this.selector = '.wpm_bmc_form';
         this.customQuantity = false;
         this.config = config;
         this.paymentMethod = '';
         this.generalConfig = window.wp_payform_general;
-        this.$formNoticeWrapper = form.parent().find('.wpm_buymecoffee_form_notices');
+        this.$formNoticeWrapper = form.parent().find('.wpm_bmc_form_notices');
     }
 
     $t(stringKey) {
@@ -18,11 +18,11 @@ class BmcFormHandler {
 
     initForm() {
         // Hooks To get third party payment handler
-        this.form.trigger('wpm_buymecoffee_single', [this, this.config]);
+        this.form.trigger('wpm_bmc_single', [this, this.config]);
 
         // Init Calculate Payments and on change re-calculate
         this.calculatePayments();
-        this.form.find('.wpm_buymecoffee_payment, .bmc_coffee input[type="radio"]').on('change', (e) => {
+        this.form.find('.wpm_bmc_payment, .bmc_coffee input[type="radio"]').on('change', (e) => {
             this.calculatePayments();
         });
 
@@ -60,8 +60,8 @@ class BmcFormHandler {
             form.addClass('wpm_submitting_form');
             form.parent().find('.wpm_form_notices').hide();
 
-            jQuery.post(window.wpm_buymecoffee_general.ajax_url, {
-                action: 'wpm_buymecoffee_submit',
+            jQuery.post(window.wpm_bmc_general.ajax_url, {
+                action: 'wpm_bmc_submit',
                 payment_total: form.data('wpm_payment_total'),
                 coffee_count: form.data('coffee_count'),
                 payment_method: form.data('wpm_selected_payment_method'),
@@ -123,8 +123,8 @@ class BmcFormHandler {
     }
 
     calculatePayments() {
-        let amount = this.form.find('.wpm_buymecoffee_payment').first().val();
-        let quantity = this.form.data('coffee_count');
+        let amount = this.form.find('.wpm_bmc_payment').first().val();
+        let quantity = this.form.data('coffee_count') ? this.form.data('coffee_count') : 1;
         let amountCents = parseInt(parseFloat(amount) * 100 * quantity);
         this.form.data('wpm_payment_total', amountCents);
         //set total

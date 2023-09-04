@@ -23,7 +23,7 @@ abstract class BaseMethods
 
         add_filter('wpm_bmc_before_save_' . $this->method, array($this, 'sanitize'), 10, 2);
 
-        add_filter('wpm_buymecoffee_get_all_methods', array($this, 'getAllMethods'), 10, 1);
+        add_filter('wpm_bmc_get_all_methods', array($this, 'getAllMethods'), 10, 1);
 
     }
 
@@ -41,7 +41,7 @@ abstract class BaseMethods
 
     public function registerHooks($method)
     {
-        add_action('wpm_buymecoffee_render_component_' . $method, array($this, 'render'), 10, 1);
+        add_action('wpm_bmc_render_component_' . $method, array($this, 'render'), 10, 1);
     }
 
     abstract public function isEnabled();

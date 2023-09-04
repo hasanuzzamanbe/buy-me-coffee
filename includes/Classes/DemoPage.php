@@ -14,7 +14,7 @@ class DemoPage
 
     public function loadTemplateStyles()
     {
-        wp_enqueue_style('wpm_buymecoffee_template_style', BUYMECOFFEE_URL . 'assets/css/BasicTemplate.css', array(), BUYMECOFFEE_VERSION);
+        wp_enqueue_style('wpm_bmc_template_style', BUYMECOFFEE_URL . 'assets/css/BasicTemplate.css', array(), BUYMECOFFEE_VERSION);
     }
 
     public function renderFormOnly()

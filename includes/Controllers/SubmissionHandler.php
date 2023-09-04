@@ -43,14 +43,14 @@ class SubmissionHandler
             'updated_at' => current_time('mysql'),
         );
 
-        $entries = apply_filters('wpm_buymecoffee_supporter_entries', $entries);
+        $entries = apply_filters('wpm_bmc_supporter_entries', $entries);
 
-        do_action('wpm_buymecoffee_BEFORE_supporters_data_insert', $entries);
+        do_action('wpm_bmc_BEFORE_supporters_data_insert', $entries);
 
         // DO ENTRIES INSERT
         $entryId = wpmBmcDB()->table('wpm_bmc_supporters')->insert($entries);
 
-        do_action('wpm_buymecoffee_after_supporters_data_insert', $entries);
+        do_action('wpm_bmc_after_supporters_data_insert', $entries);
 
         $transaction = array(
             'entry_hash' => sanitize_text_field($hash),
@@ -67,7 +67,7 @@ class SubmissionHandler
         $transactionId = wpmBmcDB()->table('wpm_bmc_transactions')->insert($transaction);
 
         if ($paymentTotal > 0) {
-            do_action( 'wpm_buymecoffee_make_payment_' . $paymentMethod, $transactionId, $entryId, $form_data);
+            do_action( 'wpm_bmc_make_payment_' . $paymentMethod, $transactionId, $entryId, $form_data);
         }
 
         wp_send_json_success(array(

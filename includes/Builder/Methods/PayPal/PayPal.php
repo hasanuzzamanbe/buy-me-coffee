@@ -16,7 +16,7 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
             'PayPal is the faster, safer way to send money, make an online payment, receive money or set up a merchant account.',
             BUYMECOFFEE_URL. 'assets/images/paypal.png'
         );
-        add_action( 'wpm_buymecoffee_make_payment_paypal' , array( $this , 'makePayment' ) , 10 , 3);
+        add_action( 'wpm_bmc_make_payment_paypal' , array( $this , 'makePayment' ) , 10 , 3);
         add_action('init', array($this, 'ipnVerification'));
         add_action('wpm_bmc_paypal_action_web_accept', array($this, 'updateStatus'), 10, 2);
     }
@@ -101,7 +101,7 @@ use buyMeCoffee\Builder\Methods\BaseMethods;
              ])
          ];
 
-         return apply_filters('wpm_buymecoffee_paypal_modal_payment_intent', $intent, $transactions);
+         return apply_filters('wpm_bmc_paypal_modal_payment_intent', $intent, $transactions);
      }
 
     public function makePayment($transactionId, $entryId, $form_data)

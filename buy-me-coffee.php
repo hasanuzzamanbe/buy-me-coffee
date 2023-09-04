@@ -95,9 +95,9 @@ if (!defined('BUYMECOFFEE_VERSION')) {
         {
             wp_enqueue_style('buymecoffee', BUYMECOFFEE_URL . 'assets/css/public-style.css', array(), BUYMECOFFEE_VERSION);
             wp_enqueue_script('buymecoffee', BUYMECOFFEE_URL . 'assets/js/BmcPublic.js', array('jquery'), BUYMECOFFEE_VERSION, true);
-            wp_localize_script('buymecoffee', 'wpm_buymecoffee', array(
+            wp_localize_script('buymecoffee', 'wpm_bmc', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
-                'nonce' => wp_create_nonce('wpm_buymecoffee_nonce'),
+                'nonce' => wp_create_nonce('wpm_bmc_nonce'),
             ));
         }
 
@@ -114,8 +114,8 @@ if (!defined('BUYMECOFFEE_VERSION')) {
 
             // Submission Handler
             $submissionHandler = new \buyMeCoffee\Controllers\SubmissionHandler();
-            add_action('wp_ajax_wpm_buymecoffee_submit', array($submissionHandler, 'handleSubmission'));
-            add_action('wp_ajax_nopriv_wpm_buymecoffee_submit', array($submissionHandler, 'handleSubmission'));
+            add_action('wp_ajax_wpm_bmc_submit', array($submissionHandler, 'handleSubmission'));
+            add_action('wp_ajax_nopriv_wpm_bmc_submit', array($submissionHandler, 'handleSubmission'));
         }
 
         public function textDomain()

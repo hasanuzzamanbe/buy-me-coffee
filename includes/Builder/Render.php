@@ -123,7 +123,7 @@ class Render
 
         ob_start();
         ?>
-        <form class="wpm_buymecoffee_form" data-wpm_currency="<?php echo esc_html_e($currency) ;?>">
+        <form class="wpm_bmc_form" data-wpm_currency="<?php echo esc_html_e($currency) ;?>">
             <div class="wpm_bmc_payment_item">
                 <div class="wpm_bmc_input_content">
                     <div class="wpm_bmc_coffee_selector">
@@ -150,7 +150,7 @@ class Render
                 <div class="wpm_bmc_input_content">
                     <div style="display: flex;">
                         <span class="wpm_bmc_currency_prefix"><?php echo esc_html($symbool);?></span>
-                        <input type="number" class="wpm_buymecoffee_payment"
+                        <input type="number" class="wpm_bmc_payment"
                             style="
                                 border-top-left-radius: 0px;
                                 border-bottom-left-radius: 0px;
@@ -216,7 +216,7 @@ class Render
                     </button>
                 </div>
             </div>
-            <p class="wpm_buymecoffee_no_signup">No signup required</p>
+            <p class="wpm_bmc_no_signup">No signup required</p>
         </form>
         <?php
         $content = ob_get_clean();
@@ -231,7 +231,7 @@ class Render
         foreach ($methods as $method) {
             if (isset($method['status']) && $method['status'] == 'yes'){
                 $hasActiveMethod = true;
-                do_action( 'wpm_buymecoffee_render_component_' . $method['route'], $template );
+                do_action( 'wpm_bmc_render_component_' . $method['route'], $template );
             }
         }
         if (!$hasActiveMethod) {
@@ -241,9 +241,9 @@ class Render
 
     public static function addAssets()
     {
-        wp_enqueue_style('wpm_buymecoffee_css', BUYMECOFFEE_URL . 'assets/css/public-style.css', array(), BUYMECOFFEE_VERSION);
-        wp_enqueue_script('wpm_buymecoffee', BUYMECOFFEE_URL . 'assets/js/BmcPublic.js', array('jquery'), BUYMECOFFEE_VERSION, true);
-        wp_localize_script('wpm_buymecoffee', 'wpm_buymecoffee_general', array(
+        wp_enqueue_style('wpm_bmc_css', BUYMECOFFEE_URL . 'assets/css/public-style.css', array(), BUYMECOFFEE_VERSION);
+        wp_enqueue_script('wpm_bmc', BUYMECOFFEE_URL . 'assets/js/BmcPublic.js', array('jquery'), BUYMECOFFEE_VERSION, true);
+        wp_localize_script('wpm_bmc', 'wpm_bmc_general', array(
             'ajax_url'  => admin_url('admin-ajax.php')
         ));
     }
