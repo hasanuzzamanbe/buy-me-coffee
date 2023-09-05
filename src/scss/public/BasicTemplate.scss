@@ -40,10 +40,12 @@ span.buymecoffee_form_to {
 
 .buymecoffee_form_preview_wrapper {
     max-width: 400px;
-    background: #e1f6ff;
+    min-width: 370px;
+    //background: #e1f6ff;
+    box-shadow: 1px 2px 7px #ccc;
     width: 70%;
     border: 1px solid #f4f4f4;
-    padding: 0px 18px;
+    padding: 0 18px;
     border-radius: 8px;
 }
 
