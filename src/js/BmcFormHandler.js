@@ -10,7 +10,7 @@ class BmcFormHandler {
     }
 
     $t(stringKey) {
-        if(this.generalConfig.i18n[stringKey]) {
+        if (this.generalConfig.i18n[stringKey]) {
             return this.generalConfig.i18n[stringKey];
         }
         return '';
@@ -123,7 +123,7 @@ class BmcFormHandler {
     }
 
     calculatePayments() {
-        let amount = this.form.find('.wpm_bmc_payment').first().val();
+        let amount = this.form.find('.wpm_bmc_payment').val();
         let quantity = this.form.data('coffee_count') ? this.form.data('coffee_count') : 1;
         let amountCents = parseInt(parseFloat(amount) * 100 * quantity);
         this.form.data('wpm_payment_total', amountCents);

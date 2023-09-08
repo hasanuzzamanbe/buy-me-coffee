@@ -29,7 +29,7 @@ abstract class BaseMethods
 
     public function getAllMethods()
     {
-        static::$methods[] = array(
+        static::$methods[$this->method] = array(
             'title' => $this->title,
             'route' => $this->method,
             'description' => $this->description,

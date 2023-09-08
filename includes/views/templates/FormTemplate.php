@@ -14,12 +14,16 @@
     <div class="buymecoffee_preview_body">
         <?php
             include WPM_BMC_DIR . 'includes/views/templates/FormSection.php';
+
+        if ($quote):
         ?>
         <div class="buymecoffee_your_content_wrapper">
             <div class="buymecoffee_your_content">
                 <div class="buymecoffee_your_content_title">
                     <div style="margin-bottom:23px;">
-                        <h4 class="bmc_appreciation_title">Thanks for your appreciation.</h4>
+                        <blockquote>
+                        <h4 class="bmc_appreciation_title"><?php echo esc_html($quote);?></h4>
+                        </blockquote>
                     </div>
                 </div>
                 <div class="buymecoffee_your_content_body">
@@ -27,5 +31,6 @@
                 </div>
             </div>
         </div>
+        <?php endif;?>
     </div>
 </div>

@@ -23,7 +23,7 @@ class Render
         $fontSize = Arr::get($template, 'advanced.fontSize');
         $radius = Arr::get($template, 'advanced.radius');
 
-        $paymentPageUrl = site_url('?appreciate-your-support-bmc=1');
+        $paymentPageUrl = site_url('?coffee-treet=1');
         $openMode = Arr::get($template, 'openMode');
 
         $styling = "<style>.wpm-buymecoffee-container .wpm-buymecoffee-button{

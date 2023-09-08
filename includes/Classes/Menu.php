@@ -97,7 +97,7 @@ class Menu
             //'image_upload_url' => admin_url('admin-ajax.php?action=wpf_global_settings_handler&route=wpf_upload_image'),
             'assets_url' => WPM_BMC_URL . 'assets/',
             'ajaxurl' => admin_url('admin-ajax.php'),
-            'preview_url' => site_url('?appreciate-your-support-bmc=1')
+            'preview_url' => site_url('?coffee-treet=1')
             // site_url('?buymecoffee_preview=button')
         ));
 

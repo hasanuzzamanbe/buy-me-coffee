@@ -109,12 +109,26 @@ class AdminAjaxHandler
 
     public function saveSettings()
     {
-        update_option('wpm_bmc_payment_setting', $_REQUEST['settings'], false);
-        do_action('wpm_bmc_after_save_template', $_REQUEST['settings']);
+        $settings = $_REQUEST['settings'] ?: array();
+
+        $data = $this->sanitizeTextArray($settings);
+        update_option('wpm_bmc_payment_setting', $data, false);
+        do_action('wpm_bmc_after_save_template', $data);
 
         wp_send_json_success(array(
             'message' => __("Settings successfully updated", 'buy-me-coffee')
         ), 200);
+    }
+
+    public function sanitizeTextArray($data)
+    {
+        foreach ($data as $key => $value) {
+            if (is_array($value)){
+                $this->sanitizeTextArray($value);
+            }
+            $data[$key] = sanitize_text_field($value);
+        }
+        return $data;
     }
 
     public function getSettings()

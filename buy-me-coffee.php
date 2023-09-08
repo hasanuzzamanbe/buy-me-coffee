@@ -89,6 +89,8 @@ if (!defined('WPM_BMC_VERSION')) {
             $demoPage = new \BuyMeCoffee\Classes\DemoPage();
             add_shortcode('buymecoffee_form', [$demoPage, 'renderFormOnly']);
 
+            add_shortcode('buymecoffee_basic', [$demoPage, 'renderBasicTemplate']);
+
         }
 
         public function addAssets()

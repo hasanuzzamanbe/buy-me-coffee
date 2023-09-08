@@ -13,11 +13,8 @@ class Buttons
                 "enableName" => 'yes',
                 "enableEmail" => 'no',
                 "defaultAmount" => '5',
-                "openMode" => 'modal',
+                "openMode" => 'page',
                 "currency" => 'USD',
-                "methods" => [
-                    'stripe', 'paypal'
-                ],
                 "advanced" => array (
                     "enable" => 'yes',
                     "bgColor" => 'rgba(250, 212, 0, 1)',
@@ -26,7 +23,8 @@ class Buttons
                     "textAlign" => 'center',
                     "minHeight" => '43',
                     "fontSize" => 21,
-                    "radius" => 4
+                    "radius" => 4,
+                    "quote" => 'Helping hands work together to accomplish great things.',
                 )
         );
 

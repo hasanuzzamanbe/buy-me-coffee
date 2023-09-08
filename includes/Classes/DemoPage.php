@@ -3,6 +3,7 @@
 namespace BuyMeCoffee\Classes;
 
 use BuyMeCoffee\Classes\View;
+use BuyMeCoffee\Helpers\ArrayHelper;
 use \BuyMeCoffee\Models\Buttons;
 
 class DemoPage
@@ -33,8 +34,8 @@ class DemoPage
             // oxygen page compatibility
             remove_action('wp_head', 'oxy_print_cached_css', 999999);
         }
-        if (isset($_GET['appreciate-your-support-bmc']) && $_GET['appreciate-your-support-bmc'] === '1') {
-            $this->renderBasicTemplate($type = 'page');
+        if (isset($_GET['coffee-treet']) && $_GET['coffee-treet'] === '1') {
+            $this->renderBasicTemplate('page');
         }
     }
 
@@ -45,26 +46,28 @@ class DemoPage
         $btnController = new Buttons();
         $template = $btnController->getButton();
 
-        echo View::make('templates.FormTemplate', [
+        echo View::make('templates.FormShortCode', [
             'type' => '',
             'template' => $template,
         ]);
     }
-    public function renderBasicTemplate($type = '')
+
+    public function renderBasicTemplate($type)
     {
-        wp_enqueue_style('dashicons');
-        $this->loadDefaultPageTemplate();
-        $this->loadTemplateStyles();
+        if (is_page() || $type === 'page') {
+            wp_enqueue_style('dashicons');
+            $this->loadDefaultPageTemplate();
+            $this->loadTemplateStyles();
 
-        $btnController = new Buttons();
-        $template = $btnController->getButton();
+            $btnController = new Buttons();
+            $template = $btnController->getButton();
 
-        echo View::make('templates.BasicTemplate', [
-            'type' => 'button',
-            'template' => $template,
-        ]);
-
-        if ($type === 'page') {
+            $quote = ArrayHelper::get($template, 'advanced.quote', false);
+            echo View::make('templates.BasicTemplate', [
+                'type' => 'button',
+                'template' => $template,
+                'quote' => $quote,
+            ]);
             exit();
         }
     }

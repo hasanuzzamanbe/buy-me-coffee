@@ -76,6 +76,12 @@ form.wpm_submitting_form {
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
+  .buymecoffee_form_preview_wrapper {
+    margin: 0 auto;
+    box-shadow: none !important;
+    border: none !important;
+    padding-top: 32px;
+  }
 }
 
 .bmc_modal_content {

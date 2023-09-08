@@ -17,6 +17,8 @@
                                     <el-tab-pane label="General">
                                       <el-form-item label="You Name">
                                         <el-input size="small" type="text" v-model="template.yourName"></el-input>
+                                        <span style="font-style: italic; font-size: 13px; color: #929292; line-height: 1.6em;">
+                                          Also you can use data params Ex: https://page-link&<code>for=John</code></span>
                                       </el-form-item>
                                         <el-form-item label="Button text">
                                             <el-input size="small" type="text" v-model="template.buttonText"></el-input>
@@ -49,7 +51,7 @@
                                           </el-select>
                                         </el-form-item>
                                     </el-tab-pane>
-                                    <el-tab-pane label="Styles">
+                                    <el-tab-pane label="Template Settings">
                                                 <el-form-item label="Button color">
                                                     <el-color-picker
                                                         size="small"
@@ -75,12 +77,21 @@
                                                         >
                                                     </el-input>
                                                 </el-form-item>
-                                                <el-form-item label="Button click action">
-                                                  <el-radio-group v-model="template.openMode">
-                                                    <el-radio label="modal">Modal (recommended)</el-radio>
-                                                    <el-radio label="page">Open in Page</el-radio>
-                                                  </el-radio-group>
+                                                <el-form-item label="Your Quotes">
+                                                    <el-input
+                                                        type="textarea"
+                                                        size="small"
+                                                        v-model="template.advanced.quote"
+                                                        >
+                                                    </el-input>
                                                 </el-form-item>
+<!--                                      will add modal-->
+<!--                                                <el-form-item label="Button click action">-->
+<!--                                                  <el-radio-group v-model="template.openMode">-->
+<!--                                                    <el-radio label="modal">Modal (recommended)</el-radio>-->
+<!--                                                    <el-radio label="page">Open in Page</el-radio>-->
+<!--                                                  </el-radio-group>-->
+<!--                                                </el-form-item>-->
                                     </el-tab-pane>
                                     <div>
                                       <el-popconfirm @confirm="resetDefault" title="Are you sure to reset to default settings?">
@@ -141,7 +152,6 @@
                                         </code>
                                     </el-tooltip>
                                 </div>
-                                <br/>
                               <div>
                                 <h4>Form:</h4>
                                 <el-tooltip effect="dark"
@@ -155,8 +165,21 @@
                                   </code>
                                 </el-tooltip>
                               </div>
+                              <div>
+                                <h4>Form with template (recomended):</h4>
+                                <el-tooltip effect="dark"
+                                            content="Click to copy shortcode"
+                                            title="Click to copy shortcode"
+                                            placement="top">
+                                  <code class="copy"
+                                        data-clipboard-action="copy"
+                                        data-clipboard-text='[buymecoffee_basic]'>
+                                    <i class="el-icon-document"></i> [buymecoffee_basic]
+                                  </code>
+                                </el-tooltip>
+                              </div>
                                 <div>
-                                    <h4>Page with designed template(recomended):</h4>
+                                    <h4>Page with designed template:</h4>
                                     <el-tooltip effect="dark"
                                         content="Click to copy shortcode"
                                         title="Click to copy shortcode"
