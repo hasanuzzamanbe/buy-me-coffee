@@ -90,7 +90,7 @@ class Render
             'data-required' => 'no',
             'data-type' => 'email',
             'name' => 'wpm-supporter-email',
-            'placeholder' => 'example@domain.com',
+            'placeholder' => 'example@domain.com (optional)',
             'class' => 'wpm-supporter-email',
             'id' => 'wpm-supporter-email',
         );
@@ -99,7 +99,7 @@ class Render
             'data-required' => 'yes',
             'data-type' => 'textarea',
             'name' => 'wpm-supporter-message',
-            'placeholder' => 'Love to hear from you!',
+            'placeholder' => 'Love to hear from you! (optional)',
             'class' => 'wpm-supporter-message',
             'id' => 'wpm-supporter-message',
         );

@@ -113,7 +113,7 @@
                         </el-col >
                         <el-col :md="24" :lg="12" class="wpm-btm-preview" style="background: #fff;padding: 24px;">
                             <div>
-                                <h3>Preview Button style</h3>
+                                <h3>Preview Button Style</h3>
                                 <button
                                     style="cursor: pointer;"
                                     :style="{'background-color': template.advanced.bgColor,
@@ -138,7 +138,7 @@
                                 Or use the URL bellow to get collect payments from your supporters</p>
                               <br/>
                                 <img :src="fullPath('blocks.jpeg')" alt="Block editor" style="width: 100%;opacity: 0.4;"/>
-                              <h3>Available ShortCodes:</h3>
+                              <h4>Or Use ShortCodes:</h4>
                                 <div style="display:flex; align-items: center;">
                                   <p>Button ShortCode:</p>
                                   <div>
@@ -170,7 +170,7 @@
                                 </div>
                               </div>
                               <div style="display:flex; align-items: center;">
-                                <p>Form with template (recomended):</p>
+                                <p>Form With Template:</p>
                                <div>
                                  <el-tooltip effect="dark"
                                              content="Click to copy shortcode"
