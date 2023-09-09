@@ -123,10 +123,13 @@ class AdminAjaxHandler
     public function sanitizeTextArray($data)
     {
         foreach ($data as $key => $value) {
-            if (is_array($value)){
-                $this->sanitizeTextArray($value);
+            if (is_array($value)) {
+                foreach ($value as $k => $v) {
+                    $data[$key][$k] = sanitize_text_field($v);
+                }
+            } else {
+                $data[$key] = sanitize_text_field($value);
             }
-            $data[$key] = sanitize_text_field($value);
         }
         return $data;
     }

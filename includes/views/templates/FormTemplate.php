@@ -22,7 +22,7 @@
                 <div class="buymecoffee_your_content_title">
                     <div style="margin-bottom:23px;">
                         <blockquote>
-                        <h4 class="bmc_appreciation_title"><?php echo esc_html($quote);?></h4>
+                        <p class="bmc_appreciation_title"><?php echo esc_html($quote);?></p>
                         </blockquote>
                     </div>
                 </div>

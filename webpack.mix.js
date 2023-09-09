@@ -41,3 +41,6 @@ mix
     .sass('src/scss/admin/app.scss', 'assets/css/element.css')
     .sass('src/scss/public/BasicTemplate.scss', 'assets/css/BasicTemplate.css')
     .sass('src/scss/public/public-style.scss', 'assets/css/public-style.css');
+
+
+mix.js('src/js/Editor/gutenBlock.js', 'assets/js/gutenBlock.js').react();

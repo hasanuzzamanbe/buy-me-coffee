@@ -48,6 +48,8 @@ if (!defined('WPM_BMC_VERSION')) {
                 $this->adminHooks();
             }
             $this->commonActions();
+            $this->textDomain();
+            $this->LoadEditorBlocks();
             $this->loadFiles();
             $this->registerShortcode();
         }
@@ -123,6 +125,16 @@ if (!defined('WPM_BMC_VERSION')) {
         public function textDomain()
         {
             load_plugin_textdomain('buy-me-coffee', false, basename(dirname(__FILE__)) . '/languages');
+        }
+
+        public function LoadEditorBlocks()
+        {
+            require WPM_BMC_DIR . 'includes/Builder/EditorBlocks/EditorBlocks.php';
+            ;
+            $pages_with_editor_button = array('post.php', 'post-new.php');
+            foreach ($pages_with_editor_button as $editor_page) {
+                add_action("load-{$editor_page}", array(new \BuyMeCoffee\Builder\EditorBlocks\EditorBlocks(), 'register'));
+            }
         }
     }
 

@@ -11,7 +11,7 @@
             <div class="wpm-template-inner">
                 <div class="wpm-bmc-editor">
                     <el-row :gutter="20">
-                        <el-col :md="24" :lg="12">
+                        <el-col :md="24" :lg="12" style="box-shadow: -2px 1px 4px #ccc;padding: 24px;">
                             <el-form label-position="left" label-width="140px" v-if="!fetching">
                                 <el-tabs>
                                     <el-tab-pane label="General">
@@ -110,8 +110,8 @@
                             <div v-else>
                               <el-skeleton :rows="5" />
                             </div>
-                        </el-col>
-                        <el-col :md="24" :lg="12" class="wpm-btm-preview">
+                        </el-col >
+                        <el-col :md="24" :lg="12" class="wpm-btm-preview" style="background: #fff;padding: 24px;">
                             <div>
                                 <h3>Preview Button style</h3>
                                 <button
@@ -132,15 +132,16 @@
                             </div>
                             <div class="wpm-btm-render-options">
                                 <br/>
-                                <br/>
+                              <h3>Embed:</h3>
+                              <i class="el-icon-info"></i>
+                              <p>Use Block editor or embed the shortcode on your posts/pages if you want to use the button above.
+                                Or use the URL bellow to get collect payments from your supporters</p>
+                              <br/>
+                                <img :src="fullPath('blocks.jpeg')" alt="Block editor" style="width: 100%;opacity: 0.4;"/>
                               <h3>Available ShortCodes:</h3>
-                              <p>
-                                <i class="el-icon-info"></i>
-                                You can embed the shortcode on your posts/pages if you want to use the button above.
-                                Or use the URL bellow to get collect payments from your supporters.
-                              </p>
-                              <h4>Button:</h4>
-                                <div>
+                                <div style="display:flex; align-items: center;">
+                                  <p>Button ShortCode:</p>
+                                  <div>
                                     <el-tooltip effect="dark"
                                         content="Click to copy shortcode"
                                         title="Click to copy shortcode"
@@ -151,45 +152,38 @@
                                             <i class="el-icon-document"></i> [buymecoffee_button]
                                         </code>
                                     </el-tooltip>
+                                  </div>
                                 </div>
-                              <div>
-                                <h4>Form:</h4>
-                                <el-tooltip effect="dark"
-                                            content="Click to copy shortcode"
-                                            title="Click to copy shortcode"
-                                            placement="top">
-                                  <code class="copy"
-                                        data-clipboard-action="copy"
-                                        data-clipboard-text='[buymecoffee_form]'>
-                                    <i class="el-icon-document"></i> [buymecoffee_form]
-                                  </code>
-                                </el-tooltip>
-                              </div>
-                              <div>
-                                <h4>Form with template (recomended):</h4>
-                                <el-tooltip effect="dark"
-                                            content="Click to copy shortcode"
-                                            title="Click to copy shortcode"
-                                            placement="top">
-                                  <code class="copy"
-                                        data-clipboard-action="copy"
-                                        data-clipboard-text='[buymecoffee_basic]'>
-                                    <i class="el-icon-document"></i> [buymecoffee_basic]
-                                  </code>
-                                </el-tooltip>
-                              </div>
+                              <div style="display:flex; align-items: center;">
+                                <p>Form ShortCode:</p>
                                 <div>
-                                    <h4>Page with designed template:</h4>
-                                    <el-tooltip effect="dark"
-                                        content="Click to copy shortcode"
-                                        title="Click to copy shortcode"
-                                        placement="top">
-                                        <code class="copy"
-                                                :data-clipboard-text='previewUrl'>
-                                            <i class="el-icon-document"></i> {{previewUrl}}
-                                        </code>
-                                    </el-tooltip>
+                                  <el-tooltip effect="dark"
+                                              content="Click to copy shortcode"
+                                              title="Click to copy shortcode"
+                                              placement="top">
+                                    <code class="copy"
+                                          data-clipboard-action="copy"
+                                          data-clipboard-text='[buymecoffee_form]'>
+                                      <i class="el-icon-document"></i> [buymecoffee_form]
+                                    </code>
+                                  </el-tooltip>
                                 </div>
+                              </div>
+                              <div style="display:flex; align-items: center;">
+                                <p>Form with template (recomended):</p>
+                               <div>
+                                 <el-tooltip effect="dark"
+                                             content="Click to copy shortcode"
+                                             title="Click to copy shortcode"
+                                             placement="top">
+                                   <code class="copy"
+                                         data-clipboard-action="copy"
+                                         data-clipboard-text='[buymecoffee_basic]'>
+                                     <i class="el-icon-document"></i> [buymecoffee_basic]
+                                   </code>
+                                 </el-tooltip>
+                               </div>
+                              </div>
                             </div>
                         </el-col>
                     </el-row>
@@ -209,16 +203,6 @@ export default {
             currencies: {},
             fetching: true,
             previewUrl: window.BuyMeCoffeeAdmin.preview_url,
-            methods: [
-                {
-                    name: 'PayPal',
-                    value: 'paypal'
-                },
-                {
-                    name: 'Stripe',
-                    value: 'stripe'
-                }
-            ],
             predefineColors: [
                 '#ff4500',
                 '#ff8c00',
@@ -253,6 +237,9 @@ export default {
                     this.fetching = false;
             });
 
+        },
+        fullPath(path) {
+          return window.BuyMeCoffeeAdmin.assets_url + 'images/' + path;
         },
         resetDefault() {
             this.saving = true;
