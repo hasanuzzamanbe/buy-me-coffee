@@ -1,5 +1,5 @@
 import Dashboard from './Components/Dashboard.vue';
-import Supporters from './Components/Supporters.vue';
+import Settings from './Components/Settings.vue';
 import PayPal from './Components/PayPal.vue';
 import Stripe from './Components/Stripe.vue';
 import Gateway from './Components/Gateway.vue';
@@ -9,19 +9,19 @@ import Supporter from "./Components/Supporter.vue";
 export default [
     {
         path: '/',
-        name: 'dashboard',
+        name: 'Dashboard',
         component: Dashboard,
         meta: {
             active: 'dashboard'
         }
     },
     {
-        path: '/supporters',
-        name: 'Supporters',
-        component: Supporters,
+        path: '/settings',
+        name: 'Settings',
+        component: Settings,
     },
     {
-        path: '/supporters/:id',
+        path: '/supporter/:id',
         name: 'Supporter',
         component: Supporter,
     },

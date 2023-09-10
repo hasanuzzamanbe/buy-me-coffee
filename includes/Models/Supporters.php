@@ -24,11 +24,27 @@ class Supporters
             $supporter->amount_formatted = PaymentHelper::getFormattedAmount($supporter->payment_total, $supporter->currency);
         }
 
+       $count = wpmBmcDB()->table('wpm_bmc_supporters')
+                ->select(wpmBmcDB()->raw('SUM(coffee_count) as total_coffee'))
+               ->first();
+
+        $currencyTotal = wpmBmcDB()->table('wpm_bmc_supporters')
+            ->groupBy('currency')
+            ->where('payment_status', 'paid')
+            ->select(wpmBmcDB()->raw('SUM(payment_total) as total_amount, currency'))
+            ->get();
+
         wp_send_json_success(
             array(
                 'supporters' => $supporters,
                 'total'     => $total,
-                'last_page' => $lastPage
+                'last_page' => $lastPage,
+                'reports' => array(
+                    'total_supporters' => $total ,
+                    'total_coffee' =>  $count->total_coffee,
+                    'currency_total' => $currencyTotal,
+//                    'total_received' =>
+                )
             ),
             200
         );

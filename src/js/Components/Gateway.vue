@@ -9,8 +9,9 @@
         </el-row>
         <el-row>
             <div v-for="(gateway, index) in gateways" :key="index" :offset="index > 0 ? 2 : 0">
-                <el-card :body-style="{ padding: '10px' }" style="width: 250px;margin-right:12px; border-radius: 20px;">
+                <el-card :body-style="{ padding: '10px' }" style="width: 250px;margin-right:12px; border-radius: 06px;">
                     <img :src="gateway.image"
+                          style="max-width: 100px;opacity: 0.6;"
                         class="image" />
                     <div style="padding: 14px">
                         <h3>{{ gateway.title }}</h3>

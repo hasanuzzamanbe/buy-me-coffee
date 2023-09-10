@@ -1,318 +1,186 @@
 <template>
-    <div class="wpm_bmc_main_container">
-        <el-row>
-            <el-col :span="12">
-                <h1 class="wpm_bmc_menu_title">Buy Me <CoffeeCup style="width:23px;"/>- Global settings</h1>
-            </el-col>
-            <el-col :span="12">
-            </el-col>
-        </el-row>
-        <el-row class="wpm-template" v-loading="saving">
-            <div class="wpm-template-inner">
-                <div class="wpm-bmc-editor">
-                    <el-row :gutter="20">
-                        <el-col :md="24" :lg="12" style="box-shadow: -2px 1px 4px #ccc;padding: 24px;">
-                            <el-form label-position="left" label-width="140px" v-if="!fetching">
-                                <el-tabs>
-                                    <el-tab-pane label="General">
-                                      <el-form-item label="You Name">
-                                        <el-input size="small" type="text" v-model="template.yourName"></el-input>
-                                        <span style="font-style: italic; font-size: 13px; color: #929292; line-height: 1.6em;">
-                                          Also you can use data params Ex: https://page-link&<code>for=John</code></span>
-                                      </el-form-item>
-                                        <el-form-item label="Button text">
-                                            <el-input size="small" type="text" v-model="template.buttonText"></el-input>
-                                        </el-form-item>
-                                        <el-form-item>
-                                            <el-checkbox true-label="yes" false-label="no" v-model="template.enableName">Collect name of supporter</el-checkbox>
-                                        </el-form-item>
-                                        <el-form-item>
-                                            <el-checkbox true-label="yes" false-label="no" v-model="template.enableEmail">Collect email of supporter</el-checkbox>
-                                        </el-form-item>
-                                        <el-form-item>
-                                            <el-checkbox true-label="yes" false-label="no" v-model="template.enableMessage">Enable message option when donate</el-checkbox>
-                                        </el-form-item>
-                                        <el-form-item label="Per coffee price">
-                                            <el-input type="number" v-model="template.defaultAmount"></el-input>
-                                        </el-form-item>
-<!--                                        <el-form-item label="Enable pay method">-->
-<!--                                                <el-checkbox-group v-model="template.methods">-->
-<!--                                                <el-checkbox v-for="method in methods" :key="method.value" :label="method.name"></el-checkbox>-->
-<!--                                            </el-checkbox-group>-->
-<!--                                        </el-form-item>-->
-                                        <el-form-item label="Currency">
-                                          <el-select filterable v-model="template.currency" placeholder="Select Currency">
-                                            <el-option
-                                                v-for="(currencyName, currenyKey) in currencies"
-                                                :key="currenyKey"
-                                                :label="currencyName"
-                                                :value="currenyKey">
-                                            </el-option>
-                                          </el-select>
-                                        </el-form-item>
-                                    </el-tab-pane>
-                                    <el-tab-pane label="Template Settings">
-                                                <el-form-item label="Button color">
-                                                    <el-color-picker
-                                                        size="small"
-                                                        @active-change="changeBgColor"
-                                                        v-model="template.advanced.bgColor"
-                                                        show-alpha
-                                                        :predefine="predefineColors">
-                                                    </el-color-picker>
-                                                </el-form-item>
-                                                    <el-form-item label="Button Text color">
-                                                    <el-color-picker
-                                                        size="small"
-                                                        @active-change="changeFontColor"
-                                                        v-model="template.advanced.color"
-                                                        show-alpha
-                                                        :predefine="predefineColors">
-                                                    </el-color-picker>
-                                                </el-form-item>
-                                                    <el-form-item label="Button Radius(px)">
-                                                    <el-input
-                                                        style="width:50%"
-                                                        type="number"
-                                                        size="small"
-                                                        v-model="template.advanced.radius"
-                                                        >
-                                                    </el-input>
-                                                </el-form-item>
-                                                <el-form-item label="Your Quotes">
-                                                    <el-input
-                                                        type="textarea"
-                                                        size="small"
-                                                        v-model="template.advanced.quote"
-                                                        >
-                                                    </el-input>
-                                                </el-form-item>
-<!--                                      will add modal-->
-<!--                                                <el-form-item label="Button click action">-->
-<!--                                                  <el-radio-group v-model="template.openMode">-->
-<!--                                                    <el-radio label="modal">Modal (recommended)</el-radio>-->
-<!--                                                    <el-radio label="page">Open in Page</el-radio>-->
-<!--                                                  </el-radio-group>-->
-<!--                                                </el-form-item>-->
-                                    </el-tab-pane>
-                                    <div>
-                                      <el-popconfirm @confirm="resetDefault" title="Are you sure to reset to default settings?">
-                                        <template #reference>
-                                          <el-button plain style="margin-top:12px;" type="warning" size="default">
-                                            Reset Default
-                                          </el-button>
-                                        </template>
-                                      </el-popconfirm>
-                                        <el-button plain style="margin-top:12px;" @click="saveTemplates" type="success" size="default">
-                                            Save Settings
-                                        </el-button>
-                                    </div>
-                                </el-tabs>
-                            </el-form>
-                            <div v-else>
-                              <el-skeleton :rows="5" />
-                            </div>
-                        </el-col >
-                        <el-col :md="24" :lg="12" class="wpm-btm-preview" style="background: #fff;padding: 24px;">
-                          <h3>Preview Button Style</h3>
-                          <div style="display: flex;">
-                                <button
-                                    style="cursor: pointer;"
-                                    :style="{'background-color': template.advanced.bgColor,
-                                            'color': template.advanced.color,
-                                            'border-radius': template.advanced.radius + 'px',
-                                            'padding': '8px 20px',
-                                            'border' : 'none',
-                                            'height' : '50px',
-                                            'font-size': template.advanced.fontSize + 'px',
-                                        }"
-                                    size="default"
-                                    @click="previewButton"
-                                    >
-                                    {{template.buttonText}}
-                                </button>
-                            </div>
-                            <div class="wpm-btm-render-options">
-                                <br/>
-                              <h3>Embed:</h3>
-                              <i class="el-icon-info"></i>
-                              <p>Use Block editor or embed the shortcode on your posts/pages if you want to use the button above.
-                                Or use the URL bellow to get collect payments from your supporters</p>
-                              <br/>
-                                <img :src="fullPath('blocks.jpeg')" alt="Block editor" style="width: 100%;opacity: 0.4;"/>
-                              <h4>Or Use ShortCodes:</h4>
-                                <div style="display:flex; align-items: center;">
-                                  <p>Button ShortCode:</p>
-                                  <div>
-                                    <el-tooltip effect="dark"
-                                        content="Click to copy shortcode"
-                                        title="Click to copy shortcode"
-                                        placement="top">
-                                        <code class="copy"
-                                                data-clipboard-action="copy"
-                                                data-clipboard-text='[buymecoffee_button]'>
-                                            <i class="el-icon-document"></i> [buymecoffee_button]
-                                        </code>
-                                    </el-tooltip>
-                                  </div>
-                                </div>
-                              <div style="display:flex; align-items: center;">
-                                <p>Form ShortCode:</p>
-                                <div>
-                                  <el-tooltip effect="dark"
-                                              content="Click to copy shortcode"
-                                              title="Click to copy shortcode"
-                                              placement="top">
-                                    <code class="copy"
-                                          data-clipboard-action="copy"
-                                          data-clipboard-text='[buymecoffee_form]'>
-                                      <i class="el-icon-document"></i> [buymecoffee_form]
-                                    </code>
-                                  </el-tooltip>
-                                </div>
-                              </div>
-                              <div style="display:flex; align-items: center;">
-                                <p>Form With Template: </p>
-                               <div>
-                                 <el-tooltip effect="dark"
-                                             content="Click to copy shortcode"
-                                             title="Click to copy shortcode"
-                                             placement="top">
-                                   <code class="copy"
-                                         data-clipboard-action="copy"
-                                         data-clipboard-text='[buymecoffee_basic]'>
-                                     <i class="el-icon-document"></i> [buymecoffee_basic]
-                                   </code>
-                                 </el-tooltip>
-                               </div>
-                                <a style="margin-left:12px; color: #e88b0d;text-decoration: none;" :href="previewUrl" target="_blank">Preview</a>
-                              </div>
-                            </div>
-                        </el-col>
-                    </el-row>
-                </div>
-            </div>
-        </el-row>
-        <!-- example content end -->
+  <div class="wpm_bmc_main_container">
+    <Report :reportData='reportData'/>
+    <div class="bmc_coffee_preview">
+      <a :href="previewUrl" target="_blank"><el-icon style="margin-right:4px;">
+        <View/></el-icon> Preview Your Page</a>
     </div>
+    <div class="wpm_bmc_supporters">
+      <h1 class="wpm_bmc_menu_title">Supporters:</h1>
+      <el-table
+          :data="supporters"
+          style="width: 100%">
+        <el-table-column
+            width="180"
+            label="Date">
+          <template #default="scope">
+            <span>{{ scope.row.created_at }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+            prop="supporters_name"
+            width="180"
+            label="Name">
+          <template #default="scope">
+            <span>{{ scope.row.supporters_name }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+            label="Amount">
+          <template #default="scope">
+            <span v-html="scope.row.amount_formatted"></span>
+          </template>
+        </el-table-column>
+        <el-table-column
+            prop="payment_status"
+            label="Status">
+        </el-table-column>
+        <el-table-column
+            prop="payment_method"
+            label="Payment By">
+        </el-table-column>
+        <el-table-column
+            label="Mode">
+          <template #default="scope">
+            <span style="margin-left: 10px">{{ scope.row.payment_mode ? scope.row.payment_mode : '-' }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+            label="Operations">
+          <template #default="scope">
+            <el-button-group>
+              <el-button
+                  size="small"
+                  icon="View"
+                  @click="handleGet(scope.row.id)"></el-button>
+              <el-popconfirm @confirm="handleDelete(scope.row.id)" title="Are you sure to delete this?">
+                <template #reference>
+                  <el-button
+                      size="small"
+                      type="danger"
+                      icon="Delete">
+                  </el-button>
+                </template>
+              </el-popconfirm>
+            </el-button-group>
+          </template>
+        </el-table-column>
+      </el-table>
+      <br/>
+      <el-pagination
+          @current-change="handleSizeChange"
+          :page-size="posts_per_page"
+          background
+          layout="prev, pager, next"
+          :total="total">
+      </el-pagination>
+    </div>
+  </div>
 </template>
 <script>
-import ClipboardJS from 'clipboard';
+import Report from "./Report";
 import {View} from "@element-plus/icons-vue";
 export default {
-    name: 'Dashboard',
-  computed: {
-    View() {
-      return View
+  name: 'Dashboard',
+  components: {
+    Report,
+    View
+  },
+  data() {
+    return {
+      limit: 20,
+      posts_per_page: 10,
+      current: 0,
+      total: null,
+      supporters: [],
+      previewUrl : window.BuyMeCoffeeAdmin.preview_url,
+      reportData: {
+        total_supporters: this.total,
+        total_coffee: 0,
+        // total_amount: 0,
+        currency_total: {}
+      }
     }
   },
-    data(){
-        return {
-            saving: false,
-            currencies: {},
-            fetching: true,
-            previewUrl: window.BuyMeCoffeeAdmin.preview_url,
-            predefineColors: [
-                '#ff4500',
-                '#ff8c00',
-                '#ffd700',
-                '#90ee90',
-                '#00ced1',
-                '#1e90ff',
-                '#c71585',
-                'rgba(255, 69, 0, 0.68)',
-                'rgb(255, 120, 0)',
-                'hsv(51, 100, 98)',
-                'hsva(120, 40, 94, 0.5)',
-                'hsl(181, 100%, 37%)',
-                'hsla(209, 100%, 56%, 0.73)',
-                '#c7158577',
-                '#FFF',
-                '#000000',
-            ],
-            template: {
-                advanced: {
-
-                }
-            }
-        }
+  methods: {
+    handleSizeChange(val) {
+      this.current = val-1;
+      this.getSupporters();
     },
-    methods: {
-        changeBgColor(value) {
-            this.template.advanced.bgColor = value;
-        },
-        changeFontColor(value) {
-            this.template.advanced.color = value;
-        },
-        getSettings() {
-            this.$get({
-                    action: 'wpm_bmc_admin_ajax',
-                    route: 'get_settings'
-                }).then(res => {
-                    this.template = res.data.template;
-                    this.currencies = res.data.currencies;
-                    this.fetching = false;
-            });
+    getSupporters () {
+      this.$get({
+        action: 'wpm_bmc_admin_ajax',
+        route: 'get_supporters',
+        limit: this.limit,
+        page: this.current,
+        posts_per_page: this.posts_per_page,
+      })
+          .then((response) => {
+            this.supporters = response.data.supporters;
+            this.total = response.data.total;
+            this.reportData = response.data.reports;
+          })
+          .fail(error => {
+            this.$message.error(error.responseJSON.data.message);
+          })
+          .always(() => {
+            this.fetching = false;
+          });
 
-        },
-        fullPath(path) {
-          return window.BuyMeCoffeeAdmin.assets_url + 'images/' + path;
-        },
-        resetDefault() {
-            this.saving = true;
-                this.$post({
-                    action: 'wpm_bmc_admin_ajax',
-                    route: 'reset_template_settings'
-                })
-                    .then(response => {
-                        this.$handleSuccess(response.data.message);
-                        this.template = response.data.settings;
-                        this.saving = false;
-                    })
-                    .fail(error => {
-                        this.$message.error(error.responseJSON.data.message);
-                    })
-                    .always(() => {
-                        this.saving = false;
-                    });
-        },
-        saveTemplates() {
-            this.saving = true;
-                this.$post({
-                    action: 'wpm_bmc_admin_ajax',
-                    settings: this.template,
-                    route: 'save_settings'
-                })
-                    .then(response => {
-                        this.$handleSuccess(response.data.message);
-                        this.saving = false;
-                    })
-                    .fail(error => {
-                        console.log(error)
-                        // this.$message.error(error.responseJSON.data.message);
-                    })
-                    .always(() => {
-                        this.saving = false;
-                    });
-        },
-        previewButton(){
-            window.open(this.previewUrl);
-        },
     },
-    mounted() {
-        this.getSettings();
-        jQuery(document).ready(function($) {
-            var clipboard = new ClipboardJS('.copy');
-            clipboard.on('success', function(e) {
-                $(e.trigger).text("Copied!");
-                e.clearSelection();
-                //todo: add timeout to revert text
-                setTimeout(function() {
-                    $(e.trigger).text(e.text);
-                }, 1000);
-            });
-        });
+    handleGet(id) {
+      this.$router.push({ name: 'Supporter', params: { id: id } })
+    },
+    handleDelete(id) {
+      this.$post({
+        action: 'wpm_bmc_admin_ajax',
+        route: 'delete_supporter',
+        id: id
+      }).then(() => {
+        this.$handleSuccess('This record has been deleted.')
+        this.getSupporters();
+      }).catch((e) => {
+        this.$handleError(e)
+      })
     }
+  },
+  mounted() {
+    this.getSupporters();
+  }
 }
 </script>
+<style scoped lang="scss">
+.wpm_bmc_supporters {
+  background: #ebfffea3;
+  padding: 24px;
+  //margin-top: 24px;
+  border-radius: 6px;
+    tr, th {
+      background: #ebfffea3 !important;
+    }
+}
+.bmc_coffee_preview {
+  z-index: 999;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 10px 32px;
+  background: white;
+  font-size: 16px;
+  font-family: monospace;
+  box-shadow: -6px -3px 9px 4px #ccc;
+  border-top-left-radius: 8px;
+  border-right: 6px solid #4f94d4;
+}
+
+.bmc_coffee_preview a {
+  text-decoration: none;
+  color: #72aee6;
+}
+
+.bmc_coffee_preview a:hover{
+  text-decoration: none;
+  color: #ff8b46;
+}
+</style>
 

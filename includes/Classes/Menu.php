@@ -38,10 +38,10 @@ class Menu
             $menuPermission,
             'admin.php?page=buy-me-coffee.php#/',
         );
-        $submenu['buy-me-coffee.php']['supporters'] = array(
-            __('Supporters', 'buy-me-coffee'),
+        $submenu['buy-me-coffee.php']['settings'] = array(
+            __('Settings', 'buy-me-coffee'),
             $menuPermission,
-            'admin.php?page=buy-me-coffee.php#/supporters',
+            'admin.php?page=buy-me-coffee.php#/settings',
         );
         $submenu['buy-me-coffee.php']['gateways'] = array(
             __('Gateways', 'buy-me-coffee'),

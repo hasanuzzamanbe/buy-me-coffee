@@ -90,6 +90,23 @@ input::placeholder {
 
 .el-input__wrapper {
     padding: 0px !important;
+    input {
+        border: 1px solid #3f9eff;
+    }
+}
+
+.wpm_currency_select {
+    input {
+        border: none;
+        background: #fff;
+    }
+    .is-focus input{
+        border: none !important;
+        outline: none !important;
+    }
+    .el-input__wrapper {
+        border: 1px solid #3f9eff;
+    }
 }
 
 .wpm_bmc_payment_settings {

@@ -1,7 +1,7 @@
 <template>
   <div class="wpm_bmc_main_container">
     <h3 class="wpm_bmc_title">
-      <router-link style="text-decoration: none;" :to="{name: 'Supporters'}">Supporters / </router-link>Supporter:
+      <router-link style="text-decoration: none;" :to="{name: 'Dashboard'}">Supporters / </router-link>Supporter:
     </h3>
       <div class="customer-info">
         <p><span class="label">Created At:</span> <span id="created_at">{{supporter?.created_at}}</span></p>
@@ -29,6 +29,7 @@ export default {
     },
   methods: {
       getSupporter() {
+        console.log(this.$route)
         this.$get({
           action: 'wpm_bmc_admin_ajax',
           route: 'get_supporter',
