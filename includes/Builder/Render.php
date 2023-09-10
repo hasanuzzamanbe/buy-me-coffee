@@ -73,7 +73,7 @@ class Render
         return $content;
     }
 
-    public static function renderInputElements()
+    public static function renderInputElements($template = [])
     {
         static::addAssets();
 
@@ -112,7 +112,9 @@ class Render
             'class' => 'wpm_submit_button',
             'id' => 'wpm_submit_button',
         );
-        $template = (new Buttons())->getButton();
+        if (empty($template)) {
+            $template = (new Buttons())->getButton();
+        }
         $enableName= Arr::get($template, 'enableName') == 'yes' ? true : false;
         $enableEmail = Arr::get($template, 'enableEmail') == 'yes' ? true : false;
         $enableMsg = Arr::get($template, 'enableMessage') == 'yes' ? true : false;
@@ -124,6 +126,7 @@ class Render
         ob_start();
         ?>
         <form class="wpm_bmc_form" data-wpm_currency="<?php echo esc_html_e($currency) ;?>">
+            <input type="hidden" name="__buymecoffee_ref" value="<?php echo esc_html($template['yourName']); ?>"/>
             <div class="wpm_bmc_payment_item">
                 <div class="wpm_bmc_input_content">
                     <div class="wpm_bmc_coffee_selector">

@@ -64,6 +64,7 @@ class Activator
 				payment_mode varchar(255),
 				payment_method varchar(255),
 				status varchar(255),
+				reference varchar(50),
 				ip_address varchar (45),
 				other_infos longtext,
 				created_at timestamp NULL,

@@ -9,7 +9,7 @@
                 </h3>
             <div style="margin-bottom: 23px;">
                 <label>Enable Stripe Payment
-                    <el-switch active-value="yes" inactive-value="no" active-text="Enable stripe" v-model="settings.enable"></el-switch>
+                    <el-switch disabled active-value="yes" inactive-value="no" active-text="Enable stripe" v-model="settings.enable"></el-switch>
                 </label>
             </div>
             <div class="wpm_bmc_section_body" :class="settings.enable !== 'yes' ? 'payment-inactive' : ''">

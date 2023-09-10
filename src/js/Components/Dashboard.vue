@@ -55,6 +55,7 @@
                                                 <el-form-item label="Button color">
                                                     <el-color-picker
                                                         size="small"
+                                                        @active-change="changeBgColor"
                                                         v-model="template.advanced.bgColor"
                                                         show-alpha
                                                         :predefine="predefineColors">
@@ -63,6 +64,7 @@
                                                     <el-form-item label="Button Text color">
                                                     <el-color-picker
                                                         size="small"
+                                                        @active-change="changeFontColor"
                                                         v-model="template.advanced.color"
                                                         show-alpha
                                                         :predefine="predefineColors">
@@ -96,12 +98,12 @@
                                     <div>
                                       <el-popconfirm @confirm="resetDefault" title="Are you sure to reset to default settings?">
                                         <template #reference>
-                                          <el-button style="margin-top:12px;" type="danger" size="default">
+                                          <el-button plain style="margin-top:12px;" type="warning" size="default">
                                             Reset Default
                                           </el-button>
                                         </template>
                                       </el-popconfirm>
-                                        <el-button style="margin-top:12px;" @click="saveTemplates" type="primary" size="default">
+                                        <el-button plain style="margin-top:12px;" @click="saveTemplates" type="success" size="default">
                                             Save Settings
                                         </el-button>
                                     </div>
@@ -112,8 +114,8 @@
                             </div>
                         </el-col >
                         <el-col :md="24" :lg="12" class="wpm-btm-preview" style="background: #fff;padding: 24px;">
-                            <div>
-                                <h3>Preview Button Style</h3>
+                          <h3>Preview Button Style</h3>
+                          <div style="display: flex;">
                                 <button
                                     style="cursor: pointer;"
                                     :style="{'background-color': template.advanced.bgColor,
@@ -170,7 +172,7 @@
                                 </div>
                               </div>
                               <div style="display:flex; align-items: center;">
-                                <p>Form With Template:</p>
+                                <p>Form With Template: </p>
                                <div>
                                  <el-tooltip effect="dark"
                                              content="Click to copy shortcode"
@@ -183,6 +185,7 @@
                                    </code>
                                  </el-tooltip>
                                </div>
+                                <a style="margin-left:12px; color: #e88b0d;text-decoration: none;" :href="previewUrl" target="_blank">Preview</a>
                               </div>
                             </div>
                         </el-col>
@@ -195,8 +198,14 @@
 </template>
 <script>
 import ClipboardJS from 'clipboard';
+import {View} from "@element-plus/icons-vue";
 export default {
     name: 'Dashboard',
+  computed: {
+    View() {
+      return View
+    }
+  },
     data(){
         return {
             saving: false,
@@ -217,7 +226,9 @@ export default {
                 'hsva(120, 40, 94, 0.5)',
                 'hsl(181, 100%, 37%)',
                 'hsla(209, 100%, 56%, 0.73)',
-                '#c7158577'
+                '#c7158577',
+                '#FFF',
+                '#000000',
             ],
             template: {
                 advanced: {
@@ -227,6 +238,12 @@ export default {
         }
     },
     methods: {
+        changeBgColor(value) {
+            this.template.advanced.bgColor = value;
+        },
+        changeFontColor(value) {
+            this.template.advanced.color = value;
+        },
         getSettings() {
             this.$get({
                     action: 'wpm_bmc_admin_ajax',
@@ -279,7 +296,7 @@ export default {
                     });
         },
         previewButton(){
-            window.open(window.BuyMeCoffeeAdmin.preview_url);
+            window.open(this.previewUrl);
         },
     },
     mounted() {

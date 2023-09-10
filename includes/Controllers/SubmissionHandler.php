@@ -26,6 +26,7 @@ class SubmissionHandler
         $supportersMessage = ArrayHelper::get($form_data, 'wpm-supporter-message');
 
         $hash = $this->getHash();
+        $reference = ArrayHelper::get($form_data, '__buymecoffee_ref', '');
 
         $entries = array(
             'supporters_name' => sanitize_text_field($supportersName),
@@ -38,6 +39,7 @@ class SubmissionHandler
             'entry_hash' => sanitize_text_field($hash),
             'payment_total' => $paymentTotal,
             'coffee_count' => intval($quantity),
+            'reference' => sanitize_text_field($reference),
             'status' => 'new',
             'created_at' => current_time('mysql'),
             'updated_at' => current_time('mysql'),
