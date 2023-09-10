@@ -35,6 +35,7 @@ class AdminAjaxHandler
             'edit_supporter' => 'editSupporter',
             'get_supporter' => 'getSupporter',
             'delete_supporter' => 'deleteSupporter',
+            'update_payment_status' => 'updatePaymentStatus'
 
         );
         if (isset($validRoutes[$route])) {
@@ -50,10 +51,23 @@ class AdminAjaxHandler
         wp_send_json_success($methods, 200);
     }
 
+    public function updatePaymentStatus()
+    {
+        $id = intval($_REQUEST['id']);
+        $status = sanitize_text_field($_REQUEST['status']);
+        $supporter = wpmBmcDB()->table('wpm_bmc_supporters')->where('id', $id)->update(['payment_status' => $status]);
+        if ($supporter) {
+            wp_send_json_success($supporter, 200);
+        }
+    }
+
     public function getSupporter()
     {
         $id = intval($_REQUEST['id']);
         $supporter = (new Supporters())->find($id);
+
+        $supporter->supporters_image = get_avatar_url($supporter->supporters_email);
+
         if ($supporter) {
             wp_send_json_success($supporter, 200);
         }
