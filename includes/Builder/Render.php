@@ -128,7 +128,7 @@ class Render
         <form class="wpm_bmc_form" data-wpm_currency="<?php echo esc_html_e($currency) ;?>">
             <input type="hidden" name="__buymecoffee_ref" value="<?php echo esc_html($template['yourName']); ?>"/>
             <div class="wpm_bmc_payment_item">
-                <div class="wpm_bmc_input_content">
+                <div class="wpm_bmc_payment_input_content">
                     <div class="wpm_bmc_coffee_selector">
                         <img width="50" src="<?php echo WPM_BMC_URL . 'assets/images/coffee.png'; ?>" >
                         <span>x</span>

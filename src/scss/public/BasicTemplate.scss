@@ -80,9 +80,19 @@ span.buymecoffee_form_to {
     box-shadow: none;
     background: white !important;
 }
+.wpm_bmc_custom_quantity{
+    padding: 4px;
+    border: 1px solid #e9e9e9;
+    border-radius: 4px;
+    box-shadow: none;
+    background: white !important;
+}
+.wpm_bmc_custom_quantity,
+.wpm_bmc_payment_input_content input,
 .wpm_bmc_input_content input{
     height: 30px;
 }
+.wpm_bmc_custom_quantity:focus,
 .wpm_bmc_input_content input:focus,
 .wpm_bmc_input_content textarea:focus {
     outline: none;

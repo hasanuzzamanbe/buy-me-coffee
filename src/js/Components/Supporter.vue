@@ -211,13 +211,13 @@ export default {
     color: #ff932a;
   }
   .wpm_supporter_profile_wrapper {
-    width: 300px;
+    max-width: 350px;
     margin: 0 auto;
   }
   .wpm_supporter_payment_line {
     border-top: 2px dotted #c8c8c8;
     padding-top: 32px;
-    width: 800px;
+    max-width: 800px;
     margin:0 auto;
   }
 
