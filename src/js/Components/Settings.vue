@@ -9,9 +9,9 @@
     </el-row>
     <el-row class="wpm-template" v-loading="saving">
       <div class="wpm-template-inner">
-        <div class="wpm-bmc-editor">
-          <el-row :gutter="20">
-            <el-col :md="24" :lg="12" style="box-shadow: -2px 1px 4px #ccc;padding: 24px; background: #ebf2ff;">
+        <div class="wpm_bmc-editor">
+          <el-row>
+            <el-col :md="24" :lg="12" style="background: linear-gradient(122deg, #ffffff87, #c4fff654); padding: 24px;">
               <el-form label-position="left" label-width="140px" v-if="!fetching">
                 <el-tabs>
                   <el-tab-pane label="General">
@@ -113,7 +113,7 @@
                 <el-skeleton :rows="5" />
               </div>
             </el-col >
-            <el-col :md="24" :lg="12" class="wpm-btm-preview" style="background: #fff;padding: 24px;">
+            <el-col :md="24" :lg="12" class="wpm-btm-preview" style="padding: 24px;background: white;">
               <h3>Preview Button Style</h3>
               <div style="display: flex;">
                 <button
@@ -139,7 +139,7 @@
                 <p>Use Block editor or embed the shortcode on your posts/pages if you want to use the button above.
                   Or use the URL bellow to collect payments from your supporters</p>
                 <br/>
-                <img :src="fullPath('blocks.jpeg')" alt="Block editor" style="width: 100%;opacity: 0.4;"/>
+                <img :src="fullPath('blocks.jpeg')" alt="Block editor" style="width: 80%;opacity: 0.3;"/>
                 <h4>Or Use ShortCodes:</h4>
                 <div style="display:flex; align-items: center;">
                   <p>Button ShortCode:</p>

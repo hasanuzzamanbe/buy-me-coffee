@@ -57,9 +57,4 @@
       }
   }
 </script>
-<style scoped lang="scss">
-#buy-me-coffee_app {
-    display: flex;
-    padding-top: 23px;
-}
-</style>
+

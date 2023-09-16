@@ -77,9 +77,6 @@ a:active {
         margin-top: 20px;
     }
 }
-.wpm_bmc_main_container {
-    padding: 23px;
-}
 .wpm_bmc_menu_title {
     font-weight: 200;
 }
@@ -109,8 +106,20 @@ input::placeholder {
     }
 }
 
-.wpm_bmc_payment_settings {
-    max-width: 680px;
+.wpm_bmc {
+    &_payment_settings {
+        max-width: 100%;
+        background: #fff;
+        padding: 24px;
+    }
+    &-editor {
+        box-shadow: rgb(17 12 46 / 15%) 0px 48px 100px 0px;
+        border-radius: 6px;
+    }
+}
+
+.buy-me-coffee_app{
+    padding: 6px 16px 6px 0px;
 }
 
 .upcoming_feature_notice {

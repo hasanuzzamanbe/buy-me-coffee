@@ -164,12 +164,12 @@ export default {
   position: fixed;
   bottom: 0;
   right: 0;
-  padding: 10px 32px;
+  padding: 4px 15px;
   background: white;
   font-size: 16px;
   font-family: monospace;
   box-shadow: -6px -3px 9px 4px #ccc;
-  border-top-left-radius: 8px;
+  border-top-left-radius: 5px;
   border-right: 6px solid #4f94d4;
 }
 
