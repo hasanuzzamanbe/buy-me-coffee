@@ -10,7 +10,7 @@ let BuyMeCoffeeApp = {};
         initiated: false,
         init() {
             this.forms = $('.wpm_bmc_form');
-            console.log('initiating', this.forms)
+
             $.each(this.forms, function ($form) {
                 let form = $(this);
                 // let formInstance = form.attr('wpm_bmc_form');

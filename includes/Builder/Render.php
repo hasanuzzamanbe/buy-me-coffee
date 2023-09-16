@@ -3,6 +3,7 @@
 namespace BuyMeCoffee\Builder;
 
 use BuyMeCoffee\Controllers\PaymentHandler;
+use BuyMeCoffee\Helpers\BuilderHelper;
 use BuyMeCoffee\Models\Buttons;
 use BuyMeCoffee\Helpers\ArrayHelper as Arr;
 use BuyMeCoffee\Classes\DemoPage;
@@ -122,6 +123,7 @@ class Render
 
         $currency = Arr::get($template, 'currency', 'USD');
         $symbool = PaymentHelper::currencySymbol();
+        $formClassCount = BuilderHelper::getFormCount();
 
         ob_start();
         ?>
@@ -134,14 +136,14 @@ class Render
                         <span>x</span>
 
                         <div class="bmc_coffee">
-                            <input id="radio_1" value="1" class="coffee-select" name="radio-group" type="radio" checked>
-                            <label for="radio_1">1</label>
+                            <input id="one_coffee_select_radio<?= $formClassCount ?>" value="1" class="coffee-select" name="radio-group" type="radio" checked>
+                            <label for="one_coffee_select_radio<?= $formClassCount ?>">1</label>
 
-                            <input id="radio_2" value="2" class="coffee-select" name="radio-group" type="radio">
-                            <label for="radio_2">2</label>
+                            <input id="two_coffee_select_radio<?= $formClassCount ?>" value="2" class="coffee-select" name="radio-group" type="radio">
+                            <label for="two_coffee_select_radio<?= $formClassCount ?>">2</label>
 
-                            <input id="radio_3" value="3" class="coffee-select" name="radio-group" type="radio">
-                            <label for="radio_3">3</label>
+                            <input id="three_coffee_select_radio<?= $formClassCount ?>" value="3" class="coffee-select" name="radio-group" type="radio">
+                            <label for="three_coffee_select_radio<?= $formClassCount ?>">3</label>
                         </div>
                         <input class="wpm_bmc_custom_quantity" type="number" value="5" data-quantity="5">
 
@@ -200,7 +202,7 @@ class Render
                 </div>
             </div>
 
-            <div data-element_type="submit" class="wpm_bmc_form_item">
+            <div data-element_type="submit" class="wpm_bmc_form_item wpm_bmc_form_submit_wrapper">
                 <div class="wpm_bmc_input_content">
                     <button <?php echo static::builtAttributes($btnAttributes); ?>>Support
                         <div class="wpm_loading_svg">

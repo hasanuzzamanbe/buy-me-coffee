@@ -47,7 +47,7 @@ class BmcFormHandler {
             jQuery(e.target).parent().addClass('wpm_payment_active');
         });
 
-        jQuery(document).on('submit', this.selector, (e) => {
+        this.form.on('submit', (e) => {
             e.preventDefault();
             this.handleFormSubmit(this.form);
         });
@@ -128,7 +128,7 @@ class BmcFormHandler {
         let amountCents = parseInt(parseFloat(amount) * 100 * quantity);
         this.form.data('wpm_payment_total', amountCents);
         //set total
-        this.form.find('#wpm_submit_button .wpm_payment_total_amount').html(parseInt(amount * quantity));
+        this.form.find('.wpm_submit_button .wpm_payment_total_amount').html(parseInt(amount * quantity));
     }
 
 }

@@ -1,4 +1,4 @@
-<div class="buymecoffee_form_preview_wrapper" style="<?php echo $quote ?: 'margin: 0 auto;' ?>" >
+<div class="buymecoffee_form_preview_wrapper" style="<?php echo $quote ?? 'margin: 0 auto;' ?>" >
     <h3 class="buymecoffee_form_to">
         Buy
         <span class="buymecoffee_form_to"><?php
