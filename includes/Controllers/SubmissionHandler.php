@@ -1,8 +1,10 @@
 <?php
+
 namespace BuyMeCoffee\Controllers;
 
 use BuyMeCoffee\Helpers\ArrayHelper;
 use BuyMeCoffee\Helpers\PaymentHelper;
+
 class SubmissionHandler
 {
     public function handleSubmission()
@@ -69,11 +71,11 @@ class SubmissionHandler
         $transactionId = wpmBmcDB()->table('wpm_bmc_transactions')->insert($transaction);
 
         if ($paymentTotal > 0) {
-            do_action( 'wpm_bmc_make_payment_' . $paymentMethod, $transactionId, $entryId, $form_data);
+            do_action('wpm_bmc_make_payment_' . $paymentMethod, $transactionId, $entryId, $form_data);
         }
 
         wp_send_json_success(array(
-            'message'       => __('Thanks for your support! <3', 'buy-me-coffee'),
+            'message' => __('Thanks for your support! <3', 'buy-me-coffee'),
             'submission_id' => $entryId
         ), 200);
 

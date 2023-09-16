@@ -1,4 +1,5 @@
 <?php
+
 namespace BuyMeCoffee\Helpers;
 
 use BuyMeCoffee\Models\Buttons;
@@ -10,11 +11,12 @@ class PaymentHelper
     {
         return Currencies::all();
     }
+
     public static function getFormattedAmount($amount, $currency)
     {
         $amount = floatval($amount / 100);
         $sign = self::currencySymbol($currency);
-        return $sign .' '. $amount;
+        return $sign . ' ' . $amount;
     }
 
     public static function getCurrency()
@@ -22,6 +24,7 @@ class PaymentHelper
         $settings = (new Buttons())->getButton();
         return $settings['currency'];
     }
+
     public static function currencySymbol($currency = '')
     {
         if (!$currency) {

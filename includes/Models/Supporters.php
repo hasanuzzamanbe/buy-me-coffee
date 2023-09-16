@@ -1,4 +1,5 @@
 <?php
+
 namespace BuyMeCoffee\Models;
 
 use BuyMeCoffee\Helpers\PaymentHelper;
@@ -7,12 +8,12 @@ class Supporters
 {
     public function index($args)
     {
-        $offset = intval( $args['page'] * $args['posts_per_page']);
+        $offset = intval($args['page'] * $args['posts_per_page']);
 
-        $query =  wpmBmcDB()->table('wpm_bmc_supporters')
-        ->orderBy('ID', 'DESC')
-        ->offset($offset)
-        ->limit($args['posts_per_page']);
+        $query = wpmBmcDB()->table('wpm_bmc_supporters')
+            ->orderBy('ID', 'DESC')
+            ->offset($offset)
+            ->limit($args['posts_per_page']);
 
         $total = $query->count();
 
@@ -24,9 +25,9 @@ class Supporters
             $supporter->amount_formatted = PaymentHelper::getFormattedAmount($supporter->payment_total, $supporter->currency);
         }
 
-       $count = wpmBmcDB()->table('wpm_bmc_supporters')
-                ->select(wpmBmcDB()->raw('SUM(coffee_count) as total_coffee'))
-               ->first();
+        $count = wpmBmcDB()->table('wpm_bmc_supporters')
+            ->select(wpmBmcDB()->raw('SUM(coffee_count) as total_coffee'))
+            ->first();
 
         $currencyTotal = wpmBmcDB()->table('wpm_bmc_supporters')
             ->groupBy('currency')
@@ -37,11 +38,11 @@ class Supporters
         wp_send_json_success(
             array(
                 'supporters' => $supporters,
-                'total'     => $total,
+                'total' => $total,
                 'last_page' => $lastPage,
                 'reports' => array(
-                    'total_supporters' => $total ,
-                    'total_coffee' =>  $count->total_coffee,
+                    'total_supporters' => $total,
+                    'total_coffee' => $count->total_coffee,
                     'currency_total' => $currencyTotal,
 //                    'total_received' =>
                 )
@@ -59,7 +60,7 @@ class Supporters
     public function find($id)
     {
         $supporter = wpmBmcDB()->table('wpm_bmc_supporters')
-        ->where('id', $id)->first();
+            ->where('id', $id)->first();
 
         return $supporter;
     }
@@ -68,6 +69,7 @@ class Supporters
     {
 
     }
+
     public function delete($id)
     {
         $supporter = wpmBmcDB()->table('wpm_bmc_supporters')->where('id', $id)->delete();

@@ -130,7 +130,6 @@ if (!defined('WPM_BMC_VERSION')) {
         public function LoadEditorBlocks()
         {
             require WPM_BMC_DIR . 'includes/Builder/EditorBlocks/EditorBlocks.php';
-            ;
             $pages_with_editor_button = array('post.php', 'post-new.php');
             foreach ($pages_with_editor_button as $editor_page) {
                 add_action("load-{$editor_page}", array(new \BuyMeCoffee\Builder\EditorBlocks\EditorBlocks(), 'register'));

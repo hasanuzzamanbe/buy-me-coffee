@@ -1,4 +1,5 @@
 <?php
+
 namespace BuyMeCoffee\Builder\Methods\Stripe;
 
 use BuyMeCoffee\Builder\Methods\BaseMethods;
@@ -14,12 +15,12 @@ class Stripe extends BaseMethods
             WPM_BMC_URL . 'assets/images/credit-card.png'
         );
 
-        add_action('wpm_bmc_make_payment_stripe' , array( $this , 'makePayment' ) , 10 , 3);
+        add_action('wpm_bmc_make_payment_stripe', array($this, 'makePayment'), 10, 3);
     }
 
     public function makePayment($transactionId, $entryId, $form_data)
     {
-       // TO-Do will implement later on upcoming version
+        // TO-Do will implement later on upcoming version
     }
 
     public function sanitize($settings)
@@ -33,8 +34,8 @@ class Stripe extends BaseMethods
     public function getPaymentSettings()
     {
         wp_send_json_success(array(
-            'settings'       => $this->getSettings(),
-            'webhook_url'    => site_url() . '?wpm_bmc_stripe_listener=1'
+            'settings' => $this->getSettings(),
+            'webhook_url' => site_url() . '?wpm_bmc_stripe_listener=1'
         ), 200);
     }
 
@@ -44,10 +45,10 @@ class Stripe extends BaseMethods
 
         $defaults = array(
             'enable' => 'no',
-            'payment_mode'    => 'test',
-            'live_pub_key'    => '',
+            'payment_mode' => 'test',
+            'live_pub_key' => '',
             'live_secret_key' => '',
-            'test_pub_key'    => '',
+            'test_pub_key' => '',
             'test_secret_key' => ''
         );
         return wp_parse_args($settings, $defaults);
@@ -56,16 +57,16 @@ class Stripe extends BaseMethods
     public function render($template)
     {
         ?>
-            <label class="wpm_stripe_card_label" for="wpm_stripe_card">
-                <img width="50px" src="<?php echo WPM_BMC_URL . 'assets/images/credit-card.png'; ?>" alt="">
-                <input
+        <label class="wpm_stripe_card_label" for="wpm_stripe_card">
+            <img width="50px" src="<?php echo WPM_BMC_URL . 'assets/images/credit-card.png'; ?>" alt="">
+            <input
                     style="outline: none;"
                     type="radio" class="wpm_stripe_card" name="wpm_payment_method" id="wpm_stripe_card"
                     value="stripe">
-<!--                <span class="payment_method_name">-->
-<!--                    stripe-->
-<!--                </span>-->
-            </label>
+            <!--                <span class="payment_method_name">-->
+            <!--                    stripe-->
+            <!--                </span>-->
+        </label>
         <?php
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace BuyMeCoffee\Models;
 
 class Transactions

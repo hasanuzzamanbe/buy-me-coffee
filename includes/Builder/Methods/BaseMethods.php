@@ -1,4 +1,5 @@
 <?php
+
 namespace BuyMeCoffee\Builder\Methods;
 
 abstract class BaseMethods
@@ -19,7 +20,7 @@ abstract class BaseMethods
 
         $this->registerHooks($method);
 
-        add_action('buy-me-coffee/get_payment_settings_' .  $this->method, array($this, 'getPaymentSettings'), 10, 1);
+        add_action('buy-me-coffee/get_payment_settings_' . $this->method, array($this, 'getPaymentSettings'), 10, 1);
 
         add_filter('wpm_bmc_before_save_' . $this->method, array($this, 'sanitize'), 10, 2);
 

@@ -10,7 +10,6 @@ if (!defined('ABSPATH')) {
  * Register and initialize custom post type for buy-me-coffee
  * @since 1.0.0
  */
-
 class PostType
 {
     public function __construct()
@@ -22,8 +21,8 @@ class PostType
     {
         $args = array(
             'capability_type' => 'post',
-            'public'          => false,
-            'show_ui'         => false,
+            'public' => false,
+            'show_ui' => false,
         );
         register_post_type('buy-me-coffee', $args);
     }

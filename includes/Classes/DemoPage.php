@@ -10,7 +10,7 @@ class DemoPage
 {
     public function register()
     {
-       $this->handleExteriorPages();
+        $this->handleExteriorPages();
     }
 
     public function loadTemplateStyles()

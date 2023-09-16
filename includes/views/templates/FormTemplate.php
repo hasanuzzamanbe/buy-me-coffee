@@ -3,7 +3,7 @@
         <div class="buymecoffee_profile_hr">
         </div>
         <div class="buymecoffee_profile_section_image">
-            <img src="<?php echo WPM_BMC_URL . 'assets/images/coffee.png';?>"
+            <img src="<?php echo WPM_BMC_URL . 'assets/images/coffee.png'; ?>"
                  alt="Profile Image">
         </div>
 
@@ -13,24 +13,24 @@
     </div>
     <div class="buymecoffee_preview_body">
         <?php
-            include WPM_BMC_DIR . 'includes/views/templates/FormSection.php';
+        include WPM_BMC_DIR . 'includes/views/templates/FormSection.php';
 
         if ($quote):
-        ?>
-        <div class="buymecoffee_your_content_wrapper">
-            <div class="buymecoffee_your_content">
-                <div class="buymecoffee_your_content_title">
-                    <div style="margin-bottom:23px;">
-                        <blockquote>
-                        <p class="bmc_appreciation_title"><?php echo esc_html($quote);?></p>
-                        </blockquote>
+            ?>
+            <div class="buymecoffee_your_content_wrapper">
+                <div class="buymecoffee_your_content">
+                    <div class="buymecoffee_your_content_title">
+                        <div style="margin-bottom:23px;">
+                            <blockquote>
+                                <p class="bmc_appreciation_title"><?php echo esc_html($quote); ?></p>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div class="buymecoffee_your_content_body">
+                        <p></p>
                     </div>
                 </div>
-                <div class="buymecoffee_your_content_body">
-                    <p></p>
-                </div>
             </div>
-        </div>
-        <?php endif;?>
+        <?php endif; ?>
     </div>
 </div>

@@ -1,4 +1,5 @@
 <?php
+
 namespace BuyMeCoffee\Builder\Methods\PayPal;
 
 use BuyMeCoffee\Helpers\ArrayHelper;
@@ -6,7 +7,7 @@ use BuyMeCoffee\Models\Supporters;
 use BuyMeCoffee\Models\Transactions;
 use BuyMeCoffee\Builder\Methods\BaseMethods;
 
- class PayPal extends BaseMethods
+class PayPal extends BaseMethods
 {
     public function __construct()
     {
@@ -14,9 +15,9 @@ use BuyMeCoffee\Builder\Methods\BaseMethods;
             'PayPal',
             'paypal',
             'PayPal is the faster, safer way to send money, make an online payment, receive money or set up a merchant account.',
-            WPM_BMC_URL. 'assets/images/paypal.png'
+            WPM_BMC_URL . 'assets/images/paypal.png'
         );
-        add_action( 'wpm_bmc_make_payment_paypal' , array( $this , 'makePayment' ) , 10 , 3);
+        add_action('wpm_bmc_make_payment_paypal', array($this, 'makePayment'), 10, 3);
         add_action('init', array($this, 'ipnVerification'));
         add_action('wpm_bmc_paypal_action_web_accept', array($this, 'updateStatus'), 10, 2);
     }
@@ -36,24 +37,24 @@ use BuyMeCoffee\Builder\Methods\BaseMethods;
     public function getPaymentSettings()
     {
         wp_send_json_success(array(
-            'settings'       => $this->getSettings(),
-            'webhook_url'    => site_url() . '?wpm_bmc_paypal_listener=1'
+            'settings' => $this->getSettings(),
+            'webhook_url' => site_url() . '?wpm_bmc_paypal_listener=1'
         ), 200);
     }
 
     public function getSettings($key = null)
     {
         $settings = get_option('wpm_bmc_payment_settings_' . $this->method, array());
-        
+
         $defaults = array(
             'enable' => 'no',
-            'payment_mode'    => 'test',
-            'payment_type'    => 'standard',
+            'payment_mode' => 'test',
+            'payment_type' => 'standard',
             'test_public_key' => '',
             'test_secret_key' => '',
             'live_public_key' => '',
             'live_secret_key' => '',
-            'paypal_email'    => '',
+            'paypal_email' => '',
             'disable_ipn_verification' => 'no',
         );
 
@@ -61,48 +62,48 @@ use BuyMeCoffee\Builder\Methods\BaseMethods;
         return $key && isset($data[$key]) ? $data[$key] : $data;
     }
 
-     public function maybeShowModal($transactions, $paypalSettings)
-     {
-         $paymentIntent = $this->modalPaymentIntent($transactions);
-         $responseData = [
-             'nextAction'       => 'paypal',
-             'actionName'       => 'custom',
-             'buttonState'      => 'hide',
-             'purchase_units'   => $paymentIntent,
-             'confirmation_url' => $this->successUrl($transactions),
-             'message_to_show'  => __('Payment Modal is opening, Please complete the payment', 'buy-me-coffee'),
-         ];
+    public function maybeShowModal($transactions, $paypalSettings)
+    {
+        $paymentIntent = $this->modalPaymentIntent($transactions);
+        $responseData = [
+            'nextAction' => 'paypal',
+            'actionName' => 'custom',
+            'buttonState' => 'hide',
+            'purchase_units' => $paymentIntent,
+            'confirmation_url' => $this->successUrl($transactions),
+            'message_to_show' => __('Payment Modal is opening, Please complete the payment', 'buy-me-coffee'),
+        ];
 
-         wp_send_json_success($responseData, 200);
-     }
+        wp_send_json_success($responseData, 200);
+    }
 
-     public function modalPaymentIntent($transactions)
-     {
-         $total = $transactions->payment_total ? $transactions->payment_total : 5;
-         $total = $total / 100;
-         $currencyCode = $transactions->currency;
-         $intent = [
-             'amount' => [
-                 'value' => $total,
-                 'breakdown' => [
-                     'item_total' => [
-                         'currency_code' => $currencyCode,
-                         'value' => $total,
-                     ]
-                 ]
-             ],
-             'items' => array([
-                 'name'        => 'Buy coffee for you',
-                 'unit_amount' => [
-                     'currency_code' => $currencyCode,
-                     'value' => $total,
-                 ],
-                 'quantity'    => '1',
-             ])
-         ];
+    public function modalPaymentIntent($transactions)
+    {
+        $total = $transactions->payment_total ? $transactions->payment_total : 5;
+        $total = $total / 100;
+        $currencyCode = $transactions->currency;
+        $intent = [
+            'amount' => [
+                'value' => $total,
+                'breakdown' => [
+                    'item_total' => [
+                        'currency_code' => $currencyCode,
+                        'value' => $total,
+                    ]
+                ]
+            ],
+            'items' => array([
+                'name' => 'Buy coffee for you',
+                'unit_amount' => [
+                    'currency_code' => $currencyCode,
+                    'value' => $total,
+                ],
+                'quantity' => '1',
+            ])
+        ];
 
-         return apply_filters('wpm_bmc_paypal_modal_payment_intent', $intent, $transactions);
-     }
+        return apply_filters('wpm_bmc_paypal_modal_payment_intent', $intent, $transactions);
+    }
 
     public function makePayment($transactionId, $entryId, $form_data)
     {
@@ -125,19 +126,19 @@ use BuyMeCoffee\Builder\Methods\BaseMethods;
         $listener_url = apply_filters('wpm_bmc_paypal_ipn_url', site_url('?wpm_bmc__paypal_ipn=1'), $supporter);
 
         $paypal_args = array(
-            'cmd'           => '_cart',
-            'upload'        => '1',
-            'business'      => $paypalSettings['paypal_email'],
-            'email'         => $supporter->supporters_email,
-            'no_shipping'   => '1',
-            'no_note'       => '1',
+            'cmd' => '_cart',
+            'upload' => '1',
+            'business' => $paypalSettings['paypal_email'],
+            'email' => $supporter->supporters_email,
+            'no_shipping' => '1',
+            'no_note' => '1',
             'currency_code' => $supporter->currency ? $supporter->currency : 'USD',
-            'charset'       => 'UTF-8',
-            'custom'        => $transactionId,
-            'return'        => $this->successUrl($supporter),
-            'notify_url'    => $listener_url,
+            'charset' => 'UTF-8',
+            'custom' => $transactionId,
+            'return' => $this->successUrl($supporter),
+            'notify_url' => $listener_url,
             'cancel_return' => $this->failedUrl($supporter),
-            'image_url'     => '',
+            'image_url' => '',
         );
 
         $payment_item = $this->cartItems($transaction);
@@ -166,10 +167,10 @@ use BuyMeCoffee\Builder\Methods\BaseMethods;
         $paypal_redirect .= http_build_query($paypal_args);
 
         wp_send_json_success(array(
-                'message' => __('You are redirected for payment.', 'buy-me-coffee'),
-                'id' => $entryId,
-                'redirectTo' => $paypal_redirect,
-                'messageToShow' => __('Your are redirecting to paypal now', 'buy-me-coffee')
+            'message' => __('You are redirected for payment.', 'buy-me-coffee'),
+            'id' => $entryId,
+            'redirectTo' => $paypal_redirect,
+            'messageToShow' => __('Your are redirecting to paypal now', 'buy-me-coffee')
         ), 200);
         exit;
     }
@@ -305,7 +306,7 @@ use BuyMeCoffee\Builder\Methods\BaseMethods;
     public function maybeLoadModalScript()
     {
         $settings = $this->getSettings();
-        if ( $settings['payment_type'] == 'standard') {
+        if ($settings['payment_type'] == 'standard') {
             return;
         };
 
@@ -323,23 +324,23 @@ use BuyMeCoffee\Builder\Methods\BaseMethods;
         $this->maybeLoadModalScript();
 
         ?>
-            <label class="wpm_paypal_card_label" for="wpm_paypal_card">
-                <img width="50px" src="<?php echo WPM_BMC_URL . 'assets/images/paypal.png'; ?>" alt="">
-                <input
+        <label class="wpm_paypal_card_label" for="wpm_paypal_card">
+            <img width="50px" src="<?php echo WPM_BMC_URL . 'assets/images/paypal.png'; ?>" alt="">
+            <input
                     style="outline: none;"
                     type="radio" name="wpm_payment_method" class="wpm_paypal_card" id="wpm_paypal_card"
                     value="paypal">
-<!--                <span class="payment_method_name">-->
-<!--                    PayPal-->
-<!--                </span>-->
-            </label>
+            <!--                <span class="payment_method_name">-->
+            <!--                    PayPal-->
+            <!--                </span>-->
+        </label>
         <?php
     }
 
-     public function isEnabled()
-     {
-         // TODO: Implement isEnabled() method.
-            $settings = $this->getSettings();
-            return $settings['enable'] === 'yes';
-     }
- }
+    public function isEnabled()
+    {
+        // TODO: Implement isEnabled() method.
+        $settings = $this->getSettings();
+        return $settings['enable'] === 'yes';
+    }
+}

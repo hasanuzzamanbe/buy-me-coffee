@@ -1,4 +1,5 @@
 <?php
+
 namespace BuyMeCoffee\Builder\Methods\PayPal;
 
 use BuyMeCoffee\Models\Supporters;
@@ -43,9 +44,9 @@ class IPN
             }
         }
         $defaults = array(
-            'txn_type'       => '',
+            'txn_type' => '',
             'payment_status' => '',
-            'custom'         => ''
+            'custom' => ''
         );
 
         $encoded_data_array = wp_parse_args($encoded_data_array, $defaults);

@@ -1,6 +1,7 @@
 <?php
 
 namespace BuyMeCoffee\Classes;
+
 use BuyMeCoffee\Models\Supporters;
 use BuyMeCoffee\Builder\Methods\PayPal\PayPal;
 use BuyMeCoffee\Helpers\ArrayHelper as Arr;
@@ -17,6 +18,7 @@ class AdminAjaxHandler
     {
         add_action('wp_ajax_wpm_bmc_admin_ajax', array($this, 'handleEndPoint'));
     }
+
     public function handleEndPoint()
     {
         $route = sanitize_text_field($_REQUEST['route']);
@@ -30,7 +32,7 @@ class AdminAjaxHandler
             'save_settings' => 'saveSettings',
             'get_settings' => 'getSettings',
             'reset_template_settings' => 'resetDefaultSettings',
-            
+
             'get_supporters' => 'getSupporters',
             'edit_supporter' => 'editSupporter',
             'get_supporter' => 'getSupporter',
@@ -72,6 +74,7 @@ class AdminAjaxHandler
             wp_send_json_success($supporter, 200);
         }
     }
+
     public function getSupporters()
     {
         return (new Supporters())->index($_REQUEST);
@@ -157,7 +160,7 @@ class AdminAjaxHandler
                 'template' => $settings,
                 'currencies' => Currencies::all()
             ),
-        200
+            200
         );
     }
 

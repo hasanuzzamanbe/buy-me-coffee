@@ -11,25 +11,18 @@ class PaypalCheckout {
         paypal
             .Buttons({
                 style: {
-                    shape: 'pill',
-                    layout: 'vertical',
-                    label: 'paypal',
-                    // tagline: 'false',
-                    size: 'responsive',
-                    disableMaxWidth: true
-                },
-                createOrder: (data, actions) => {
+                    shape: 'pill', layout: 'vertical', label: 'paypal', // tagline: 'false',
+                    size: 'responsive', disableMaxWidth: true
+                }, createOrder: (data, actions) => {
                     return actions.order.create({
                         purchase_units: [this.data.purchase_units]
                     })
-                },
-                onApprove: (data, actions) => {
+                }, onApprove: (data, actions) => {
                     return actions.order.capture().then((details) => {
                         console.log(this.data?.confirmation_url)
                         window.location = this.data?.confirmation_url;
                     })
-                },
-                onError: function (err) {
+                }, onError: function (err) {
                     alert('An error occurred: ' + err)
                 }
             })

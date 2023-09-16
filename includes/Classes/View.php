@@ -7,8 +7,8 @@ class View
 
     /**
      * Generate and echo/print a view file
-     * @param  string $path
-     * @param  array  $data
+     * @param string $path
+     * @param array $data
      * @return void
      */
     public static function render($path, $data = [])
@@ -18,8 +18,8 @@ class View
 
     /**
      * Generate a view file
-     * @param  string $path
-     * @param  array  $data
+     * @param string $path
+     * @param array $data
      * @return string [generated html]
      */
     public static function make($path, $data = [])
@@ -35,14 +35,14 @@ class View
 
     /**
      * Resolve the view file path
-     * @param  string $path
+     * @param string $path
      * @return string
      */
     protected static function getFilePath($path)
     {
         $path = str_replace('.', DIRECTORY_SEPARATOR, $path);
-        $viewName = WPM_BMC_DIR.'includes'.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.$path;
-        $fullPath = $viewName.'.php';
+        $viewName = WPM_BMC_DIR . 'includes' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . $path;
+        $fullPath = $viewName . '.php';
         return apply_filters('buymecoffee/template_view_path', $fullPath, $path);
     }
 }

@@ -56,13 +56,13 @@ class Menu
 
         ob_start();
         ?>
-            <div id="buy-me-coffee_app" class="buy-me-coffee_app">
-                <div class="buymecoffee_body">
-                    <div class="bmc_route_wrapper">
-                        <router-view></router-view>
-                    </div>
+        <div id="buy-me-coffee_app" class="buy-me-coffee_app">
+            <div class="buymecoffee_body">
+                <div class="bmc_route_wrapper">
+                    <router-view></router-view>
                 </div>
             </div>
+        </div>
         <?php
         echo ob_get_clean();
     }
@@ -82,13 +82,13 @@ class Menu
         // 3rd party developers can now add their scripts here
         do_action('buy-me-coffee/booting_admin_app');
 
-	    wp_enqueue_script(
+        wp_enqueue_script(
             'buy-me-coffee_js',
-		    WPM_BMC_URL . 'assets/js/plugin-main-js-file.js',
-		    array('jquery'),
-		    WPM_BMC_VERSION,
-		    true
-	    );
+            WPM_BMC_URL . 'assets/js/plugin-main-js-file.js',
+            array('jquery'),
+            WPM_BMC_VERSION,
+            true
+        );
 
         //enqueue css file
         wp_enqueue_style('buy-me-coffee_admin_css', WPM_BMC_URL . 'assets/css/element.css');

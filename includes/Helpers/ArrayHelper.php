@@ -1,4 +1,5 @@
 <?php
+
 namespace BuyMeCoffee\Helpers;
 
 if (!defined('ABSPATH')) {
@@ -9,7 +10,6 @@ if (!defined('ABSPATH')) {
  * ArrayHelper Class
  * @since 1.0.0
  */
-
 class ArrayHelper
 {
     /**
@@ -19,8 +19,8 @@ class ArrayHelper
     /**
      * Check if an item or items exist in an array using "dot" notation.
      *
-     * @param  \ArrayAccess|array $array
-     * @param  string|array       $keys
+     * @param \ArrayAccess|array $array
+     * @param string|array $keys
      * @return bool
      */
     public static function has($array, $keys)
@@ -29,7 +29,7 @@ class ArrayHelper
             return false;
         }
 
-        $keys = (array) $keys;
+        $keys = (array)$keys;
 
         if (!$array) {
             return false;
@@ -61,9 +61,9 @@ class ArrayHelper
     /**
      * Get an item from an array using "dot" notation.
      *
-     * @param  \ArrayAccess|array $array
-     * @param  string             $key
-     * @param  mixed              $default
+     * @param \ArrayAccess|array $array
+     * @param string $key
+     * @param mixed $default
      * @return mixed
      */
     public static function get($array, $key, $default = null)
@@ -77,10 +77,10 @@ class ArrayHelper
         }
 
         if (static::exists($array, $key)) {
-            if($array[$key]) {
-	            return $array[$key];
+            if ($array[$key]) {
+                return $array[$key];
             } else {
-            	return $default;
+                return $default;
             }
         }
 
@@ -100,9 +100,9 @@ class ArrayHelper
      *
      * If no key is given to the method, the entire array will be replaced.
      *
-     * @param  array  $array
-     * @param  string $key
-     * @param  mixed  $value
+     * @param array $array
+     * @param string $key
+     * @param mixed $value
      * @return array
      */
     public static function set(&$array, $key, $value)
@@ -134,20 +134,20 @@ class ArrayHelper
     /**
      * Get a subset of the items from the given array.
      *
-     * @param  array        $array
-     * @param  array|string $keys
+     * @param array $array
+     * @param array|string $keys
      * @return array
      */
     public static function only($array, $keys)
     {
-        return array_intersect_key($array, array_flip((array) $keys));
+        return array_intersect_key($array, array_flip((array)$keys));
     }
 
     /**
      * Get all of the given array except for a specified array of items.
      *
-     * @param  array        $array
-     * @param  array|string $keys
+     * @param array $array
+     * @param array|string $keys
      * @return array
      */
     public static function except($array, $keys)
@@ -160,14 +160,14 @@ class ArrayHelper
     /**
      * Remove one or many array items from a given array using "dot" notation.
      *
-     * @param array        $array
+     * @param array $array
      * @param array|string $keys
      */
     public static function forget(&$array, $keys)
     {
         $original = &$array;
 
-        $keys = (array) $keys;
+        $keys = (array)$keys;
 
         if (count($keys) === 0) {
             return;
@@ -203,7 +203,7 @@ class ArrayHelper
     /**
      * Determine whether the given value is array accessible.
      *
-     * @param  mixed $value
+     * @param mixed $value
      * @return bool
      */
     public static function accessible($value)
@@ -214,8 +214,8 @@ class ArrayHelper
     /**
      * Determine if the given key exists in the provided array.
      *
-     * @param  \ArrayAccess|array $array
-     * @param  string|int         $key
+     * @param \ArrayAccess|array $array
+     * @param string|int $key
      * @return bool
      */
     public static function exists($array, $key)
@@ -230,18 +230,18 @@ class ArrayHelper
     /**
      * Return the default value of the given value.
      *
-     * @param  mixed $value
+     * @param callable $value
      * @return mixed
      */
     public static function value($value)
     {
-        return $value instanceof Closure ? $value() : $value;
+        return is_callable($value) ? $value() : $value;
     }
 
     /**
      * Flatten a multi-dimensional associative array with dots.
      *
-     * @param array  $array
+     * @param array $array
      * @param string $prepend
      *
      * @return array
@@ -252,9 +252,9 @@ class ArrayHelper
 
         foreach ($array as $key => $value) {
             if (is_array($value) && !empty($value)) {
-                $results = array_merge($results, static::dot($value, $prepend.$key.'.'));
+                $results = array_merge($results, static::dot($value, $prepend . $key . '.'));
             } else {
-                $results[$prepend.$key] = $value;
+                $results[$prepend . $key] = $value;
             }
         }
 

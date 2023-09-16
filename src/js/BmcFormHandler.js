@@ -54,36 +54,34 @@ class BmcFormHandler {
     }
 
 
-
     handleFormSubmit(form) {
-            form.find('button.wpm_submit_button').attr('disabled', true);
-            form.addClass('wpm_submitting_form');
-            form.parent().find('.wpm_form_notices').hide();
+        form.find('button.wpm_submit_button').attr('disabled', true);
+        form.addClass('wpm_submitting_form');
+        form.parent().find('.wpm_form_notices').hide();
 
-            jQuery.post(window.wpm_bmc_general.ajax_url, {
-                action: 'wpm_bmc_submit',
-                payment_total: form.data('wpm_payment_total'),
-                coffee_count: form.data('coffee_count'),
-                payment_method: form.data('wpm_selected_payment_method'),
-                currency: form.data('wpm_currency'),
-                form_data: jQuery(form).serialize()
-            })
-                .then(response => {
-                    if (response.data?.redirectTo) {
-                        window.location.href = response.data.redirectTo;
-                    }
-                    if (response.data?.actionName == 'custom') {
-                        this.fireCustomEvent(response.data.nextAction, response);
-                        return;
-                    }
-                });
+        jQuery.post(window.wpm_bmc_general.ajax_url, {
+            action: 'wpm_bmc_submit',
+            payment_total: form.data('wpm_payment_total'),
+            coffee_count: form.data('coffee_count'),
+            payment_method: form.data('wpm_selected_payment_method'),
+            currency: form.data('wpm_currency'),
+            form_data: jQuery(form).serialize()
+        })
+            .then(response => {
+                if (response.data?.redirectTo) {
+                    window.location.href = response.data.redirectTo;
+                }
+                if (response.data?.actionName == 'custom') {
+                    this.fireCustomEvent(response.data.nextAction, response);
+                    return;
+                }
+            });
     }
 
     fireCustomEvent(eventName, response) {
         window.dispatchEvent(new CustomEvent('wpm_bmc_payment_next_action_' + response?.data?.nextAction, {
             detail: {
-                form: this.form,
-                response: response
+                form: this.form, response: response
             }
         }));
     }
