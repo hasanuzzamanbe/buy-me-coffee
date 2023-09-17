@@ -83,20 +83,18 @@ class Menu
         Vite::enqueueScript(
             'buy-me-coffee_js',
             'js/main.js',
-//            array('jquery'),
+            array('jquery'),
             WPM_BMC_VERSION,
             true
         );
 
-        //enqueue css file
-        Vite::enqueueStyle('buy-me-coffee_admin_css', 'scss/admin/app.scss');
+        //enqueue css file using wp_enqueue (already compiled with vite)
+        //Vite::enqueueStyle('buy-me-coffee_admin_css', 'scss/admin/app.scss');
 
         $BuyMeCoffeeAdminVars = apply_filters('buy-me-coffee/admin_app_vars', array(
-            //'image_upload_url' => admin_url('admin-ajax.php?action=wpf_global_settings_handler&route=wpf_upload_image'),
             'assets_url' => Vite::staticPath(),
             'ajaxurl' => admin_url('admin-ajax.php'),
             'preview_url' => site_url('?coffee-treet=1')
-            // site_url('?buymecoffee_preview=button')
         ));
 
 

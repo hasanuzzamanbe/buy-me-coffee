@@ -28,6 +28,13 @@ const inputs = {
     'js/gutenBlock' : 'src/js/Editor/gutenBlock.jsx'
 }
 export default defineConfig({
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: `@use "./src/scss/admin/app.scss" as *;`,
+            },
+        },
+    },
     plugins:
         [
             vue(),
