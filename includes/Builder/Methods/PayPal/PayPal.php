@@ -6,6 +6,7 @@ use BuyMeCoffee\Helpers\ArrayHelper;
 use BuyMeCoffee\Models\Supporters;
 use BuyMeCoffee\Models\Transactions;
 use BuyMeCoffee\Builder\Methods\BaseMethods;
+use BuyMeCoffee\Classes\Vite;
 
 class PayPal extends BaseMethods
 {
@@ -15,7 +16,7 @@ class PayPal extends BaseMethods
             'PayPal',
             'paypal',
             'PayPal is the faster, safer way to send money, make an online payment, receive money or set up a merchant account.',
-            WPM_BMC_URL . 'assets/images/paypal.png'
+            Vite::staticPath() . 'images/paypal.png'
         );
         add_action('wpm_bmc_make_payment_paypal', array($this, 'makePayment'), 10, 3);
         add_action('init', array($this, 'ipnVerification'));
@@ -315,7 +316,7 @@ class PayPal extends BaseMethods
 
         wp_enqueue_script('wpm-buymecoffee-checkout-sdk-' . $this->method, 'https://www.paypal.com/sdk/js?client-id=' . $clientId, [], null, false);
 
-        wp_enqueue_script('wpm-buymecoffee-checkout-handler-' . $this->method, WPM_BMC_URL . 'assets/js/PaymentMethods/paypal-checkout.js', ['wpm-buymecoffee-checkout-sdk-paypal'], '1.0.1', false);
+        Vite::enqueueScript('wpm-buymecoffee-checkout-handler-' . $this->method, 'js/PaymentMethods/paypal-checkout.js', ['wpm-buymecoffee-checkout-sdk-paypal'], '1.0.1', false);
 
     }
 

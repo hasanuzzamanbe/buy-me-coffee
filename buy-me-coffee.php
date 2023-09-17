@@ -39,6 +39,7 @@ if (!defined('WPM_BMC_VERSION')) {
     define('WPM_BMC_URL', plugin_dir_url(__FILE__));
     define('WPM_BMC_DIR', plugin_dir_path(__FILE__));
     define('WPM_BMC_UPLOAD_DIR', '/buy-me-coffee');
+    define('WPM_BMC_PRODUCTION', 'yes');
 
     class BuyMeCoffee
     {
@@ -97,8 +98,10 @@ if (!defined('WPM_BMC_VERSION')) {
 
         public function addAssets()
         {
-            wp_enqueue_style('wpm_bmc_style', WPM_BMC_URL . 'assets/css/public-style.css', array(), WPM_BMC_VERSION);
-            wp_enqueue_script('wpm_bmc_script', WPM_BMC_URL . 'assets/js/BmcPublic.js', array('jquery'), WPM_BMC_VERSION, true);
+            $vite = new \BuyMeCoffee\Classes\Vite();
+
+            $vite::enqueueStyle('wpm_bmc_style', WPM_BMC_URL . 'assets/css/public-style.css', array(), WPM_BMC_VERSION);
+            $vite::enqueueScript('wpm_bmc_script', WPM_BMC_URL . 'assets/js/BmcPublic.js', array('jquery'), WPM_BMC_VERSION, true);
             wp_localize_script('wpm_bmc_script', 'wpm_bmc', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('wpm_bmc_nonce'),
@@ -107,6 +110,7 @@ if (!defined('WPM_BMC_VERSION')) {
 
         public function commonActions()
         {
+            require_once WPM_BMC_DIR . 'includes/Classes/Vite.php';
             require WPM_BMC_DIR . 'includes/Controllers/SubmissionHandler.php';
 
             //payment methods init

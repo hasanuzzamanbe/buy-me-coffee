@@ -2,6 +2,8 @@
 
 namespace buyMeCoffee\Builder\EditorBlocks;
 
+use BuyMeCoffee\Classes\Vite;
+
 class EditorBlocks
 {
     public function register()
@@ -25,9 +27,9 @@ class EditorBlocks
     public function loadBlockEditorAssets()
     {
         add_action('enqueue_block_editor_assets', function () {
-            wp_enqueue_script(
+            Vite::enqueueScript(
                 'buymecoffee_block_editor',
-                WPM_BMC_URL . 'assets/js/gutenBlock.js',
+                ('js/Editor/gutenBlock/gutenBlock.jsx'),
                 array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-components'),
                 WPM_BMC_VERSION,
                 true

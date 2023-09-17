@@ -8,10 +8,6 @@ import {
     removeAllActions
 } from '@wordpress/hooks';
 
-const moment = require('moment');
-require('moment/locale/en-gb');
-moment.locale('en-gb');
-
 const appStartTime = new Date();
 
 export default class BuyMeCoffee {
@@ -34,14 +30,9 @@ export default class BuyMeCoffee {
                 doAction,
                 addAction,
                 removeAllActions,
-                longLocalDate: self.longLocalDate,
-                longLocalDateTime: self.longLocalDateTime,
-                dateTimeFormat: self.dateTimeFormat,
-                localDate: self.localDate,
                 ucFirst: self.ucFirst,
                 ucWords: self.ucWords,
                 slugify: self.slugify,
-                moment: moment,
                 $get: self.$get,
                 $post: self.$post,
                 $adminGet: self.$adminGet,
@@ -53,8 +44,6 @@ export default class BuyMeCoffee {
                 $handleError: self.handleError,
                 $saveData: self.saveData,
                 $getData: self.getData,
-                $timeDiff: self.humanDiffTime,
-                $waitingTime: self.waitingTime,
                 convertToText: self.convertToText,
                 $setTitle(title) {
                     document.title = title;
@@ -116,21 +105,6 @@ export default class BuyMeCoffee {
 
     $getJSON(options) {
         return window.jQuery.getJSON(window.BuyMeCoffeeAdmin.ajaxurl, options);
-    }
-    dateTimeFormat(date, format) {
-        const dateString = (date === undefined) ? null : date;
-        const dateObj = moment(dateString);
-        return dateObj.isValid() ? dateObj.format(format) : null;
-    }
-
-    localDate(date) {
-        return moment.utc(date).local();
-    }
-
-    longLocalDate(date) {
-        return this.dateTimeFormat(
-            date, 'ddd, DD MMM, YYYY'
-        );
     }
 
     saveData(key, data) {
@@ -238,25 +212,5 @@ export default class BuyMeCoffee {
         }
 
         return string.join('<br />')
-    }
-
-    humanDiffTime(date) {
-        const dateString = (date === undefined) ? null : date;
-        if (!dateString) {
-            return '';
-        }
-        const endTime = new Date();
-        const timeDiff = endTime - appStartTime; // in ms
-        const dateObj = moment(dateString);
-        return dateObj.from(moment(window.BuyMeCoffeeAdmin.server_time).add(timeDiff, 'milliseconds'));
-    }
-
-    waitingTime(time1, time2) {
-        if (!time2 || !time1) {
-            return '';
-        }
-        time1 = moment(time1);
-        time2 = moment(time2);
-        return time2.from(time1);
     }
 }

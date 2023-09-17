@@ -1,6 +1,6 @@
 <template>
   <div class="wpm_bmc_main_container">
-    <Report :reportData='reportData'/>
+    <report :reportData='reportData'/>
     <div class="bmc_coffee_preview">
       <a :href="previewUrl" target="_blank"><el-icon style="margin-right:4px;">
         <View/></el-icon> Preview Your Page</a>
@@ -78,7 +78,7 @@
   </div>
 </template>
 <script>
-import Report from "./Report";
+import Report from "./Report.vue";
 import {View} from "@element-plus/icons-vue";
 export default {
   name: 'Dashboard',
@@ -174,6 +174,9 @@ export default {
 }
 
 .bmc_coffee_preview a {
+  svg{
+    width: 20px;
+  }
   text-decoration: none;
   color: #72aee6;
 }

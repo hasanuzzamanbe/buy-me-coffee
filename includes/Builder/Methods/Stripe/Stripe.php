@@ -3,6 +3,7 @@
 namespace BuyMeCoffee\Builder\Methods\Stripe;
 
 use BuyMeCoffee\Builder\Methods\BaseMethods;
+use BuyMeCoffee\Classes\Vite;
 
 class Stripe extends BaseMethods
 {
@@ -12,7 +13,7 @@ class Stripe extends BaseMethods
             'Stripe',
             'stripe',
             'Stripe is a payment gateway that allows you to accept payments from your customers.',
-            WPM_BMC_URL . 'assets/images/credit-card.png'
+            Vite::staticPath() . 'images/credit-card.png'
         );
 
         add_action('wpm_bmc_make_payment_stripe', array($this, 'makePayment'), 10, 3);

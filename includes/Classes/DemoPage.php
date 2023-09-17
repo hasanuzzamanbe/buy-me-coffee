@@ -5,6 +5,7 @@ namespace BuyMeCoffee\Classes;
 use BuyMeCoffee\Classes\View;
 use BuyMeCoffee\Helpers\ArrayHelper;
 use \BuyMeCoffee\Models\Buttons;
+use BuyMeCoffee\Classes\Vite;
 
 class DemoPage
 {
@@ -15,7 +16,7 @@ class DemoPage
 
     public function loadTemplateStyles()
     {
-        wp_enqueue_style('wpm_bmc_template_style', WPM_BMC_URL . 'assets/css/BasicTemplate.css', array(), WPM_BMC_VERSION);
+        Vite::enqueueStyle('wpm_bmc_template_style', 'scss/public/BasicTemplate.scss', array(), WPM_BMC_VERSION);
     }
 
     public function renderFormOnly()

@@ -2,6 +2,7 @@
 
 namespace BuyMeCoffee\Builder;
 
+use BuyMeCoffee\Classes\Vite;
 use BuyMeCoffee\Controllers\PaymentHandler;
 use BuyMeCoffee\Helpers\BuilderHelper;
 use BuyMeCoffee\Models\Buttons;
@@ -252,8 +253,8 @@ class Render
 
     public static function addAssets()
     {
-        wp_enqueue_style('wpm_bmc_css', WPM_BMC_URL . 'assets/css/public-style.css', array(), WPM_BMC_VERSION);
-        wp_enqueue_script('wpm_bmc', WPM_BMC_URL . 'assets/js/BmcPublic.js', array('jquery'), WPM_BMC_VERSION, true);
+        Vite::enqueueStyle('wpm_bmc_css', 'scss/public/public-style.scss', array(), WPM_BMC_VERSION);
+        Vite::enqueueScript('wpm_bmc',  'js/BmcPublic.js', array('jquery'), WPM_BMC_VERSION, true);
         wp_localize_script('wpm_bmc', 'wpm_bmc_general', array(
             'ajax_url' => admin_url('admin-ajax.php')
         ));
