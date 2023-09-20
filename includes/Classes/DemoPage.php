@@ -35,7 +35,9 @@ class DemoPage
             // oxygen page compatibility
             remove_action('wp_head', 'oxy_print_cached_css', 999999);
         }
-        if (isset($_GET['coffee-treet']) && $_GET['coffee-treet'] === '1') {
+
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        if (isset($_GET['coffee-treat']) && $_GET['coffee-treat'] === '1') {
             $this->renderBasicTemplate('page');
         }
     }
@@ -47,10 +49,8 @@ class DemoPage
         $btnController = new Buttons();
         $template = $btnController->getButton();
 
-        echo View::make('templates.FormShortCode', [
-            'type' => '',
-            'template' => $template,
-        ]);
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo View::make('templates.FormShortCode', ['template' => $template, 'type' => '',]);
     }
 
     public function renderBasicTemplate($type)
@@ -64,10 +64,10 @@ class DemoPage
             $template = $btnController->getButton();
 
             $quote = ArrayHelper::get($template, 'advanced.quote', false);
-            echo View::make('templates.BasicTemplate', [
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo View::make('templates.BasicTemplate', [ 'template' => $template,
                 'type' => 'button',
-                'template' => $template,
-                'quote' => $quote,
+                'quote' => esc_html($quote),
             ]);
             exit();
         }

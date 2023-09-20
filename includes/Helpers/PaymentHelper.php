@@ -28,7 +28,7 @@ class PaymentHelper
     public static function currencySymbol($currency = '')
     {
         if (!$currency) {
-            $currency = 'USD';
+            $currency = static::getCurrency()?? 'USD';
         }
         $currency = strtoupper($currency);
 

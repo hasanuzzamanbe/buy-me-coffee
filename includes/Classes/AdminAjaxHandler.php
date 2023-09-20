@@ -21,6 +21,12 @@ class AdminAjaxHandler
 
     public function handleEndPoint()
     {
+        if (!wp_verify_nonce(Arr::get($_REQUEST, 'nonce', false), 'wpm_bmc_nonce')) {
+            wp_send_json_error(array(
+                'message' => __("Invalid nonce", 'buy-me-coffee')
+            ), 403);
+        }
+
         $route = sanitize_text_field($_REQUEST['route']);
 
         $validRoutes = array(
@@ -53,19 +59,19 @@ class AdminAjaxHandler
         wp_send_json_success($methods, 200);
     }
 
-    public function updatePaymentStatus()
+    public function updatePaymentStatus($request)
     {
-        $id = intval($_REQUEST['id']);
-        $status = sanitize_text_field($_REQUEST['status']);
+        $id = intval($request['id']);
+        $status = sanitize_text_field($request['status']);
         $supporter = wpmBmcDB()->table('wpm_bmc_supporters')->where('id', $id)->update(['payment_status' => $status]);
         if ($supporter) {
             wp_send_json_success($supporter, 200);
         }
     }
 
-    public function getSupporter()
+    public function getSupporter($request)
     {
-        $id = intval($_REQUEST['id']);
+        $id = intval($request['id']);
         $supporter = (new Supporters())->find($id);
 
         $supporter->supporters_image = get_avatar_url($supporter->supporters_email);
@@ -75,28 +81,28 @@ class AdminAjaxHandler
         }
     }
 
-    public function getSupporters()
+    public function getSupporters($request)
     {
-        return (new Supporters())->index($_REQUEST);
+        return (new Supporters())->index($request);
     }
 
-    public function editSupporter()
+    public function editSupporter($request)
     {
-        $id = sanitize_text_field($_REQUEST['id']);
+        $id = sanitize_text_field($request['id']);
         $supporter = (new Supporters())->find($id);
         if ($supporter) {
-            $supporter->name = sanitize_text_field(Arr::get($_REQUEST, 'name', ''));
-            $supporter->email = sanitize_text_field(Arr::get($_REQUEST, 'email', ''));
-            $supporter->amount = sanitize_text_field(Arr::get($_REQUEST, 'amount'));
+            $supporter->name = sanitize_text_field(Arr::get($request, 'name', ''));
+            $supporter->email = sanitize_text_field(Arr::get($request, 'email', ''));
+            $supporter->amount = sanitize_text_field(Arr::get($request, 'amount'));
             $supporter->save();
             wp_send_json_success($supporter, 200);
         }
         wp_send_json_error();
     }
 
-    public function deleteSupporter()
+    public function deleteSupporter($request)
     {
-        $id = sanitize_text_field($_REQUEST['id']);
+        $id = sanitize_text_field($request['id']);
         $supporter = (new Supporters());
         if ($supporter->find($id)) {
             $supporter->delete($id);
@@ -105,13 +111,13 @@ class AdminAjaxHandler
         wp_send_json_error();
     }
 
-    public function getPaymentSettings()
+    public function getPaymentSettings($request)
     {
-        $method = sanitize_text_field(Arr::get($_REQUEST, 'method'));
+        $method = sanitize_text_field(Arr::get($request, 'method'));
         do_action('buy-me-coffee/get_payment_settings_' . $method);
     }
 
-    public function resetDefaultSettings()
+    public function resetDefaultSettings($request)
     {
         $settings = (new Buttons())->getButton($isDefault = true);
         update_option('wpm_bmc_payment_setting', $settings, false);
@@ -124,9 +130,9 @@ class AdminAjaxHandler
 
     }
 
-    public function saveSettings()
+    public function saveSettings($request)
     {
-        $settings = $_REQUEST['settings'] ?: array();
+        $settings = $request['settings'] ?: array();
 
         $data = $this->sanitizeTextArray($settings);
         update_option('wpm_bmc_payment_setting', $data, false);

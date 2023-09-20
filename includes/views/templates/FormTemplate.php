@@ -3,13 +3,12 @@
         <div class="buymecoffee_profile_hr">
         </div>
         <div class="buymecoffee_profile_section_image">
-            <img src="<?php echo WPM_BMC_URL . 'assets/images/coffee.png'; ?>"
+            <img src="<?php echo esc_url(WPM_BMC_URL . 'assets/images/coffee.png'); ?>"
                  alt="Profile Image">
         </div>
 
     </div>
     <div class="buymecoffee_preview_header">
-        <h3><?php esc_html_e('', 'buymecoffee') ?></h3>
     </div>
     <div class="buymecoffee_preview_body">
         <?php

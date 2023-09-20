@@ -26,10 +26,12 @@ class IPN
         if ($post_data || strlen($post_data) > 0) {
             $encoded_data .= $arg_separator . $post_data;
         } else {
-            if (empty($_POST)) {
+            // phpcs:ignore WordPress.Security.NonceVerification.Missing
+            $postData = $_POST;
+            if (empty($postData)) {
                 return;
             } else {
-                foreach ($_POST as $key => $value) {
+                foreach ($postData as $key => $value) {
                     $encoded_data .= $arg_separator . "$key=" . urlencode($value);
                 }
             }

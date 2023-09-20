@@ -109,6 +109,7 @@ class Vite
         if (!file_exists($manifestPath)) {
             throw new Exception('Vite Manifest Not Found. Run : npm run dev or npm run prod');
         }
+
         $manifestFile = fopen($manifestPath, "r");
         $manifestData = fread($manifestFile, filesize($manifestPath));
         (static::$instance)->manifestData = json_decode($manifestData, true);
@@ -120,7 +121,7 @@ class Vite
     private function getFileFromManifest($src)
     {
         if (!isset((static::$instance)->manifestData[(static::$instance)->resourceDirectory . $src]) && static::isDevMode()) {
-            throw new Exception("$src file not found in vite manifest, Make sure it is in rollupOptions input and build again");
+            throw new Exception(esc_html($src) . "file not found in vite manifest, Make sure it is in rollupOptions input and build again");
         }
         return (static::$instance)->manifestData[(static::$instance)->resourceDirectory . $src];
     }
@@ -155,7 +156,9 @@ class Vite
             foreach ($file['css'] as $key => $path) {
                 wp_enqueue_style(
                     $file['file'] . '_' . $key . '_css',
-                    $assetPath . $path
+                    $assetPath . $path,
+                    [],
+                    WPM_BMC_VERSION
                 );
             }
         }

@@ -21,7 +21,7 @@ class PaymentHandler
         do_action('wpm_bmc_after_save_' . $method, $settings);
 
         wp_send_json_success(array(
-            'message' => __("Settings ({$method}) successfully updated", 'buy-me-coffee')
+            'message' => "Settings $method successfully updated"
         ), 200);
 
     }

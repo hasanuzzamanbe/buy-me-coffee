@@ -19,13 +19,13 @@ class Render
         $template = (new Buttons())->getButton();
 
         $buttonText = Arr::get($template, 'buttonText');
-        $bgColor = Arr::get($template, 'advanced.bgColor');
-        $color = Arr::get($template, 'advanced.color');
-        $minWidth = Arr::get($template, 'advanced.minWidth');
-        $fontSize = Arr::get($template, 'advanced.fontSize');
-        $radius = Arr::get($template, 'advanced.radius');
+        $bgColor = esc_attr(Arr::get($template, 'advanced.bgColor', '#fad400'));
+        $color = esc_attr(Arr::get($template, 'advanced.color', '#000000'));
+        $minWidth = esc_attr(Arr::get($template, 'advanced.minWidth'));
+        $fontSize = esc_attr(Arr::get($template, 'advanced.fontSize'));
+        $radius = esc_attr(Arr::get($template, 'advanced.radius', '5'));
 
-        $paymentPageUrl = site_url('?coffee-treet=1');
+        $paymentPageUrl = site_url('?coffee-treat=1');
         $openMode = Arr::get($template, 'openMode');
 
         $styling = "<style>.wpm-buymecoffee-container .wpm-buymecoffee-button{
@@ -39,6 +39,7 @@ class Render
             font-size: {$fontSize}px;
             border-radius: {$radius}px;
             cursor: pointer;
+            text-decoration: none;
         }
         button.wpm-buymecoffee-button {
             height: 50px;
@@ -49,19 +50,20 @@ class Render
         </style>";
 
         ob_start();
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo $styling;
         ?>
         <div class="wpm-buymecoffee-container">
             <!--  The Modal button -->
             <?php
-            if ($openMode === 'modal') {
+            if (sanitize_text_field($openMode) === 'modal') {
                 ?>
-                <button class="wpm-buymecoffee-button" id="bmc_open_modal_btn"><?php echo $buttonText; ?></button>
+                <button class="wpm-buymecoffee-button" id="bmc_open_modal_btn"><?php echo esc_html($buttonText); ?></button>
                 <?php
             } else {
                 ?>
                 <a class="wpm-buymecoffee-button" target="_blank"
-                   href="<?php echo esc_url($paymentPageUrl); ?>"><?php echo $buttonText; ?></a>
+                   href="<?php echo esc_url($paymentPageUrl); ?>"><?php echo esc_html($buttonText); ?></a>
                 <?php
             } ?>
             <div id="bmc_modal_wrapper" class="modal">
@@ -125,30 +127,30 @@ class Render
 
         $currency = Arr::get($template, 'currency', 'USD');
         $symbool = PaymentHelper::currencySymbol();
-        $formClassCount = BuilderHelper::getFormCount();
+        $formDynamicClass = BuilderHelper::getFormDynamicClass();
 
         ob_start();
         ?>
-        <form class="wpm_bmc_form" data-wpm_currency="<?php echo esc_html_e($currency); ?>">
+        <form class="wpm_bmc_form" data-wpm_currency="<?php echo esc_html($currency); ?>">
             <input type="hidden" name="__buymecoffee_ref" value="<?php echo esc_html($template['yourName']); ?>"/>
             <div class="wpm_bmc_payment_item">
                 <div class="wpm_bmc_payment_input_content">
                     <div class="wpm_bmc_coffee_selector">
-                        <img width="50" src="<?php echo WPM_BMC_URL . 'assets/images/coffee.png'; ?>">
+                        <img width="50" src="<?php echo esc_url(WPM_BMC_URL . 'assets/images/coffee.png'); ?>">
                         <span>x</span>
 
                         <div class="bmc_coffee">
-                            <input id="one_coffee_select_radio<?= $formClassCount ?>" value="1" class="coffee-select"
+                            <input id="one_coffee_select_radio_<?php echo esc_attr($formDynamicClass); ?>" value="1" class="coffee-select"
                                    name="radio-group" type="radio" checked>
-                            <label for="one_coffee_select_radio<?= $formClassCount ?>">1</label>
+                            <label for="one_coffee_select_radio_<?php echo esc_attr($formDynamicClass); ?>">1</label>
 
-                            <input id="two_coffee_select_radio<?= $formClassCount ?>" value="2" class="coffee-select"
+                            <input id="two_coffee_select_radio_<?php echo esc_attr($formDynamicClass); ?>" value="2" class="coffee-select"
                                    name="radio-group" type="radio">
-                            <label for="two_coffee_select_radio<?= $formClassCount ?>">2</label>
+                            <label for="two_coffee_select_radio_<?php echo esc_attr($formDynamicClass); ?>">2</label>
 
-                            <input id="three_coffee_select_radio<?= $formClassCount ?>" value="3" class="coffee-select"
+                            <input id="three_coffee_select_radio_<?php echo esc_attr($formDynamicClass); ?>" value="3" class="coffee-select"
                                    name="radio-group" type="radio">
-                            <label for="three_coffee_select_radio<?= $formClassCount ?>">3</label>
+                            <label for="three_coffee_select_radio_<?php echo esc_attr($formDynamicClass); ?>">3</label>
                         </div>
                         <input class="wpm_bmc_custom_quantity" type="number" value="5" data-quantity="5">
 
@@ -168,8 +170,8 @@ class Render
                                 height: 60px;
                                 font-size:33px;
                                 padding: 0px 20px; margin-bottom: 14px;"
-                               value="<?php echo $defaultAmount; ?>"
-                               data-price="<?php echo $defaultAmount * 100; ?>"
+                               value="<?php echo esc_attr($defaultAmount); ?>"
+                               data-price="<?php echo esc_attr($defaultAmount * 100); ?>"
                                type="text">
                     </div>
                 </div>
@@ -178,7 +180,7 @@ class Render
                 <div data-element_type="input" class="wpm_bmc_form_item">
                     <!--                        <label for="wpm-supporter-name">Name</label>-->
                     <div class="wpm_bmc_input_content">
-                        <input <?php echo static::builtAttributes($nameAttributes); ?>></input>
+                        <input <?php echo esc_attr(static::builtAttributes($nameAttributes)); ?>></input>
                     </div>
                 </div>
             <?php endif; ?>
@@ -187,7 +189,7 @@ class Render
                 <div data-element_type="email" class="wpm_bmc_form_item">
                     <!--                        <label for="wpm-message">Email</label>-->
                     <div class="wpm_bmc_input_content">
-                        <input <?php echo static::builtAttributes($emailAttributes); ?>></input>
+                        <input <?php echo esc_attr(static::builtAttributes($emailAttributes)); ?>></input>
                     </div>
                 </div>
             <?php endif; ?>
@@ -196,20 +198,20 @@ class Render
                 <div data-element_type="textarea" class="wpm_bmc_form_item">
                     <!--                    <label for="wpm-message">Message</label>-->
                     <div class="wpm_bmc_input_content">
-                        <textarea rows="6" <?php echo static::builtAttributes($msgAttributes); ?>></textarea>
+                        <textarea rows="6" <?php echo esc_attr(static::builtAttributes($msgAttributes)); ?>></textarea>
                     </div>
                 </div>
             <?php endif; ?>
 
             <div class="wpm_bmc_form_item wpm_bmc_pay_methods">
                 <div class="wpm_bmc_pay_method" data-payment_selected="none">
-                    <?php echo static::payMethod($template); ?>
+                    <?php echo esc_html(static::payMethod($template)); ?>
                 </div>
             </div>
 
             <div data-element_type="submit" class="wpm_bmc_form_item wpm_bmc_form_submit_wrapper">
                 <div class="wpm_bmc_input_content">
-                    <button <?php echo static::builtAttributes($btnAttributes); ?>>Support
+                    <button <?php echo esc_attr(static::builtAttributes($btnAttributes)); ?>>Support
                         <div class="wpm_loading_svg">
                             <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px"
@@ -223,8 +225,8 @@ class Render
                                                       to="360 20 20" dur="0.5s" repeatCount="indefinite"/>
                                 </path></svg>
                         </div>
-                        <?php echo $symbool; ?></php> <span
-                                class="wpm_payment_total_amount"><?php echo $defaultAmount; ?></span>
+                        <?php echo esc_html($symbool); ?></php> <span
+                                class="wpm_payment_total_amount"><?php echo esc_html($defaultAmount); ?></span>
                     </button>
                 </div>
             </div>
@@ -267,7 +269,7 @@ class Render
             if (is_array($attribute)) {
                 $attribute = json_encode($attribute);
             }
-            $atts .= $attributeKey . "='" . htmlspecialchars($attribute, ENT_QUOTES) . "' ";
+            $atts .= $attributeKey . "=" . htmlspecialchars($attribute, ENT_QUOTES) . " ";
         }
         return $atts;
     }

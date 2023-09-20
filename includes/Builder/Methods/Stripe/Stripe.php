@@ -59,7 +59,7 @@ class Stripe extends BaseMethods
     {
         ?>
         <label class="wpm_stripe_card_label" for="wpm_stripe_card">
-            <img width="50px" src="<?php echo WPM_BMC_URL . 'assets/images/credit-card.png'; ?>" alt="">
+            <img width="50px" src="<?php echo esc_url(WPM_BMC_URL . 'assets/images/credit-card.png'); ?>" alt="">
             <input
                     style="outline: none;"
                     type="radio" class="wpm_stripe_card" name="wpm_payment_method" id="wpm_stripe_card"

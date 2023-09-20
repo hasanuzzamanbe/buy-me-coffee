@@ -62,6 +62,7 @@ class Menu
             </div>
         </div>
         <?php
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo ob_get_clean();
     }
 
@@ -94,7 +95,8 @@ class Menu
         $BuyMeCoffeeAdminVars = apply_filters('buy-me-coffee/admin_app_vars', array(
             'assets_url' => Vite::staticPath(),
             'ajaxurl' => admin_url('admin-ajax.php'),
-            'preview_url' => site_url('?coffee-treet=1')
+            'preview_url' => site_url('?coffee-treat=1'),
+            'nonce' => wp_create_nonce('wpm_bmc_nonce'),
         ));
 
 

@@ -9,12 +9,14 @@ class SubmissionHandler
 {
     public function handleSubmission()
     {
-        parse_str($_REQUEST['form_data'], $form_data);
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $request = $_REQUEST;
+        parse_str($request['form_data'], $form_data);
 
-        $paymentMethod = ArrayHelper::get($_REQUEST, 'payment_method');
-        $paymentTotal = intval(ArrayHelper::get($_REQUEST, 'payment_total'));
-        $quantity = ArrayHelper::get($_REQUEST, 'coffee_count', 1);
-        $currency = ArrayHelper::get($_REQUEST, 'currency', false);
+        $paymentMethod = ArrayHelper::get($request, 'payment_method');
+        $paymentTotal = intval(ArrayHelper::get($request, 'payment_total'));
+        $quantity = ArrayHelper::get($request, 'coffee_count', 1);
+        $currency = ArrayHelper::get($request, 'currency', false);
 
         if (!$currency) {
             $currency = PaymentHelper::getCurrency();
@@ -86,7 +88,7 @@ class SubmissionHandler
         $prefix = 'wpm_bmc_' . time();
         $uid = uniqid($prefix);
         // now let's make a unique number from 1 to 999
-        $uid .= mt_rand(1, 999);
+        $uid .= wp_rand(1, 999);
         $uid = str_replace(array("'", '/', '?', '#', "\\"), '', $uid);
         return $uid;
     }

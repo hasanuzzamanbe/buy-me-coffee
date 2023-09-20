@@ -13,7 +13,8 @@ class View
      */
     public static function render($path, $data = [])
     {
-        echo self::make($path, $data);
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo static::make($path, $data);
     }
 
     /**

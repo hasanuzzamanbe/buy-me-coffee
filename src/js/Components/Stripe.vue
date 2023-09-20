@@ -77,7 +77,8 @@
                 this.$get({
                     action: 'wpm_bmc_admin_ajax',
                     route: 'get_data',
-                    method: this.$route.name
+                    method: this.$route.name,
+                    nonce: window.BuyMeCoffeeAdmin.nonce
                 })
                     .then((response) => {
                         this.settings = response.data.settings;
@@ -96,7 +97,8 @@
                     action: 'wpm_bmc_admin_ajax',
                     settings: this.settings,
                     method: this.$route.name,
-                    route: 'save_payment_settings'
+                    route: 'save_payment_settings',
+                    nonce: window.BuyMeCoffeeAdmin.nonce
                 })
                     .then(response => {
                         this.$handleSuccess(response.data.message);

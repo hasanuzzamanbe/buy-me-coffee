@@ -114,6 +114,7 @@ export default {
         limit: this.limit,
         page: this.current,
         posts_per_page: this.posts_per_page,
+        nonce: window.BuyMeCoffeeAdmin.nonce
       })
           .then((response) => {
             this.supporters = response.data.supporters;
@@ -135,7 +136,8 @@ export default {
       this.$post({
         action: 'wpm_bmc_admin_ajax',
         route: 'delete_supporter',
-        id: id
+        id: id,
+        nonce: window.BuyMeCoffeeAdmin.nonce
       }).then(() => {
         this.$handleSuccess('This record has been deleted.')
         this.getSupporters();

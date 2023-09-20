@@ -247,7 +247,8 @@ export default {
     getSettings() {
       this.$get({
         action: 'wpm_bmc_admin_ajax',
-        route: 'get_settings'
+        route: 'get_settings',
+        nonce: window.BuyMeCoffeeAdmin.nonce
       }).then(res => {
         this.template = res.data.template;
         this.currencies = res.data.currencies;
@@ -262,7 +263,8 @@ export default {
       this.saving = true;
       this.$post({
         action: 'wpm_bmc_admin_ajax',
-        route: 'reset_template_settings'
+        route: 'reset_template_settings',
+        nonce: window.BuyMeCoffeeAdmin.nonce
       })
           .then(response => {
             this.$handleSuccess(response.data.message);
@@ -281,7 +283,8 @@ export default {
       this.$post({
         action: 'wpm_bmc_admin_ajax',
         settings: this.template,
-        route: 'save_settings'
+        route: 'save_settings',
+        nonce: window.BuyMeCoffeeAdmin.nonce
       })
           .then(response => {
             this.$handleSuccess(response.data.message);

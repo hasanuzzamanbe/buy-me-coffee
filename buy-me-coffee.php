@@ -156,6 +156,7 @@ if (!defined('WPM_BMC_VERSION')) {
         $disablePages = [
             'buy-me-coffee.php',
         ];
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if (isset($_GET['page']) && in_array($_GET['page'], $disablePages)) {
             remove_all_actions('admin_notices');
         }

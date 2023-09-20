@@ -15,7 +15,7 @@
                     <li data-key="<?php echo esc_attr($item['key']); ?>"
                         class="buymecoffee_menu_item <?php echo ($hasSubMenu) ? 'buymecoffee_has_sub_items' : ''; ?> buymecoffee_item_<?php echo esc_attr($item['key']); ?>">
                         <a class="buymecoffee_menu_primary" href="<?php echo esc_url($item['permalink']); ?>">
-                            <?php echo sanitize_text_field($item['label']); ?>
+                            <?php echo esc_html($item['label']); ?>
                             <?php if ($hasSubMenu) { ?>
                                 <span class="dashicons dashicons-arrow-down-alt2"></span>
                             <?php } ?></a>

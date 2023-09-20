@@ -190,7 +190,7 @@ class PayPal extends BaseMethods
     public function successUrl($supporter)
     {
         return add_query_arg(array(
-            'coffee-treet' => 1,
+            'coffee-treat' => 1,
             'wpm_bmc_success' => 1,
             'wpm_bmc_submission' => $supporter->entry_hash,
             'payment_method' => 'paypal'
@@ -201,7 +201,7 @@ class PayPal extends BaseMethods
     {
         return add_query_arg(array(
             'wpm_bmc_failed' => 1,
-            'coffee-treet' => 1,
+            'coffee-treat' => 1,
             'wpm_bmc_submission' => $supporter->entry_hash,
             'payment_method' => 'paypal'
         ), home_url());
@@ -209,7 +209,9 @@ class PayPal extends BaseMethods
 
     public function ipnVerification()
     {
-        if (isset($_REQUEST['wpm_bmc__paypal_ipn'])) {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $requestData = $_REQUEST;
+        if (isset($requestData['wpm_bmc__paypal_ipn'])) {
             (new IPN())->ipnVerificationProcess();
         }
     }
@@ -314,7 +316,7 @@ class PayPal extends BaseMethods
         $mode = $settings['payment_mode'];
         $clientId = $mode === 'test' ? $settings['test_public_key'] : $settings['live_public_key'];
 
-        wp_enqueue_script('wpm-buymecoffee-checkout-sdk-' . $this->method, 'https://www.paypal.com/sdk/js?client-id=' . $clientId, [], null, false);
+        wp_enqueue_script('wpm-buymecoffee-checkout-sdk-' . $this->method, 'https://www.paypal.com/sdk/js?client-id=' . $clientId, [], WPM_BMC_VERSION, false);
 
         Vite::enqueueScript('wpm-buymecoffee-checkout-handler-' . $this->method, 'js/PaymentMethods/paypal-checkout.js', ['wpm-buymecoffee-checkout-sdk-paypal'], '1.0.1', false);
 
@@ -326,7 +328,7 @@ class PayPal extends BaseMethods
 
         ?>
         <label class="wpm_paypal_card_label" for="wpm_paypal_card">
-            <img width="50px" src="<?php echo WPM_BMC_URL . 'assets/images/paypal.png'; ?>" alt="">
+            <img width="50px" src="<?php echo esc_url(WPM_BMC_URL . 'assets/images/paypal.png'); ?>" alt="">
             <input
                     style="outline: none;"
                     type="radio" name="wpm_payment_method" class="wpm_paypal_card" id="wpm_paypal_card"
