@@ -316,7 +316,7 @@ class PayPal extends BaseMethods
         $mode = $settings['payment_mode'];
         $clientId = $mode === 'test' ? $settings['test_public_key'] : $settings['live_public_key'];
 
-        wp_enqueue_script('wpm-buymecoffee-checkout-sdk-' . $this->method, 'https://www.paypal.com/sdk/js?client-id=' . $clientId, [], WPM_BMC_VERSION, false);
+        wp_enqueue_script('wpm-buymecoffee-checkout-sdk-' . $this->method, 'https://www.paypal.com/sdk/js?client-id=' . $clientId, [], null, false);
 
         Vite::enqueueScript('wpm-buymecoffee-checkout-handler-' . $this->method, 'js/PaymentMethods/paypal-checkout.js', ['wpm-buymecoffee-checkout-sdk-paypal'], '1.0.1', false);
 
