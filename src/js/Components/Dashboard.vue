@@ -8,6 +8,7 @@
     <div class="wpm_bmc_supporters">
       <h1 class="wpm_bmc_menu_title">Supporters:</h1>
       <el-table
+          class="customers_table"
           :data="supporters"
           style="width: 100%">
         <el-table-column
@@ -22,7 +23,7 @@
             width="180"
             label="Name">
           <template #default="scope">
-            <span>{{ scope.row.supporters_name }}</span>
+            <a style="cursor:pointer;" @click="handleGet(scope.row.id)">{{ scope.row.supporters_name }}</a>
           </template>
         </el-table-column>
         <el-table-column
@@ -34,15 +35,21 @@
         <el-table-column
             prop="payment_status"
             label="Status">
+          <template #default="scope">
+            <span :class="'wpm_bmc_status wpm_bmc_status_' + scope.row.payment_status" v-html="scope.row.payment_status"></span>
+          </template>
         </el-table-column>
         <el-table-column
-            prop="payment_method"
-            label="Payment By">
+            label="Paid By">
+          <template #default="scope">
+            <img width="64" class="wpm_bmc_paid_by_image" v-if="scope.row.payment_method" :src="PayPalImage">
+            <span v-else :class="'wpm_bmc_payment_type wpm_bmc_payment_type_' + scope.row.payment_method" style="margin-left: 10px">{{ scope.row.payment_method ? scope.row.payment_method : '-' }}</span>
+          </template>
         </el-table-column>
         <el-table-column
             label="Mode">
           <template #default="scope">
-            <span style="margin-left: 10px">{{ scope.row.payment_mode ? scope.row.payment_mode : '-' }}</span>
+            <span :class="'wpm_bmc_payment_mode wpm_bmc_payment_mode_' + scope.row.payment_mode" style="margin-left: 10px">{{ scope.row.payment_mode ? scope.row.payment_mode : '-' }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -50,12 +57,14 @@
           <template #default="scope">
             <el-button-group>
               <el-button
+                  round
                   size="small"
                   icon="View"
                   @click="handleGet(scope.row.id)"></el-button>
               <el-popconfirm @confirm="handleDelete(scope.row.id)" title="Are you sure to delete this?">
                 <template #reference>
                   <el-button
+                      round
                       size="small"
                       type="danger"
                       icon="Delete">
@@ -70,8 +79,8 @@
       <el-pagination
           @current-change="handleSizeChange"
           :page-size="posts_per_page"
-          background
-          layout="prev, pager, next"
+          background="background"
+          layout="size, prev, pager, next, total"
           :total="total">
       </el-pagination>
     </div>
@@ -80,6 +89,7 @@
 <script>
 import Report from "./Report.vue";
 import {View} from "@element-plus/icons-vue";
+
 export default {
   name: 'Dashboard',
   components: {
@@ -100,6 +110,11 @@ export default {
         // total_amount: 0,
         currency_total: {}
       }
+    }
+  },
+  computed: {
+    PayPalImage() {
+      return window.BuyMeCoffeeAdmin.assets_url + 'images/' + 'PayPal.svg';
     }
   },
   methods: {
@@ -153,7 +168,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .wpm_bmc_supporters {
-  background: #ebfffea3;
+  background: #e9fff7;
   padding: 24px;
   //margin-top: 24px;
   border-radius: 6px;
@@ -185,7 +200,10 @@ export default {
 
 .bmc_coffee_preview a:hover{
   text-decoration: none;
-  color: #ff8b46;
+  color: #07958b;
+}
+.wpm_bmc_paid_by_image {
+  opacity: 0.8;
 }
 </style>
 

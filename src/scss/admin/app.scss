@@ -1,10 +1,32 @@
-//@forward "~element-plus/theme-chalk/src/common/var.scss" with (
-//  $colors: (
-//    "primary": (
-//      "base": #eef513,
-//    ),
-//  ),
-//);
+:root {
+  --el-color-primary: #14a3b7;
+}
+
+.el-input__wrapper {
+  padding: 0px !important;
+}
+.el-textarea__inner, .el-input__inner {
+  &:focus, &:active {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  border: 1px solid #14a3b7 !important;
+}
+.wpm_currency_select {
+  border: none;
+  .el-input__wrapper {
+    border: 1px solid #14a3b7 !important;
+    .el-input__inner {
+      border:none !important;
+    }
+    &:focus {
+      outline: none;
+        box-shadow: none;
+    }
+  }
+}
 
 @import './global_css.scss';
+
+
 

@@ -8,8 +8,6 @@ import {
     removeAllActions
 } from '@wordpress/hooks';
 
-const appStartTime = new Date();
-
 export default class BuyMeCoffee {
     constructor() {
         this.doAction = doAction;

@@ -12,6 +12,8 @@ class Supporters
 
         $query = wpmBmcDB()->table('wpm_bmc_supporters')
             ->orderBy('ID', 'DESC')
+            ->select('*')
+            ->select(wpmBmcDB()->raw('DATE_FORMAT(created_at, "%e/%m/%y at %H:%i")  as created_at'))
             ->offset($offset)
             ->limit($args['posts_per_page']);
 

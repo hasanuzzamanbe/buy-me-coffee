@@ -38,7 +38,7 @@
             <td>Payment Method</td><td>{{supporter.payment_method}}</td>
           </tr>
           <tr>
-            <td>Payment Status</td><td>{{supporter.payment_status}}</td>
+            <td>Payment Status</td><td><span :class="'wpm_bmc_status wpm_bmc_status_' + supporter.payment_status">{{supporter.payment_status}}</span></td>
           </tr>
           <tr>
             <td>Payment Mode</td><td>{{supporter.payment_mode}}</td>
@@ -122,10 +122,7 @@ export default {
                   nonce: window.BuyMeCoffeeAdmin.nonce
                 }
             ).then((response) => {
-              ElMessage({
-                type: 'success',
-                message: 'Updated',
-              })
+              this.$handleSuccess('Updated Successfully');
             })
           })
           .catch(() => {
@@ -182,8 +179,10 @@ export default {
 }
 .wpm_bmc_supporter_main_container {
   background: #ebfffea3;
-  box-shadow: 0px 0px 4px 3px lightgrey;
+  box-shadow: rgb(17 12 46 / 15%) 0px 48px 100px 0px;
   padding: 32px;
+  margin-top: 23px;
+  border-radius: 6px;
   .wpm_supporter_items svg {
     width: 20px;
     margin-right: 10px;

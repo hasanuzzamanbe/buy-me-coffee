@@ -58,11 +58,11 @@ export default {
 
 <style scoped lang="scss">
 .wpm_bmc_report_wrapper {
-  background: #fffcf2;
+  background: linear-gradient(84deg, #f5fffe54, #affbf054);
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  box-shadow: rgb(17 12 46 / 15%) 0px 48px 100px 0px;
+  box-shadow: rgb(17 12 46 / 15%) 0px 8px 100px 0px;
   margin-bottom: 24px;
   border-radius: 7px;
   margin-top: 23px;
@@ -86,6 +86,6 @@ export default {
 }
 .wpm_bmc_report_count i {
   margin-right: 20px;
-  color: #e4c710;
+  color: #2a9e6f;
 }
 </style>

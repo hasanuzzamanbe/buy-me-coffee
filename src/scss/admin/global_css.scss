@@ -91,13 +91,6 @@ input::placeholder {
     font-weight: 100;
 }
 
-.el-input__wrapper {
-    padding: 0px !important;
-    input {
-        border: 1px solid #3f9eff;
-    }
-}
-
 .wpm_currency_select {
     input {
         border: none;
@@ -107,9 +100,6 @@ input::placeholder {
         border: none !important;
         outline: none !important;
     }
-    .el-input__wrapper {
-        border: 1px solid #3f9eff;
-    }
 }
 
 .wpm_bmc {
@@ -117,6 +107,10 @@ input::placeholder {
         max-width: 100%;
         background: #fff;
         padding: 24px;
+        margin-top: 23px;
+        background: linear-gradient(84deg, #f5fffe54, #affbf054);
+        box-shadow: rgb(17 12 46 / 15%) 0px 8px 100px 0px;
+        border-radius: 7px;
     }
     &-editor {
         box-shadow: rgb(17 12 46 / 15%) 0px 48px 100px 0px;
@@ -141,4 +135,66 @@ input::placeholder {
     margin: 125px auto;
     color: #636363;
     font-family: monospace;
+}
+
+//dashboard css
+span.wpm_bmc_payment_type {
+    padding: 2px 6px;
+    border-radius: 5px;
+    text-transform: capitalize;
+    border: 1px solid #ccc;
+    background: #42a5ff6e;
+}
+
+.wpm_bmc_status {
+    padding: 2px 6px;
+    border-radius: 5px;
+    color: #141414;
+    text-transform: capitalize;
+    border: 1px solid #ccc;
+
+    &_paid {
+        border: 1px solid #1affb280;
+        background: #1affb280;
+    }
+    &_pending {
+        border: 1px solid rgba(255, 235, 59, 0.55);
+        background: rgba(255, 235, 59, 0.55);
+    }
+    &_cancelled {
+        border: 1px solid #ff0b0b;
+        background: #ff0b0b;
+        color: #fff;
+    }
+    &_failed {
+        border: 1px solid #ff0b0b;
+        background: #ff0b0b;
+        color: #fff;
+    }
+    &_refunded {
+        border: 1px solid rgb(137, 137, 137);
+        background: rgb(137, 137, 137);
+        color: white;
+    }
+}
+
+.customers_table table tr {
+    background-color: #f2fffe !important;
+}
+thead th {
+    background: #f1fffe !important;
+    color: #3f7098;
+}
+
+.wpm_bmc_payment_mode {
+    text-transform: uppercase;
+    font-family: monospace;
+    font-weight: 600;
+    font-size: 16px;
+    &_live {
+        color: #4CAF50;
+    }
+    &_test {
+        color: #607D8B;
+    }
 }
