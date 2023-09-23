@@ -91,12 +91,12 @@ class Menu
         );
 
         //enqueue css file using wp_enqueue (already compiled with vite)
-        //Vite::enqueueStyle('buy-me-coffee_admin_css', 'scss/admin/app.scss');
+//        Vite::enqueueStyle('buy-me-coffee_admin_css', 'scss/admin/app.scss');
 
         $BuyMeCoffeeAdminVars = apply_filters('buy-me-coffee/admin_app_vars', array(
             'assets_url' => Vite::staticPath(),
             'ajaxurl' => admin_url('admin-ajax.php'),
-            'preview_url' => site_url('?send_coffee=1'),
+            'preview_url' => site_url('?send_coffee'),
             'nonce' => wp_create_nonce('wpm_bmc_nonce'),
         ));
 

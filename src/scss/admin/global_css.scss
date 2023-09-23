@@ -1,46 +1,4 @@
-.topnav {
-    overflow: hidden;
-    display: flex;
-    min-height: 90vh;
-    flex-direction: column;
-    align-items: flex-end;
-    padding: 0px 18px;
 
-    /* Style the links inside the navigation bar */
-    a {
-        min-width: 96px;
-        float: left;
-        color: black;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 15px;
-        border: 1px solid #ccc;
-        border-radius: 25px;
-        margin-bottom: 33px;
-    }
-
-    a:focus{
-        outline: none !important;
-    }
-    a:active {
-        outline: none !important;
-    }
-    /* Change the color of links on hover */
-    a:hover {
-        outline: none !important;
-        background-color: #ddd;
-        outline: none;
-        color: black;
-    }
-
-    /* Add a color to the active/current link */
-    a.ninja-tab-active {
-        background: white;
-        color: #ffa92c;
-        border-bottom: 2px solid #ffa92c;
-    }
-}
 a:focus{
     outline: none !important;
     box-shadow: none !important;
@@ -220,3 +178,37 @@ input::placeholder {
             color: #607D8B;
         }
     }
+
+
+    //gateways
+
+.wpm_bmc_gateways {
+    background: linear-gradient(122deg, #ffffff87, #c4fff654);
+    border-radius: 6px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.wpm_bmc_gateway_item {
+    gap: 20px;
+    max-width: 400px;
+    display: flex;
+    border-radius: 7px;
+    align-items: center;
+    border: 1px solid #efefef;
+    padding: 23px;
+    height: 56px;
+    margin-bottom: 32px;
+    cursor:pointer;
+    &:hover {
+        box-shadow: rgb(50 50 93 / 25%) 2px 2px 3px 0px, rgb(0 0 0 / 30%) 0px 30px 60px -30px;
+    }
+}
+
+//supporter
+table.wpm_supporter_payments {
+    td{
+        padding: 12px;
+    }
+}

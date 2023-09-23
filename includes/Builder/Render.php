@@ -25,7 +25,7 @@ class Render
         $fontSize = esc_attr(Arr::get($template, 'advanced.fontSize'));
         $radius = esc_attr(Arr::get($template, 'advanced.radius', '5'));
 
-        $paymentPageUrl = site_url('?send_coffee=1');
+        $paymentPageUrl = site_url('?send_coffee');
         $openMode = Arr::get($template, 'openMode');
 
         $styling = "<style>.wpm-buymecoffee-container .wpm-buymecoffee-button{

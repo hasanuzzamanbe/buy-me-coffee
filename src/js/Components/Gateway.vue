@@ -7,19 +7,20 @@
             <el-col :span="12">
             </el-col>
         </el-row>
-        <el-row>
-            <div v-for="(gateway, index) in gateways" :key="index" :offset="index > 0 ? 2 : 0">
-                <el-card :body-style="{ padding: '10px' }" style="width: 250px;margin-right:12px; border-radius: 06px;">
+        <el-row class="wpm_bmc_gateways">
+            <div v-for="(gateway, index) in gateways" :key="index" class="wpm_bmc_gateway_item" @click="() => this.$router.push({ name: gateway.route })">
+                  <div>
                     <img :src="gateway.image"
-                          style="max-width: 100px;opacity: 0.6;"
-                        class="image" />
-                    <div style="padding: 14px">
+                         style="max-width: 96px;"
+                         class="image" />
+                  </div>
+
+                    <div style="display: flex;">
                         <h3>{{ gateway.title }}</h3>
-                        <div class="bottom">
-                            <el-button size="small" class="link" @click="() => this.$router.push({ name: gateway.route })" icon="View">settings </el-button>
-                        </div>
+<!--                        <div class="bottom">-->
+<!--                            <el-button size="small" class="link" @click="() => this.$router.push({ name: gateway.route })" icon="View">settings </el-button>-->
+<!--                        </div>-->
                     </div>
-                </el-card>
             </div>
         </el-row>
 

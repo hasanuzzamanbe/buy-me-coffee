@@ -1,7 +1,7 @@
 <template>
   <div v-loading="loading" class="wpm_bmc_supporter_main_container">
     <h3 class="wpm_bmc_title">
-      <router-link style="text-decoration: none;" :to="{name: 'Dashboard'}">Supporters / </router-link>Supporter:
+      <router-link style="text-decoration: none;" :to="{name: 'Dashboard'}">Supporters / </router-link>{{$route.params.id}}
     </h3>
     <div class="wpm_supporter_profile_wrapper">
         <div class="wpm_supporter_profile_section">
@@ -35,16 +35,23 @@
           </thead>
           <tbody>
           <tr>
-            <td>Payment Method</td><td>{{supporter.payment_method}}</td>
+            <td>Payment Method</td>
+            <td>
+              <img v-if="supporter.payment_method === 'paypal'" width="64" :src="getImage('PayPal.svg')" />
+              <span v-else>{{supporter.payment_method}}</span>
+            </td>
           </tr>
           <tr>
             <td>Payment Status</td><td><span :class="'wpm_bmc_status wpm_bmc_status_' + supporter.payment_status">{{supporter.payment_status}}</span></td>
           </tr>
-          <tr>
+          <tr v-if="supporter.payment_mode">
             <td>Payment Mode</td><td>{{supporter.payment_mode}}</td>
           </tr>
           <tr>
             <td style="text-transform:capitalize;">Coffee For</td><td>{{supporter.reference}}</td>
+          </tr>
+          <tr v-if="supporter.supporters_message">
+            <td style="text-transform:capitalize;">Message</td><td>{{supporter.supporters_message}}</td>
           </tr>
           <tr>
             <td style="font-family:monospace;">{{supporter.created_at}}</td>
@@ -102,6 +109,9 @@ export default {
       Money
     },
   methods: {
+    getImage(path) {
+      return window.BuyMeCoffeeAdmin.assets_url + 'images/' + path;
+    },
     updateStatus() {
       ElMessageBox.confirm(
           'Are you sure to change payment status?',
@@ -202,13 +212,13 @@ export default {
 
   .wpm_supporter_items div {
     font-size: 20px;
-    border: 1px solid #ff932a;
+    border: 1px solid #0c993a;
     padding: 9px 16px;
     border-radius: 6px;
     margin-right: 6px;
     margin-bottom: 12px;
     display: flex;
-    color: #ff932a;
+    color: #0c993a;
   }
   .wpm_supporter_profile_wrapper {
     max-width: 350px;
