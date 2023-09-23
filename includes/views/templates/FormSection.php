@@ -7,7 +7,7 @@
             if (isset($getData['for'])) {
                 $template['yourName'] = sanitize_text_field($getData['for']);
             }
-            esc_html($template['yourName'])
+            echo esc_html($template['yourName'])
             ?></span> <br/>
         a coffee
     </h3>

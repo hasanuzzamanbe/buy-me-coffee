@@ -3,7 +3,7 @@
         <div class="buymecoffee_profile_hr">
         </div>
         <div class="buymecoffee_profile_section_image">
-            <img src="<?php echo esc_url(WPM_BMC_URL . 'assets/images/coffee.png'); ?>"
+            <img src="<?php echo esc_url($profile_image); ?>"
                  alt="Profile Image">
         </div>
 

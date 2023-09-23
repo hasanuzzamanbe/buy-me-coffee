@@ -37,7 +37,7 @@ class DemoPage
         }
 
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        if (isset($_GET['coffee-treat']) && $_GET['coffee-treat'] === '1') {
+        if (isset($_GET['send_coffee'])) {
             $this->renderBasicTemplate('page');
         }
     }
@@ -64,10 +64,15 @@ class DemoPage
             $template = $btnController->getButton();
 
             $quote = ArrayHelper::get($template, 'advanced.quote', false);
+            $profileImage = ArrayHelper::get($template, 'advanced.image');
+            if ($profileImage == '') {
+                $profileImage = WPM_BMC_URL . 'assets/images/coffee.png';
+            }
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo View::make('templates.BasicTemplate', [ 'template' => $template,
                 'type' => 'button',
-                'quote' => esc_html($quote),
+                'quote' => $quote,
+                'profile_image' => $profileImage
             ]);
             exit();
         }

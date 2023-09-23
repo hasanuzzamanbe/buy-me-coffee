@@ -137,64 +137,86 @@ input::placeholder {
     font-family: monospace;
 }
 
-//dashboard css
-span.wpm_bmc_payment_type {
-    padding: 2px 6px;
-    border-radius: 5px;
-    text-transform: capitalize;
-    border: 1px solid #ccc;
-    background: #42a5ff6e;
-}
 
-.wpm_bmc_status {
-    padding: 2px 6px;
-    border-radius: 5px;
-    color: #141414;
-    text-transform: capitalize;
-    border: 1px solid #ccc;
-
-    &_paid {
-        border: 1px solid #1affb280;
-        background: #1affb280;
+//settings page
+.wpm_bmc_settings_image {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    gap: 20px;
+    img {
+        width: 120px;
+        border-radius: 50%;
+        border: 4px solid #ccc;
     }
-    &_pending {
-        border: 1px solid rgba(255, 235, 59, 0.55);
-        background: rgba(255, 235, 59, 0.55);
-    }
-    &_cancelled {
-        border: 1px solid #ff0b0b;
-        background: #ff0b0b;
-        color: #fff;
-    }
-    &_failed {
-        border: 1px solid #ff0b0b;
-        background: #ff0b0b;
-        color: #fff;
-    }
-    &_refunded {
-        border: 1px solid rgb(137, 137, 137);
-        background: rgb(137, 137, 137);
-        color: white;
+    button {
+        background: rgba(141, 202, 255, 0.84);
+        border: none;
+        border-radius: 6px;
+        width:64px;
+        cursor: pointer;
     }
 }
 
-.customers_table table tr {
-    background-color: #f2fffe !important;
-}
-thead th {
-    background: #f1fffe !important;
-    color: #3f7098;
-}
+    //dashboard css
+    span.wpm_bmc_payment_type {
+        padding: 2px 6px;
+        border-radius: 5px;
+        text-transform: capitalize;
+        border: 1px solid #ccc;
+        background: #42a5ff6e;
+    }
 
-.wpm_bmc_payment_mode {
-    text-transform: uppercase;
-    font-family: monospace;
-    font-weight: 600;
-    font-size: 16px;
-    &_live {
-        color: #4CAF50;
+    .wpm_bmc_status {
+        padding: 2px 6px;
+        border-radius: 5px;
+        color: #141414;
+        text-transform: capitalize;
+        border: 1px solid #ccc;
+        font-size: 12px;
+        &_paid {
+            border: 1px solid #1affb280;
+            background: #1affb280;
+        }
+        &_pending {
+            border: 1px solid rgba(255, 235, 59, 0.55);
+            background: rgba(255, 235, 59, 0.55);
+        }
+        &_cancelled {
+            border: 1px solid #ff0b0b;
+            background: #ff0b0b;
+            color: #fff;
+        }
+        &_failed {
+            border: 1px solid #ff0b0b;
+            background: #ff0b0b;
+            color: #fff;
+        }
+        &_refunded {
+            border: 1px solid rgb(137, 137, 137);
+            background: rgb(137, 137, 137);
+            color: white;
+        }
     }
-    &_test {
-        color: #607D8B;
+
+    .customers_table table tr {
+        background-color: #f2fffe !important;
     }
-}
+    thead th {
+        background: #f1fffe !important;
+        color: #3f7098;
+    }
+
+    .wpm_bmc_payment_mode {
+        text-transform: uppercase;
+        font-family: monospace;
+        font-weight: 600;
+        font-size: 14px;
+        &_live {
+            color: #4CAF50;
+        }
+        &_test {
+            color: #607D8B;
+        }
+    }

@@ -87,6 +87,20 @@
                       >
                       </el-input>
                     </el-form-item>
+                    <el-form-item label="">
+                      <div class="wpm_bmc_settings_image">
+                        <div>
+                          <MediaButton @onMediaSelected="onMediaSelected" />
+                        </div>
+                        <img width="120" height="120"
+                            v-if="template.advanced.image"
+                            :src="template.advanced.image"
+                        />
+                        <img v-else width="120" height="120"
+                             :src="fullPath('coffee.png')"
+                        />
+                      </div>
+                    </el-form-item>
                     <!--                                      will add modal-->
                     <!--                                                <el-form-item label="Button click action">-->
                     <!--                                                  <el-radio-group v-model="template.openMode">-->
@@ -199,12 +213,16 @@
 <script>
 import ClipboardJS from 'clipboard';
 import {View} from "@element-plus/icons-vue";
+import MediaButton from "./Parts/MediaButton.vue";
 export default {
   name: 'Settings',
   computed: {
     View() {
       return View
     }
+  },
+  components: {
+    MediaButton
   },
   data(){
     return {
@@ -238,6 +256,11 @@ export default {
     }
   },
   methods: {
+    onMediaSelected ($selected) {
+      if ($selected.length) {
+        this.template.advanced.image = $selected[0].url
+      }
+    },
     changeBgColor(value) {
       this.template.advanced.bgColor = value;
     },

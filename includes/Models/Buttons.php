@@ -17,6 +17,7 @@ class Buttons
             "openMode" => 'page',
             "currency" => 'USD',
             "advanced" => array(
+                "image" => '',
                 "enable" => 'yes',
                 "bgColor" => 'rgba(250, 212, 0, 1)',
                 "color" => 'rgba(0, 0, 0, 1)',
@@ -25,7 +26,7 @@ class Buttons
                 "minHeight" => '43',
                 "fontSize" => 21,
                 "radius" => 4,
-                "quote" => 'Helping hands work together to accomplish great things.',
+                "quote" => '🤝 Helping hands work together to accomplish great things.',
             )
         );
 

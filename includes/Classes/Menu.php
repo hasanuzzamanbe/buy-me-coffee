@@ -50,6 +50,7 @@ class Menu
 
     public function render()
     {
+        wp_enqueue_media();
         $this->enqueueAssets();
 
         ob_start();
@@ -95,7 +96,7 @@ class Menu
         $BuyMeCoffeeAdminVars = apply_filters('buy-me-coffee/admin_app_vars', array(
             'assets_url' => Vite::staticPath(),
             'ajaxurl' => admin_url('admin-ajax.php'),
-            'preview_url' => site_url('?coffee-treat=1'),
+            'preview_url' => site_url('?send_coffee=1'),
             'nonce' => wp_create_nonce('wpm_bmc_nonce'),
         ));
 

@@ -25,7 +25,7 @@ class SubmissionHandler
         $form_data['payment_method'] = $paymentMethod;
         $form_data['payment_total'] = intval($paymentTotal);
 
-        $supportersName = ArrayHelper::get($form_data, 'wpm-supporter-name');
+        $supportersName = ArrayHelper::get($form_data, 'wpm-supporter-name', 'Anonymous');
         $supportersEmail = ArrayHelper::get($form_data, 'wpm-supporter-email');
         $supportersMessage = ArrayHelper::get($form_data, 'wpm-supporter-message');
 

@@ -190,7 +190,7 @@ class PayPal extends BaseMethods
     public function successUrl($supporter)
     {
         return add_query_arg(array(
-            'coffee-treat' => 1,
+            'send_coffee' => 1,
             'wpm_bmc_success' => 1,
             'wpm_bmc_submission' => $supporter->entry_hash,
             'payment_method' => 'paypal'
@@ -201,7 +201,7 @@ class PayPal extends BaseMethods
     {
         return add_query_arg(array(
             'wpm_bmc_failed' => 1,
-            'coffee-treat' => 1,
+            'send_coffee' => 1,
             'wpm_bmc_submission' => $supporter->entry_hash,
             'payment_method' => 'paypal'
         ), home_url());

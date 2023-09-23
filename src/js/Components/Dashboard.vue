@@ -29,7 +29,7 @@
         <el-table-column
             label="Amount">
           <template #default="scope">
-            <span v-html="scope.row.amount_formatted"></span>
+            <span class="wpm_supporters_amount" v-html="scope.row.amount_formatted"></span>
           </template>
         </el-table-column>
         <el-table-column
@@ -40,9 +40,9 @@
           </template>
         </el-table-column>
         <el-table-column
-            label="Paid By">
+            label="Method">
           <template #default="scope">
-            <img width="64" class="wpm_bmc_paid_by_image" v-if="scope.row.payment_method" :src="PayPalImage">
+            <img width="48" class="wpm_bmc_paid_by_image" v-if="scope.row.payment_method" :src="PayPalImage">
             <span v-else :class="'wpm_bmc_payment_type wpm_bmc_payment_type_' + scope.row.payment_method" style="margin-left: 10px">{{ scope.row.payment_method ? scope.row.payment_method : '-' }}</span>
           </template>
         </el-table-column>
@@ -168,7 +168,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .wpm_bmc_supporters {
-  background: #e9fff7;
+  background: #f6fffc;
   padding: 24px;
   //margin-top: 24px;
   border-radius: 6px;
@@ -204,6 +204,11 @@ export default {
 }
 .wpm_bmc_paid_by_image {
   opacity: 0.8;
+}
+.wpm_supporters_amount{
+  color: #009697;
+  font-family: monospace;
+  font-weight: bold;
 }
 </style>
 

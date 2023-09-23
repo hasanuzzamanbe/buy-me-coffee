@@ -25,7 +25,7 @@ class Render
         $fontSize = esc_attr(Arr::get($template, 'advanced.fontSize'));
         $radius = esc_attr(Arr::get($template, 'advanced.radius', '5'));
 
-        $paymentPageUrl = site_url('?coffee-treat=1');
+        $paymentPageUrl = site_url('?send_coffee=1');
         $openMode = Arr::get($template, 'openMode');
 
         $styling = "<style>.wpm-buymecoffee-container .wpm-buymecoffee-button{
@@ -178,27 +178,30 @@ class Render
             </div>
             <?php if ($enableName): ?>
                 <div data-element_type="input" class="wpm_bmc_form_item">
-                    <!--                        <label for="wpm-supporter-name">Name</label>-->
                     <div class="wpm_bmc_input_content">
-                        <input <?php echo esc_attr(static::builtAttributes($nameAttributes)); ?>></input>
+                        <input <?php
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo static::builtAttributes($nameAttributes); ?>></input>
                     </div>
                 </div>
             <?php endif; ?>
 
             <?php if ($enableEmail): ?>
                 <div data-element_type="email" class="wpm_bmc_form_item">
-                    <!--                        <label for="wpm-message">Email</label>-->
                     <div class="wpm_bmc_input_content">
-                        <input <?php echo esc_attr(static::builtAttributes($emailAttributes)); ?>></input>
+                        <input <?php
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo static::builtAttributes($emailAttributes); ?>></input>
                     </div>
                 </div>
             <?php endif; ?>
 
             <?php if ($enableMsg): ?>
                 <div data-element_type="textarea" class="wpm_bmc_form_item">
-                    <!--                    <label for="wpm-message">Message</label>-->
                     <div class="wpm_bmc_input_content">
-                        <textarea rows="6" <?php echo esc_attr(static::builtAttributes($msgAttributes)); ?>></textarea>
+                        <textarea rows="4" <?php
+                        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                        echo static::builtAttributes($msgAttributes); ?>></textarea>
                     </div>
                 </div>
             <?php endif; ?>
@@ -211,7 +214,9 @@ class Render
 
             <div data-element_type="submit" class="wpm_bmc_form_item wpm_bmc_form_submit_wrapper">
                 <div class="wpm_bmc_input_content">
-                    <button <?php echo esc_attr(static::builtAttributes($btnAttributes)); ?>>Support
+                    <button <?php
+                    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    echo static::builtAttributes($btnAttributes); ?>>Support
                         <div class="wpm_loading_svg">
                             <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg"
                                  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px"
@@ -264,12 +269,13 @@ class Render
 
     public static function builtAttributes($attributes)
     {
-        $atts = ' ';
+        $atts = "";
         foreach ($attributes as $attributeKey => $attribute) {
             if (is_array($attribute)) {
                 $attribute = json_encode($attribute);
             }
-            $atts .= $attributeKey . "=" . htmlspecialchars($attribute, ENT_QUOTES) . " ";
+            $atts .= esc_attr($attributeKey) . "='" . esc_attr(htmlspecialchars($attribute, ENT_QUOTES)) . "' ";
+
         }
         return $atts;
     }
