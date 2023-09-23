@@ -130,7 +130,7 @@ class PayPal extends BaseMethods
 
         $supportersModel = new Supporters();
         $supporter = $supportersModel->find($entryId);
-        $listener_url = apply_filters('wpm_bmc_paypal_ipn_url', site_url('?wpm_bmc__paypal_ipn=1'), $supporter);
+        $listener_url = apply_filters('wpm_bmc_paypal_ipn_url', site_url('?wpm_bmc_ipn_listener=1&method=paypal'), $supporter);
 
         $paypal_args = array(
             'cmd' => '_cart',

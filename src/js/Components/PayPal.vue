@@ -58,6 +58,10 @@
                             complete, then check this box. This forces the site to use a slightly less secure method of
                             verifying purchases.</p>
                         </el-form-item>
+                        <div class="wpm_bmc_settings_section">
+                          <p>Please use IPN url to get marked paid on you site.</p>
+                          <p><b>IPN URL: </b><code>{{webhook_url}}</code></p>
+                        </div>
                     </el-tab-pane>
                   </el-tabs>
 
