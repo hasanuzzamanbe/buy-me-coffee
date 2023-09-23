@@ -41,13 +41,6 @@ class Vite
      */
     private function enqueueScript($handle, $src, $dependency = [], $version = null, $inFooter = false)
     {
-        if (in_array($handle, (static::$instance)->moduleScripts)) {
-            if (static::isDevMode()) {
-                throw new Exception('This handel Has been used');
-            }
-            return;
-        }
-
         (static::$instance)->moduleScripts[] = $handle;
 
         if (!(static::$instance)->isScriptFilterAdded) {

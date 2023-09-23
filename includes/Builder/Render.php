@@ -261,8 +261,8 @@ class Render
     public static function addAssets()
     {
         Vite::enqueueStyle('wpm_bmc_css', 'scss/public/public-style.scss', array(), WPM_BMC_VERSION);
-        Vite::enqueueScript('wpm_bmc',  'js/BmcPublic.js', array('jquery'), WPM_BMC_VERSION, true);
-        wp_localize_script('wpm_bmc', 'wpm_bmc_general', array(
+        Vite::enqueueScript('wpm_bmc_public_js',  'js/BmcPublic.js', array('jquery'), WPM_BMC_VERSION, true);
+        wp_localize_script('wpm_bmc_public_js', 'wpm_bmc_general', array(
             'ajax_url' => admin_url('admin-ajax.php')
         ));
     }

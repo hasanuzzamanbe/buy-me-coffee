@@ -1,4 +1,4 @@
-<div class="buymecoffee_form_preview_wrapper" style="<?php echo esc_attr($quote) ?? 'margin: 0 auto;' ?>">
+<div class="buymecoffee_form_preview_wrapper">
     <h3 class="buymecoffee_form_to">
         Buy
         <span class="buymecoffee_form_to"><?php
