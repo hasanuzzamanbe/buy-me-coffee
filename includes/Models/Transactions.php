@@ -19,11 +19,11 @@ class Transactions
         return $supporter->first();
     }
 
-    public function getByPaymentId($chargeId)
+    public function getByPaymentId($chargeId, $method = 'paypal')
     {
         $payment = wpmBmcDB()->table('wpm_bmc_transactions')
             ->where('charge_id', $chargeId)
-            ->where('payment_method', 'paypal')
+            ->where('payment_method', $method)
             ->first();
         if ($payment) {
             return $payment->id;

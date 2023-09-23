@@ -16,11 +16,11 @@ class PayPal extends BaseMethods
             'PayPal',
             'paypal',
             'PayPal is the faster, safer way to send money, make an online payment, receive money or set up a merchant account.',
-            Vite::staticPath() . 'images/paypal.png'
+            Vite::staticPath() . 'images/PayPal.svg'
         );
         add_action('wpm_bmc_make_payment_paypal', array($this, 'makePayment'), 10, 3);
-        add_action('init', array($this, 'ipnVerification'));
         add_action('wpm_bmc_paypal_action_web_accept', array($this, 'updateStatus'), 10, 2);
+        add_action("wpm_bmc_ipn_endpoint_paypal", array($this, 'verifyIpn'), 10, 2);
     }
 
     public function sanitize($settings)
@@ -35,11 +35,16 @@ class PayPal extends BaseMethods
         return $settings;
     }
 
+    public function verifyIpn()
+    {
+        (new IPN())->ipnVerificationProcess();
+    }
+
     public function getPaymentSettings()
     {
         wp_send_json_success(array(
             'settings' => $this->getSettings(),
-            'webhook_url' => site_url() . '?wpm_bmc_paypal_listener=1'
+            'webhook_url' => site_url() . '?wpm_bmc_ipn_listener=1&method=paypal'
         ), 200);
     }
 
@@ -84,6 +89,7 @@ class PayPal extends BaseMethods
         $total = $total / 100;
         $currencyCode = $transactions->currency;
         $intent = [
+            'reference_id' => $transactions->entry_hash,
             'amount' => [
                 'value' => $total,
                 'breakdown' => [
@@ -207,15 +213,6 @@ class PayPal extends BaseMethods
         ), home_url());
     }
 
-    public function ipnVerification()
-    {
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        $requestData = $_REQUEST;
-        if (isset($requestData['wpm_bmc__paypal_ipn'])) {
-            (new IPN())->ipnVerificationProcess();
-        }
-    }
-
     public function updateStatus($data, $payment_id)
     {
         if ($data['txn_type'] != 'web_accept' && $data['txn_type'] != 'cart' && $data['payment_status'] != 'Refunded') {
@@ -236,7 +233,6 @@ class PayPal extends BaseMethods
             return;
         }
 
-
         if ($transaction->payment_method != 'paypal') {
             return;
         }
@@ -245,14 +241,14 @@ class PayPal extends BaseMethods
         $paypalSettings = $this->getSettings();
 
         if (strcasecmp($business_email, trim($paypalSettings['paypal_email'])) != 0) {
-            $this->changeStatus('failed');
+            $this->changeStatus('failed', $transaction);
             return;
         }
 
         $currency_code = strtolower($data['mc_currency']);
 
         if ($currency_code != strtolower($transaction->currency)) {
-            $this->changeStatus('failed');
+            $this->changeStatus('failed', $transaction);
             return;
         }
 
@@ -264,26 +260,26 @@ class PayPal extends BaseMethods
             $isMismatchAmount = true;
         }
         if ($isMismatchAmount) {
-            $this->changeStatus('failed');
+            $this->changeStatus('failed', $transaction);
             return;
         }
 
         if ($data['custom'] != $transaction->id) {
-            $this->changeStatus('failed');
+            $this->changeStatus('failed', $transaction);
             return;
         }
 
         if ('completed' == $payment_status || $transaction->payment_mode == 'test') {
-            $this->changeStatus('paid', $data, $transaction);
+            $this->changeStatus('paid', $transaction, $data);
             return;
         }
 
         if ('pending' == $payment_status && isset($data['pending_reason'])) {
-            $this->changeStatus('processing', $data, $transaction);
+            $this->changeStatus('processing', $transaction, $data);
         }
     }
 
-    public function changeStatus($status, $data = array(), $transaction = null)
+    public function changeStatus($status, $transaction = null,  $data = array())
     {
         $supportersModel = new Supporters();
         $transactionModel = new Transactions();
@@ -299,11 +295,13 @@ class PayPal extends BaseMethods
             $updateData = [
                 'status' => $status,
                 'updated_at' => current_time('mysql'),
-                $updateData['charge_id'] = $data['txn_id']
+                'payment_note' => json_encode($data),
+                'charge_id' => sanitize_text_field($data['txn_id'])
             ];
         }
 
         $transactionModel->updateData($transaction->id, $updateData);
+
     }
 
     public function maybeLoadModalScript()
@@ -334,9 +332,6 @@ class PayPal extends BaseMethods
                     style="outline: none;"
                     type="radio" name="wpm_payment_method" class="wpm_paypal_card" id="wpm_paypal_card"
                     value="paypal">
-            <!--                <span class="payment_method_name">-->
-            <!--                    PayPal-->
-            <!--                </span>-->
         </label>
         <?php
     }

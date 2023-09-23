@@ -11,7 +11,7 @@ class Supporters
         $offset = intval($args['page'] * $args['posts_per_page']);
 
         $query = wpmBmcDB()->table('wpm_bmc_supporters')
-            ->orderBy('ID', 'DESC')
+            ->orderBy('id', 'DESC')
             ->select('*')
             ->select(wpmBmcDB()->raw('DATE_FORMAT(created_at, "%e/%m/%y at %H:%i")  as created_at'))
             ->offset($offset)
@@ -62,14 +62,15 @@ class Supporters
     public function find($id)
     {
         $supporter = wpmBmcDB()->table('wpm_bmc_supporters')
-            ->where('id', $id)->first();
+            ->where('wpm_bmc_supporters.id', $id)
+            ->first();
 
-        return $supporter;
-    }
+        $transaction = wpmBmcDB()->table('wpm_bmc_transactions')
+            ->where('entry_id', $id)
+            ->first();
 
-    public function updateStatus()
-    {
-
+         $supporter->transaction = $transaction;
+         return $supporter;
     }
 
     public function delete($id)

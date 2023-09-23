@@ -11,15 +11,13 @@
             <div v-for="(gateway, index) in gateways" :key="index" class="wpm_bmc_gateway_item" @click="() => this.$router.push({ name: gateway.route })">
                   <div>
                     <img :src="gateway.image"
-                         style="max-width: 96px;"
+                         style="max-width: 180px;"
                          class="image" />
                   </div>
 
-                    <div style="display: flex;">
-                        <h3>{{ gateway.title }}</h3>
-<!--                        <div class="bottom">-->
-<!--                            <el-button size="small" class="link" @click="() => this.$router.push({ name: gateway.route })" icon="View">settings </el-button>-->
-<!--                        </div>-->
+                    <div>
+                      <p style="font-size: 16px;font-weight: bold;">{{ gateway.title }}</p>
+                      <p>{{gateway.description}}</p>
                     </div>
             </div>
         </el-row>
@@ -33,22 +31,13 @@
     data() {
         return {
             gateways: [
-                {
-                    title: 'Stripe',
-                    description: 'Stripe is a suite of payment APIs that powers commerce for online businesses of all sizes, including fraud prevention, and subscription management. Use Stripe’s payment platform to accept and process payments online for easy-to-use commerce solutions.',
-                    image: 'credit-card.png',
-                    route: 'stripe'
-                },
-                {
-                    title: 'PayPal',
-                    description: 'PayPal is the faster, safer way to send money, make an online payment, receive money or set up a merchant account.',
-                    image: 'paypal.png',
-                    route: 'paypal'
-                }
             ]
         }
     },
     methods: {
+      getImage(image){
+        return window.BuyMeCoffeeAdmin.assets_url + '/images/' + image;
+      },
         // All methods go here
         goto() {
             this.$router.push({ name: 'stripe' })

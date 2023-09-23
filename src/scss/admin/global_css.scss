@@ -196,9 +196,9 @@ input::placeholder {
     display: flex;
     border-radius: 7px;
     align-items: center;
-    border: 1px solid #efefef;
+    border: 1px solid #dbdbdb;
     padding: 23px;
-    height: 56px;
+    min-height: 120px;
     margin-bottom: 32px;
     cursor:pointer;
     &:hover {

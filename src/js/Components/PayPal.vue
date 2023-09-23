@@ -41,6 +41,10 @@
                                     placeholder="Secret key from paypal dashboard"/>
                         </el-form-item>
                       </div>
+                        <div class="wpm_bmc_settings_section">
+                          <p>Please use IPN url to get marked paid on you site.</p>
+                          <p><b>IPN URL: </b><code>{{webhook_url}}</code></p>
+                      </div>
 
                     </el-tab-pane>
                     <el-tab-pane label="Paypal Standard" name="standard">
@@ -73,7 +77,8 @@
                 settings: {},
                 saving: false,
                 fetching: false,
-                labelPosition: 'right'
+                labelPosition: 'right',
+                webhook_url: ''
             }
         },
         methods: {
@@ -87,6 +92,7 @@
                 })
                     .then((response) => {
                         this.settings = response.data.settings;
+                        this.webhook_url = response.data.webhook_url;
                         this.fetching = false;
                     })
                     .fail(error => {

@@ -13,7 +13,7 @@ class Stripe extends BaseMethods
             'Stripe',
             'stripe',
             'Stripe is a payment gateway that allows you to accept payments from your customers.',
-            Vite::staticPath() . 'images/credit-card.png'
+            Vite::staticPath() . 'images/stripe.svg'
         );
 
         add_action('wpm_bmc_make_payment_stripe', array($this, 'makePayment'), 10, 3);

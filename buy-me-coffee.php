@@ -53,6 +53,7 @@ if (!defined('WPM_BMC_VERSION')) {
             $this->LoadEditorBlocks();
             $this->loadFiles();
             $this->registerShortcode();
+            $this->registerIpnHooks();
         }
 
         public function loadFiles()
@@ -124,6 +125,16 @@ if (!defined('WPM_BMC_VERSION')) {
             $submissionHandler = new \BuyMeCoffee\Controllers\SubmissionHandler();
             add_action('wp_ajax_wpm_bmc_submit', array($submissionHandler, 'handleSubmission'));
             add_action('wp_ajax_nopriv_wpm_bmc_submit', array($submissionHandler, 'handleSubmission'));
+        }
+
+        public function registerIpnHooks()
+        {
+            if (isset($_REQUEST['wpm_bmc_ipn_listener']) && isset($_REQUEST['method'])) {
+                add_action('wp', function () {
+                    $paymentMethod = sanitize_text_field($_REQUEST['method']);
+                    do_action('wpm_bmc_ipn_endpoint_' . $paymentMethod);
+                });
+            }
         }
 
         public function textDomain()
