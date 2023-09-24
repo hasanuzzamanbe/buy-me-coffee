@@ -108,10 +108,10 @@ class PayPal extends BaseMethods
             $this->maybeShowModal($transaction, $paypalSettings);
         }
 
-        $paypal_redirect = 'https://www.sandbox.paypal.com/cgi-bin/webscr/?';
+        $paypal_redirect = 'https://www.paypal.com/cgi-bin/webscr/?';
 
-        if ($paypalSettings['payment_mode'] === 'live') {
-            $paypal_redirect = 'https://www.paypal.com/cgi-bin/webscr/?';
+        if ($paypalSettings['payment_mode'] === 'test') {
+            $paypal_redirect = 'https://www.sandbox.paypal.com/cgi-bin/webscr/?';
         }
 
         $supportersModel = new Supporters();
@@ -245,12 +245,8 @@ class PayPal extends BaseMethods
         if (number_format((float)($transaction->payment_total / 100), 2) - number_format((float)$paypal_amount, 2) > 1) {
             $isMismatchAmount = true;
         }
-        if ($isMismatchAmount) {
-            $this->changeStatus('failed', $transaction);
-            return;
-        }
 
-        if ($data['custom'] != $transaction->id) {
+        if ($isMismatchAmount) {
             $this->changeStatus('failed', $transaction);
             return;
         }

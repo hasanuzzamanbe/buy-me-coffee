@@ -227,6 +227,8 @@ input.custom_quantity_active {
 
 //confirmation
 .wpm_bmc_confirmation{
+    display: flex;
+    align-items: center;
     padding: 20px;
     min-width: 300px;
     box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;

@@ -19,13 +19,11 @@ class PaypalCheckout {
                     })
                 }, onApprove: (data, actions) => {
                     return actions.order.capture().then((details) => {
-                        console.log(details, 'dt')
-                        console.log(data, 'dd')
-                        console.log(actions, 'a')
+                        var transaction = details?.purchase_units[0].payments.captures[0];
                         jQuery.post(window.wpm_bmc_general.ajax_url, {
                             action: 'wpm_bmc_update_payment',
                             hash: this.data.hash,
-                            charge_id: details.id,
+                            charge_id: transaction.id,
                         })
                             .then(response => {
                                 window.location = this.data?.confirmation_url;

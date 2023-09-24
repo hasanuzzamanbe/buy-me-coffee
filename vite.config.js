@@ -20,7 +20,7 @@ const inputs = {
     'js/PaymentMethods/paypal-checkout' : 'src/js/PaymentMethods/paypal-checkout.js',
 
     //styles
-    'css/element' : 'src/scss/admin/app.scss',
+    // 'css/element' : 'src/scss/admin/app.scss',
     'css/BasicTemplate' : 'src/scss/public/BasicTemplate.scss',
     'css/public-style' : 'src/scss/public/public-style.scss',
 
