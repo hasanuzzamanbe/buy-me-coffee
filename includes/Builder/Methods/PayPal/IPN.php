@@ -109,6 +109,12 @@ class IPN
         exit;
     }
 
+    private function getSettings()
+    {
+        $settings = get_option('wpm_bmc_payment_settings_paypal', []);
+        return $settings;
+    }
+
     private function isTestMode()
     {
         $settings = get_option('wpm_bmc_payment_settings_paypal', []);

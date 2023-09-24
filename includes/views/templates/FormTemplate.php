@@ -12,14 +12,21 @@
     </div>
     <div class="buymecoffee_preview_body">
         <?php
-        include WPM_BMC_DIR . 'includes/views/templates/FormSection.php';
+
+        // check if receipt page
+        if (isset($_REQUEST['wpm_bmc_success']) && isset($_REQUEST['hash'])) {
+            $hash = sanitize_text_field($_REQUEST['hash']);
+            include WPM_BMC_DIR . 'includes/views/templates/Confirmation.php';
+        } else {
+            include WPM_BMC_DIR . 'includes/views/templates/FormSection.php';
+        }
 
         if ($quote):
             ?>
             <div class="buymecoffee_your_content_wrapper">
                 <div class="buymecoffee_your_content">
                     <div class="buymecoffee_your_content_title">
-                        <div style="margin-bottom:23px;">
+                        <div style="margin:23px;">
                             <blockquote>
                                 <p class="bmc_appreciation_title"><?php echo esc_html($quote); ?></p>
                             </blockquote>

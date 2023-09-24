@@ -279,4 +279,9 @@ class Render
         }
         return $atts;
     }
+
+    public function confirmation($hash)
+    {
+        echo 'Thanks for your contribution!';
+    }
 }

@@ -19,7 +19,7 @@
                       <el-radio label="live">Live Mode</el-radio>
                     </el-radio-group>
                   </el-form-item>
-                  <el-tabs v-model="settings.payment_type" class="demo-tabs" @tab-click="handleClick">
+                  <el-tabs v-model="settings.payment_type" class="demo-tabs">
                     <el-tab-pane label="PayPal pro" name="pro">
                       <div v-if="settings.payment_mode === 'test'">
                         <el-form-item label="Test Public key">
@@ -41,11 +41,6 @@
                                     placeholder="Secret key from paypal dashboard"/>
                         </el-form-item>
                       </div>
-                        <div class="wpm_bmc_settings_section">
-                          <p>Please use IPN url to get marked paid on you site.</p>
-                          <p><b>IPN URL: </b><code>{{webhook_url}}</code></p>
-                      </div>
-
                     </el-tab-pane>
                     <el-tab-pane label="Paypal Standard" name="standard">
                         <el-form-item label="Paypal Email">
@@ -58,14 +53,24 @@
                             complete, then check this box. This forces the site to use a slightly less secure method of
                             verifying purchases.</p>
                         </el-form-item>
-                        <div class="wpm_bmc_settings_section">
-                          <p>Please use IPN url to get marked paid on you site.</p>
-                          <p><b>IPN URL: </b><code>{{webhook_url}}</code></p>
-                        </div>
                     </el-tab-pane>
                   </el-tabs>
+                  <div class="wpm_bmc_settings_section">
+                    <p>Please use IPN url to get marked paid on you site.</p>
+                    <b>IPN URL: </b>
+                    <el-tooltip effect="dark"
+                                content="Click to copy"
+                                title="Click to copy"
+                                placement="top">
+                      <code class="copy"
+                            data-clipboard-action="copy"
+                            :data-clipboard-text='webhook_url'>
+                        <i class="el-icon-document"></i> {{webhook_url}}
+                      </code>
+                    </el-tooltip>
+                  </div>
 
-                    <div class="action_right">
+                    <div class="action_right" style="margin-top: 24px;">
                         <el-button @click="saveSettings()" type="primary" size="default">Save PayPal Settings</el-button>
                     </div>
                 </el-form>
@@ -74,6 +79,7 @@
     </div>
 </template>
 <script type="text/babel">
+import ClipboardJS from 'clipboard';
     export default {
         name: 'paypal_settings',
         data() {
@@ -128,6 +134,17 @@
         },
         mounted() {
             this.getSettings();
+            jQuery(document).ready(function($) {
+              var clipboard = new ClipboardJS('.copy');
+              clipboard.on('success', function(e) {
+                $(e.trigger).text("Copied!");
+                e.clearSelection();
+                //todo: add timeout to revert text
+                setTimeout(function() {
+                  $(e.trigger).text(e.text);
+                }, 1000);
+              });
+            });
         }
     }
 </script>

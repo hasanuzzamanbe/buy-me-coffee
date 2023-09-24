@@ -68,11 +68,12 @@ class DemoPage
             if ($profileImage == '') {
                 $profileImage = WPM_BMC_URL . 'assets/images/coffee.png';
             }
+
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo View::make('templates.BasicTemplate', [ 'template' => $template,
                 'type' => 'button',
                 'quote' => $quote,
-                'profile_image' => $profileImage
+                'profile_image' => $profileImage,
             ]);
             exit();
         }

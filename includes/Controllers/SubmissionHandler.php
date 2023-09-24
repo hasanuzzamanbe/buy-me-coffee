@@ -92,4 +92,32 @@ class SubmissionHandler
         $uid = str_replace(array("'", '/', '?', '#', "\\"), '', $uid);
         return $uid;
     }
+
+    public function updatePayment()
+    {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $request = $_REQUEST;
+        $chargeId = sanitize_text_field(ArrayHelper::get($request, 'charge_id'));
+        $hash = sanitize_text_field(ArrayHelper::get($request, 'hash'));
+
+        if ($chargeId == '' || $hash == '') {
+            wp_send_json_error(array(
+                'message' => __('Invalid request', 'buy-me-coffee'),
+            ), 400);
+        }
+
+        $transaction = array(
+            'charge_id' => $chargeId,
+            'updated_at' => current_time('mysql'),
+        );
+
+       $transactionId = wpmBmcDB()->table('wpm_bmc_transactions')
+           ->where('entry_hash', $hash)
+           ->update($transaction);
+
+        wp_send_json_success(array(
+            'message' => __('Payment updated successfully', 'buy-me-coffee'),
+            'data' => $transactionId
+        ), 200);
+    }
 }

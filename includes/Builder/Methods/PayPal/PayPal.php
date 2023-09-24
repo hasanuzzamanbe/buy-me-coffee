@@ -50,22 +50,7 @@ class PayPal extends BaseMethods
 
     public function getSettings($key = null)
     {
-        $settings = get_option('wpm_bmc_payment_settings_' . $this->method, array());
-
-        $defaults = array(
-            'enable' => 'no',
-            'payment_mode' => 'test',
-            'payment_type' => 'standard',
-            'test_public_key' => '',
-            'test_secret_key' => '',
-            'live_public_key' => '',
-            'live_secret_key' => '',
-            'paypal_email' => '',
-            'disable_ipn_verification' => 'no',
-        );
-
-        $data = wp_parse_args($settings, $defaults);
-        return $key && isset($data[$key]) ? $data[$key] : $data;
+        return PayPalSettings::get($key);
     }
 
     public function maybeShowModal($transactions, $paypalSettings)
@@ -73,6 +58,7 @@ class PayPal extends BaseMethods
         $paymentIntent = $this->modalPaymentIntent($transactions);
         $responseData = [
             'nextAction' => 'paypal',
+            'hash' => $transactions->entry_hash,
             'actionName' => 'custom',
             'buttonState' => 'hide',
             'purchase_units' => $paymentIntent,
@@ -198,7 +184,7 @@ class PayPal extends BaseMethods
         return add_query_arg(array(
             'send_coffee' => '',
             'wpm_bmc_success' => 1,
-            'wpm_bmc_submission' => $supporter->entry_hash,
+            'hash' => $supporter->entry_hash,
             'payment_method' => 'paypal'
         ), home_url());
     }
@@ -317,7 +303,7 @@ class PayPal extends BaseMethods
         //phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
         wp_enqueue_script('wpm-buymecoffee-checkout-sdk-' . $this->method, 'https://www.paypal.com/sdk/js?client-id=' . $clientId, [], null, false);
 
-        Vite::enqueueScript('wpm-buymecoffee-checkout-handler-' . $this->method, 'js/PaymentMethods/paypal-checkout.js', ['wpm-buymecoffee-checkout-sdk-paypal'], '1.0.1', false);
+        Vite::enqueueScript('wpm-buymecoffee-checkout-handler-' . $this->method, 'js/PaymentMethods/paypal-checkout.js', ['wpm-buymecoffee-checkout-sdk-paypal', 'jquery'], '1.0.1', false);
 
     }
 

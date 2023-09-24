@@ -10,6 +10,7 @@
     wp_head();
     ?>
     <?php
+
     include WPM_BMC_DIR . 'includes/views/templates/FormTemplate.php';
 
     wp_footer();

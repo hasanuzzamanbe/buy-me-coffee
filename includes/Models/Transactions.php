@@ -25,6 +25,7 @@ class Transactions
             ->where('charge_id', $chargeId)
             ->where('payment_method', $method)
             ->first();
+
         if ($payment) {
             return $payment->id;
         }
