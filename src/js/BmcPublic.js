@@ -36,7 +36,6 @@ let BuyMeCoffeeApp = {};
     };
 
     $(window).on('load', function () {
-        console.log('window loaded', BuyMeCoffeeApp.initiated)
         if (!BuyMeCoffeeApp?.initiated) {
             console.log('initiating');
             BuyMeCoffeeApp.init();

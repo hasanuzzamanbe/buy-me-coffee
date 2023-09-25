@@ -91,7 +91,7 @@ class Menu
         );
 
         //enqueue css file using wp_enqueue (already compiled with vite)
-//        Vite::enqueueStyle('buy-me-coffee_admin_css', 'scss/admin/app.scss', array(), WPM_BMC_VERSION, true);
+        Vite::enqueueStyle('buy-me-coffee_admin_css', 'scss/admin/app.scss', array(), WPM_BMC_VERSION, true);
 
         $BuyMeCoffeeAdminVars = apply_filters('buy-me-coffee/admin_app_vars', array(
             'assets_url' => Vite::staticPath(),

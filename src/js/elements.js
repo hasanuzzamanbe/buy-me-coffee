@@ -1,7 +1,5 @@
 import { createApp } from 'vue';
 
-// import 'element-plus/dist/index.css';
-
 import {Upload, Top, Bottom, Edit, Delete, View, Tools, Back, Plus, CircleCheck, SuccessFilled, CoffeeCup} from '@element-plus/icons-vue'
 
 const elPlusIcons = [
@@ -18,7 +16,6 @@ const elPlusIcons = [
     SuccessFilled,
     CoffeeCup
 ];
-
 
 const app = createApp({});
 app.use(ElLoading);

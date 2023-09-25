@@ -108,12 +108,17 @@ class SubmissionHandler
 
         $transaction = array(
             'charge_id' => $chargeId,
+            'status' => 'paid-initially',
             'updated_at' => current_time('mysql'),
         );
 
        $transactionId = wpmBmcDB()->table('wpm_bmc_transactions')
            ->where('entry_hash', $hash)
            ->update($transaction);
+
+        wpmBmcDB()->table('wpm_bmc_supporters')
+            ->where('entry_hash', $hash)
+            ->update(['payment_status' => 'paid-initially']);
 
         wp_send_json_success(array(
             'message' => __('Payment updated successfully', 'buy-me-coffee'),

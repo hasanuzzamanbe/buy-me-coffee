@@ -42,7 +42,10 @@
             </td>
           </tr>
           <tr>
-            <td>Payment Status</td><td><span :class="'wpm_bmc_status wpm_bmc_status_' + supporter.payment_status">{{supporter.payment_status}}</span></td>
+            <td>Payment Status</td><td><span :class="'wpm_bmc_status wpm_bmc_status_' + supporter.payment_status">
+            {{supporter.payment_status}}
+            <a :href="getTransactionUrl()" v-if="supporter.payment_status === 'paid-initially'">Needs to verify</a>
+            </span></td>
           </tr>
           <tr v-if="supporter.payment_mode">
             <td>Payment Mode</td><td>{{supporter.payment_mode}}</td>
@@ -54,20 +57,23 @@
             <td style="text-transform:capitalize;">Message</td><td>{{supporter.supporters_message}}</td>
           </tr>
           <tr>
-            <td style="font-family:monospace;">{{supporter.created_at}}</td>
+            <td>Submission Hash:</td>
+            <td style="font-family:monospace;">{{supporter.entry_hash}}</td>
           </tr>
           <tr>
-            <td style="font-family:monospace;">{{supporter.uuid}}</td>
+            <td>Transaction URL:</td>
+            <td style="font-family:monospace;">
+              <a target="_blank" :href="getTransactionUrl()">{{supporter?.transaction?.charge_id}}</a>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-family:monospace;">{{supporter.created_at}}</td>
           </tr>
           </tbody>
         </table>
       </div>
       <div>
         <div class="wpm_supporter_payment_actions">
-          <el-popconfirm
-              title="Are you sure to delete this?"
-          >
-          </el-popconfirm>
           <el-select v-model="paymentStatus" @change="updateStatus">
             <el-option
                 v-for="item in options"
@@ -76,10 +82,8 @@
                 :value="item.value">
             </el-option>
           </el-select>
-
         </div>
       </div>
-
     </div>
     </div>
 </template>
@@ -98,7 +102,9 @@ export default {
               { value: 'pending', label: 'Pending' },
               { value: 'paid', label: 'Paid' },
               { value: 'refunded', label: 'Refunded' },
-              { value: 'cancelled', label: 'Cancelled'}
+              { value: 'cancelled', label: 'Cancelled'},
+              { value: 'failed', label: 'Failed'},
+              { value: 'paid-initially', label: 'Paid Initially'}
             ]
         }
     },
@@ -109,6 +115,15 @@ export default {
       Money
     },
   methods: {
+      getTransactionUrl() {
+        if (this.supporter.payment_method === 'paypal') {
+          if (this.supporter.payment_mode !== 'live') {
+            return 'https://www.sandbox.paypal.com/activity/payment/' + this.supporter?.transaction?.charge_id
+          }
+          return 'https://www.paypal.com/activity/payment/' + this.supporter.transaction.charge_id
+        }
+        return ''
+      },
     getImage(path) {
       return window.BuyMeCoffeeAdmin.assets_url + 'images/' + path;
     },
@@ -176,7 +191,7 @@ export default {
   border: none !important;
   height: 38px;
   color: #ff932a;
-  font-size:20px;
+  font-size:16px;
 }
 .wpm_supporter_payment_actions input:focus, .wpm_supporter_payment_actions input:active {
   border: none !important;
