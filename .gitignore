@@ -108,3 +108,5 @@ dist
 src/images/.DS_Store
 .DS_Store
 *.xml
+
+assets/*
