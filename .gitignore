@@ -1,5 +1,4 @@
 # Logs
-/.assets
 logs
 *.log
 npm-debug.log*
@@ -108,5 +107,4 @@ dist
 src/images/.DS_Store
 .DS_Store
 *.xml
-
 assets/*
