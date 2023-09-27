@@ -199,7 +199,7 @@ class Render
             <?php if ($enableMsg): ?>
                 <div data-element_type="textarea" class="wpm_bmc_form_item">
                     <div class="wpm_bmc_input_content">
-                        <textarea rows="4" <?php
+                        <textarea rows="2" <?php
                         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                         echo static::builtAttributes($msgAttributes); ?>></textarea>
                     </div>

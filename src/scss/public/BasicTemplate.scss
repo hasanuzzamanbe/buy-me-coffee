@@ -75,8 +75,9 @@ span.buymecoffee_form_to {
 }
 .wpm_bmc_input_content input,
 .wpm_bmc_input_content textarea {
-    width: 98% !important;
-    padding: 4px;
+    box-shadow: none !important;
+    width: 100% !important;
+    padding: 4px 12px;
     border: 1px solid #f2f2f2 !important;
     border-radius: 4px;
     resize: vertical;
@@ -95,13 +96,32 @@ span.buymecoffee_form_to {
 .wpm_bmc_input_content input{
     height: 30px;
 }
+.wpm_bmc_payment_input_content {
+    background: #b9fff33d;
+    border: 1px solid #cffaf7;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
 .wpm_bmc_custom_quantity:focus,
 .wpm_bmc_input_content input:focus,
 .wpm_bmc_input_content textarea:focus {
     outline: none;
     box-shadow: none;
 }
-
+.wpm_bmc_input_content input::placeholder 
+{
+    color: #607D8B;
+}
+.wpm_bmc_input_content textarea::placeholder
+{
+    color: #607D8B;
+}
+.wpm_bmc_input_content textarea {
+    min-height: 50px;
+}
 .wpm_bmc_form_item {
     margin-bottom: 14px;
 }
@@ -189,17 +209,28 @@ span.buymecoffee_form_to {
 .bmc_coffee input {
     visibility: hidden;
 }
+input.wpm_bmc_custom_quantity {
+    height: 40px;
+    display: flex;
+    width: 55px;
+}
 .bmc_coffee label {
     cursor: pointer;
     border: 1px solid #ccc;
-    padding: 5px 14px;
     border-radius: 50%;
-    max-width: 39px !important;
-    max-height: 39px !important;
     text-align: center;
+    width: 40px;
+    height: 40px;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
 }
 .bmc_coffee input:checked+label {
-    background: #0db799 !important;
+    background: #b9fff3 !important;
+    border-color: #b9fff3;
 }
 .wpm_bmc_custom_quantity {
     max-width: 60px !important;
@@ -207,7 +238,8 @@ span.buymecoffee_form_to {
     text-align: center;
 }
 input.custom_quantity_active {
-    background: #0db799 !important;
+    background: #b9fff3 !important;
+    border-color: #b9fff3;
 }
 .wpm_bmc_main_container .wpm_bmc_payment_item {
     min-width: 300px;

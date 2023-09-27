@@ -6,7 +6,7 @@
       <a :href="previewUrl" target="_blank"><el-icon style="margin-right:4px;">
         <View/></el-icon> Preview</a>
     </div>
-    <div class="quick_setup_tour" v-if="!supporters.length && !guidedTour">
+    <div class="quick_setup_tour" v-if="!supporters.length && !guidedTour && !fetching">
       <p @click="setStore" style="float:right">x close </p>
       <div>
         <el-icon><Setting /></el-icon>
@@ -115,7 +115,8 @@ export default {
   data() {
     return {
       limit: 20,
-      guidedTour: false,
+      guidedTour: true,
+      fetching: false,
       posts_per_page: 10,
       current: 0,
       total: null,
@@ -146,6 +147,7 @@ export default {
       this.getSupporters();
     },
     getSupporters () {
+      this.fetching = true;
       this.$get({
         action: 'wpm_bmc_admin_ajax',
         route: 'get_supporters',
@@ -158,6 +160,7 @@ export default {
             this.supporters = response.data.supporters;
             this.total = response.data.total;
             this.reportData = response.data.reports;
+            this.fetching = false;
           })
           .fail(error => {
             this.$message.error(error.responseJSON.data.message);
@@ -187,7 +190,7 @@ export default {
   mounted() {
     this.getSupporters();
     if (window.localStorage) {
-      this.guidedTour = window.localStorage.getItem('wpm_bmc_guided_tour');
+      this.guidedTour = !!window.localStorage.getItem('wpm_bmc_guided_tour');
     }
   }
 }
