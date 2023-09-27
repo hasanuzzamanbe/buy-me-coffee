@@ -111,7 +111,7 @@ export default {
                     Share your page  <a target="_blank" :href="previewUrl">{{previewUrl}}</a><br/>
                     </h3>
                   </div>
-                  <el-icon><InfoFilled /></el-icon> You can build your own page using block editor "BuyMeCoffee" of use this shortcode bellow
+                  <el-icon><InfoFilled /></el-icon> You can build your own page using block editor "BuyMeCoffee" or use available shortcodes
                   <br/>
                   <br>
                   <el-tooltip effect="dark"
