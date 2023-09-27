@@ -3,9 +3,9 @@
 namespace BuyMeCoffee\Classes;
 
 use BuyMeCoffee\Classes\View;
+use BuyMeCoffee\Classes\Vite;
 use BuyMeCoffee\Helpers\ArrayHelper;
 use \BuyMeCoffee\Models\Buttons;
-use BuyMeCoffee\Classes\Vite;
 
 class DemoPage
 {
@@ -66,7 +66,7 @@ class DemoPage
             $quote = ArrayHelper::get($template, 'advanced.quote', false);
             $profileImage = ArrayHelper::get($template, 'advanced.image');
             if ($profileImage == '') {
-                $profileImage = WPM_BMC_URL . 'assets/images/coffee.png';
+                $profileImage = Vite::staticPath() . 'images/profile.png';
             }
 
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

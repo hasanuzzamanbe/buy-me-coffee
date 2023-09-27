@@ -25,7 +25,7 @@ const inputs = {
     'css/public-style' : 'src/scss/public/public-style.scss',
 
     //Block Editor assets
-    'js/gutenBlock' : 'src/js/Editor/gutenBlock.jsx'
+    'js/Editor/gutenBlock' : 'src/js/Editor/gutenBlock.jsx'
 }
 export default defineConfig({
     plugins:

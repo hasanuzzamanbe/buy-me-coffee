@@ -75,6 +75,7 @@ span.buymecoffee_form_to {
 }
 .wpm_bmc_input_content input,
 .wpm_bmc_input_content textarea {
+    box-sizing: border-box;
     box-shadow: none !important;
     width: 100% !important;
     padding: 4px 12px;
@@ -83,6 +84,7 @@ span.buymecoffee_form_to {
     resize: vertical;
     box-shadow: none;
     background: #f1f1f178 !important;
+    min-height: 35px;
 }
 .wpm_bmc_custom_quantity{
     padding: 4px !important;
@@ -104,6 +106,7 @@ span.buymecoffee_form_to {
     box-sizing: border-box;
     display: flex;
     justify-content: center;
+    height: 80px;
 }
 .wpm_bmc_custom_quantity:focus,
 .wpm_bmc_input_content input:focus,
@@ -113,11 +116,11 @@ span.buymecoffee_form_to {
 }
 .wpm_bmc_input_content input::placeholder 
 {
-    color: #607D8B;
+    color: rgba(109, 135, 142, 0.56);
 }
 .wpm_bmc_input_content textarea::placeholder
 {
-    color: #607D8B;
+    color: rgba(109, 135, 142, 0.56);
 }
 .wpm_bmc_input_content textarea {
     min-height: 50px;
@@ -151,7 +154,7 @@ span.buymecoffee_form_to {
     letter-spacing: 2.5px;
     font-weight: 500;
     color: #000;
-    background-color: #89efe8;
+    background-color: #89efe8 !important;
     border: none;
     border-radius: 45px;
     box-shadow: 0px 8px 15px rgb(0 0 0 / 10%);
@@ -161,7 +164,7 @@ span.buymecoffee_form_to {
 }
 
 .wpm_submit_button:hover {
-    background-color: #2EE59D !important;
+    background-color: #1db278 !important;
     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
     color: #fff;
     transform: translateY(-7px);
@@ -210,7 +213,7 @@ span.buymecoffee_form_to {
     visibility: hidden;
 }
 input.wpm_bmc_custom_quantity {
-    height: 40px;
+    height: 30px;
     display: flex;
     width: 55px;
 }

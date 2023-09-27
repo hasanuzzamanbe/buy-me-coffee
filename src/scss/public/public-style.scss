@@ -19,9 +19,6 @@ form.wpm_submitting_form {
   }
 }
 .wpm_submit_button {
-    &:hover {
-      background: #ffcf88;
-    }
     &:disabled {
       background: #f1cd16;
       opacity: 1!important;

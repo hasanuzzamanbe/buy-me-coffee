@@ -97,7 +97,7 @@
                             :src="template.advanced.image"
                         />
                         <img v-else width="120" height="120"
-                             :src="fullPath('coffee.png')"
+                             :src="fullPath('profile.png')"
                         />
                       </div>
                     </el-form-item>

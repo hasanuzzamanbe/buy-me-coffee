@@ -2,7 +2,15 @@
   <div class="wpm_bmc_main_container">
     <report :reportData='reportData'/>
     <div class="bmc_coffee_preview">
-      <a style="cursor:pointer;" @click="$router.push('quick-setup')"><el-icon><Help /></el-icon>Setup</a> |
+        <el-tooltip
+            effect="light"
+            content="Quick guided setup"
+            placement="top"
+        >
+          <a style="cursor:pointer;" @click="$router.push('quick-setup')">
+            <el-icon><Help /></el-icon>Setup |
+          </a>
+        </el-tooltip>
       <a :href="previewUrl" target="_blank"><el-icon style="margin-right:4px;">
         <View/></el-icon> Preview</a>
     </div>
@@ -89,13 +97,21 @@
         </el-table-column>
       </el-table>
       <br/>
+<!--      <el-pagination-->
+<!--          @current-change="handleSizeChange"-->
+<!--          :page-size="posts_per_page"-->
+<!--          background="background"-->
+<!--          layout="size, prev, pager, next, total"-->
+<!--          :total="total">-->
+<!--      </el-pagination>-->
       <el-pagination
           @current-change="handleSizeChange"
           :page-size="posts_per_page"
           background="background"
           layout="size, prev, pager, next, total"
-          :total="total">
-      </el-pagination>
+          :page-count="1"
+          :total="total"
+      />
     </div>
   </div>
 </template>
@@ -206,6 +222,7 @@ export default {
     }
 }
 .bmc_coffee_preview {
+  display: flex;
   z-index: 999;
   position: fixed;
   bottom: 0;
@@ -220,6 +237,7 @@ export default {
 }
 
 .bmc_coffee_preview a {
+  display: flex;
   svg{
     width: 20px;
   }

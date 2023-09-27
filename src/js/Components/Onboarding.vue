@@ -46,6 +46,9 @@ export default {
         this.profileImage = $selected[0].url
       }
     },
+    gotoPage() {
+      window.open(this.previewUrl, '_blank');
+    },
     fullPath(path) {
       return window.BuyMeCoffeeAdmin.assets_url + 'images/' + path;
     },
@@ -89,7 +92,7 @@ export default {
                          :src="template.advanced.image"
                     />
                     <img v-else width="120" height="120"
-                         :src="fullPath('coffee.png')"
+                         :src="fullPath('profile.png')"
                     />
                     <MediaButton class="quick_media" @onMediaSelected="onMediaSelected"/> <br/>
                   </div>
@@ -114,30 +117,33 @@ export default {
                   <el-icon><InfoFilled /></el-icon> You can build your own page using block editor "BuyMeCoffee" or use available shortcodes
                   <br/>
                   <br>
-                  <el-tooltip effect="dark"
+                  <el-tooltip effect="light"
                               content="Click to copy shortcode"
                               title="Click to copy shortcode"
-                              placement="top">
+                              :show-after="1000"
+                              placement="right">
                     <p class="copy"
                           data-clipboard-action="copy"
                           data-clipboard-text='[buymecoffee_basic]'>
                       <i class="el-icon-document"></i> [buymecoffee_basic]
                     </p>
                   </el-tooltip>
-                  <el-tooltip effect="dark"
+                  <el-tooltip effect="light"
+                              :show-after="1000"
                               content="Click to copy shortcode"
                               title="Click to copy shortcode"
-                              placement="top">
+                              placement="right">
                     <p class="copy"
                           data-clipboard-action="copy"
                           data-clipboard-text='[buymecoffee_basic]'>
                       <i class="el-icon-document"></i> [buymecoffee_form]
                     </p>
                   </el-tooltip>
-                  <el-tooltip effect="dark"
+                  <el-tooltip effect="light"
+                              :show-after="1000"
                               content="Click to copy shortcode"
                               title="Click to copy shortcode"
-                              placement="top">
+                              placement="right">
                     <p class="copy"
                           data-clipboard-action="copy"
                           data-clipboard-text='[buymecoffee_basic]'>
@@ -149,7 +155,8 @@ export default {
           </div>
           <div style="text-align: center;">
             <el-button :disabled="active < 2" @click="prev"><el-icon><DArrowLeft /></el-icon> &nbsp  Prev </el-button>
-            <el-button :disabled="active > 2" @click="next">Next  &nbsp <el-icon><DArrowRight /></el-icon></el-button>
+            <el-button v-if="active < 3" :disabled="active > 2" @click="next">Next  &nbsp <el-icon><DArrowRight /></el-icon></el-button>
+            <el-button type="success" plain v-if="active == 3" @click="gotoPage()" >View Page</el-button>
           </div>
         </div>
         <div class="wpm_bmc_onboard_stepper">
@@ -159,7 +166,7 @@ export default {
             <el-step title="Payment" />
             <el-step title="Done" />
           </el-steps>
-          <el-button style="margin-top:12px;" @click="$router.push('/')" type="text">Skip Setup for later</el-button>
+          <el-button class="el-button el-button--text" style="margin-top:12px;" @click="$router.push('/')">Skip Setup for later</el-button>
         </div>
       </div>
   </div>
@@ -180,11 +187,11 @@ export default {
     box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
   }
   &_content {
+    padding: 32px 10px;
     width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 10px;
     border-radius: 12px;
     min-height: 450px;
 

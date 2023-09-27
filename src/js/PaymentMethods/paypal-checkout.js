@@ -39,6 +39,7 @@ class PaypalCheckout {
 
         this.form.find('.wpm_bmc_form_submit_wrapper').hide();
         this.form.find('.wpm_bmc_pay_methods')?.parent().append(paypalButtonContainer);
+        this.form.find('.wpm_bmc_no_signup').html('Please complete your payment with PayPal 👇');
     }
 }
 

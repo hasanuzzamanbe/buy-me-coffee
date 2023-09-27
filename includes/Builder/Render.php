@@ -136,7 +136,7 @@ class Render
             <div class="wpm_bmc_payment_item">
                 <div class="wpm_bmc_payment_input_content">
                     <div class="wpm_bmc_coffee_selector">
-                        <img width="50" src="<?php echo esc_url(WPM_BMC_URL . 'assets/images/coffee.png'); ?>">
+                        <img width="50" src="<?php echo esc_url(Vite::staticPath() . 'images/coffee.png'); ?>">
                         <span>x</span>
 
                         <div class="bmc_coffee">

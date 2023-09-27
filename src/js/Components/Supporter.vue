@@ -147,6 +147,7 @@ export default {
                   nonce: window.BuyMeCoffeeAdmin.nonce
                 }
             ).then((response) => {
+              this.getSupporter();
               this.$handleSuccess('Updated Successfully');
             })
           })
