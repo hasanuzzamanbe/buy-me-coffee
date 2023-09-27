@@ -2,8 +2,21 @@
   <div class="wpm_bmc_main_container">
     <report :reportData='reportData'/>
     <div class="bmc_coffee_preview">
+      <a style="cursor:pointer;" @click="$router.push('quick-setup')"><el-icon><Help /></el-icon>Setup</a> |
       <a :href="previewUrl" target="_blank"><el-icon style="margin-right:4px;">
-        <View/></el-icon> Preview Your Page</a>
+        <View/></el-icon> Preview</a>
+    </div>
+    <div class="quick_setup_tour" v-if="!supporters.length && !guidedTour">
+      <p @click="setStore" style="float:right">x close </p>
+      <div>
+        <el-icon><Setting /></el-icon>
+      </div>
+      <div @click="$router.push('quick-setup')">
+        Start collecting your donations with Buy me coffee!
+        <br/>
+        Start a Quick setup tour.
+      </div>
+
     </div>
     <div class="wpm_bmc_supporters">
       <h1 class="wpm_bmc_menu_title">Supporters:</h1>
@@ -88,17 +101,21 @@
 </template>
 <script>
 import Report from "./Report.vue";
-import {View} from "@element-plus/icons-vue";
+import {View,Setting, Help} from "@element-plus/icons-vue";
+import Onboarding from './Onboarding.vue';
 
 export default {
   name: 'Dashboard',
   components: {
     Report,
-    View
+    View,
+    Help,
+    Setting
   },
   data() {
     return {
       limit: 20,
+      guidedTour: false,
       posts_per_page: 10,
       current: 0,
       total: null,
@@ -118,6 +135,12 @@ export default {
     }
   },
   methods: {
+    setStore() {
+         this.guidedTour = true;
+        if (window.localStorage) {
+          localStorage.setItem("wpm_bmc_guided_tour", false);
+        }
+    },
     handleSizeChange(val) {
       this.current = val-1;
       this.getSupporters();
@@ -163,6 +186,9 @@ export default {
   },
   mounted() {
     this.getSupporters();
+    if (window.localStorage) {
+      this.guidedTour = window.localStorage.getItem('wpm_bmc_guided_tour');
+    }
   }
 }
 </script>

@@ -4,7 +4,7 @@ import PayPal from './Components/PayPal.vue';
 import Stripe from './Components/Stripe.vue';
 import Gateway from './Components/Gateway.vue';
 import Supporter from "./Components/Supporter.vue";
-
+import Onboarding from './Components/Onboarding.vue'
 
 export default [
     {
@@ -41,6 +41,12 @@ export default [
         path: '/gateway/stripe',
         name: 'stripe',
         component: Stripe,
+        exact: true
+    },
+    {
+        path: '/quick-setup',
+        name: 'Onboarding',
+        component: Onboarding,
         exact: true
     }
 ];

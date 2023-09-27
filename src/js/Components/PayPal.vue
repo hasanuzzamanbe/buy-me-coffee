@@ -89,7 +89,7 @@ import ClipboardJS from 'clipboard';
                 this.$get({
                     action: 'wpm_bmc_admin_ajax',
                     route: 'get_data',
-                    method: this.$route.name,
+                    method: 'paypal',
                     nonce: window.BuyMeCoffeeAdmin.nonce
                 })
                     .then((response) => {
@@ -109,7 +109,7 @@ import ClipboardJS from 'clipboard';
                 this.$post({
                     action: 'wpm_bmc_admin_ajax',
                     route: 'save_payment_settings',
-                    method: this.$route.name,
+                    method: 'paypal',
                     settings: this.settings,
                     nonce: window.BuyMeCoffeeAdmin.nonce
                 })

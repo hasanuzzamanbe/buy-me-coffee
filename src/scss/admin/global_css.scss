@@ -211,3 +211,30 @@ table.wpm_supporter_payments {
         padding: 12px;
     }
 }
+
+//quick setup
+.quick_payment_section .wpm_bmc_payment_settings {
+    background: none !important;
+    box-shadow: none !important;
+}
+
+.quick_setup_tour {
+    transition-duration: 2s;
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 24px;
+    background: linear-gradient(84deg, #fffeda54, #cee8fd);
+    box-shadow: rgb(17 12 46 / 15%) 1px 7px 100px 8px;
+    border-radius: 7px;
+    font-size: 16px;
+    color: #6d6c6c;
+    cursor: pointer;
+    line-height: 36px;
+    &:hover {
+        color: #977f1e;
+    }
+    i {
+        font-size: 30px;
+        margin-right:12px
+    }
+}
