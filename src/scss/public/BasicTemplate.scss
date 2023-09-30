@@ -2,9 +2,9 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    min-width: 444px;
+    min-width: 380px;
     margin: 0 auto;
-    max-width: 60%;
+    max-width: 1000px;
     &_modal {
         max-width: 380px !important;
     }
@@ -16,9 +16,6 @@
     .buymecoffee_preview_body {
         flex-direction: column;
     }
-    .buymecoffee_form_preview_wrapper {
-        width: 100% !important;
-    }
 }
 
 .bmc_appreciation_title {
@@ -29,7 +26,8 @@
 h3.buymecoffee_form_to {
     margin: 10px 0px;
     font-size: 30px;
-    color: #6d6d6d;
+    color: #929191;
+    font-weight: 700;
 }
 
 span.buymecoffee_form_to {
@@ -43,13 +41,12 @@ span.buymecoffee_form_to {
 }
 
 .buymecoffee_form_preview_wrapper {
-    max-width: 380px;
-    min-width: 370px;
+    width: 345px;
     box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px;
-    width: 70%;
     border: 1px solid #f4f4f4;
     padding: 20px;
     border-radius: 8px;
+    margin: 0 auto;
 }
 
 .buymecoffee_preview_header {
@@ -215,7 +212,7 @@ span.buymecoffee_form_to {
 input.wpm_bmc_custom_quantity {
     height: 30px;
     display: flex;
-    width: 55px;
+    width: 43px;
 }
 .bmc_coffee label {
     cursor: pointer;

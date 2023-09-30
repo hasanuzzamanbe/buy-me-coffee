@@ -67,7 +67,9 @@ class Supporters
             ->where('entry_id', $id)
             ->first();
 
-         $supporter->transaction = $transaction;
+        if ($supporter) {
+            $supporter->transaction = $transaction;
+        }
          return $supporter;
     }
 

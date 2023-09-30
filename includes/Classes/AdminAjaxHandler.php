@@ -11,6 +11,7 @@ use BuyMeCoffee\Helpers\PaymentHelper;
 use BuyMeCoffee\Helpers\Currencies;
 
 use BuyMeCoffee\Models\Buttons;
+use BuyMeCoffee\Models\Transactions;
 
 class AdminAjaxHandler
 {
@@ -104,8 +105,10 @@ class AdminAjaxHandler
     {
         $id = sanitize_text_field($request['id']);
         $supporter = (new Supporters());
+        $transactions = (new Transactions());
         if ($supporter->find($id)) {
             $supporter->delete($id);
+            $transactions->delete($id, 'entry_id');
             wp_send_json_success($supporter, 200);
         }
         wp_send_json_error();

@@ -34,7 +34,7 @@ if (!defined('ABSPATH')) {
 }
 if (!defined('WPM_BMC_VERSION')) {
     define('WPM_BMC_VERSION_LITE', true);
-    define('WPM_BMC_VERSION', '1.1.0');
+    define('WPM_BMC_VERSION', '1.0.0');
     define('WPM_BMC_MAIN_FILE', __FILE__);
     define('WPM_BMC_URL', plugin_dir_url(__FILE__));
     define('WPM_BMC_DIR', plugin_dir_path(__FILE__));

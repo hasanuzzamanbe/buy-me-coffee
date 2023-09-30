@@ -5,7 +5,8 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta http-equiv="Imagetoolbar" content="No"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php esc_html_e('Buy Me Coffee', 'buy-me-coffee') ?></title>
+    <link rel="icon" type="image/x-icon" href="<?php echo esc_url($profile_image)?>">
+    <title> <?php esc_html_e('Buy Me Coffee', 'buy-me-coffee') ?></title>
     <?php
     wp_head();
     ?>

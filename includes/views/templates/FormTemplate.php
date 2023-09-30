@@ -6,6 +6,7 @@
             <img src="<?php echo esc_url($profile_image); ?>"
                  alt="Profile Image">
         </div>
+<!--        <h1 style="font-size:23px;text-align:center;color: #6b6b6b;" class="buymecoffee_profile_section_name">--><?php //echo esc_html($name); ?><!--</h1>-->
 
     </div>
     <div class="buymecoffee_preview_header">

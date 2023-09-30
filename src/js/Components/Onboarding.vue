@@ -19,6 +19,7 @@ export default {
   data() {
     return {
       active: 1,
+      saving: false,
       previewUrl: window.BuyMeCoffeeAdmin.preview_url,
       template: {
         advanced: {
@@ -43,7 +44,7 @@ export default {
     },
     onMediaSelected ($selected) {
       if ($selected.length) {
-        this.profileImage = $selected[0].url
+        this.template.advanced.image = $selected[0].url
       }
     },
     gotoPage() {
@@ -57,7 +58,24 @@ export default {
       if (this.active > 0) this.active = this.active - 1;
     },
     next() {
-      console.log('next')
+      if (this.active == 1) {
+        this.saving = true;
+        this.$post({
+          action: 'wpm_bmc_admin_ajax',
+          settings: this.template,
+          route: 'save_settings',
+          nonce: window.BuyMeCoffeeAdmin.nonce
+        })
+            .then(response => {
+              this.saving = false;
+            })
+            .fail(error => {
+              console.log(error)
+            })
+            .always(() => {
+              this.saving = false;
+            });
+      }
       if (this.active < 3) this.active = this.active+1;
       console.log(this.active)
     }

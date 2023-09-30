@@ -74,6 +74,7 @@ class DemoPage
                 'type' => 'button',
                 'quote' => $quote,
                 'profile_image' => $profileImage,
+                'name' => ArrayHelper::get($template, 'yourName'),
             ]);
             exit();
         }
