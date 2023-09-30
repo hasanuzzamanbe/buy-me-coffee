@@ -4,7 +4,7 @@
 Plugin Name: Buy me coffee widgets - fundraise into own account
 Plugin URI: http://www.wpminers.com/
 Description: Collect "buy me a coffee" amount directly your own Stripe and Paypal
-Version: 1.0.0
+Version: 1.0.2
 Author: wpminers
 Author URI: http://www.wpminers.com
 License: GPLv2 or later
@@ -34,7 +34,7 @@ if (!defined('ABSPATH')) {
 }
 if (!defined('WPM_BMC_VERSION')) {
     define('WPM_BMC_VERSION_LITE', true);
-    define('WPM_BMC_VERSION', '1.0.0');
+    define('WPM_BMC_VERSION', '1.0.2');
     define('WPM_BMC_MAIN_FILE', __FILE__);
     define('WPM_BMC_URL', plugin_dir_url(__FILE__));
     define('WPM_BMC_DIR', plugin_dir_path(__FILE__));

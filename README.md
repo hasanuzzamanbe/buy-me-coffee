@@ -3,7 +3,7 @@ Contributors: wpminers
 Tags: buy me a coffee, donations, payments, stripe payments, PayPal, fundraise
 Requires at least: 4.5
 Tested up to: 6.3
-Stable tag: 1.0.0
+Stable tag: 1.0.2
 Requires PHP: 7.1
 License: GPLv2 or later
 Collect donations from "buy me a coffee" widgets directly into your own Stripe or PayPal merchant account without any commission.
