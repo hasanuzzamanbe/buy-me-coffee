@@ -1,5 +1,6 @@
-
-<img width="1510" alt="preview-page" src="https://github.com/hasanuzzamanbe/buy-me-coffee/assets/43160844/7b2d2603-ba9e-4bc9-b42a-722580bdbef4">
+[![Buy Me a Coffee](https://github.com/hasanuzzamanbe/buy-me-coffee/assets/43160844/11d39611-2195-439e-925b-77139c5f124d)](https://www.youtube.com/watch?v=m3T5LQ1DOEc&ab_channel=WPMiners)
+### See Short Video
+<a href="https://www.youtube.com/watch?v=m3T5LQ1DOEc" target="_blank">https://www.youtube.com/watch?v=m3T5LQ1DOEc</a>
 
 === Buy me coffee button & widget - fundraise into own account ===
 Contributors: wpminers
