@@ -14,7 +14,7 @@ Collect donations from "buy me a coffee" widgets directly into your own Stripe o
 
 == Description ==
 
-[User Guide](https://wpminers.com/buymecoffee/docs/) | [Demo](https://wpminers.com/buymecoffee/demo)
+[User Guide](https://wpminers.com/buymecoffee-docs) | [Demo](https://wpminers.com/buymecoffee-demo)
 
 **Buy me a Coffee** is a free WordPress plugin that allows you to accept donations from your visitors. It is a simple and effective way to monetize your content. You can accept donations via PayPal or Stripe. The plugin is very easy to use and configure. You can add a PayPal donation button, Form, or template anywhere on your website using a shortcode or a widget.
 
