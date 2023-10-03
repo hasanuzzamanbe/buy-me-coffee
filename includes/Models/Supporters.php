@@ -32,6 +32,7 @@ class Supporters
         $currencyTotal = wpmBmcDB()->table('wpm_bmc_supporters')
             ->groupBy('currency')
             ->where('payment_status', 'paid')
+            ->orWhere('payment_status', 'paid-initially')
             ->select(wpmBmcDB()->raw('SUM(payment_total) as total_amount, currency'))
             ->get();
 

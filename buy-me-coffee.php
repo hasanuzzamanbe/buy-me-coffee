@@ -168,11 +168,7 @@ if (!defined('WPM_BMC_VERSION')) {
 
     // disabled admin-notice on dashboard
     add_action('admin_init', function () {
-        $disablePages = [
-            'buy-me-coffee.php',
-        ];
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        if (isset($_GET['page']) && in_array($_GET['page'], $disablePages)) {
+        if (isset($_GET['page']) && $_GET['page'] === 'buy-me-coffee.php') {
             remove_all_actions('admin_notices');
         }
     });
