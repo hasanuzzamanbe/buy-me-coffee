@@ -21,3 +21,6 @@ router.afterEach((to, from) => {
         jQuery('.buymecoffee_main-menu-items').find('li[data-key='+active+']').addClass('active');
     }
 });
+
+jQuery('.update-nag,.notice, #wpbody-content > .updated, #wpbody-content > .error').remove();
+

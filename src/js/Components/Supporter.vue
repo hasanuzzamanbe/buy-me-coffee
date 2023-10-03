@@ -5,7 +5,7 @@
     </h3>
     <div class="wpm_supporter_profile_wrapper">
         <div class="wpm_supporter_profile_section">
-            <img :src="supporter?.supporters_image" alt="Supporter's Image" class="wpm_supporter_profile_image">
+            <img v-if="supporter?.supporters_image" :src="supporter?.supporters_image" alt="Supporter's Image" class="wpm_supporter_profile_image">
         </div>
         <div>
           <h3 v-if="supporter?.supporters_name" class="wpm_supporter_profile_name">{{supporter?.supporters_name}}</h3>

@@ -222,14 +222,6 @@ class PayPal extends BaseMethods
         if ($transaction->payment_method != 'paypal') {
             return;
         }
-        $business_email = isset($data['business']) && is_email($data['business']) ? trim($data['business']) : trim($data['receiver_email']);
-
-        $paypalSettings = $this->getSettings();
-
-        if (strcasecmp($business_email, trim($paypalSettings['paypal_email'])) != 0) {
-            $this->changeStatus('failed', $transaction);
-            return;
-        }
 
         $currency_code = strtolower($data['mc_currency']);
 
