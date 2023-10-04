@@ -63,7 +63,7 @@
         <el-table-column
             label="Method">
           <template #default="scope">
-            <img width="48" class="wpm_bmc_paid_by_image" v-if="scope.row.payment_method" :src="PayPalImage">
+            <img width="48" class="wpm_bmc_paid_by_image" v-if="maybeGetMethodImage(scope.row.payment_method)" :src="maybeGetMethodImage(scope.row.payment_method)">
             <span v-else :class="'wpm_bmc_payment_type wpm_bmc_payment_type_' + scope.row.payment_method" style="margin-left: 10px">{{ scope.row.payment_method ? scope.row.payment_method : '-' }}</span>
           </template>
         </el-table-column>
@@ -97,19 +97,12 @@
         </el-table-column>
       </el-table>
       <br/>
-<!--      <el-pagination-->
-<!--          @current-change="handleSizeChange"-->
-<!--          :page-size="posts_per_page"-->
-<!--          background="background"-->
-<!--          layout="size, prev, pager, next, total"-->
-<!--          :total="total">-->
-<!--      </el-pagination>-->
       <el-pagination
           @current-change="handleSizeChange"
           :page-size="posts_per_page"
           background="background"
           layout="size, prev, pager, next, total"
-          :page-count="1"
+          :page-count="Math.ceil(total / posts_per_page)"
           :total="total"
       />
     </div>
@@ -147,11 +140,18 @@ export default {
     }
   },
   computed: {
-    PayPalImage() {
-      return window.BuyMeCoffeeAdmin.assets_url + 'images/' + 'PayPal.svg';
-    }
+
   },
   methods: {
+    maybeGetMethodImage(method) {
+      if (method === 'paypal') {
+        return window.BuyMeCoffeeAdmin.assets_url + 'images/' + 'PayPal.svg';
+      } else if (method === 'stripe') {
+        return window.BuyMeCoffeeAdmin.assets_url + 'images/' + 'stripe.svg';
+      } else {
+        return false;
+      }
+    },
     setStore() {
          this.guidedTour = true;
         if (window.localStorage) {
