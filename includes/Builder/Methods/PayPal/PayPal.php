@@ -125,7 +125,7 @@ class PayPal extends BaseMethods
             'email' => $supporter->supporters_email,
             'no_shipping' => '1',
             'no_note' => '1',
-            'currency_code' => $supporter->currency ? $supporter->currency : 'USD',
+            'currency_code' => $supporter->currency ?? 'USD',
             'charset' => 'UTF-8',
             'custom' => $transactionId,
             'return' => $this->successUrl($supporter),
@@ -301,11 +301,14 @@ class PayPal extends BaseMethods
 
         ?>
         <label class="wpm_paypal_card_label" for="wpm_paypal_card">
-            <img width="50px" src="<?php echo esc_url(Vite::staticPath() . 'images/paypal.png'); ?>" alt="">
+            <img width="60px" src="<?php echo esc_url(Vite::staticPath() . 'images/paypal.png'); ?>" alt="">
             <input
                     style="outline: none;"
                     type="radio" name="wpm_payment_method" class="wpm_paypal_card" id="wpm_paypal_card"
                     value="paypal">
+<!--            <span class="payment_method_name">-->
+<!--                                PayPal-->
+<!--                            </span>-->
         </label>
         <?php
     }

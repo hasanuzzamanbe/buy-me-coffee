@@ -1,15 +1,12 @@
 <template>
     <div class="wpm_bmc_main_container" v-loading="fetching">
-        <div class="upcoming_feature_notice">
-          Upcoming feature
-        </div>
         <div class="wpm_bmc_wrapper wpm_bmc_payment_settings">
                 <h3 class="wpm_bmc_title">
                     <router-link style="text-decoration: none;" :to="{name: 'Gateway'}">Gateways / </router-link>Stripe Gateway Settings:
                 </h3>
             <div style="margin-bottom: 23px;">
                 <label>Enable Stripe Payment
-                    <el-switch disabled active-value="yes" inactive-value="no" active-text="Enable stripe" v-model="settings.enable"></el-switch>
+                    <el-switch active-value="yes" inactive-value="no" active-text="Enable stripe" v-model="settings.enable"></el-switch>
                 </label>
             </div>
             <div class="wpm_bmc_section_body" :class="settings.enable !== 'yes' ? 'payment-inactive' : ''">

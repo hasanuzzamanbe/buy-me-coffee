@@ -206,7 +206,7 @@ class Render
                 </div>
             <?php endif; ?>
 
-            <div class="wpm_bmc_form_item wpm_bmc_pay_methods">
+            <div class="wpm_bmc_form_item wpm_bmc_pay_methods" id="wpm_bmc_pay_methods">
                 <div class="wpm_bmc_pay_method" data-payment_selected="none">
                     <?php echo static::payMethod($template); ?>
                 </div>
@@ -230,8 +230,8 @@ class Render
                                                       to="360 20 20" dur="0.5s" repeatCount="indefinite"/>
                                 </path></svg>
                         </div>
-                        <?php echo esc_html($symbool); ?></php> <span
-                                class="wpm_payment_total_amount"><?php echo esc_html($defaultAmount); ?></span>
+                            <span class="wpm_payment_total_amount_prefix"><?php echo esc_html($symbool); ?></span>
+                            <span class="wpm_payment_total_amount"><?php echo esc_html($defaultAmount); ?></span>
                     </button>
                 </div>
             </div>

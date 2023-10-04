@@ -1,0 +1,46 @@
+<?php
+
+namespace BuyMeCoffee\Builder\Methods\Stripe;
+
+class StripeSettings
+{
+    public static function getSettings($key = null)
+    {
+        $settings = get_option('wpm_bmc_payment_settings_stripe', []);
+
+        $defaults = array(
+            'enable' => 'no',
+            'payment_mode' => 'test',
+            'live_pub_key' => '',
+            'live_secret_key' => '',
+            'test_pub_key' => '',
+            'test_secret_key' => ''
+        );
+
+        $data = wp_parse_args($settings, $defaults);
+        return $key && isset($data[$key]) ? $data[$key] : $data;
+    }
+
+    public static function getKeys($key = null)
+    {
+        $settings = self::getSettings();
+
+        if ($settings['payment_mode'] == 'test') {
+            $data = array(
+                'secret' => $settings['test_secret_key'],
+                'public' => $settings['test_pub_key']
+            );
+        } else {
+            $data = array(
+                'secret' => $settings['live_secret_key'],
+                'public' =>$settings['live_pub_key']
+            );
+        }
+
+        return $key && isset($data[$key]) ? $data[$key] : $data;
+
+    }
+
+
+
+}
