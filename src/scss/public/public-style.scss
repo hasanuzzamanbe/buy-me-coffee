@@ -10,6 +10,7 @@ form.wpm_submitting_form {
 .wpm_loading_svg {
   display: none;
 }
+
 form.wpm_submitting_form {
   //background: #fff;
   .wpm_loading_svg {
@@ -40,6 +41,7 @@ form.wpm_submitting_form {
     border: 1px solid #dedede;
     border-radius: 6px;
     opacity: 0.4;
+    height: 34px;
   }
   img:hover {
     opacity: 1;

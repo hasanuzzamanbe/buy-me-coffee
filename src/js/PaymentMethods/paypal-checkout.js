@@ -37,9 +37,9 @@ class PaypalCheckout {
             })
             .render(paypalButtonContainer[0])
 
-        this.form.find('.wpm_bmc_form_submit_wrapper').hide();
+        this.form.find('.wpm_bmc_form_submit_wrapper, .wpm_bmc_no_signup, .wpm_bmc_input_content, .wpm_bmc_payment_input_content').hide();
         this.form.find('.wpm_bmc_pay_methods')?.parent().append(paypalButtonContainer);
-        this.form.find('.wpm_bmc_no_signup').html('Please complete your payment with PayPal 👇');
+        this.form.prepend("<p class='complete_payment_instruction'>Please complete your donation with PayPal 👇</p>");
     }
 }
 
