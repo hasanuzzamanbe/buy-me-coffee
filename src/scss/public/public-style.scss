@@ -38,26 +38,43 @@ form.wpm_submitting_form {
     visibility: hidden;
   }
   img {
-    border: 1px solid #dedede;
-    border-radius: 6px;
-    opacity: 0.4;
-    height: 34px;
+    height: 28px;
+    filter: grayscale(1);
+    opacity: 0.5;
   }
   img:hover {
     opacity: 1;
+    filter: grayscale(0);
   }
   display: flex;
   label {
-    margin-right: 23px;
+    border-radius: 18px;
+    border: 1px solid #f6f8f8;
+    width: 100px;
+    margin-right: 10px;
     cursor: pointer;
     display: grid;
     justify-items: center;
     align-items: center;
   }
   .wpm_payment_active {
+    background: #8aeee84d;
     img {
       opacity: 1;
+      filter: grayscale(0);
     }
+  }
+}
+
+button#wpm_bmc_pay_now {
+  color: #cdcdcd !important;
+  font-size: 16px !important;
+  padding: 8px !important;
+  border-radius: 31px;
+  border: none;
+  background: #1d52ffc9;
+  &:hover {
+    background: #0e886b;
   }
 }
 

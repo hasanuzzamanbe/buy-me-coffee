@@ -11,7 +11,7 @@ class StripeCheckout {
 
         let buttonText = "Pay " + amounPrefix + (parseInt(this.intent.amount) / 100) + " Now"
 
-        let submitButton = "<button id='wpm_bmc_pay_now' style='margin-top: 20px;width: 100%;background: #11d8cc;' type='submit'>" + buttonText + "</button>";
+        let submitButton = "<button id='wpm_bmc_pay_now' style='margin-top: 20px;width: 100%;' type='submit'>" + buttonText + "</button>";
         var stripe = Stripe(this.data?.order_items?.payment_args?.public_key);
         const elements = stripe.elements({
             clientSecret: this.intent.client_secret

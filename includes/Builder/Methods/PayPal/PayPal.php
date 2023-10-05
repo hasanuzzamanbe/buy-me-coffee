@@ -301,7 +301,7 @@ class PayPal extends BaseMethods
 
         ?>
         <label class="wpm_paypal_card_label" for="wpm_paypal_card">
-            <img width="60px" src="<?php echo esc_url(Vite::staticPath() . 'images/paypal.png'); ?>" alt="">
+            <img width="60px" src="<?php echo esc_url(Vite::staticPath() . 'images/PayPal.svg'); ?>" alt="">
             <input
                     style="outline: none;"
                     type="radio" name="wpm_payment_method" class="wpm_paypal_card" id="wpm_paypal_card"

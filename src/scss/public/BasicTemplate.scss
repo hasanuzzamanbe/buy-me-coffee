@@ -142,7 +142,6 @@ span.buymecoffee_form_to {
 }
 
 .wpm_submit_button {
-    margin-top: 10px;
     width: 100%;
     height: 45px;
     font-family: 'Roboto', sans-serif;
@@ -150,7 +149,7 @@ span.buymecoffee_form_to {
     text-transform: uppercase;
     letter-spacing: 2.5px;
     font-weight: 500;
-    color: #000;
+    color: #000 !important;
     background-color: #89efe8 !important;
     border: none;
     border-radius: 45px;

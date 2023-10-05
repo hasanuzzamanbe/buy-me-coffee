@@ -19,6 +19,8 @@ class Stripe extends BaseMethods
         );
 
         add_action('wpm_bmc_make_payment_stripe', array($this, 'makePayment'), 10, 3);
+        add_action("wpm_bmc_ipn_endpoint_stripe", array($this, 'verifyIpn'), 10, 2);
+
     }
 
     public function makePayment($transactionId, $entryId, $form_data)
@@ -95,6 +97,69 @@ class Stripe extends BaseMethods
         ), home_url());
     }
 
+    public function verifyIpn()
+    {
+        $data = (new IPN())->IPNData();
+
+        error_log(print_r($data));
+        error_log("data event");
+
+        if (!$data) {
+            error_log('invalid data');
+            return;
+        }
+
+        $eventId = $data->id;
+        $invoice = (new API())->getInvoice($eventId);
+
+        $orderHash = $this->getOrderHash($invoice);
+
+        if (!$invoice || is_wp_error($invoice)) {
+            error_log('invoice not found');
+            return;
+        }
+
+        $status = $invoice->data->object->status;
+
+        if ($status === 'succeeded') {
+            $status = 'paid';
+        }
+
+        $this->updateStatus($orderHash, $status);
+    }
+
+    public function updateStatus($orderHash, $status)
+    {
+        $transactions = new Transactions();
+        $transaction = $transactions->find($orderHash, 'entry_hash');
+
+        $supportersModel = new Supporters();
+        $supportersModel->updateData($transaction->entry_id, ['payment_status' => $status]);
+
+        $transactions->updateData($transaction->id, ['payment_status' => $status]);
+
+        do_action('wpm_bmc_payment_status_updated', $transaction->id, $status);
+    }
+
+    public static function getOrderHash($event)
+    {
+        $eventType = $event->type;
+
+        $metaDataEvents = [
+            'checkout.session.completed',
+            'charge.refunded',
+            'charge.succeeded',
+            'invoice.paid'
+        ];
+
+        if (in_array($eventType, $metaDataEvents)) {
+            $data = $event->data->object;
+            $metaData = (array)$data->metadata;
+            return Arr::get($metaData, 'ref_id');
+        }
+
+        return false;
+    }
 
     public function sanitize($settings)
     {
@@ -140,7 +205,7 @@ class Stripe extends BaseMethods
 
         ?>
         <label class="wpm_stripe_card_label" for="wpm_stripe_card">
-            <img width="60px" src="<?php echo esc_url(Vite::staticPath() . 'images/stripe.svg'); ?>" alt="">
+            <img width="50px" src="<?php echo esc_url(Vite::staticPath() . 'images/stripe.svg'); ?>" alt="">
             <input
                     style="outline: none;"
                     type="radio" class="wpm_stripe_card" name="wpm_payment_method" id="wpm_stripe_card"
