@@ -201,6 +201,9 @@
                   </div>
                   <a style="margin-left:12px; color: #e88b0d;text-decoration: none;" :href="previewUrl" target="_blank">Preview</a>
                 </div>
+                <br/>
+                <p>Also you can use custom amount template by adding <code>&custom</code> &nbsp param with your page link like this:</p>
+                <p>{{ previewUrl }}&custom=10 <a style="color: #e88b0d;text-decoration: none;" target="_blank" :href="previewUrl + '&custom=10'">Preview</a></p>
               </div>
             </el-col>
           </el-row>

@@ -14,6 +14,7 @@ class Buttons
             "enableName" => 'yes',
             "enableEmail" => 'no',
             "defaultAmount" => '5',
+            "custom_coffee" => 5,
             "openMode" => 'page',
             "currency" => 'USD',
             "advanced" => array(

@@ -124,15 +124,30 @@ class Render
         $enableEmail = Arr::get($template, 'enableEmail') == 'yes' ? true : false;
         $enableMsg = Arr::get($template, 'enableMessage') == 'yes' ? true : false;
         $defaultAmount = intval(Arr::get($template, 'defaultAmount', '5'));
+        $customCoffeeDefault = intval(Arr::get($template, 'custom_coffee', '5'));
 
         $currency = Arr::get($template, 'currency', 'USD');
         $symbool = PaymentHelper::currencySymbol();
         $formDynamicClass = BuilderHelper::getFormDynamicClass();
 
+        $isCustomPay = false;
+        $customAmount = $defaultAmount;
+
+        if (isset($_GET['custom'])) {
+            $isCustomPay = true;
+            $customAmount = $_GET['custom'] ? intval($_GET['custom']) : $defaultAmount;
+        }
+
         ob_start();
         ?>
         <form class="wpm_bmc_form" data-wpm_currency="<?php echo esc_html($currency); ?>">
             <input type="hidden" name="__buymecoffee_ref" value="<?php echo esc_html($template['yourName']); ?>"/>
+
+            <?php if (!$isCustomPay): ?>
+            <div class="wpm_bmc_input_content">
+                <input type="hidden" style="display: none!important;" type="number" class="wpm_bmc_payment" value="<?php echo esc_attr($defaultAmount); ?>"
+                       data-price="<?php echo esc_attr($defaultAmount * 100); ?>" type="text"/>
+            </div>
             <div class="wpm_bmc_payment_item">
                 <div class="wpm_bmc_payment_input_content">
                     <div class="wpm_bmc_coffee_selector">
@@ -157,25 +172,22 @@ class Render
                     </div>
                 </div>
             </div>
+
+            <?php endif; ?>
+            <?php if ($isCustomPay): ?>
             <!--   This custom quantity will update in any future feature       /-->
-            <div class="wpm_bmc_payment_item" style="display: none !important; align-items: center;">
+            <div class="wpm_bmc_payment_item" style="align-items: center;">
                 <div class="wpm_bmc_input_content">
                     <div style="display: flex;">
                         <span class="wpm_bmc_currency_prefix"><?php echo esc_html($symbool); ?></span>
                         <input type="number" class="wpm_bmc_payment"
-                               style="
-                                border-top-left-radius: 0px;
-                                border-bottom-left-radius: 0px;
-                                border: 1px solid #ffe3b9;
-                                height: 60px;
-                                font-size:33px;
-                                padding: 0px 20px; margin-bottom: 14px;"
-                               value="<?php echo esc_attr($defaultAmount); ?>"
-                               data-price="<?php echo esc_attr($defaultAmount * 100); ?>"
+                               value="<?php echo esc_attr($customAmount); ?>"
+                               data-price="<?php echo esc_attr($customAmount * 100); ?>"
                                type="text">
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
             <?php if ($enableName): ?>
                 <div data-element_type="input" class="wpm_bmc_form_item">
                     <div class="wpm_bmc_input_content">

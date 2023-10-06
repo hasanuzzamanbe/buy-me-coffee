@@ -49,16 +49,23 @@ form.wpm_submitting_form {
   display: flex;
   label {
     border-radius: 18px;
-    border: 1px solid #f6f8f8;
-    width: 100px;
+    border: 1px solid #efeeee;
+    width: 30px;
     margin-right: 10px;
     cursor: pointer;
     display: grid;
     justify-items: center;
     align-items: center;
+    padding: 0px;
+    height: 30px;
+    transition-duration: 1s;
+     &:hover {
+      background: #e1fffa;
+    }
   }
   .wpm_payment_active {
-    background: #8aeee84d;
+    background: #8aeee814;
+    width: 120px;
     img {
       opacity: 1;
       filter: grayscale(0);

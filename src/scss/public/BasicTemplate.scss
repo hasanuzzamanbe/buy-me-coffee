@@ -95,6 +95,18 @@ span.buymecoffee_form_to {
 .wpm_bmc_input_content input{
     height: 30px;
 }
+.wpm_bmc_payment{
+    border-radius: 0px 6px 6px 0px!important;
+    height: 60px !important;
+    font-size: 33px;
+    padding: 0px 20px;
+    margin-bottom: 14px !important;
+    border: 1px solid #b6fffb7d !important;
+    margin-left: 0px!important;
+    &:focus {
+        outline: none !important;
+    }
+}
 .wpm_bmc_payment_input_content {
     background: #b9fff33d;
     border: 1px solid #cffaf7;
@@ -128,12 +140,12 @@ span.buymecoffee_form_to {
 
 .wpm_bmc_currency_prefix {
     font-size: 33px;
-    background: #ffc568;
+    background: #41d9d0;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
-    color: white;
+    color: #fff;
     width: 59px;
-    height: 62px;
+    height: 60px;
     text-align: center;
 }
 .wpm_bmc_input_content ::placeholder {
@@ -222,6 +234,7 @@ input.wpm_bmc_custom_quantity {
     display: flex;
     width: 43px !important;
     font-size: 16px;
+    background: #0000;
 }
 .bmc_coffee label {
     cursor: pointer;
