@@ -298,13 +298,14 @@ class PayPal extends BaseMethods
     public function render($template)
     {
         $this->maybeLoadModalScript();
+        $id = $this->uniqueId('paypal_card');
 
         ?>
-        <label class="wpm_paypal_card_label" for="wpm_paypal_card">
+        <label class="wpm_paypal_card_label" for="<?php echo $id; ?>">
             <img width="60px" src="<?php echo esc_url(Vite::staticPath() . 'images/PayPal.svg'); ?>" alt="">
             <input
                     style="outline: none;"
-                    type="radio" name="wpm_payment_method" class="wpm_paypal_card" id="wpm_paypal_card"
+                    type="radio" name="wpm_payment_method" class="wpm_paypal_card" id="<?php echo $id; ?>"
                     value="paypal">
 <!--            <span class="payment_method_name">-->
 <!--                                PayPal-->

@@ -2,6 +2,8 @@
 
 namespace BuyMeCoffee\Builder\Methods;
 
+use BuyMeCoffee\Helpers\BuilderHelper;
+
 abstract class BaseMethods
 {
     public $title = '';
@@ -51,6 +53,11 @@ abstract class BaseMethods
     {
         $paymentSettings = $this->getSettings();
         return ($paymentSettings['payment_mode'] == 'live') ? 'live' : 'test';
+    }
+
+    public function uniqueId($id = '')
+    {
+        return esc_attr(BuilderHelper::getFormDynamicClass() . '_' . $id);
     }
 
     abstract public function render($template);

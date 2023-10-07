@@ -202,13 +202,13 @@ class Stripe extends BaseMethods
     public function render($template)
     {
         $this->maybeLoadModalScript();
-
+        $id = $this->uniqueId('stripe_card');
         ?>
-        <label class="wpm_stripe_card_label" for="wpm_stripe_card">
+        <label class="wpm_stripe_card_label" for="<?php echo $id; ?>">
             <img width="50px" src="<?php echo esc_url(Vite::staticPath() . 'images/stripe.svg'); ?>" alt="">
             <input
                     style="outline: none;"
-                    type="radio" class="wpm_stripe_card" name="wpm_payment_method" id="wpm_stripe_card"
+                    type="radio" class="wpm_stripe_card" name="wpm_payment_method" id="<?php echo $id; ?>"
                     value="stripe">
 <!--                            <span class="payment_method_name">-->
 <!--                                Stripe-->
