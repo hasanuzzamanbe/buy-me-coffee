@@ -41,6 +41,7 @@ form.wpm_submitting_form {
     height: 28px;
     filter: grayscale(1);
     opacity: 0.5;
+    max-width: 100%;
   }
   img:hover {
     opacity: 1;
@@ -58,7 +59,7 @@ form.wpm_submitting_form {
     align-items: center;
     padding: 0px;
     height: 30px;
-    transition-duration: 1s;
+    transition-duration: 0.7s;
      &:hover {
       background: #e1fffa;
     }
@@ -67,7 +68,7 @@ form.wpm_submitting_form {
     background: #8aeee814;
     width: 120px;
     img {
-      opacity: 1;
+      opacity: 0.8;
       filter: grayscale(0);
     }
   }
@@ -80,6 +81,7 @@ button#wpm_bmc_pay_now {
   border-radius: 31px;
   border: none;
   background: #1d52ffc9;
+  height: 45px;
   &:hover {
     background: #0e886b;
   }

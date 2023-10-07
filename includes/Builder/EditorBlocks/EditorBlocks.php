@@ -29,8 +29,8 @@ class EditorBlocks
         add_action('enqueue_block_editor_assets', function () {
             Vite::enqueueScript(
                 'buymecoffee_block_editor',
-                ('js/Editor/gutenBlock.jsx'),
-                array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-components'),
+                'js/Editor/gutenBlock.jsx',
+                ['wp-blocks', 'wp-components', 'wp-block-editor'],
                 WPM_BMC_VERSION,
                 true
             );
