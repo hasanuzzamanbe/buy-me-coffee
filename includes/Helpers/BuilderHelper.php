@@ -11,7 +11,7 @@ class BuilderHelper
 
     public static function getFormDynamicClass()
     {
-        return 'bmc' . '_' . static::$formCount++;
+        return 'bmc' . '_form_' . static::$formCount++;
     }
 
 }

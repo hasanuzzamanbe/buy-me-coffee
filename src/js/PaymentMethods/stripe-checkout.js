@@ -1,8 +1,9 @@
 class StripeCheckout {
     constructor ($form, $response) {
-        this.form = $form
-        this.data = $response.data
-        this.intent = $response.data?.intent
+        window.myform = $form;
+        this.form = $form;
+        this.data = $response.data;
+        this.intent = $response.data?.intent;
     }
 
     init () {
@@ -17,19 +18,19 @@ class StripeCheckout {
             clientSecret: this.intent.client_secret
         });
         const paymentElement = elements.create('payment', {});
-        paymentElement.mount('#wpm_bmc_pay_methods');
 
-        this.form.find('.wpm_bmc_pay_methods')?.parent().append("<p class='wpm_bmc_loading_processor' style='color: #48a891;font-size: 14px;'>Payment processing...</p>");
-        this.form.find('#fluent_cart_order_btn').hide();
+        this.form.find('.wpm_bmc_pay_methods')?.parent().prepend("<div class='wpm_bmc_payment_processor'><p class='wpm_bmc_loading_processor' style='color: #48a891;font-size: 14px;'>Payment processing...<p/></div>");
+        const formSelector = '#' + this.form.attr('id') + ' .wpm_bmc_payment_processor';
+        paymentElement.mount(formSelector);
 
         let that= this;
         paymentElement.on('ready', (event) => {
-            jQuery('.wpm_bmc_loading_processor').remove();
-            jQuery('#wpm_bmc_pay_methods').append(submitButton);
-            this.form.find('.wpm_bmc_input_content, .wpm_bmc_payment_input_content').hide();
+            this.form.find('.wpm_bmc_loading_processor').remove();
+            this.form.find('.wpm_bmc_payment_processor').append(submitButton);
+            this.form.find('.wpm_bmc_input_content, .wpm_bmc_pay_methods, .wpm_bmc_payment_item').hide();
             this.form.prepend("<p class='complete_payment_instruction'>Please complete your donation with Stripe 👇</p>");
 
-            jQuery('#wpm_bmc_pay_now').on('click', function(e) {
+            this.form.find('#wpm_bmc_pay_now').on('click', function(e) {
                 e.preventDefault()
                 jQuery(this).text('Processing...');
                 elements.submit().then(result=> {

@@ -140,7 +140,7 @@ class Render
 
         ob_start();
         ?>
-        <form class="wpm_bmc_form" data-wpm_currency="<?php echo esc_html($currency); ?>">
+        <form id="<?php echo esc_attr($formDynamicClass . '_main_wrapper');  ?>" class="wpm_bmc_form" data-wpm_currency="<?php echo esc_html($currency); ?>">
             <input type="hidden" name="__buymecoffee_ref" value="<?php echo esc_html($template['yourName']); ?>"/>
 
             <?php if (!$isCustomPay): ?>
