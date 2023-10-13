@@ -125,10 +125,6 @@ if (!defined('WPM_BMC_VERSION')) {
             $submissionHandler = new \BuyMeCoffee\Controllers\SubmissionHandler();
             add_action('wp_ajax_wpm_bmc_submit', array($submissionHandler, 'handleSubmission'));
             add_action('wp_ajax_nopriv_wpm_bmc_submit', array($submissionHandler, 'handleSubmission'));
-
-            //update payment id
-            add_action('wp_ajax_wpm_bmc_update_payment', array($submissionHandler, 'updatePayment'));
-            add_action('wp_ajax_nopriv_wpm_bmc_update_payment', array($submissionHandler, 'updatePayment'));
         }
 
         public function registerIpnHooks()

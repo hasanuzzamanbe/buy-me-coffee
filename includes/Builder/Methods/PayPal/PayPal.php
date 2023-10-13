@@ -3,6 +3,7 @@
 namespace BuyMeCoffee\Builder\Methods\PayPal;
 
 use BuyMeCoffee\Helpers\ArrayHelper;
+use BuyMeCoffee\Helpers\PaymentHelper;
 use BuyMeCoffee\Models\Supporters;
 use BuyMeCoffee\Models\Transactions;
 use BuyMeCoffee\Builder\Methods\BaseMethods;
@@ -35,6 +36,10 @@ class PayPal extends BaseMethods
         return $settings;
     }
 
+    public function paymentConfirmation()
+    {
+        $this->updatePayment($_REQUEST);
+    }
     public function verifyIpn()
     {
         (new IPN())->ipnVerificationProcess();
@@ -312,6 +317,40 @@ class PayPal extends BaseMethods
 <!--                            </span>-->
         </label>
         <?php
+    }
+
+
+    public function updatePayment()
+    {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $request = $_REQUEST;
+        $chargeId = sanitize_text_field(ArrayHelper::get($request, 'charge_id'));
+        $hash = sanitize_text_field(ArrayHelper::get($request, 'hash'));
+
+        if ($chargeId == '' || $hash == '') {
+            wp_send_json_error(array(
+                'message' => __('Invalid request', 'buy-me-coffee'),
+            ), 400);
+        }
+
+        $transaction = array(
+            'charge_id' => $chargeId,
+            'status' => 'paid-initially',
+            'updated_at' => current_time('mysql'),
+        );
+
+        $transactionId = wpmBmcDB()->table('wpm_bmc_transactions')
+            ->where('entry_hash', $hash)
+            ->update($transaction);
+
+        wpmBmcDB()->table('wpm_bmc_supporters')
+            ->where('entry_hash', $hash)
+            ->update(['payment_status' => 'paid-initially']);
+
+        wp_send_json_success(array(
+            'message' => __('Payment updated successfully', 'buy-me-coffee'),
+            'data' => $transactionId
+        ), 200);
     }
 
     public function isEnabled()

@@ -37,9 +37,17 @@ class StripeCheckout {
                     stripe.confirmPayment({
                         elements,
                         confirmParams: {
-                            return_url: that.data?.order_items?.payment_args?.success_url
-                        }
+                        },
+                        redirect: 'if_required'
                     }).then((result) => {
+                        if (result?.paymentIntent?.id) {
+                            jQuery.post(window.wpm_bmc_general.ajax_url, {
+                                action: 'wpm_bmc_payment_confirmation_stripe',
+                                intentId: result?.paymentIntent?.id,
+                            }).then((response) => {
+                                window.location.href = that.data?.order_items?.payment_args?.success_url;
+                            });
+                        }
                         jQuery(this).text(buttonText);
                     })
                 }).catch(error => {

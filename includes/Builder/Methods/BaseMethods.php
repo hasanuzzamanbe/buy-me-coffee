@@ -3,6 +3,7 @@
 namespace BuyMeCoffee\Builder\Methods;
 
 use BuyMeCoffee\Helpers\BuilderHelper;
+use BuyMeCoffee\Helpers\PaymentHelper;
 
 abstract class BaseMethods
 {
@@ -28,6 +29,8 @@ abstract class BaseMethods
 
         add_filter('wpm_bmc_get_all_methods', array($this, 'getAllMethods'), 10, 1);
 
+        add_action('wp_ajax_nopriv_wpm_bmc_payment_confirmation_'. $this->method, array($this, 'paymentConfirmation'));
+        add_action('wp_ajax_wpm_bmc_payment_confirmation_' . $this->method, array($this, 'paymentConfirmation'));
     }
 
     public function getAllMethods()
@@ -60,6 +63,10 @@ abstract class BaseMethods
         return esc_attr(BuilderHelper::getFormDynamicClass() . '_' . $id);
     }
 
+    public function paymentConfirmation()
+    {
+        //return if no module extend
+    }
     abstract public function render($template);
 
     abstract public function getPaymentSettings();

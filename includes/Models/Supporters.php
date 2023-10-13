@@ -74,6 +74,22 @@ class Supporters
          return $supporter;
     }
 
+    public static function getByHash($hash)
+    {
+        $supporter = wpmBmcDB()->table('wpm_bmc_supporters')
+            ->where('entry_hash', $hash)
+            ->first();
+
+        if ($supporter) {
+            $transaction = wpmBmcDB()->table('wpm_bmc_transactions')
+                ->where('entry_id', $supporter->id)
+                ->where('entry_hash', $hash)
+                ->first();
+            $supporter->transaction = $transaction;
+        }
+        return $supporter;
+    }
+
     public function delete($id)
     {
         $supporter = wpmBmcDB()->table('wpm_bmc_supporters')->where('id', $id)->delete();

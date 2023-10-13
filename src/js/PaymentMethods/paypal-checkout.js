@@ -21,7 +21,7 @@ class PaypalCheckout {
                     return actions.order.capture().then((details) => {
                         var transaction = details?.purchase_units[0].payments.captures[0];
                         jQuery.post(window.wpm_bmc_general.ajax_url, {
-                            action: 'wpm_bmc_update_payment',
+                            action: 'wpm_bmc_payment_confirmation_paypal',
                             hash: this.data.hash,
                             charge_id: transaction.id,
                         })

@@ -2,7 +2,13 @@
 
 namespace BuyMeCoffee\Helpers;
 
+use BuyMeCoffee\Builder\Methods\Stripe\API;
+use BuyMeCoffee\Builder\Methods\Stripe\StripeSettings;
+use BuyMeCoffee\Controllers\SubmissionHandler;
 use BuyMeCoffee\Models\Buttons;
+use BuyMeCoffee\Models\Supporters;
+use BuyMeCoffee\Helpers\ArrayHelper as Arr;
+use BuyMeCoffee\Models\Transactions;
 
 class PaymentHelper
 {
@@ -10,6 +16,49 @@ class PaymentHelper
     public function getCurrencies()
     {
         return Currencies::all();
+    }
+
+    public function getByHash($hash)
+    {
+        return Supporters::getByHash($hash);
+    }
+
+    public function updatePaymentData($request)
+    {
+        if (!isset($request['intentId'])) {
+            return;
+        }
+
+        $intentId = $request['intentId'];
+        $path = 'payment_intents/' . $intentId;
+
+        $api = new API();
+        $response = $api->makeRequest($path, [], (new StripeSettings())->getKeys('secret'));
+
+        if (!$response || is_wp_error($response)) {
+            return;
+        }
+
+        $orderHash = Arr::get($response, 'metadata.ref_id');
+        $amount = intval(Arr::get($response, 'amount_received'));
+
+        //verify order
+        $paymentHelper = new PaymentHelper();
+        $order =  $paymentHelper->getByHash($orderHash);
+        if (intval($order->payment_total) !== $amount) {
+            return;
+        }
+
+        $status = Arr::get($response, 'status') === 'succeeded' ? 'paid' : 'pending';
+
+        $updateData = [
+            'status' => sanitize_text_field($status),
+            'charge_id' => sanitize_text_field($intentId),
+            'payment_mode' => Arr::get($response, 'livemode') ? 'live' : 'test'
+        ];
+
+        (new Supporters())->updateData($order->id, ['payment_status' => $status]);
+        (new Transactions())->updateData($order->transaction->id, $updateData);
     }
 
     public static function getFormattedAmount($amount, $currency)

@@ -4,6 +4,7 @@ namespace BuyMeCoffee\Builder\Methods\Stripe;
 
 use BuyMeCoffee\Builder\Methods\BaseMethods;
 use BuyMeCoffee\Classes\Vite;
+use BuyMeCoffee\Helpers\PaymentHelper;
 use BuyMeCoffee\Models\Supporters;
 use BuyMeCoffee\Models\Transactions;
 
@@ -20,7 +21,6 @@ class Stripe extends BaseMethods
 
         add_action('wpm_bmc_make_payment_stripe', array($this, 'makePayment'), 10, 3);
         add_action("wpm_bmc_ipn_endpoint_stripe", array($this, 'verifyIpn'), 10, 2);
-
     }
 
     public function makePayment($transactionId, $entryId, $form_data)
@@ -36,7 +36,7 @@ class Stripe extends BaseMethods
         $apiKey = $keys['secret'];
 
         $paymentArgs = array(
-            'payment_method_type' => ['card'],
+//            'payment_method_type' => ['card'],
             'client_reference_id' => $hash,
             'amount' => (int) round($transaction->payment_total, 0),
             'currency' => strtolower($transaction->currency),
@@ -47,6 +47,11 @@ class Stripe extends BaseMethods
         );
 
         $this->handleInlinePayment($transaction, $paymentArgs, $apiKey);
+    }
+
+    public function paymentConfirmation()
+    {
+        (new PaymentHelper())->updatePaymentData($_REQUEST);
     }
 
     public function handleInlinePayment($transaction, $paymentArgs, $apiKey)

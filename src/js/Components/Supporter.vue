@@ -118,11 +118,11 @@ export default {
       getTransactionUrl() {
         if (this.supporter.payment_method === 'paypal') {
           if (this.supporter.payment_mode !== 'live') {
-            return 'https://www.sandbox.paypal.com/activity/payment/' + this.supporter?.transaction?.charge_id
+            return 'https://www.sandbox.paypal.com/activity/payment/' + this.supporter?.transaction?.charge_id;
           }
-          return 'https://www.paypal.com/activity/payment/' + this.supporter.transaction.charge_id
+          return 'https://www.paypal.com/activity/payment/' + this.supporter?.transaction?.charge_id;
         }
-        return ''
+        return 'https://dashboard.stripe.com/test/payments/' + this.supporter?.transaction?.charge_id;
       },
     getImage(path) {
       return window.BuyMeCoffeeAdmin.assets_url + 'images/' + path;
