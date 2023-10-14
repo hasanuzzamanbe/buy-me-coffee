@@ -87,6 +87,22 @@ button#wpm_bmc_pay_now {
   }
 }
 
+.buymecoffee_form_preview_wrapper {
+  .wpm_bmc_form_receipt {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 200px;
+    align-content: center;
+    a {
+      color: #0e886b;
+    }
+  }
+  .wpm_bmc_loading_processor{
+    color: #48a891;font-size: 14px;
+  }
+}
+
 
 //public button modal css here
 

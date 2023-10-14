@@ -17,7 +17,7 @@
         // check if receipt page
         if (isset($_REQUEST['wpm_bmc_success']) && isset($_REQUEST['hash'])) {
             $hash = sanitize_text_field($_REQUEST['hash']);
-            $supporters = \BuyMeCoffee\Models\Supporters::getByHash($hash);
+            $paymentData = \BuyMeCoffee\Models\Supporters::getByHash($hash);
             include WPM_BMC_DIR . 'includes/views/templates/Confirmation.php';
         } else {
             include WPM_BMC_DIR . 'includes/views/templates/FormSection.php';

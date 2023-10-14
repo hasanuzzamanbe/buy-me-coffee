@@ -282,28 +282,3 @@ input.custom_quantity_active {
     background: #fff;
 }
 
-//confirmation
-.wpm_bmc_confirmation{
-    p {
-        margin: 0;
-    }
-    .payment_status{
-        text-transform: capitalize;
-        border: 1px solid #60d084;
-        width: 100px;
-        border-radius: 12px;
-        height: 23px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 13px;
-        margin-bottom: 32px;
-    }
-    padding: 20px;
-    min-width: 300px;
-    box-shadow: #959da533 0 8px 24px;
-    border-left: 5px solid #ff9800;
-    margin: 0!important;
-    align-items: center;
-    font-family: fantasy;
-}
