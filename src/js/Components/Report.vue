@@ -33,15 +33,38 @@ export default {
       <div class="wpm_bmc_report_count" style="text-align:center;">
         <img :src="getImage('money.png')" alt="Money"/>
         <ul v-if="reportData.currency_total.length > 0" style="max-height: 120px;overflow-y: hidden;">
-          Total Received
-          <p v-if="reportData.currency_total.length === 1">{{reportData?.currency_total[0].currency}} : {{reportData?.currency_total[0].total_amount ? reportData?.currency_total[0].total_amount / 100 : 0}} </p>
-          <li v-else v-for="group in reportData.currency_total">{{group.currency}} : {{group.total_amount ? group.total_amount / 100 : 0}}</li>
+          <li>
+            <span>Total Received</span>
+          </li>
+          <p style="margin: 0;"
+             v-if="reportData.currency_total.length === 1"
+             v-html="reportData?.currency_total[0].formatted_total" ></p>
+          <li v-else v-for="group in reportData.currency_total">
+            <span style="font-size:20px;" v-html="group.formatted_total"></span>
+          </li>
         </ul>
         <span v-else><br/>No amount received yet!</span>
       </div>
 <!--      <div class="wpm_bmc_report_header">-->
 <!--        <p>Amount Received</p>-->
 <!--      </div>-->
+    </div>
+    <div class="wpm_bmc_report_inner">
+      <div class="wpm_bmc_report_count" style="text-align:center;">
+        <img :src="getImage('money-pending.png')" alt="MoneyPending"/>
+        <ul v-if="reportData.currency_total_pending.length > 0" style="max-height: 120px;overflow-y: hidden;">
+          <li>
+            <span>Amount Pending</span>
+          </li>
+          <p style="margin: 0;"
+             v-if="reportData.currency_total_pending.length === 1"
+             v-html="reportData?.currency_total_pending[0].formatted_total" ></p>
+          <li v-else v-for="group in reportData.currency_total_pending">
+            <span style="font-size:20px;" v-html="group.formatted_total"></span>
+          </li>
+        </ul>
+        <span v-else><br/>No pending yet!</span>
+      </div>
     </div>
       <div class="wpm_bmc_report_inner">
         <div class="wpm_bmc_report_count">
@@ -51,7 +74,7 @@ export default {
               <span>Supporters</span>
             </li>
             <li>
-              <p style="margin:0">{{ reportData.total_supporters }} </p>
+              <p style="margin:0">{{ reportData.total_supporters || 0 }} </p>
             </li>
           </ul>
         </div>
@@ -67,10 +90,11 @@ export default {
               <span>Total Coffee</span>
             </li>
             <li>
-              <p>{{reportData.total_coffee || 0}} </p>
+              <p style="margin: 0;">{{reportData.total_coffee || 0}} </p>
             </li>
           </ul>
         </div>
+
 <!--        <div class="wpm_bmc_report_header">-->
 <!--          <p>Total Coffee</p>-->
 <!--        </div>-->

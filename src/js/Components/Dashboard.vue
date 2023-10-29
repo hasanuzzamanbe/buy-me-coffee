@@ -82,7 +82,8 @@ export default {
       reportData: {
         total_supporters: this.total,
         total_coffee: 0,
-        currency_total: {}
+        currency_total: [],
+        currency_total_pending: [],
       },
       totalRevenue: {
         id: 'revenue_chart',

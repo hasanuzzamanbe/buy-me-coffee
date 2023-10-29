@@ -21,6 +21,16 @@ class Supporters
         if (isset($args['filter_top'])) {
             $query->where('payment_status', 'paid')
                 ->orderBy('payment_total', 'DESC');
+
+            $currencyTotalPending = wpmBmcDB()->table('wpm_bmc_supporters')
+                ->groupBy('currency')
+                ->where('payment_status', 'pending')
+                ->select(wpmBmcDB()->raw('SUM(payment_total) as total_amount, currency'))
+                ->get();
+
+            foreach ($currencyTotalPending as $currency) {
+                $currency->formatted_total = PaymentHelper::getFormattedAmount($currency->total_amount, $currency->currency);
+            }
         } else {
             $query->orderBy('id', 'DESC');
         }
@@ -41,6 +51,10 @@ class Supporters
             ->select(wpmBmcDB()->raw('SUM(payment_total) as total_amount, currency'))
             ->get();
 
+        foreach ($currencyTotal as $currency) {
+            $currency->formatted_total = PaymentHelper::getFormattedAmount($currency->total_amount, $currency->currency);
+        }
+
         wp_send_json_success(
             array(
                 'supporters' => $supporters,
@@ -50,6 +64,7 @@ class Supporters
                     'total_supporters' => $total,
                     'total_coffee' => $count->total_coffee,
                     'currency_total' => $currencyTotal,
+                    'currency_total_pending' => $currencyTotalPending??[],
                 )
             ),
             200
