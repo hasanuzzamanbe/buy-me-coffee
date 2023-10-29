@@ -36,10 +36,10 @@
             :hide_columns="['operations', 'id', 'mode', 'date']"
         />
       </div>
-      <div class="wpm_bmc_supporters_map">
-        <h1 class="wpm_bmc_menu_graph_title" style="padding:23px;">Recent Revenue graph in {{top_paid_currency}}
+      <div class="wpm_bmc_supporters_map" style="padding:23px;">
+        <h1 class="wpm_bmc_menu_graph_title">Recent Revenue graph in {{top_paid_currency}}
           <span style="color:#ff9800; font-weight: 400;" v-if="dummyChart">(Dummy chart)</span></h1>
-        <div style="height: 100%">
+        <div style="height: 100%;">
           <div v-if="dummyChart" style="text-align: center; color:#e38110">
             NB: No actual data found! Once you receive some donations, this chart will be updated.
           </div>
