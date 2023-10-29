@@ -27,8 +27,12 @@ a:active {
 }
 
 .wpm_bmc_report_count{
-    svg{
-        width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    img{
+        width: 80px;
     }
 }
 

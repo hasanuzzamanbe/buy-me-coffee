@@ -23,7 +23,7 @@
             include WPM_BMC_DIR . 'includes/views/templates/FormSection.php';
         }
 
-        if ($quote):
+        if ($quote && !isset($_REQUEST['wpm_bmc_success'])):
             ?>
             <div class="buymecoffee_your_content_wrapper">
                 <div class="buymecoffee_your_content">

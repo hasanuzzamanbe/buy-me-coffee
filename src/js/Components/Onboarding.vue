@@ -2,7 +2,6 @@
 import {DArrowLeft, DArrowRight, Share, InfoFilled, DocumentCopy} from '@element-plus/icons-vue';
 import MediaButton from './Parts/MediaButton.vue';
 import PayPal from './PayPal.vue';
-import Clipboard from 'clipboard';
 import ClipboardJS from "clipboard";
 export default {
   name: 'Onboarding',
@@ -54,7 +53,6 @@ export default {
       return window.BuyMeCoffeeAdmin.assets_url + 'images/' + path;
     },
     prev() {
-      console.log('previous')
       if (this.active > 0) this.active = this.active - 1;
     },
     next() {
@@ -77,7 +75,6 @@ export default {
             });
       }
       if (this.active < 3) this.active = this.active+1;
-      console.log(this.active)
     }
   },
   mounted() {
@@ -153,7 +150,7 @@ export default {
                               placement="right">
                     <p class="copy"
                           data-clipboard-action="copy"
-                          data-clipboard-text='[buymecoffee_basic]'>
+                          data-clipboard-text='[buymecoffee_form]'>
                       <i class="el-icon-document"></i> [buymecoffee_form]
                     </p>
                   </el-tooltip>
@@ -164,7 +161,7 @@ export default {
                               placement="right">
                     <p class="copy"
                           data-clipboard-action="copy"
-                          data-clipboard-text='[buymecoffee_basic]'>
+                          data-clipboard-text='[buymecoffee_button]'>
                       <i class="el-icon-document"></i> [buymecoffee_button]
                     </p>
                   </el-tooltip>
