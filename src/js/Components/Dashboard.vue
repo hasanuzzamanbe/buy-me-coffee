@@ -26,92 +26,35 @@
       </div>
 
     </div>
-    <div class="wpm_bmc_supporters">
-      <h1 class="wpm_bmc_menu_title">Supporters:</h1>
-      <el-table
-          class="customers_table"
-          :data="supporters"
-          style="width: 100%">
-        <el-table-column
-            width="180"
-            label="Date">
-          <template #default="scope">
-            <span>{{ scope.row.created_at }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column
-            prop="supporters_name"
-            width="180"
-            label="Name">
-          <template #default="scope">
-            <a style="cursor:pointer;" @click="handleGet(scope.row.id)">{{ scope.row.supporters_name }}</a>
-          </template>
-        </el-table-column>
-        <el-table-column
-            label="Amount">
-          <template #default="scope">
-            <span class="wpm_supporters_amount" v-html="scope.row.amount_formatted"></span>
-          </template>
-        </el-table-column>
-        <el-table-column
-            prop="payment_status"
-            label="Status">
-          <template #default="scope">
-            <span :class="'wpm_bmc_status wpm_bmc_status_' + scope.row.payment_status" v-html="scope.row.payment_status"></span>
-          </template>
-        </el-table-column>
-        <el-table-column
-            label="Method">
-          <template #default="scope">
-            <img width="48" class="wpm_bmc_paid_by_image" v-if="maybeGetMethodImage(scope.row.payment_method)" :src="maybeGetMethodImage(scope.row.payment_method)">
-            <span v-else :class="'wpm_bmc_payment_type wpm_bmc_payment_type_' + scope.row.payment_method" style="margin-left: 10px">{{ scope.row.payment_method ? scope.row.payment_method : '-' }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column
-            label="Mode">
-          <template #default="scope">
-            <span :class="'wpm_bmc_payment_mode wpm_bmc_payment_mode_' + scope.row.payment_mode" style="margin-left: 10px">{{ scope.row.payment_mode ? scope.row.payment_mode : '-' }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column
-            label="Operations">
-          <template #default="scope">
-            <el-button-group>
-              <el-button
-                  round
-                  size="small"
-                  icon="View"
-                  @click="handleGet(scope.row.id)"></el-button>
-              <el-popconfirm @confirm="handleDelete(scope.row.id)" title="Are you sure to delete this?">
-                <template #reference>
-                  <el-button
-                      round
-                      size="small"
-                      type="danger"
-                      icon="Delete">
-                  </el-button>
-                </template>
-              </el-popconfirm>
-            </el-button-group>
-          </template>
-        </el-table-column>
-      </el-table>
-      <br/>
-      <el-pagination
-          @current-change="handleSizeChange"
-          :page-size="posts_per_page"
-          background="background"
-          layout="size, prev, pager, next, total"
-          :page-count="Math.ceil(total / posts_per_page)"
-          :total="total"
-      />
+    <div class="wpm_bmc_dashboard_2nd_row">
+      <div class="wpm_bmc_supporters">
+        <h1 class="wpm_bmc_menu_graph_title">Supporters Leaderboard</h1>
+        <supporters-table
+            @pageChanged="(val)=>{current = val; getSupporters()}"
+            :supporters="supporters"
+            hide_pagination="yes"
+            :hide_columns="['operations', 'id', 'mode', 'date']"
+        />
+      </div>
+      <div class="wpm_bmc_supporters_map">
+        <h1 class="wpm_bmc_menu_graph_title" style="padding:23px;">Recent Revenue graph in {{top_paid_currency}}
+          <span style="color:#ff9800; font-weight: 400;" v-if="dummyChart">(Dummy chart)</span></h1>
+        <div style="height: 100%">
+          <div v-if="dummyChart" style="text-align: center; color:#e38110">
+            NB: No actual data found! Once you receive some donations, this chart will be updated.
+          </div>
+          <ChartRenderer v-if="renderChart" :chartProps="totalRevenue" :chartOptions="overviewOptions"></ChartRenderer>
+        </div>
+      </div>
     </div>
+
   </div>
 </template>
 <script>
 import Report from "./Report.vue";
 import {View,Setting, Help} from "@element-plus/icons-vue";
-import Onboarding from './Onboarding.vue';
+import SupportersTable from "./SupportersTable.vue";
+import ChartRenderer from "./Parts/ChartRenderer.vue";
 
 export default {
   name: 'Dashboard',
@@ -119,7 +62,9 @@ export default {
     Report,
     View,
     Help,
-    Setting
+    Setting,
+    SupportersTable,
+    ChartRenderer
   },
   data() {
     return {
@@ -128,45 +73,79 @@ export default {
       fetching: false,
       posts_per_page: 10,
       current: 0,
-      total: null,
+      total: 0,
       supporters: [],
+      renderChart: false,
+      dummyChart: true,
+      top_paid_currency: 'USD',
       previewUrl : window.BuyMeCoffeeAdmin.preview_url,
       reportData: {
         total_supporters: this.total,
         total_coffee: 0,
-        // total_amount: 0,
         currency_total: {}
-      }
+      },
+      totalRevenue: {
+        id: 'revenue_chart',
+        type: 'line',
+        height: '460',
+        title: 'Total Revenue',
+        color: 'rgba(111,194,255,0.51)',
+        backgroundColor: 'rgba(24,220,244,0.32)',
+        data: [
+            20,
+            18,
+            20,
+            20,
+            25
+        ],
+        label: [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May'
+        ]
+      },
+      overviewOptions: {
+        elements: {
+          line: {
+            tension: 0.3
+          },
+          point:{
+            radius: 5
+          },
+        },
+        plugins: {
+          legend: {
+            display: false,
+          },
+          tooltip: {
+            callbacks: {
+              label: (context) => {
+                return context.formattedValue +' '+ this.top_paid_currency;
+              }
+            }
+          }
+        }
+      },
     }
   },
   computed: {
 
   },
   methods: {
-    maybeGetMethodImage(method) {
-      if (method === 'paypal') {
-        return window.BuyMeCoffeeAdmin.assets_url + 'images/' + 'PayPal.svg';
-      } else if (method === 'stripe') {
-        return window.BuyMeCoffeeAdmin.assets_url + 'images/' + 'stripe.svg';
-      } else {
-        return false;
-      }
-    },
     setStore() {
          this.guidedTour = true;
         if (window.localStorage) {
           localStorage.setItem("wpm_bmc_guided_tour", false);
         }
     },
-    handleSizeChange(val) {
-      this.current = val-1;
-      this.getSupporters();
-    },
     getSupporters () {
       this.fetching = true;
       this.$get({
         action: 'wpm_bmc_admin_ajax',
         route: 'get_supporters',
+        filter_top: 'yes',
         limit: this.limit,
         page: this.current,
         posts_per_page: this.posts_per_page,
@@ -186,18 +165,20 @@ export default {
           });
 
     },
-    handleGet(id) {
-      this.$router.push({ name: 'Supporter', params: { id: id } })
-    },
-    handleDelete(id) {
-      this.$post({
+    getWeeklyRevenue() {
+      this.$get({
         action: 'wpm_bmc_admin_ajax',
-        route: 'delete_supporter',
-        id: id,
+        route: 'get_weekly_revenue',
         nonce: window.BuyMeCoffeeAdmin.nonce
-      }).then(() => {
-        this.$handleSuccess('This record has been deleted.')
-        this.getSupporters();
+      }).then((response) => {
+        this.top_paid_currency = response?.data?.top_paid_currency || 'USD';
+        let graphData = response?.data?.chartData[this.top_paid_currency];
+        if (graphData) {
+          this.totalRevenue.data = graphData.data;
+          this.totalRevenue.label = graphData.label;
+          this.dummyChart = false;
+        }
+        this.renderChart = true;
       }).catch((e) => {
         this.$handleError(e)
       })
@@ -205,6 +186,7 @@ export default {
   },
   mounted() {
     this.getSupporters();
+    this.getWeeklyRevenue();
     if (window.localStorage) {
       this.guidedTour = !!window.localStorage.getItem('wpm_bmc_guided_tour');
     }
@@ -213,14 +195,23 @@ export default {
 </script>
 <style scoped lang="scss">
 .wpm_bmc_supporters {
+  overflow: auto;
   background: #f6fffc;
   padding: 24px;
-  //margin-top: 24px;
+  width: 40%;
+  box-sizing: border-box;
   border-radius: 6px;
     tr, th {
       background: #ebfffea3 !important;
     }
 }
+.wpm_bmc_supporters_map {
+  box-sizing: border-box;
+  border-radius: 6px;
+  background: #f6fffc;
+  width: 60%;
+}
+
 .bmc_coffee_preview {
   display: flex;
   z-index: 999;
@@ -256,6 +247,26 @@ export default {
   color: #009697;
   font-family: monospace;
   font-weight: bold;
+}
+.wpm_bmc_dashboard_2nd_row {
+  box-sizing: border-box;
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
+}
+@media (max-width: 1200px) {
+  .wpm_bmc_dashboard_2nd_row {
+    flex-direction: column;
+  }
+  .wpm_bmc_supporters {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .wpm_bmc_supporters_map {
+    width: 100%;
+    box-sizing: border-box;
+
+  }
 }
 </style>
 

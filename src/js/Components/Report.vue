@@ -34,7 +34,7 @@ export default {
         <img :src="getImage('money.png')" alt="Money"/>
         <ul v-if="reportData.currency_total.length > 0" style="max-height: 120px;overflow-y: hidden;">
           Total Received
-          <p v-if="reportData.currency_total.length === 1">{{group.currency}} : {{group.total_amount ? group.total_amount / 100 : 0}} </p>
+          <p v-if="reportData.currency_total.length === 1">{{reportData?.currency_total[0].currency}} : {{reportData?.currency_total[0].total_amount ? reportData?.currency_total[0].total_amount / 100 : 0}} </p>
           <li v-else v-for="group in reportData.currency_total">{{group.currency}} : {{group.total_amount ? group.total_amount / 100 : 0}}</li>
         </ul>
         <span v-else><br/>No amount received yet!</span>
@@ -67,7 +67,7 @@ export default {
               <span>Total Coffee</span>
             </li>
             <li>
-              <p>{{reportData.total_coffee}} </p>
+              <p>{{reportData.total_coffee || 0}} </p>
             </li>
           </ul>
         </div>

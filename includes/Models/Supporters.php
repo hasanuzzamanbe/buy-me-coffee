@@ -11,15 +11,20 @@ class Supporters
         $offset = intval($args['page'] * $args['posts_per_page']);
 
         $query = wpmBmcDB()->table('wpm_bmc_supporters')
-            ->orderBy('id', 'DESC')
             ->offset($offset)
             ->limit($args['posts_per_page']);
 
         $total = $query->count();
-
-        $supporters = $query->get();
-
         $lastPage = ceil($total / $args['posts_per_page']);
+
+        // if top supporter filters add
+        if (isset($args['filter_top'])) {
+            $query->where('payment_status', 'paid')
+                ->orderBy('payment_total', 'DESC');
+        } else {
+            $query->orderBy('id', 'DESC');
+        }
+        $supporters = $query->get();
 
         foreach ($supporters as $supporter) {
             $supporter->amount_formatted = PaymentHelper::getFormattedAmount($supporter->payment_total, $supporter->currency);
@@ -45,7 +50,6 @@ class Supporters
                     'total_supporters' => $total,
                     'total_coffee' => $count->total_coffee,
                     'currency_total' => $currencyTotal,
-//                    'total_received' =>
                 )
             ),
             200
@@ -88,6 +92,54 @@ class Supporters
             $supporter->transaction = $transaction;
         }
         return $supporter;
+    }
+
+    public function getWeeklyRevenue()
+    {
+        $revenue = wpmBmcDB()->table('wpm_bmc_supporters')->select(
+            'currency',
+            'payment_status',
+            wpmBmcDB()->raw('Date(created_at) as date'),
+            wpmBmcDB()->raw("SUM(round(payment_total / 100, 2)) as total_paid"),
+            wpmBmcDB()->raw("COUNT(*) as submissions")
+        )->whereIn('payment_status', ['paid'])
+            ->where('payment_total', '>', 0)
+            ->groupBy([wpmBmcDB()->raw('Date(created_at)'), 'currency'])
+            ->orderBy('id', 'desc')
+            ->limit(50)
+            ->getArray();
+
+        $group = array();
+        foreach ( $revenue as $value ) {
+            $group[$value['currency']][] = $value;
+        }
+
+        $groupSelect = array();
+        $chartData = array();
+        $valueLength = 0;
+        $topPaidCurrency = '';
+        foreach ($group as $key => $value) {
+            if ($valueLength < count($value)) {
+                $valueLength = count($value);
+                $topPaidCurrency = $key;
+            }
+
+            $groupSelect[] = array(
+                'label' => $key,
+                'value' => $key,
+            );
+            foreach ($value as $val) {
+                $chartData[$key]['label'][] = $val['date'];
+                $chartData[$key]['data'][] = floatval($val['total_paid']);
+            }
+        }
+
+        wp_send_json_success([
+            'data' => $group,
+            'options' => $groupSelect,
+            'chartData' => $chartData,
+            'topPaidCurrency' => $topPaidCurrency,
+        ], 200);
     }
 
     public function delete($id)

@@ -150,6 +150,19 @@ class QueryBuilderHandler
         return microtime(true) - $start;
     }
 
+    /*
+    * toArray
+     * @return array
+     *
+    */
+
+    public function getArray()
+    {
+        return array_map(function ($value) {
+            return (array)$value;
+        }, $this->get());
+    }
+
     /**
      * Get all rows
      *

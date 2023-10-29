@@ -40,7 +40,9 @@ class AdminAjaxHandler
             'get_settings' => 'getSettings',
             'reset_template_settings' => 'resetDefaultSettings',
 
+            'get_weekly_revenue' => 'getWeeklyRevenue',
             'get_supporters' => 'getSupporters',
+            'get_top_supporters' => 'getTopSupporters',
             'edit_supporter' => 'editSupporter',
             'get_supporter' => 'getSupporter',
             'delete_supporter' => 'deleteSupporter',
@@ -172,6 +174,12 @@ class AdminAjaxHandler
             200
         );
     }
+
+    public function getWeeklyRevenue()
+    {
+        return (new Supporters())->getWeeklyRevenue();
+    }
+
 
     public function savePaymentSettings($data = array())
     {

@@ -36,12 +36,13 @@ class Stripe extends BaseMethods
         $apiKey = $keys['secret'];
 
         $paymentArgs = array(
-//            'payment_method_type' => ['card'],
+            'supporter_id' => $supporter->id,
             'client_reference_id' => $hash,
             'amount' => (int) round($transaction->payment_total, 0),
             'currency' => strtolower($transaction->currency),
             'description' => "Buy coffee from {$supporter->supporters_name}",
-            'customer_email' => $supporter->supporters_email,
+            'supporters_email' => $supporter->supporters_email,
+            'supporters_name' => $supporter->supporters_name,
             'success_url' => $this->successUrl($supporter),
             'public_key' => $keys['public']
         );
@@ -57,6 +58,16 @@ class Stripe extends BaseMethods
     public function handleInlinePayment($transaction, $paymentArgs, $apiKey)
     {
         try {
+            if (!empty($paymentArgs['supporters_email'])) {
+                $customer = (new API())->makeRequest('customers', [
+                        'name' => $paymentArgs['supporters_name'],
+                        'email' => $paymentArgs['supporters_email'],
+                ],$apiKey, 'POST');
+                if (!is_wp_error($customer) && isset($customer['id'])) {
+                    $paymentArgs['vendor_customer_id'] = $customer['id'];
+                }
+            }
+
             $intentData = $this->intentData($paymentArgs);
             $invoiceResponse = (new API())->makeRequest('payment_intents', $intentData, $apiKey, 'POST');
 
@@ -87,8 +98,13 @@ class Stripe extends BaseMethods
             'currency' => $args['currency'],
             'metadata' => [
                 'ref_id'  => $args['client_reference_id'],
+                'supporter' => admin_url('admin.php?page=buy-me-coffee.php#/supporter/' . $args['supporter_id'])
             ],
         );
+
+        if (isset($args['vendor_customer_id'])) {
+            $sessionPayload['customer'] = $args['vendor_customer_id'];
+        }
 
         return $sessionPayload;
     }

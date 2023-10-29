@@ -4,7 +4,8 @@ import PayPal from './Components/PayPal.vue';
 import Stripe from './Components/Stripe.vue';
 import Gateway from './Components/Gateway.vue';
 import Supporter from "./Components/Supporter.vue";
-import Onboarding from './Components/Onboarding.vue'
+import Onboarding from './Components/Onboarding.vue';
+import Supporters from './Components/Supporters.vue'
 
 export default [
     {
@@ -13,6 +14,14 @@ export default [
         component: Dashboard,
         meta: {
             active: 'dashboard'
+        }
+    },
+    {
+        path: '/supporters',
+        name: 'Supporters',
+        component: Supporters,
+        meta: {
+            active: 'supporters'
         }
     },
     {
