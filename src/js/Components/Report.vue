@@ -110,7 +110,6 @@ export default {
   box-shadow: rgb(17 12 46 / 15%) 0px 8px 100px 0px;
   margin-bottom: 24px;
   border-radius: 7px;
-  margin-top: 23px;
   min-height: 190px;
   display: flex;
   align-items: center;

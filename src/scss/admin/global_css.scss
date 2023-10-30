@@ -73,7 +73,6 @@ input::placeholder {
         max-width: 100%;
         background: #fff;
         padding: 24px;
-        margin-top: 23px;
         background: linear-gradient(84deg, #f5fffe54, #affbf054);
         box-shadow: rgb(17 12 46 / 15%) 0px 8px 100px 0px;
         border-radius: 7px;
@@ -246,4 +245,46 @@ table.wpm_supporter_payments {
         font-size: 30px;
         margin-right:12px
     }
+}
+
+//global menu settings
+div#buy-me-coffee_app {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    max-width: 100%;
+    padding-top: 24px;
+}
+.buymecoffee_body {
+    width: 92%;
+}
+
+.wpm_bmc_app_menu {
+    padding: 20px;
+    max-width: 60px;
+    background: #eff4f5;
+    box-shadow: rgb(17 12 46 / 15%) 0px 8px 100px 0px;
+    border-radius: 6px;
+    li{
+        margin-bottom: 42px!important;
+        a {
+            display: flex;
+            text-decoration: none;
+            font-size: 12px;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            color: #0cc7c0;
+        }
+        img {
+            filter: drop-shadow(1px 1px 0px #03a9f4);
+        }
+    }
+    .active {
+        filter: hue-rotate(43deg);
+    }
+}
+
+body::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
 }

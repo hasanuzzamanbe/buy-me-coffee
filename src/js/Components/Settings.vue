@@ -1,17 +1,11 @@
 <template>
   <div class="wpm_bmc_main_container">
-    <el-row>
-      <el-col :span="12">
-        <h1 class="wpm_bmc_menu_title">Buy Me <CoffeeCup style="width:23px;"/>- Global settings</h1>
-      </el-col>
-      <el-col :span="12">
-      </el-col>
-    </el-row>
     <el-row class="wpm-template" v-loading="saving">
       <div class="wpm-template-inner">
         <div class="wpm_bmc-editor">
           <el-row>
             <el-col :md="24" :lg="12" style="background: linear-gradient(122deg, #ffffff87, #c4fff654);border-radius:6px; padding: 24px;">
+              <h1 class="wpm_bmc_menu_title">Buy Me <CoffeeCup style="width:23px;"/>- Global settings</h1>
               <el-form label-position="left" label-width="140px" v-if="!fetching">
                 <el-tabs>
                   <el-tab-pane label="General">

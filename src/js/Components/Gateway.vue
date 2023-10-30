@@ -1,14 +1,8 @@
 <template>
     <div class="wpm_bmc_main_container">
-        <el-row>
-            <el-col :span="12">
-                <h1 class="wpm_bmc_menu_title">Payment Gateways</h1>
-            </el-col>
-            <el-col :span="12">
-            </el-col>
-        </el-row>
         <el-row class="wpm_bmc_gateways">
-            <div v-for="(gateway, index) in gateways" :key="index" class="wpm_bmc_gateway_item" @click="() => this.$router.push({ name: gateway.route })">
+          <h1 class="wpm_bmc_menu_title">Payment Gateways</h1>
+          <div v-for="(gateway, index) in gateways" :key="index" class="wpm_bmc_gateway_item" @click="() => this.$router.push({ name: gateway.route })">
                   <div>
                     <img :src="gateway.image"
                          style="max-width: 180px;"

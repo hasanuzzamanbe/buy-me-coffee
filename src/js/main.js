@@ -15,10 +15,12 @@ framework.app.config.globalProperties.appVars = window.BuyMeCoffeeAdmin;
 window.BuyMeCoffeeApp = framework.app.use(router).mount('#buy-me-coffee_app');
 
 router.afterEach((to, from) => {
-    jQuery('.buymecoffee_menu_item').removeClass('active');
+    jQuery('.wpm_bmc_app_menu li').removeClass('active');
     let active = to.meta.active;
-    if (active) {
-        jQuery('.buymecoffee_main-menu-items').find('li[data-key='+active+']').addClass('active');
+    if (to.name) {
+        active = to.name.toLowerCase();
+        let selector = '.wpm_bmc_menu_' + active;
+        jQuery('.wpm_bmc_app_menu ' + selector).addClass('active');
     }
 });
 

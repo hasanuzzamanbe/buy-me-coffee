@@ -1,13 +1,13 @@
 <template>
   <div class="wpm_bmc_main_container">
-    <el-row>
-      <el-col :span="12">
-        <h1 class="wpm_bmc_menu_title">Supporters</h1>
-      </el-col>
-      <el-col :span="12">
-      </el-col>
-    </el-row>
     <div class="wpm_bmc_supporters">
+      <el-row>
+        <el-col :span="12">
+          <h1 class="wpm_bmc_menu_title">Supporters</h1>
+        </el-col>
+        <el-col :span="12">
+        </el-col>
+      </el-row>
     <SupportersTable
         @pageChanged="(val)=>{current = val; getSupporters()}"
         @fetchSupporters="()=>getSupporters()"
