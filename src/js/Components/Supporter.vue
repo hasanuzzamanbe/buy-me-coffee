@@ -207,7 +207,6 @@ export default {
   background: #ebfffea3;
   box-shadow: rgb(17 12 46 / 15%) 0px 48px 100px 0px;
   padding: 32px;
-  margin-top: 23px;
   border-radius: 6px;
   .wpm_supporter_items svg {
     width: 20px;

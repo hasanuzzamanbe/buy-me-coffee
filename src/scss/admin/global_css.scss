@@ -260,7 +260,7 @@ div#buy-me-coffee_app {
 }
 
 .wpm_bmc_app_menu {
-    padding: 20px;
+    padding: 16px;
     max-width: 60px;
     background: #eff4f5;
     box-shadow: rgb(17 12 46 / 15%) 0px 8px 100px 0px;
@@ -282,6 +282,17 @@ div#buy-me-coffee_app {
     }
     .active {
         filter: hue-rotate(43deg);
+        &::before {
+            width: 0;
+            height: 0;
+            border-top: 10px solid #0000;
+            border-bottom: 10px solid #0000;
+            border-right: 10px solid #03a9f4;
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 8px;
+        }
     }
 }
 
