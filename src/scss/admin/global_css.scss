@@ -190,6 +190,7 @@ input::placeholder {
     //gateways
 
 .wpm_bmc_gateways {
+    box-shadow: rgb(17 12 46 / 15%) 0px 8px 100px 0px;
     background: linear-gradient(122deg, #ffffff87, #c4fff654);
     border-radius: 6px;
     padding: 24px;
@@ -262,9 +263,10 @@ div#buy-me-coffee_app {
 .wpm_bmc_app_menu {
     padding: 16px;
     max-width: 60px;
-    background: #eff4f5;
+    background: #f6fffc;
     box-shadow: rgb(17 12 46 / 15%) 0px 8px 100px 0px;
     border-radius: 6px;
+    min-height: 450px;
     li{
         margin-bottom: 42px!important;
         a {
@@ -281,14 +283,17 @@ div#buy-me-coffee_app {
         }
     }
     .active {
-        filter: hue-rotate(43deg);
+        //a {
+            filter: hue-rotate(43deg);
+        //}
         &::before {
             width: 0;
             height: 0;
             border-top: 10px solid #0000;
             border-bottom: 10px solid #0000;
-            border-right: 10px solid #03a9f4;
+            border-right: 10px solid #81cda1;
             content: '';
+            filter: hue-rotate(43deg);
             position: absolute;
             left: -26px;
             top: 8px;

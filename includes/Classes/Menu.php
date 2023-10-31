@@ -131,7 +131,7 @@ class Menu
         $BuyMeCoffeeAdminVars = apply_filters('buy-me-coffee/admin_app_vars', array(
             'assets_url' => Vite::staticPath(),
             'ajaxurl' => admin_url('admin-ajax.php'),
-            'preview_url' => site_url('?send_coffee'),
+            'preview_url' => site_url('?share_coffee'),
             'nonce' => wp_create_nonce('wpm_bmc_nonce'),
         ));
 

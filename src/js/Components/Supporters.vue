@@ -67,6 +67,7 @@ export default {
 
 <style scoped lang="scss">
 .wpm_bmc_supporters {
+  box-shadow: rgb(17 12 46 / 15%) 0px 8px 100px 0px;
   background: #f6fffc;
   padding: 24px;
   border-radius: 6px;

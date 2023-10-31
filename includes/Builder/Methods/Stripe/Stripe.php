@@ -111,7 +111,7 @@ class Stripe extends BaseMethods
     public function successUrl($supporter)
     {
         return add_query_arg(array(
-            'send_coffee' => '',
+            'share_coffee' => '',
             'wpm_bmc_success' => 1,
             'hash' => $supporter->entry_hash,
             'payment_method' => 'stripe'

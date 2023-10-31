@@ -37,7 +37,7 @@ class DemoPage
         }
 
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        if (isset($_GET['send_coffee'])) {
+        if (isset($_GET['share_coffee'])) {
             $this->renderBasicTemplate('page');
         }
     }

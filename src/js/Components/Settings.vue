@@ -121,7 +121,11 @@
                 <el-skeleton :rows="5" />
               </div>
             </el-col >
-            <el-col :md="24" :lg="12" class="wpm-btm-preview" style="padding: 24px;background: white;">
+            <el-col :md="24" :lg="12" class="wpm-btm-preview"
+                    style="padding: 24px;
+                    background: white;
+                    border-top-right-radius: 6px;
+                    border-bottom-right-radius: 6px;">
               <h3>Preview Button Style</h3>
               <div style="display: flex;">
                 <button
