@@ -89,7 +89,7 @@ class Menu
                         </a>
                     </li>
                     <li class="wpm_bmc_menu_gateway">
-                        <a href="<?php echo admin_url('admin.php?page=buy-me-coffee.php#/gateway'); ?>" >
+                        <a href="<?php echo admin_url('admin.php?page=buy-me-coffee.php#/stripe'); ?>" >
                             <img width="30" src="<?php echo Vite::staticPath() . 'images/bank.svg'; ?>" />
                             Gateways
                         </a>

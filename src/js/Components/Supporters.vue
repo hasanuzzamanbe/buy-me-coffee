@@ -71,5 +71,6 @@ export default {
   background: #f6fffc;
   padding: 24px;
   border-radius: 6px;
+  min-height: 500px;
 }
 </style>

@@ -39,18 +39,20 @@ export default [
         name: 'Gateway',
         component: Gateway,
         exact: true,
-    },
-    {
-        path: '/gateway/paypal',
-        name: 'paypal',
-        component: PayPal,
-        exact: true
-    },
-    {
-        path: '/gateway/stripe',
-        name: 'stripe',
-        component: Stripe,
-        exact: true
+        children: [
+            {
+                path: '/paypal',
+                name: 'paypal',
+                component: PayPal,
+                exact: true
+            },
+            {
+                path: '/stripe',
+                name: 'stripe',
+                component: Stripe,
+                exact: true
+            },
+        ]
     },
     {
         path: '/quick-setup',

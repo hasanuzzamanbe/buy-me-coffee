@@ -3,7 +3,7 @@
         <div class="wpm_bmc_wrapper wpm_bmc_payment_settings">
             <div class="wpm_bmc_header">
                 <h3 class="wpm_bmc_title">
-                    <router-link style="text-decoration: none;" :to="{name: 'Gateway'}">Gateways / </router-link>PayPal Gateway Settings:
+                    <router-link style="text-decoration: none;" :to="{name: 'Gateway'}"></router-link>PayPal Gateway Settings:
                 </h3>
             </div>
             <div style="margin-bottom: 23px;">

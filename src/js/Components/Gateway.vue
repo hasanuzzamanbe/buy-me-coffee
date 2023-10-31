@@ -1,19 +1,17 @@
 <template>
     <div class="wpm_bmc_main_container">
         <el-row class="wpm_bmc_gateways">
-          <h1 class="wpm_bmc_menu_title">Payment Gateways</h1>
-          <div v-for="(gateway, index) in gateways" :key="index" class="wpm_bmc_gateway_item" @click="() => this.$router.push({ name: gateway.route })">
-                  <div>
-                    <img :src="gateway.image"
-                         style="max-width: 180px;"
-                         class="image" />
-                  </div>
-
-                    <div>
-                      <p style="font-size: 16px;font-weight: bold;">{{ gateway.title }}</p>
-                      <p>{{gateway.description}}</p>
-                    </div>
-            </div>
+            <h1 class="wpm_bmc_menu_title">Payment Gateways</h1>
+           <div class="wpm_bmc_gateway_menu">
+             <div v-for="(gateway, index) in gateways" :key="index" class="wpm_bmc_gateway_item" @click="() => this.$router.push({ name: gateway.route })">
+               <div :class="'wpm_bmc_gateway_' + gateway.route + (gateway.route === 'stripe' ? ' active' : '')">
+                 <img :src="gateway.image"
+                      style="max-width: 70px;"
+                      class="image" />
+               </div>
+             </div>
+         </div>
+          <router-view/>
         </el-row>
 
     </div>

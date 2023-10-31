@@ -70,12 +70,11 @@ input::placeholder {
 
 .wpm_bmc {
     &_payment_settings {
+        background: #f6fffc;;
         max-width: 100%;
-        background: #fff;
         padding: 24px;
-        background: linear-gradient(84deg, #f5fffe54, #affbf054);
-        box-shadow: rgb(17 12 46 / 15%) 0px 8px 100px 0px;
         border-radius: 7px;
+        min-height: 500px;
     }
     &-editor {
         box-shadow: rgb(17 12 46 / 15%) 0px 48px 100px 0px;
@@ -191,24 +190,38 @@ input::placeholder {
 
 .wpm_bmc_gateways {
     box-shadow: rgb(17 12 46 / 15%) 0px 8px 100px 0px;
-    background: linear-gradient(122deg, #ffffff87, #c4fff654);
+    background: #f6fffc;
     border-radius: 6px;
     padding: 24px;
     display: flex;
+    min-height: 500px;
     flex-direction: column;
+}
+
+.wpm_bmc_gateway_menu {
+    display: flex;
+    justify-content: center;
 }
 
 .wpm_bmc_gateway_item {
     gap: 20px;
     max-width: 400px;
     display: flex;
-    border-radius: 7px;
     align-items: center;
     border: 1px solid #dbdbdb;
-    padding: 23px;
-    min-height: 120px;
-    margin-bottom: 32px;
+    padding: 1px 20px;
     cursor:pointer;
+    img {
+        filter: grayscale(1);
+        opacity: 0.6;
+    }
+    .active {
+        img{
+            opacity: 1;
+            filter: grayscale(0);
+        }
+    }
+
     &:hover {
         box-shadow: rgb(50 50 93 / 25%) 2px 2px 3px 0px, rgb(0 0 0 / 30%) 0px 30px 60px -30px;
     }
