@@ -51,7 +51,7 @@ class Menu
         $submenu['buy-me-coffee.php']['gateways'] = array(
             __('Gateways', 'buy-me-coffee'),
             $menuPermission,
-            'admin.php?page=buy-me-coffee.php#/gateway',
+            'admin.php?page=buy-me-coffee.php#/stripe',
         );
     }
 

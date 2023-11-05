@@ -6,7 +6,7 @@
              <div v-for="(gateway, index) in gateways" :key="index" class="wpm_bmc_gateway_item" @click="() => this.$router.push({ name: gateway.route })">
                <div :class="'wpm_bmc_gateway_' + gateway.route + (gateway.route === 'stripe' ? ' active' : '')">
                  <img :src="gateway.image"
-                      style="max-width: 70px;"
+                      style="width:70px; max-width: 70px;"
                       class="image" />
                </div>
              </div>

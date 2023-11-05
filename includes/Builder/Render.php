@@ -14,7 +14,7 @@ use BuyMeCoffee\Helpers\PaymentHelper;
 class Render
 {
 
-    public function render()
+    public function render($args = [])
     {
         $template = (new Buttons())->getButton();
 
@@ -59,6 +59,12 @@ class Render
             if (sanitize_text_field($openMode) === 'modal') {
                 ?>
                 <button class="wpm-buymecoffee-button" id="bmc_open_modal_btn"><?php echo esc_html($buttonText); ?></button>
+                <div id="bmc_modal_wrapper" class="modal">
+                    <div class="bmc_modal_content">
+                        <span class="close">&times;</span>
+                        <?php (new DemoPage())->loadModalContent(); ?>
+                    </div>
+                </div>
                 <?php
             } else {
                 ?>
@@ -66,19 +72,13 @@ class Render
                    href="<?php echo esc_url($paymentPageUrl); ?>"><?php echo esc_html($buttonText); ?></a>
                 <?php
             } ?>
-            <div id="bmc_modal_wrapper" class="modal">
-                <div class="bmc_modal_content">
-                    <span class="close">&times;</span>
-                    <?php (new DemoPage())->loadModalContent(); ?>
-                </div>
-            </div>
         </div>
         <?php
         $content = ob_get_clean();
         return $content;
     }
 
-    public static function renderInputElements($template = [])
+    public static function renderInputElements($template = [], $args = [])
     {
         static::addAssets();
 
@@ -133,9 +133,14 @@ class Render
         $isCustomPay = false;
         $customAmount = $defaultAmount;
 
+        if (isset($args['custom'])) {
+            $isCustomPay = true;
+            $customAmount = intval(Arr::get($args, 'custom', $defaultAmount));
+        }
+
         if (isset($_GET['custom'])) {
             $isCustomPay = true;
-            $customAmount = $_GET['custom'] ? intval($_GET['custom']) : $defaultAmount;
+            $customAmount = intval(Arr::get($_GET, 'custom', $defaultAmount));
         }
 
         ob_start();

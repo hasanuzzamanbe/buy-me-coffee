@@ -15,7 +15,7 @@
         a coffee
     </h3>
     <?php
-    $form = \BuyMeCoffee\Builder\Render::renderInputElements($template);
+    $form = \BuyMeCoffee\Builder\Render::renderInputElements($template, $args);
     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     echo $form;
     ?>

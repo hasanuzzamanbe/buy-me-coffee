@@ -87,7 +87,7 @@ if (!defined('WPM_BMC_VERSION')) {
                 $this->addAssets();
 
                 $builder = new \BuyMeCoffee\Builder\Render();
-                return $builder->render();
+                return $builder->render($args);
             });
 
             $demoPage = new \BuyMeCoffee\Classes\DemoPage();
@@ -101,7 +101,7 @@ if (!defined('WPM_BMC_VERSION')) {
         {
             $vite = new \BuyMeCoffee\Classes\Vite();
 
-//            $vite::enqueueStyle('wpm_bmc_style', 'scss/public/public-style.scss', array(), WPM_BMC_VERSION);
+            // $vite::enqueueStyle('wpm_bmc_style', 'scss/public/public-style.scss', array(), WPM_BMC_VERSION);
             $vite::enqueueScript('wpm_bmc_script',  'js/BmcPublic.js', array('jquery'), WPM_BMC_VERSION, true);
             wp_localize_script('wpm_bmc_script', 'wpm_bmc', array(
                 'ajax_url' => admin_url('admin-ajax.php'),

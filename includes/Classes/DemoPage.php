@@ -19,7 +19,7 @@ class DemoPage
         Vite::enqueueStyle('wpm_bmc_template_style', 'scss/public/BasicTemplate.scss', array(), WPM_BMC_VERSION);
     }
 
-    public function renderFormOnly()
+    public function renderFormOnly($args = [])
     {
         $this->loadTemplateStyles();
         $btnController = new Buttons();
@@ -38,7 +38,7 @@ class DemoPage
 
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if (isset($_GET['share_coffee'])) {
-            $this->renderBasicTemplate('page');
+            $this->renderBasicTemplate([], 'page');
         }
     }
 
@@ -53,7 +53,7 @@ class DemoPage
         echo View::make('templates.FormShortCode', ['template' => $template, 'type' => '',]);
     }
 
-    public function renderBasicTemplate($type)
+    public function renderBasicTemplate($args = [], $type = '')
     {
         if (is_page() || $type === 'page') {
             wp_enqueue_style('dashicons');
@@ -75,6 +75,7 @@ class DemoPage
                 'quote' => $quote,
                 'profile_image' => $profileImage,
                 'name' => ArrayHelper::get($template, 'yourName'),
+                'args' => $args,
             ]);
             exit();
         }

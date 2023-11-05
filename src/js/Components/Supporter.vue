@@ -191,7 +191,7 @@ export default {
   background: #eefaf9;
   border: none !important;
   height: 38px;
-  color: #ff932a;
+  color: #2ad8ff;
   font-size:16px;
 }
 .wpm_supporter_payment_actions input:focus, .wpm_supporter_payment_actions input:active {
@@ -200,7 +200,7 @@ export default {
 }
 
 .wpm_supporter_payment_actions .el-input__wrapper {
-  border: 1px solid #ff932a;
+  //border: 1px solid #14a3b7;
   width: 133px;
 }
 .wpm_bmc_supporter_main_container {
