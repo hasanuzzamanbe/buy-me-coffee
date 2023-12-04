@@ -15,10 +15,10 @@ class SubmissionHandler
         $request = $_REQUEST;
         parse_str($request['form_data'], $form_data);
 
-        $paymentMethod = ArrayHelper::get($request, 'payment_method');
-        $paymentTotal = intval(ArrayHelper::get($request, 'payment_total'));
-        $quantity = ArrayHelper::get($request, 'coffee_count', 1);
-        $currency = ArrayHelper::get($request, 'currency', false);
+        $paymentMethod = isset($_REQUEST['payment_method']) ? $_REQUEST['payment_method'] : 'paypal';
+        $paymentTotal = isset($_REQUEST['payment_total']) ? intval($_REQUEST['payment_total']) : 0;
+        $quantity = isset($_REQUEST['coffee_count']) ? intval($_REQUEST['coffee_count']) : 1;
+        $currency = isset($_REQUEST['currency']) ? $_REQUEST['currency'] : false;
 
         if (!$currency) {
             $currency = PaymentHelper::getCurrency();

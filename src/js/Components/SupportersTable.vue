@@ -137,7 +137,9 @@ export default {
       this.$post({
         action: 'wpm_bmc_admin_ajax',
         route: 'delete_supporter',
-        id: id,
+        data: {
+          id: id,
+        },
         nonce: window.BuyMeCoffeeAdmin.nonce
       }).then(() => {
         this.$handleSuccess('This record has been deleted.')

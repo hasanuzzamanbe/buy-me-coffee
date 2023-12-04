@@ -39,7 +39,7 @@ if (!defined('WPM_BMC_VERSION')) {
     define('WPM_BMC_URL', plugin_dir_url(__FILE__));
     define('WPM_BMC_DIR', plugin_dir_path(__FILE__));
     define('WPM_BMC_UPLOAD_DIR', '/buy-me-coffee');
-    define('WPM_BMC_PRODUCTION', 'yes');
+    define('WPM_BMC_DEVELOPMENT', 'yes');
 
     class BuyMeCoffee
     {

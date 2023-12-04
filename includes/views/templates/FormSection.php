@@ -5,10 +5,10 @@
             //phpcs:ignore WordPress.Security.NonceVerification.Recommended
             $getData = $_GET;
             if (isset($getData['for'])) {
-                $template['yourName'] = sanitize_text_field($getData['for']);
+                $template['yourName'] = esc_html($getData['for']);
             }
             if (isset($getData['custom_coffee'])) {
-                $template['custom_coffee'] = sanitize_text_field($getData['custom_coffee']);
+                $template['custom_coffee'] = esc_html($getData['custom_coffee']);
             }
             echo esc_html($template['yourName'])
             ?></span> <br/>

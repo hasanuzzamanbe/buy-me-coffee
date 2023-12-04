@@ -39,9 +39,11 @@ export default {
       this.$get({
         action: 'wpm_bmc_admin_ajax',
         route: 'get_supporters',
-        limit: this.limit,
-        page: this.current,
-        posts_per_page: this.posts_per_page,
+        data: {
+          limit: this.limit,
+          page: this.current,
+          posts_per_page: this.posts_per_page,
+        },
         nonce: window.BuyMeCoffeeAdmin.nonce
       })
           .then((response) => {

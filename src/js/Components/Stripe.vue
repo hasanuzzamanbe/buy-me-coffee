@@ -74,7 +74,9 @@
                 this.$get({
                     action: 'wpm_bmc_admin_ajax',
                     route: 'get_data',
-                    method: this.$route.name,
+                    data: {
+                      method: this.$route.name,
+                    },
                     nonce: window.BuyMeCoffeeAdmin.nonce
                 })
                     .then((response) => {

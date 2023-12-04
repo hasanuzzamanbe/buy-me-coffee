@@ -307,8 +307,10 @@ export default {
       this.saving = true;
       this.$post({
         action: 'wpm_bmc_admin_ajax',
-        settings: this.template,
         route: 'save_settings',
+        data: {
+          settings: this.template,
+        },
         nonce: window.BuyMeCoffeeAdmin.nonce
       })
           .then(response => {

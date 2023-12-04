@@ -142,8 +142,10 @@ export default {
                 {
                   action: 'wpm_bmc_admin_ajax',
                   route: 'update_payment_status',
-                  id: this.$route.params.id,
-                  status: this.paymentStatus,
+                  data: {
+                    id: this.$route.params.id,
+                    status: this.paymentStatus,
+                  },
                   nonce: window.BuyMeCoffeeAdmin.nonce
                 }
             ).then((response) => {
@@ -163,7 +165,9 @@ export default {
         this.$get({
           action: 'wpm_bmc_admin_ajax',
           route: 'get_supporter',
-          id: this.$route.params.id,
+          data: {
+            id: this.$route.params.id,
+          },
           nonce: window.BuyMeCoffeeAdmin.nonce
         }).then((response) => {
           this.supporter = response.data
