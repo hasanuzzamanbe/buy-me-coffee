@@ -141,7 +141,7 @@ class Render
 
         if (isset($_GET['custom'])) {
             $isCustomPay = true;
-            $customAmount = intval(Arr::get($_GET, 'custom', $defaultAmount));
+            $customAmount = intval($_GET['custom']);
         }
 
         ob_start();

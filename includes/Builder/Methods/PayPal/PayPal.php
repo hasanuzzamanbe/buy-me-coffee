@@ -40,7 +40,12 @@ class PayPal extends BaseMethods
 
     public function paymentConfirmation()
     {
-        $this->updatePayment($_REQUEST);
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $chargeId = isset($_REQUEST['charge_id']) ? sanitize_text_field($_REQUEST['charge_id']) : '';
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $hash = isset($_REQUEST['hash']) ?  sanitize_text_field($_REQUEST['hash']) : '';
+
+        $this->updatePayment($chargeId, $hash);
     }
     public function verifyIpn()
     {
@@ -322,13 +327,8 @@ class PayPal extends BaseMethods
     }
 
 
-    public function updatePayment()
+    public function updatePayment($chargeId, $hash)
     {
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        $request = $_REQUEST;
-        $chargeId = sanitize_text_field(ArrayHelper::get($request, 'charge_id'));
-        $hash = sanitize_text_field(ArrayHelper::get($request, 'hash'));
-
         if ($chargeId == '' || $hash == '') {
             wp_send_json_error(array(
                 'message' => __('Invalid request', 'buy-me-coffee'),

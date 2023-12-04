@@ -54,7 +54,11 @@ class Stripe extends BaseMethods
 
     public function paymentConfirmation()
     {
-        (new PaymentHelper())->updatePaymentData($_REQUEST);
+        if (!isset($_REQUEST['intentId'])) {
+            return;
+        }
+        $intentId = sanitize_text_field($_REQUEST['intentId']);
+        (new PaymentHelper())->updatePaymentData($intentId);
     }
 
     public function handleInlinePayment($transaction, $paymentArgs, $apiKey)

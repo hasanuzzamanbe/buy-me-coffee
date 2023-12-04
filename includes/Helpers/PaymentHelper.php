@@ -25,13 +25,8 @@ class PaymentHelper
         return Supporters::getByHash($hash);
     }
 
-    public function updatePaymentData($request)
+    public function updatePaymentData($intentId)
     {
-        if (!isset($request['intentId'])) {
-            return;
-        }
-
-        $intentId = $request['intentId'];
         $path = 'payment_intents/' . $intentId;
 
         $api = new API();

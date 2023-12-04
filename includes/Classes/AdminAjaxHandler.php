@@ -24,7 +24,13 @@ class AdminAjaxHandler
 
     public function handleEndPoint()
     {
-        if (!wp_verify_nonce(Arr::get($_REQUEST, 'nonce', false), 'wpm_bmc_nonce')) {
+        if (!isset($_REQUEST['nonce']) ) {
+            wp_send_json_error(array(
+                'message' => __("Invalid nonce", 'buy-me-coffee')
+            ), 403);
+        }
+
+        if (!wp_verify_nonce($_REQUEST['nonce'], 'wpm_bmc_nonce')) {
             wp_send_json_error(array(
                 'message' => __("Invalid nonce", 'buy-me-coffee')
             ), 403);
