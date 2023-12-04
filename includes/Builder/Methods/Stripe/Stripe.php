@@ -8,6 +8,8 @@ use BuyMeCoffee\Helpers\PaymentHelper;
 use BuyMeCoffee\Models\Supporters;
 use BuyMeCoffee\Models\Transactions;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class Stripe extends BaseMethods
 {
     public function __construct()

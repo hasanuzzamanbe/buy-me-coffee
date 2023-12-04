@@ -5,6 +5,8 @@ namespace BuyMeCoffee\Builder\Methods;
 use BuyMeCoffee\Helpers\BuilderHelper;
 use BuyMeCoffee\Helpers\PaymentHelper;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 abstract class BaseMethods
 {
     public $title = '';

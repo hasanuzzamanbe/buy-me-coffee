@@ -10,6 +10,7 @@ use BuyMeCoffee\Helpers\ArrayHelper as Arr;
 use BuyMeCoffee\Classes\DemoPage;
 use BuyMeCoffee\Helpers\PaymentHelper;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 class Render
 {

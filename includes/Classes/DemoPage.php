@@ -7,6 +7,8 @@ use BuyMeCoffee\Classes\Vite;
 use BuyMeCoffee\Helpers\ArrayHelper;
 use \BuyMeCoffee\Models\Buttons;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class DemoPage
 {
     public function register()

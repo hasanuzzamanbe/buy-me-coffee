@@ -5,6 +5,8 @@ namespace BuyMeCoffee\Controllers;
 use BuyMeCoffee\Helpers\ArrayHelper;
 use BuyMeCoffee\Helpers\PaymentHelper;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class SubmissionHandler
 {
     public function handleSubmission()

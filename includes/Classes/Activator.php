@@ -2,9 +2,7 @@
 
 namespace BuyMeCoffee\Classes;
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 /**
  * Ajax Handler Class

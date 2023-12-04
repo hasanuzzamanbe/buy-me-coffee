@@ -5,6 +5,8 @@ namespace BuyMeCoffee\Builder\Methods\PayPal;
 use BuyMeCoffee\Models\Supporters;
 use BuyMeCoffee\Models\Transactions;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class IPN
 {
     public function ipnVerificationProcess()

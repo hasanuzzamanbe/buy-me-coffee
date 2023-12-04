@@ -2,6 +2,8 @@
 
 namespace BuyMeCoffee\Classes;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class View
 {
 

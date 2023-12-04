@@ -47,7 +47,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 <script>
@@ -70,7 +69,7 @@ export default {
     return {
       limit: 20,
       guidedTour: true,
-      fetching: false,
+      fetching: true,
       posts_per_page: 10,
       current: 0,
       total: 0,
@@ -135,6 +134,9 @@ export default {
 
   },
   methods: {
+    getImage(path) {
+      return window.BuyMeCoffeeAdmin.assets_url + 'images/' + path;
+    },
     setStore() {
          this.guidedTour = true;
         if (window.localStorage) {
@@ -167,6 +169,7 @@ export default {
 
     },
     getWeeklyRevenue() {
+      this.fetching = true;
       this.$get({
         action: 'wpm_bmc_admin_ajax',
         route: 'get_weekly_revenue',
@@ -180,7 +183,9 @@ export default {
           this.dummyChart = false;
         }
         this.renderChart = true;
+        this.fetching = false;
       }).catch((e) => {
+        this.fetching = false;
         this.$handleError(e)
       })
     }

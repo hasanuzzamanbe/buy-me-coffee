@@ -4,6 +4,8 @@ namespace BuyMeCoffee\Controllers;
 
 use BuyMeCoffee\Helpers\ArrayHelper;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class PaymentHandler
 {
     public static function getAllMethods()

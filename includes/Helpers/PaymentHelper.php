@@ -10,6 +10,8 @@ use BuyMeCoffee\Models\Supporters;
 use BuyMeCoffee\Helpers\ArrayHelper as Arr;
 use BuyMeCoffee\Models\Transactions;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class PaymentHelper
 {
 

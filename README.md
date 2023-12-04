@@ -1,16 +1,18 @@
-[![Buy Me a Coffee](https://github.com/hasanuzzamanbe/buy-me-coffee/assets/43160844/11d39611-2195-439e-925b-77139c5f124d)](https://www.youtube.com/watch?v=m3T5LQ1DOEc&ab_channel=WPMiners)
-### See Short Video
-<a href="https://www.youtube.com/watch?v=m3T5LQ1DOEc" target="_blank">https://www.youtube.com/watch?v=m3T5LQ1DOEc</a>
-
 === Buy me coffee button & widget - fundraise into own account ===
 Contributors: wpminers
 Tags: buy me a coffee, donations, payments, stripe payments, PayPal, fundraise
 Requires at least: 4.5
-Tested up to: 6.3
-Stable tag: 1.0.2
+Tested up to: 6.4.1
+Stable tag: 1.0.0
 Requires PHP: 7.1
 License: GPLv2 or later
+Text Domain: buy-me-coffee
 Collect donations from "buy me a coffee" widgets directly into your own Stripe or PayPal merchant account without any commission.
+
+[![Buy Me a Coffee](https://github.com/hasanuzzamanbe/buy-me-coffee/assets/43160844/11d39611-2195-439e-925b-77139c5f124d)](https://www.youtube.com/watch?v=m3T5LQ1DOEc&ab_channel=WPMiners)
+### See Short Video
+<a href="https://www.youtube.com/watch?v=m3T5LQ1DOEc" target="_blank">https://www.youtube.com/watch?v=m3T5LQ1DOEc</a>
+
 
 == Description ==
 
@@ -38,6 +40,19 @@ Donor profiles
 Donation statistics/reports
 Quick setup mode
 Coffee counter
+
+== Libraries Used ==
+* [WP Fluent DB library](https://github.com/hasanuzzamanbe/wp-fluent/)
+    This is just a Database library for WordPress. It is not a full-fledged ORM. It is a simple database library that makes working with the database easier. It is inspired by Laravel's Eloquent ORM. It's not collect any data from your site.
+* [PayPal SDK](https://developer.paypal.com/sdk/js/reference/)
+     is used to create a PayPal donation button and collect donations from your visitors. It required to create a PayPal donation button. There is a clear documentation on PayPal's website link above about how PayPal manage user data.
+
+== 3rd Party services ==
+* [PayPal](https://www.paypal.com/)
+     is used to collect donations from your visitors. It is required to create a PayPal donation button. There is a clear documentation on PayPal's website link above about how PayPal manage user data.
+     for PayPal sandbox you may use [PayPal Sandbox](https://developer.paypal.com/docs/api-basics/sandbox/accounts/).
+     For PayPal IPN BuyMeCoffee plugin use [PayPal IPN](https://www.sandbox.paypal.com/cgi-bin/webscr/) to verify the payment.
+     And for library SDK [PayPal SDK](https://www.paypal.com/sdk/js?client-id=) where it requires your clientId.
 
 ## Installation
 1. Download a release version and Upload the plugin files to the `/wp-content/plugins/buymecoffee` directory, or install the plugin through the WordPress plugins screen directly.

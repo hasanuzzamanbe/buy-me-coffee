@@ -4,6 +4,8 @@ namespace BuyMeCoffee\Models;
 
 use BuyMeCoffee\Helpers\PaymentHelper;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class Supporters
 {
     public function index($args)

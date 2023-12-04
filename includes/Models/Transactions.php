@@ -2,6 +2,8 @@
 
 namespace BuyMeCoffee\Models;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class Transactions
 {
     public function updateData($id, $data)

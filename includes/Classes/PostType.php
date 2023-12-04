@@ -2,9 +2,7 @@
 
 namespace BuyMeCoffee\Classes;
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 /**
  * Register and initialize custom post type for buy-me-coffee

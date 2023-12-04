@@ -9,6 +9,8 @@ use BuyMeCoffee\Models\Transactions;
 use BuyMeCoffee\Builder\Methods\BaseMethods;
 use BuyMeCoffee\Classes\Vite;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class PayPal extends BaseMethods
 {
     public function __construct()

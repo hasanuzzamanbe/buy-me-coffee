@@ -5,9 +5,9 @@
  * @package BuyMeCoffee
  */
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
+
 include 'global_functions.php';
 if (!function_exists('BuyMeCoffeeAutoload')) {
     /**

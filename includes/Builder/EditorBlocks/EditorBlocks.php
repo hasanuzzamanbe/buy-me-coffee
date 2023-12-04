@@ -4,6 +4,7 @@ namespace buyMeCoffee\Builder\EditorBlocks;
 
 use BuyMeCoffee\Classes\Vite;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
 class EditorBlocks
 {
     public function register()

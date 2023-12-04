@@ -21,9 +21,8 @@
         flex-direction: column;
         align-content: space-around;
         justify-content: center;
-        border-radius: 10px;
         background-image: linear-gradient(84deg, #f5fffe54, #affbf054);
-        box-shadow: rgb(0 0 0 / 15%) 0px 2px 8px;
+        box-shadow: rgb(0 150 136 / 38%) 0px 2px 8px;
         max-width: 460px;
     }
     span.wpm_bmc_status_paid {

@@ -4,6 +4,8 @@ namespace BuyMeCoffee\Classes;
 
 use Exception;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class Vite
 {
     private static $instance = null;

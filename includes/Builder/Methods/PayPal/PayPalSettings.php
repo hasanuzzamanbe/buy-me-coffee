@@ -2,6 +2,8 @@
 
 namespace buyMeCoffee\Builder\Methods\PayPal;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class PayPalSettings
 {
     public static function get($key = null)

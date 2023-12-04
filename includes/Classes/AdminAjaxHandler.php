@@ -13,6 +13,8 @@ use BuyMeCoffee\Helpers\Currencies;
 use BuyMeCoffee\Models\Buttons;
 use BuyMeCoffee\Models\Transactions;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class AdminAjaxHandler
 {
     public function registerEndpoints()

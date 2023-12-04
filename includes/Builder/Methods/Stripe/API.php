@@ -4,6 +4,8 @@ namespace BuyMeCoffee\Builder\Methods\Stripe;
 
 use BuyMeCoffee\Helpers\ArrayHelper as Arr;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class API
 {
     private $createSessionUrl;

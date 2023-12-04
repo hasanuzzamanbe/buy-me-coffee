@@ -2,6 +2,8 @@
 
 namespace BuyMeCoffee\Builder\Methods\Stripe;
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 class StripeSettings
 {
     public static function getSettings($key = null)
