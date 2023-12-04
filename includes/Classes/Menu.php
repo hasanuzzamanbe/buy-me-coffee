@@ -73,26 +73,26 @@ class Menu
             <div class="wpm_bmc_app_menu">
                 <ul>
                     <li class="wpm_bmc_menu_dashboard">
-                        <a href="<?php echo admin_url('admin.php?page=buy-me-coffee.php#/'); ?>" >
-                            <img width="30" src="<?php echo Vite::staticPath() . 'images/dashboard.svg'; ?>" />
+                        <a href="<?php echo esc_url(admin_url('admin.php?page=buy-me-coffee.php#/')); ?>" >
+                            <img width="30" src="<?php echo esc_url(Vite::staticPath() . 'images/dashboard.svg'); ?>" />
                             Report
                         </a>
                     </li>
                     <li class="wpm_bmc_menu_supporters">
-                        <a href="<?php echo admin_url('admin.php?page=buy-me-coffee.php#/supporters'); ?>" >
-                            <img width="30" src="<?php echo Vite::staticPath() . 'images/handshake.svg'; ?>" />
+                        <a href="<?php echo esc_url(admin_url('admin.php?page=buy-me-coffee.php#/supporters')); ?>" >
+                            <img width="30" src="<?php echo esc_url(Vite::staticPath() . 'images/handshake.svg'); ?>" />
                             Donor
                         </a>
                     </li>
                     <li class="wpm_bmc_menu_settings">
-                        <a href="<?php echo admin_url('admin.php?page=buy-me-coffee.php#/settings'); ?>" >
-                            <img width="30" src="<?php echo Vite::staticPath() . 'images/settings.svg'; ?>" />
+                        <a href="<?php echo esc_url(admin_url('admin.php?page=buy-me-coffee.php#/settings')); ?>" >
+                            <img width="30" src="<?php echo esc_url(Vite::staticPath() . 'images/settings.svg'); ?>" />
                             Settings
                         </a>
                     </li>
                     <li class="wpm_bmc_menu_gateway">
-                        <a href="<?php echo admin_url('admin.php?page=buy-me-coffee.php#/stripe'); ?>" >
-                            <img width="30" src="<?php echo Vite::staticPath() . 'images/bank.svg'; ?>" />
+                        <a href="<?php echo esc_url(admin_url('admin.php?page=buy-me-coffee.php#/stripe')); ?>" >
+                            <img width="30" src="<?php echo esc_url(Vite::staticPath() . 'images/bank.svg'); ?>" />
                             Gateways
                         </a>
                     </li>

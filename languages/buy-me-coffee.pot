@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Buy me coffee widgets - fundraise into own account\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-04 20:26+0000\n"
+"POT-Creation-Date: 2023-12-04 18:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Loco-Version: 2.6.6; wp-6.3.1\n"
 "X-Domain: buy-me-coffee"
 
-#: includes/Classes/Menu.php:21 includes/views/templates/BasicTemplate.php:8
+#: includes/Classes/Menu.php:21 includes/views/templates/BasicTemplate.php:9
 msgid "Buy Me Coffee"
 msgstr ""
 
@@ -32,7 +32,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: includes/Classes/Menu.php:47
+#: includes/Classes/Menu.php:54
 msgid "Gateways"
 msgstr ""
 
@@ -44,20 +44,38 @@ msgstr ""
 msgid "http://www.wpminers.com/"
 msgstr ""
 
-#: includes/Builder/Methods/PayPal/PayPal.php:73
+#: includes/Classes/AdminAjaxHandler.php:29
+#: includes/Classes/AdminAjaxHandler.php:35
+msgid "Invalid nonce"
+msgstr ""
+
+#: includes/Builder/Methods/PayPal/PayPal.php:334
+msgid "Invalid request"
+msgstr ""
+
+#: includes/Builder/Methods/PayPal/PayPal.php:78
+#: includes/Builder/Methods/Stripe/Stripe.php:88
 msgid "Payment Modal is opening, Please complete the payment"
 msgstr ""
 
-#: includes/Classes/AdminAjaxHandler.php:105
-#: includes/Classes/AdminAjaxHandler.php:116
+#: includes/Builder/Methods/PayPal/PayPal.php:353
+msgid "Payment updated successfully"
+msgstr ""
+
+#: includes/Classes/Menu.php:49
+msgid "Settings"
+msgstr ""
+
+#: includes/Classes/AdminAjaxHandler.php:141
+#: includes/Classes/AdminAjaxHandler.php:155
 msgid "Settings successfully updated"
 msgstr ""
 
-#: includes/Classes/Menu.php:42
+#: includes/Classes/Menu.php:43
 msgid "Supporters"
 msgstr ""
 
-#: includes/Controllers/SubmissionHandler.php:74
+#: includes/Controllers/SubmissionHandler.php:82
 msgid "Thanks for your support! <3"
 msgstr ""
 
@@ -65,10 +83,10 @@ msgstr ""
 msgid "wpminers"
 msgstr ""
 
-#: includes/Builder/Methods/PayPal/PayPal.php:169
+#: includes/Builder/Methods/PayPal/PayPal.php:175
 msgid "You are redirected for payment."
 msgstr ""
 
-#: includes/Builder/Methods/PayPal/PayPal.php:172
+#: includes/Builder/Methods/PayPal/PayPal.php:178
 msgid "Your are redirecting to paypal now"
 msgstr ""

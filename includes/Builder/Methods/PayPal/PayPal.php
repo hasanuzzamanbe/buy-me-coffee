@@ -313,11 +313,11 @@ class PayPal extends BaseMethods
         $id = $this->uniqueId('paypal_card');
 
         ?>
-        <label class="wpm_paypal_card_label" for="<?php echo $id; ?>">
+        <label class="wpm_paypal_card_label" for="<?php echo esc_attr($id); ?>">
             <img width="60px" src="<?php echo esc_url(Vite::staticPath() . 'images/PayPal.svg'); ?>" alt="">
             <input
                     style="outline: none;"
-                    type="radio" name="wpm_payment_method" class="wpm_paypal_card" id="<?php echo $id; ?>"
+                    type="radio" name="wpm_payment_method" class="wpm_paypal_card" id="<?php echo esc_attr($id); ?>"
                     value="paypal">
 <!--            <span class="payment_method_name">-->
 <!--                                PayPal-->

@@ -226,7 +226,7 @@ class Render
 
             <div class="wpm_bmc_form_item wpm_bmc_pay_methods" id="wpm_bmc_pay_methods">
                 <div class="wpm_bmc_pay_method" data-payment_selected="none">
-                    <?php echo static::payMethod($template); ?>
+                    <?php echo esc_html(static::payMethod($template)); ?>
                 </div>
             </div>
 

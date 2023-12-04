@@ -71,6 +71,7 @@ class DemoPage
                 $profileImage = Vite::staticPath() . 'images/profile.png';
             }
 
+            //escaped in template, ignoring phpcs here now
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo View::make('templates.BasicTemplate', [ 'template' => $template,
                 'type' => 'button',

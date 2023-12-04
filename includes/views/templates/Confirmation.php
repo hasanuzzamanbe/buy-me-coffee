@@ -89,7 +89,7 @@ if ($paymentData): ?> <div class="wpm_bmc_confirmation">
             </div>
                 <!--                <strong>Date:</strong>-->
                 <p style="text-align: center;font-size: 12px;margin: 8px;font-family: monospace;"><?php $timestamp = strtotime($paymentData->created_at??'');
-                    $formatted_date = date("jS F Y \a\\t g:i A", $timestamp); echo esc_html($formatted_date); ?></p>
+                    $formatted_date = gmdate("jS F Y \a\\t g:i A", $timestamp); echo esc_html($formatted_date); ?></p>
         </div>
         <hr/>
         <div class='content'>

@@ -18,7 +18,7 @@ class Activator
             if (function_exists('get_sites') && function_exists('get_current_network_id')) {
                 $site_ids = get_sites(array('fields' => 'ids', 'network_id' => get_current_network_id()));
             } else {
-                $site_ids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs WHERE site_id = $wpdb->siteid;");
+                $site_ids = $wpdb->get_col($wpdb->prepare("SELECT blog_id FROM %s WHERE site_id = %s;", $wpdb->blogs, $wpdb->siteid ));
             }
             // Install the plugin for all these sites.
             foreach ($site_ids as $site_id) {
@@ -102,7 +102,7 @@ class Activator
     private function runSQL($sql, $tableName)
     {
         global $wpdb;
-        if ($wpdb->get_var("SHOW TABLES LIKE '$tableName'") != $tableName) {
+        if ($wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $tableName)) != $tableName) {
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
             dbDelta($sql);
         }
