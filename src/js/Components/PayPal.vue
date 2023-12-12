@@ -92,7 +92,7 @@ import ClipboardJS from 'clipboard';
                     data: {
                       method: 'paypal',
                     },
-                    nonce: window.BuyMeCoffeeAdmin.nonce
+                    wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
                 })
                     .then((response) => {
                         this.settings = response.data.settings;
@@ -115,7 +115,7 @@ import ClipboardJS from 'clipboard';
                       method: 'paypal',
                       settings: this.settings,
                     },
-                    nonce: window.BuyMeCoffeeAdmin.nonce
+                    wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
                 })
                     .then(response => {
                         this.$handleSuccess(response.data.message);

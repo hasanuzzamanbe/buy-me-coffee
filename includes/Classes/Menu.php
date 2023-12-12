@@ -134,7 +134,7 @@ class Menu
             'assets_url' => Vite::staticPath(),
             'ajaxurl' => admin_url('admin-ajax.php'),
             'preview_url' => site_url('?share_coffee'),
-            'nonce' => wp_create_nonce('wpm_bmc_nonce'),
+            'wpm_bmc_nonce' => wp_create_nonce('wpm_bmc_nonce'),
         ));
 
 

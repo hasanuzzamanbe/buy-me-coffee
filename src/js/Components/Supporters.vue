@@ -44,7 +44,7 @@ export default {
           page: this.current,
           posts_per_page: this.posts_per_page,
         },
-        nonce: window.BuyMeCoffeeAdmin.nonce
+        wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
       })
           .then((response) => {
             this.supporters = response.data.supporters;

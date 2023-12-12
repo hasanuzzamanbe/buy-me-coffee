@@ -146,7 +146,7 @@ export default {
                     id: this.$route.params.id,
                     status: this.paymentStatus,
                   },
-                  nonce: window.BuyMeCoffeeAdmin.nonce
+                  wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
                 }
             ).then((response) => {
               this.getSupporter();
@@ -168,7 +168,7 @@ export default {
           data: {
             id: this.$route.params.id,
           },
-          nonce: window.BuyMeCoffeeAdmin.nonce
+          wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
         }).then((response) => {
           this.supporter = response.data
           this.paymentStatus = response.data.payment_status

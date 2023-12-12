@@ -38,7 +38,7 @@
             this.$get({
                 action: 'wpm_bmc_admin_ajax',
                 route: 'gateways',
-                nonce: window.BuyMeCoffeeAdmin.nonce
+                wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
             })
                 .then((response) => {
                     this.gateways = response.data;

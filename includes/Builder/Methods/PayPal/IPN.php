@@ -11,7 +11,7 @@ class IPN
 {
     public function ipnVerificationProcess()
     {
-        if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] != 'POST') {
+        if (isset($_SERVER['REQUEST_METHOD']) && sanitize_text_field($_SERVER['REQUEST_METHOD']) != 'POST') {
             return;
         }
 
@@ -29,11 +29,10 @@ class IPN
             $encoded_data .= $arg_separator . $post_data;
         } else {
             // phpcs:ignore WordPress.Security.NonceVerification.Missing
-            $postData = $_POST;
-            if (empty($postData)) {
+            if (empty($_POST)) {
                 return;
             } else {
-                foreach ($postData as $key => $value) {
+                foreach ($_POST as $key => $value) {
                     $encoded_data .= $arg_separator . "$key=" . urlencode($value);
                 }
             }
@@ -57,36 +56,10 @@ class IPN
 
         $encoded_data_array = wp_parse_args($encoded_data_array, $defaults);
 
-        //if ipn verification enabled then verify the ipn
-        if (false) {
-            $validate_ipn = wp_unslash($_POST); // WPCS: CSRF ok, input var ok.
-            $validate_ipn['cmd'] = '_notify-validate';
-            // Validate the IPN
-            $remote_post_vars = array(
-                'timeout' => 60,
-                'redirection' => 5,
-                'httpversion' => '1.1',
-                'compress'    => false,
-                'decompress'  => false,
-                'user-agent' => 'WPM BMC IPN Verification/' . '1.0.0' . '; ' . get_bloginfo('url'),
-                'body' => $validate_ipn
-            );
-
-            $api_response = wp_safe_remote_post($this->getPaypalRedirect(true, true), $remote_post_vars);
-
-            if (is_wp_error($api_response)) {
-                do_action('wpm_bmc/paypal_ipn_verification_failed', $remote_post_vars, $encoded_data_array);
-                return;
-            }
-            if (wp_remote_retrieve_body($api_response) !== 'VERIFIED') {
-                do_action('wpm_bmc/paypal_ipn_not_verified', $api_response, $remote_post_vars, $encoded_data_array);
-                return;
-            }
-        }
-
         if (!is_array($encoded_data_array) && !empty($encoded_data_array)) {
             return;
         }
+
         $defaults = array(
             'txn_type' => '',
             'payment_status' => '',

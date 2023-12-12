@@ -11,41 +11,45 @@ class SubmissionHandler
 {
     public function handleSubmission()
     {
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        $request = $_REQUEST;
-        parse_str($request['form_data'], $form_data);
+        if (!isset($_REQUEST['form_data'])) {
+            wp_send_json_error(array(
+                'message' => __("Invalid form data", 'buy-me-coffee')
+            ), 403);
+        }
 
-        $paymentMethod = isset($_REQUEST['payment_method']) ? $_REQUEST['payment_method'] : 'paypal';
+        parse_str($_REQUEST['form_data'], $form_data);
+
+        $paymentMethod = isset($_REQUEST['payment_method']) ? sanitize_text_field($_REQUEST['payment_method']) : 'paypal';
         $paymentTotal = isset($_REQUEST['payment_total']) ? intval($_REQUEST['payment_total']) : 0;
         $quantity = isset($_REQUEST['coffee_count']) ? intval($_REQUEST['coffee_count']) : 1;
-        $currency = isset($_REQUEST['currency']) ? $_REQUEST['currency'] : false;
+        $currency = isset($_REQUEST['currency']) ? sanitize_text_field($_REQUEST['currency']) : false;
 
         if (!$currency) {
             $currency = PaymentHelper::getCurrency();
         }
 
         $form_data['payment_method'] = $paymentMethod;
-        $form_data['payment_total'] = intval($paymentTotal);
+        $form_data['payment_total'] = $paymentTotal;
 
-        $supportersName = ArrayHelper::get($form_data, 'wpm-supporter-name', 'Anonymous');
-        $supportersEmail = ArrayHelper::get($form_data, 'wpm-supporter-email');
-        $supportersMessage = ArrayHelper::get($form_data, 'wpm-supporter-message');
+        $supportersName = sanitize_text_field(ArrayHelper::get($form_data, 'wpm-supporter-name', 'Anonymous'));
+        $supportersEmail = sanitize_email(ArrayHelper::get($form_data, 'wpm-supporter-email'));
+        $supportersMessage = sanitize_text_field(ArrayHelper::get($form_data, 'wpm-supporter-message'));
 
-        $hash = $this->getHash();
-        $reference = ArrayHelper::get($form_data, '__buymecoffee_ref', '');
+        $hash = sanitize_text_field($this->getHash());
+        $reference = sanitize_text_field(ArrayHelper::get($form_data, '__buymecoffee_ref', ''));
 
         $entries = array(
-            'supporters_name' => sanitize_text_field($supportersName),
-            'supporters_email' => sanitize_email($supportersEmail),
-            'supporters_message' => sanitize_text_field($supportersMessage),
+            'supporters_name' => $supportersName,
+            'supporters_email' => $supportersEmail,
+            'supporters_message' => $supportersMessage,
             'form_data_raw' => maybe_serialize($form_data),
-            'currency' => sanitize_text_field($currency),
-            'payment_method' => sanitize_text_field($paymentMethod),
+            'currency' => $currency,
+            'payment_method' => $paymentMethod,
             'payment_status' => 'pending',
-            'entry_hash' => sanitize_text_field($hash),
+            'entry_hash' => $hash,
             'payment_total' => $paymentTotal,
-            'coffee_count' => intval($quantity),
-            'reference' => sanitize_text_field($reference),
+            'coffee_count' => $quantity,
+            'reference' => $reference,
             'status' => 'new',
             'created_at' => current_time('mysql'),
             'updated_at' => current_time('mysql'),

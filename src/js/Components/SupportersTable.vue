@@ -140,7 +140,7 @@ export default {
         data: {
           id: id,
         },
-        nonce: window.BuyMeCoffeeAdmin.nonce
+        wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
       }).then(() => {
         this.$handleSuccess('This record has been deleted.')
         this.$emit('fetchSupporters');

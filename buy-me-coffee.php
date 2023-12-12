@@ -105,7 +105,7 @@ if (!defined('WPM_BMC_VERSION')) {
             $vite::enqueueScript('wpm_bmc_script',  'js/BmcPublic.js', array('jquery'), WPM_BMC_VERSION, true);
             wp_localize_script('wpm_bmc_script', 'wpm_bmc', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
-                'nonce' => wp_create_nonce('wpm_bmc_nonce'),
+                'wpm_bmc_nonce' => wp_create_nonce('wpm_bmc_nonce'),
             ));
         }
 

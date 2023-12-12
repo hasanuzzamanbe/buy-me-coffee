@@ -52,7 +52,7 @@ class Render
 
         ob_start();
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-        echo $styling;
+        echo wp_kses($styling, ['style' => []]);
         ?>
         <div class="wpm-buymecoffee-container">
             <!--  The Modal button -->

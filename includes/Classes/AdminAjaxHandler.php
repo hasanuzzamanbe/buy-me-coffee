@@ -2,6 +2,7 @@
 
 namespace BuyMeCoffee\Classes;
 
+use BuyMeCoffee\Helpers\SanitizeHelper;
 use BuyMeCoffee\Models\Supporters;
 use BuyMeCoffee\Builder\Methods\PayPal\PayPal;
 use BuyMeCoffee\Helpers\ArrayHelper as Arr;
@@ -24,15 +25,15 @@ class AdminAjaxHandler
 
     public function handleEndPoint()
     {
-        if (!isset($_REQUEST['nonce']) ) {
+        if (!isset($_REQUEST['wpm_bmc_nonce']) ) {
             wp_send_json_error(array(
                 'message' => __("Invalid nonce", 'buy-me-coffee')
             ), 403);
         }
 
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'wpm_bmc_nonce')) {
+        if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['wpm_bmc_nonce'])), 'wpm_bmc_nonce')) {
             wp_send_json_error(array(
-                'message' => __("Invalid nonce", 'buy-me-coffee')
+                'message' => __("Invalid wpm_bmc_nonce", 'buy-me-coffee')
             ), 403);
         }
 
@@ -59,7 +60,7 @@ class AdminAjaxHandler
         );
         if (isset($validRoutes[$route])) {
             do_action('buy-me-coffee/doing_ajax_forms_' . $route);
-            $data = $_REQUEST['data'] ?? [];
+            $data = isset($_REQUEST['data']) ? SanitizeHelper::sanitizeText($_REQUEST['data']) : [];
             return $this->{$validRoutes[$route]}($data);
         }
         do_action('buy-me-coffee/admin_ajax_handler_catch', $route);
@@ -186,7 +187,7 @@ class AdminAjaxHandler
 
     public function getWeeklyRevenue()
     {
-        return (new Supporters())->getWeeklyRevenue();
+        (new Supporters())->getWeeklyRevenue();
     }
 
 
@@ -194,6 +195,6 @@ class AdminAjaxHandler
     {
         $settings = Arr::get($data, 'settings');
         $method = Arr::get($data, 'method');
-        return (new PaymentHandler())->saveSettings($method, $settings);
+        (new PaymentHandler())->saveSettings($method, $settings);
     }
 }

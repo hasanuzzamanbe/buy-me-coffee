@@ -77,7 +77,7 @@
                     data: {
                       method: this.$route.name,
                     },
-                    nonce: window.BuyMeCoffeeAdmin.nonce
+                    wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
                 })
                     .then((response) => {
                         this.settings = response.data.settings;
@@ -97,7 +97,7 @@
                     settings: this.settings,
                     method: this.$route.name,
                     route: 'save_payment_settings',
-                    nonce: window.BuyMeCoffeeAdmin.nonce
+                    wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
                 })
                     .then(response => {
                         this.$handleSuccess(response.data.message);

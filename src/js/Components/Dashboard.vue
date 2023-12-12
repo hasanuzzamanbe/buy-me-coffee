@@ -154,7 +154,7 @@ export default {
           page: this.current,
           posts_per_page: this.posts_per_page,
         },
-        nonce: window.BuyMeCoffeeAdmin.nonce
+        wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
       })
           .then((response) => {
             this.supporters = response.data.supporters;
@@ -175,7 +175,7 @@ export default {
       this.$get({
         action: 'wpm_bmc_admin_ajax',
         route: 'get_weekly_revenue',
-        nonce: window.BuyMeCoffeeAdmin.nonce
+        wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
       }).then((response) => {
         this.top_paid_currency = response?.data?.top_paid_currency || 'USD';
         let graphData = response?.data?.chartData[this.top_paid_currency];
