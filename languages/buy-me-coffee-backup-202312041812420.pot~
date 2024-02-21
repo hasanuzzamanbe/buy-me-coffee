@@ -1,0 +1,74 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Buy me coffee widgets - fundraise into own account\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-04 20:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.6.6; wp-6.3.1\n"
+"X-Domain: buy-me-coffee"
+
+#: includes/Classes/Menu.php:21 includes/views/templates/BasicTemplate.php:8
+msgid "Buy Me Coffee"
+msgstr ""
+
+#. Name of the plugin
+msgid "Buy me coffee widgets - fundraise into own account"
+msgstr ""
+
+#. Description of the plugin
+msgid "Collect \"buy me a coffee\" amount directly your own Stripe and Paypal"
+msgstr ""
+
+#: includes/Classes/Menu.php:37
+msgid "Dashboard"
+msgstr ""
+
+#: includes/Classes/Menu.php:47
+msgid "Gateways"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://www.wpminers.com"
+msgstr ""
+
+#. URI of the plugin
+msgid "http://www.wpminers.com/"
+msgstr ""
+
+#: includes/Builder/Methods/PayPal/PayPal.php:73
+msgid "Payment Modal is opening, Please complete the payment"
+msgstr ""
+
+#: includes/Classes/AdminAjaxHandler.php:105
+#: includes/Classes/AdminAjaxHandler.php:116
+msgid "Settings successfully updated"
+msgstr ""
+
+#: includes/Classes/Menu.php:42
+msgid "Supporters"
+msgstr ""
+
+#: includes/Controllers/SubmissionHandler.php:74
+msgid "Thanks for your support! <3"
+msgstr ""
+
+#. Author of the plugin
+msgid "wpminers"
+msgstr ""
+
+#: includes/Builder/Methods/PayPal/PayPal.php:169
+msgid "You are redirected for payment."
+msgstr ""
+
+#: includes/Builder/Methods/PayPal/PayPal.php:172
+msgid "Your are redirecting to paypal now"
+msgstr ""

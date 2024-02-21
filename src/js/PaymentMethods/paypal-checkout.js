@@ -10,6 +10,7 @@ class PaypalCheckout {
         let paypalButtonContainer = jQuery("<div style='padding: 12px;'></div>")
         paypal
             .Buttons({
+                fundingSource: paypal.FUNDING.PAYPAL,
                 style: {
                     shape: 'pill', layout: 'vertical', label: 'paypal', // tagline: 'false',
                     size: 'responsive', disableMaxWidth: true
