@@ -11,8 +11,8 @@ The syntax is quite similar to Laravel's query builder.
 
 ## Example
 ```PHP
-// You can use the global wpFluent() function
-$user = wpFluent()->table('users')->find(1);
+// You can use the global buyMeCoffeeDB() function
+$user = buyMeCoffeeDB()->table('users')->find(1);
 
 // Or, create a connection using $wpdb, only once.
 global $wpdb;
@@ -108,9 +108,9 @@ new \WpFluent\Connection($wpdb, ['prefix' => $wpdb->prefix], 'DB');
 // Run query
 $query = DB::table('my_table')->where('name', '=', 'admin');
 
-// Or, simply use the global wpFluent() function.
+// Or, simply use the global buyMeCoffeeDB() function.
 // It handles all the ncessary initial setup.
-wpFluent()->table('my_table')->where('name', '=', 'admin');
+buyMeCoffeeDB()->table('my_table')->where('name', '=', 'admin');
 ```
 
 

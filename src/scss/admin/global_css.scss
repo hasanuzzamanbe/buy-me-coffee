@@ -26,7 +26,7 @@ a:active {
     }
 }
 
-.wpm_bmc_report_count{
+.buymecoffee_report_count{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,11 +44,11 @@ a:active {
         margin-top: 20px;
     }
 }
-.wpm_bmc_menu_title {
+.buymecoffee_menu_title {
     font-weight: 200;
     font-size: 22px;
 }
-.wpm_bmc_menu_graph_title {
+.buymecoffee_menu_graph_title {
     font-weight: 200;
     font-size: 18px;
 }
@@ -68,7 +68,7 @@ input::placeholder {
     }
 }
 
-.wpm_bmc {
+.buymecoffee {
     &_payment_settings {
         background: #f6fffc;;
         max-width: 100%;
@@ -103,7 +103,7 @@ input::placeholder {
 
 
 //settings page
-.wpm_bmc_settings_image {
+.buymecoffee_settings_image {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -124,7 +124,7 @@ input::placeholder {
 }
 
     //dashboard css
-    span.wpm_bmc_payment_type {
+    span.buymecoffee_payment_type {
         padding: 2px 6px;
         border-radius: 5px;
         text-transform: capitalize;
@@ -132,7 +132,7 @@ input::placeholder {
         background: #42a5ff6e;
     }
 
-    .wpm_bmc_status {
+    .buymecoffee_status {
         padding: 2px 6px;
         border-radius: 5px;
         color: #141414;
@@ -172,7 +172,7 @@ input::placeholder {
         color: #3f7098;
     }
 
-    .wpm_bmc_payment_mode {
+    .buymecoffee_payment_mode {
         text-transform: uppercase;
         font-family: monospace;
         font-weight: 600;
@@ -188,7 +188,7 @@ input::placeholder {
 
     //gateways
 
-.wpm_bmc_gateways {
+.buymecoffee_gateways {
     box-shadow: rgb(17 12 46 / 15%) 0px 8px 100px 0px;
     background: #f6fffc;
     border-radius: 6px;
@@ -198,12 +198,12 @@ input::placeholder {
     flex-direction: column;
 }
 
-.wpm_bmc_gateway_menu {
+.buymecoffee_gateway_menu {
     display: flex;
     justify-content: center;
 }
 
-.wpm_bmc_gateway_item {
+.buymecoffee_gateway_item {
     gap: 20px;
     max-width: 400px;
     display: flex;
@@ -235,7 +235,7 @@ table.wpm_supporter_payments {
 }
 
 //quick setup
-.quick_payment_section .wpm_bmc_payment_settings {
+.quick_payment_section .buymecoffee_payment_settings {
     background: none !important;
     box-shadow: none !important;
 }
@@ -273,7 +273,7 @@ div#buy-me-coffee_app {
     width: 92%;
 }
 
-.wpm_bmc_app_menu {
+.buymecoffee_app_menu {
     padding: 16px;
     max-width: 60px;
     background: #f6fffc;

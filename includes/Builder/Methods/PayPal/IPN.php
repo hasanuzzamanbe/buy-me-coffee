@@ -80,19 +80,19 @@ class IPN
             $payment_id = !empty($encoded_data_array['custom']) ? absint($encoded_data_array['custom']) : 0;
         }
 
-        do_action('wpm_bmc_paypal_action_web_accept', $encoded_data_array, $payment_id);
+        do_action('buymecoffee_paypal_action_web_accept', $encoded_data_array, $payment_id);
         exit;
     }
 
     private function getSettings()
     {
-        $settings = get_option('wpm_bmc_payment_settings_paypal', []);
+        $settings = get_option('buymecoffee_payment_settings_paypal', []);
         return $settings;
     }
 
     private function isTestMode()
     {
-        $settings = get_option('wpm_bmc_payment_settings_paypal', []);
+        $settings = get_option('buymecoffee_payment_settings_paypal', []);
         if (isset($settings['payment_mode']) && $settings['payment_mode'] == 'live') {
             return false;
         }
@@ -122,7 +122,7 @@ class IPN
                 $paypal_uri = $protocol . 'www.paypal.com/cgi-bin/webscr';
             }
         }
-        return apply_filters('wpm_bmc_ipn/paypal_url', $paypal_uri, $ssl_check, $ipn);
+        return apply_filters('buymecoffee_ipn/paypal_url', $paypal_uri, $ssl_check, $ipn);
     }
 }
 

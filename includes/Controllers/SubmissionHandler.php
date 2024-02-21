@@ -55,14 +55,14 @@ class SubmissionHandler
             'updated_at' => current_time('mysql'),
         );
 
-        $entries = apply_filters('wpm_bmc_supporter_entries', $entries);
+        $entries = apply_filters('buymecoffee_supporter_entries', $entries);
 
-        do_action('wpm_bmc_before_supporters_data_insert', $entries);
+        do_action('buymecoffee_before_supporters_data_insert', $entries);
 
         // DO ENTRIES INSERT
-        $entryId = wpmBmcDB()->table('wpm_bmc_supporters')->insert($entries);
+        $entryId = wpmBmcDB()->table('buymecoffee_supporters')->insert($entries);
 
-        do_action('wpm_bmc_after_supporters_data_insert', $entries);
+        do_action('buymecoffee_after_supporters_data_insert', $entries);
 
         $transaction = array(
             'entry_hash' => sanitize_text_field($hash),
@@ -76,7 +76,7 @@ class SubmissionHandler
             'updated_at' => current_time('mysql'),
         );
 
-         $transactionTable = wpmBmcDB()->table('wpm_bmc_transactions');
+         $transactionTable = wpmBmcDB()->table('buymecoffee_transactions');
          $transactionTable->insert($transaction);
 
          $transactionId =
@@ -86,7 +86,7 @@ class SubmissionHandler
             ->first();
 
          if ($paymentTotal > 0) {
-            do_action('wpm_bmc_make_payment_' . $paymentMethod, $transactionId->id, $entryId, $form_data);
+            do_action('buymecoffee_make_payment_' . $paymentMethod, $transactionId->id, $entryId, $form_data);
         }
 
         wp_send_json_success(array(
@@ -98,7 +98,7 @@ class SubmissionHandler
 
     private function getHash()
     {
-        $prefix = 'wpm_bmc_' . time();
+        $prefix = 'buymecoffee_' . time();
         $uid = uniqid($prefix);
         // now let's make a unique number from 1 to 999
         $uid .= wp_rand(1, 999);

@@ -139,7 +139,7 @@ class Vite
 
     public static function isDevMode(): bool
     {
-        return defined('WPM_BMC_DEVELOPMENT') && WPM_BMC_DEVELOPMENT === 'yes';
+        return defined('BUYMECOFFEE_DEVELOPMENT') && BUYMECOFFEE_DEVELOPMENT === 'yes';
     }
 
     private static function getDevPath(): string
@@ -149,7 +149,7 @@ class Vite
 
     private static function getAssetPath(): string
     {
-        return WPM_BMC_URL . 'assets/';
+        return BUYMECOFFEE_URL . 'assets/';
     }
 
     private static function getProductionFilePath($file): string
@@ -161,7 +161,7 @@ class Vite
                     $file['file'] . '_' . $key . '_css',
                     $assetPath . $path,
                     [],
-                    WPM_BMC_VERSION
+                    BUYMECOFFEE_VERSION
                 );
             }
         }

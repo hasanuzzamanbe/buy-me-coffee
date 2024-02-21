@@ -1,8 +1,8 @@
 <template>
-    <div class="wpm_bmc_main_container" v-loading="fetching">
-        <div class="wpm_bmc_wrapper wpm_bmc_payment_settings">
-            <div class="wpm_bmc_header">
-                <h3 class="wpm_bmc_title">
+    <div class="buymecoffee_main_container" v-loading="fetching">
+        <div class="buymecoffee_wrapper buymecoffee_payment_settings">
+            <div class="buymecoffee_header">
+                <h3 class="buymecoffee_title">
                     <router-link style="text-decoration: none;" :to="{name: 'Gateway'}"></router-link>PayPal Gateway Settings:
                 </h3>
             </div>
@@ -11,7 +11,7 @@
                     <el-switch active-value="yes" inactive-value="no" active-text="Enable PayPal" v-model="settings.enable"></el-switch>
                 </label>
             </div>
-            <div class="wpm_bmc_section_body" :class="settings.enable !== 'yes' ? 'payment-inactive' : ''">
+            <div class="buymecoffee_section_body" :class="settings.enable !== 'yes' ? 'payment-inactive' : ''">
                 <el-form :label-position="labelPosition" rel="paypal_settings" :model="settings" label-width="220px">
                   <el-form-item label="PayPal Payment Mode">
                     <el-radio-group v-model="settings.payment_mode">
@@ -47,7 +47,7 @@
                         </el-form-item>
                     </el-tab-pane>
                   </el-tabs>
-                  <div class="wpm_bmc_settings_section">
+                  <div class="buymecoffee_settings_section">
                     <p>Please use IPN url to get marked paid on you site.</p>
                     <b>IPN URL: </b>
                     <el-tooltip effect="dark"
@@ -87,12 +87,12 @@ import ClipboardJS from 'clipboard';
             getSettings() {
                 this.fetching = true;
                 this.$get({
-                    action: 'wpm_bmc_admin_ajax',
+                    action: 'buymecoffee_admin_ajax',
                     route: 'get_data',
                     data: {
                       method: 'paypal',
                     },
-                    wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
+                    buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
                 })
                     .then((response) => {
                         this.settings = response.data.settings;
@@ -109,13 +109,13 @@ import ClipboardJS from 'clipboard';
             saveSettings() {
                 this.saving = true;
                 this.$post({
-                    action: 'wpm_bmc_admin_ajax',
+                    action: 'buymecoffee_admin_ajax',
                     route: 'save_payment_settings',
                     data: {
                       method: 'paypal',
                       settings: this.settings,
                     },
-                    wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
+                    buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
                 })
                     .then(response => {
                         this.$handleSuccess(response.data.message);

@@ -73,8 +73,8 @@ span.buymecoffee_form_to {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-style: italic;
 }
-.wpm_bmc_input_content input,
-.wpm_bmc_input_content textarea {
+.buymecoffee_input_content input,
+.buymecoffee_input_content textarea {
     box-sizing: border-box;
     box-shadow: none !important;
     width: 100% !important;
@@ -85,19 +85,19 @@ span.buymecoffee_form_to {
     background: #f1f1f178 !important;
     min-height: 35px;
 }
-.wpm_bmc_custom_quantity{
+.buymecoffee_custom_quantity{
     padding: 4px !important;
     border: 1px solid #e9e9e9 !important;
     border-radius: 4px !important;
     box-shadow: none;
     background: white;
 }
-.wpm_bmc_custom_quantity,
-.wpm_bmc_payment_input_content input,
-.wpm_bmc_input_content input{
+.buymecoffee_custom_quantity,
+.buymecoffee_payment_input_content input,
+.buymecoffee_input_content input{
     height: 30px;
 }
-.wpm_bmc_payment{
+.buymecoffee_payment{
     border-radius: 0px 6px 6px 0px!important;
     height: 60px !important;
     font-size: 33px;
@@ -109,7 +109,7 @@ span.buymecoffee_form_to {
         outline: none !important;
     }
 }
-.wpm_bmc_payment_input_content {
+.buymecoffee_payment_input_content {
     background: #b9fff33d;
     border: 1px solid #cffaf7;
     border-radius: 7px;
@@ -119,28 +119,28 @@ span.buymecoffee_form_to {
     justify-content: center;
     height: 80px;
 }
-.wpm_bmc_custom_quantity:focus,
-.wpm_bmc_input_content input:focus,
-.wpm_bmc_input_content textarea:focus {
+.buymecoffee_custom_quantity:focus,
+.buymecoffee_input_content input:focus,
+.buymecoffee_input_content textarea:focus {
     outline: none;
     box-shadow: none;
 }
-.wpm_bmc_input_content input::placeholder 
+.buymecoffee_input_content input::placeholder
 {
     color: rgba(109, 135, 142, 0.56);
 }
-.wpm_bmc_input_content textarea::placeholder
+.buymecoffee_input_content textarea::placeholder
 {
     color: rgba(109, 135, 142, 0.56);
 }
-.wpm_bmc_input_content textarea {
+.buymecoffee_input_content textarea {
     min-height: 50px;
 }
-.wpm_bmc_form_item {
+.buymecoffee_form_item {
     margin-bottom: 14px;
 }
 
-.wpm_bmc_currency_prefix {
+.buymecoffee_currency_prefix {
     font-size: 33px;
     background: #41d9d0;
     border-top-left-radius: 6px;
@@ -150,7 +150,7 @@ span.buymecoffee_form_to {
     height: 60px;
     text-align: center;
 }
-.wpm_bmc_input_content ::placeholder {
+.buymecoffee_input_content ::placeholder {
     color: #ccc;
     font-size: 12px;
 }
@@ -206,7 +206,7 @@ span.buymecoffee_form_to {
     width: 100%;
     background: #07fff412;
 }
-.wpm_bmc_no_signup{
+.buymecoffee_no_signup{
     color: #b8b8b8;
     font-size: 12px;
     font-family: sans-serif;
@@ -224,7 +224,7 @@ span.buymecoffee_form_to {
     }
     display: flex;
 }
-.wpm_bmc_coffee_selector {
+.buymecoffee_coffee_selector {
     display: flex;
     align-items: center;
 }
@@ -232,7 +232,7 @@ span.buymecoffee_form_to {
     max-width: 15px;
     visibility: hidden;
 }
-input.wpm_bmc_custom_quantity {
+input.buymecoffee_custom_quantity {
     height: 36px !important;
     display: flex;
     width: 43px !important;
@@ -257,7 +257,7 @@ input.wpm_bmc_custom_quantity {
     background: #b9fff3 !important;
     border-color: #b9fff3;
 }
-.wpm_bmc_custom_quantity {
+.buymecoffee_custom_quantity {
     max-width: 60px !important;
     margin-left: 15px !important;
     text-align: center;
@@ -266,7 +266,7 @@ input.custom_quantity_active {
     background: #b9fff3 !important;
     border-color: #b9fff3;
 }
-.wpm_bmc_main_container .wpm_bmc_payment_item {
+.buymecoffee_main_container .buymecoffee_payment_item {
     min-width: 300px;
     border: 1px solid #72e0ce;
     border-radius: 5px;

@@ -1,5 +1,5 @@
 <template>
-  <div class="wpm_bmc_main_container">
+  <div class="buymecoffee_main_container">
     <report :reportData='reportData'/>
     <div class="bmc_coffee_preview">
         <el-tooltip
@@ -26,9 +26,9 @@
       </div>
 
     </div>
-    <div class="wpm_bmc_dashboard_2nd_row">
-      <div class="wpm_bmc_supporters">
-        <h1 class="wpm_bmc_menu_graph_title">Supporters Leaderboard</h1>
+    <div class="buymecoffee_dashboard_2nd_row">
+      <div class="buymecoffee_supporters">
+        <h1 class="buymecoffee_menu_graph_title">Supporters Leaderboard</h1>
         <supporters-table
             @pageChanged="(val)=>{current = val; getSupporters()}"
             :supporters="supporters"
@@ -36,8 +36,8 @@
             :hide_columns="['operations', 'id', 'mode', 'date']"
         />
       </div>
-      <div class="wpm_bmc_supporters_map" style="padding:23px;">
-        <h1 class="wpm_bmc_menu_graph_title">Recent Revenue graph in {{top_paid_currency}}
+      <div class="buymecoffee_supporters_map" style="padding:23px;">
+        <h1 class="buymecoffee_menu_graph_title">Recent Revenue graph in {{top_paid_currency}}
           <span style="color:#ff9800; font-weight: 400;" v-if="dummyChart">(Dummy chart)</span></h1>
         <div style="height: 100%;">
           <div v-if="dummyChart" style="text-align: center; color:#e38110">
@@ -140,13 +140,13 @@ export default {
     setStore() {
          this.guidedTour = true;
         if (window.localStorage) {
-          localStorage.setItem("wpm_bmc_guided_tour", false);
+          localStorage.setItem("buymecoffee_guided_tour", false);
         }
     },
     getSupporters () {
       this.fetching = true;
       this.$get({
-        action: 'wpm_bmc_admin_ajax',
+        action: 'buymecoffee_admin_ajax',
         route: 'get_supporters',
         data: {
           filter_top: 'yes',
@@ -154,7 +154,7 @@ export default {
           page: this.current,
           posts_per_page: this.posts_per_page,
         },
-        wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
+        buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
       })
           .then((response) => {
             this.supporters = response.data.supporters;
@@ -173,9 +173,9 @@ export default {
     getWeeklyRevenue() {
       this.fetching = true;
       this.$get({
-        action: 'wpm_bmc_admin_ajax',
+        action: 'buymecoffee_admin_ajax',
         route: 'get_weekly_revenue',
-        wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
+        buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
       }).then((response) => {
         this.top_paid_currency = response?.data?.top_paid_currency || 'USD';
         let graphData = response?.data?.chartData[this.top_paid_currency];
@@ -196,13 +196,13 @@ export default {
     this.getSupporters();
     this.getWeeklyRevenue();
     if (window.localStorage) {
-      this.guidedTour = !!window.localStorage.getItem('wpm_bmc_guided_tour');
+      this.guidedTour = !!window.localStorage.getItem('buymecoffee_guided_tour');
     }
   }
 }
 </script>
 <style scoped lang="scss">
-.wpm_bmc_supporters {
+.buymecoffee_supporters {
   overflow: auto;
   background: #f6fffc;
   padding: 24px;
@@ -213,7 +213,7 @@ export default {
       background: #ebfffea3 !important;
     }
 }
-.wpm_bmc_supporters_map {
+.buymecoffee_supporters_map {
   box-sizing: border-box;
   border-radius: 6px;
   background: #f6fffc;
@@ -248,7 +248,7 @@ export default {
   text-decoration: none;
   color: #07958b;
 }
-.wpm_bmc_paid_by_image {
+.buymecoffee_paid_by_image {
   opacity: 0.8;
 }
 .wpm_supporters_amount{
@@ -256,21 +256,21 @@ export default {
   font-family: monospace;
   font-weight: bold;
 }
-.wpm_bmc_dashboard_2nd_row {
+.buymecoffee_dashboard_2nd_row {
   box-sizing: border-box;
   display: flex;
   gap: 20px;
   justify-content: flex-start;
 }
 @media (max-width: 1200px) {
-  .wpm_bmc_dashboard_2nd_row {
+  .buymecoffee_dashboard_2nd_row {
     flex-direction: column;
   }
-  .wpm_bmc_supporters {
+  .buymecoffee_supporters {
     width: 100%;
     box-sizing: border-box;
   }
-  .wpm_bmc_supporters_map {
+  .buymecoffee_supporters_map {
     width: 100%;
     box-sizing: border-box;
 

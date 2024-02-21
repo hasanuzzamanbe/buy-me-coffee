@@ -8,7 +8,7 @@ class PayPalSettings
 {
     public static function get($key = null)
     {
-        $settings = get_option('wpm_bmc_payment_settings_paypal', array());
+        $settings = get_option('buymecoffee_payment_settings_paypal', array());
 
         $defaults = array(
             'enable' => 'no',

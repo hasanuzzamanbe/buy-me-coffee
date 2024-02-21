@@ -32,7 +32,7 @@ class EditorBlocks
                 'buymecoffee_block_editor',
                 'js/Editor/gutenBlock.jsx',
                 ['wp-blocks', 'wp-components', 'wp-block-editor'],
-                WPM_BMC_VERSION,
+                BUYMECOFFEE_VERSION,
                 true
             );
         });

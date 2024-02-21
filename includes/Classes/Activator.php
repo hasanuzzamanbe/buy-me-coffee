@@ -47,7 +47,7 @@ class Activator
     {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
-        $table_name = $wpdb->prefix . 'wpm_bmc_supporters';
+        $table_name = $wpdb->prefix . 'buymecoffee_supporters';
         $sql = "CREATE TABLE $table_name (
 				id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				supporters_name varchar(255),
@@ -76,7 +76,7 @@ class Activator
     {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
-        $table_name = $wpdb->prefix . 'wpm_bmc_transactions';
+        $table_name = $wpdb->prefix . 'buymecoffee_transactions';
         $sql = "CREATE TABLE $table_name (
 				id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 entry_id int(11),

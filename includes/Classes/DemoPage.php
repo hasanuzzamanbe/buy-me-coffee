@@ -18,7 +18,7 @@ class DemoPage
 
     public function loadTemplateStyles()
     {
-        Vite::enqueueStyle('wpm_bmc_template_style', 'scss/public/BasicTemplate.scss', array(), WPM_BMC_VERSION);
+        Vite::enqueueStyle('buymecoffee_template_style', 'scss/public/BasicTemplate.scss', array(), BUYMECOFFEE_VERSION);
     }
 
     public function renderFormOnly($args = [])
@@ -27,7 +27,7 @@ class DemoPage
         $btnController = new Buttons();
         $template = $btnController->getButton();
         ob_start();
-        include WPM_BMC_DIR . 'includes/views/templates/FormShortCode.php';
+        include BUYMECOFFEE_DIR . 'includes/views/templates/FormShortCode.php';
         return ob_get_clean();
     }
 

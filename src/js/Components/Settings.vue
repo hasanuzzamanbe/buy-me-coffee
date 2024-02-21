@@ -1,11 +1,11 @@
 <template>
-  <div class="wpm_bmc_main_container">
+  <div class="buymecoffee_main_container">
     <el-row class="wpm-template" v-loading="saving">
       <div class="wpm-template-inner">
-        <div class="wpm_bmc-editor">
+        <div class="buymecoffee-editor">
           <el-row>
             <el-col :md="24" :lg="12" style="background: linear-gradient(122deg, #ffffff87, #c4fff654);border-radius:6px; padding: 24px;">
-              <h1 class="wpm_bmc_menu_title">Buy Me <CoffeeCup style="width:23px;"/>- Global settings</h1>
+              <h1 class="buymecoffee_menu_title">Buy Me <CoffeeCup style="width:23px;"/>- Global settings</h1>
               <el-form label-position="left" label-width="140px" v-if="!fetching">
                 <el-tabs>
                   <el-tab-pane label="General">
@@ -82,7 +82,7 @@
                       </el-input>
                     </el-form-item>
                     <el-form-item label="">
-                      <div class="wpm_bmc_settings_image">
+                      <div class="buymecoffee_settings_image">
                         <div>
                           <MediaButton @onMediaSelected="onMediaSelected" />
                         </div>
@@ -271,9 +271,9 @@ export default {
     },
     getSettings() {
       this.$get({
-        action: 'wpm_bmc_admin_ajax',
+        action: 'buymecoffee_admin_ajax',
         route: 'get_settings',
-        wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
+        buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
       }).then(res => {
         this.template = res.data.template;
         this.currencies = res.data.currencies;
@@ -287,9 +287,9 @@ export default {
     resetDefault() {
       this.saving = true;
       this.$post({
-        action: 'wpm_bmc_admin_ajax',
+        action: 'buymecoffee_admin_ajax',
         route: 'reset_template_settings',
-        wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
+        buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
       })
           .then(response => {
             this.$handleSuccess(response.data.message);
@@ -306,12 +306,10 @@ export default {
     saveTemplates() {
       this.saving = true;
       this.$post({
-        action: 'wpm_bmc_admin_ajax',
+        action: 'buymecoffee_admin_ajax',
         route: 'save_settings',
-        data: {
-          settings: this.template,
-        },
-        wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
+        data: this.template,
+        buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
       })
           .then(response => {
             this.$handleSuccess(response.data.message);
@@ -319,7 +317,7 @@ export default {
           })
           .fail(error => {
             console.log(error)
-            // this.$message.error(error.responseJSON.data.message);
+            this.$message.error(error.responseJSON.data.message);
           })
           .always(() => {
             this.saving = false;

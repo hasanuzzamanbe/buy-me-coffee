@@ -78,7 +78,7 @@ class PaymentHelper
         }
         $currency = strtoupper($currency);
 
-        $symbols = apply_filters('wpm_bmc_currency_symbols', array(
+        $symbols = apply_filters('buymecoffee_currency_symbols', array(
             'AED' => '&#x62f;.&#x625;',
             'AFN' => '&#x60b;',
             'ALL' => 'L',
@@ -242,6 +242,6 @@ class PaymentHelper
             'ZMW' => 'ZK',
         ));
         $currency_symbol = isset($symbols[$currency]) ? $symbols[$currency] : '';
-        return apply_filters('wpm_bmc_currency_symbol', $currency_symbol, $currency);
+        return apply_filters('buymecoffee_currency_symbol', $currency_symbol, $currency);
     }
 }

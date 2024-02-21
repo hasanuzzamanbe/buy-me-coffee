@@ -5,7 +5,7 @@ class PaypalCheckout {
     }
 
     init() {
-        this.form.find('.wpm_submit_button, .wpm_bmc_pay_method').hide()
+        this.form.find('.wpm_submit_button, .buymecoffee_pay_method').hide()
 
         let paypalButtonContainer = jQuery("<div style='padding: 12px;'></div>")
         paypal
@@ -21,8 +21,8 @@ class PaypalCheckout {
                 }, onApprove: (data, actions) => {
                     return actions.order.capture().then((details) => {
                         var transaction = details?.purchase_units[0].payments.captures[0];
-                        jQuery.post(window.wpm_bmc_general.ajax_url, {
-                            action: 'wpm_bmc_payment_confirmation_paypal',
+                        jQuery.post(window.buymecoffee_general.ajax_url, {
+                            action: 'buymecoffee_payment_confirmation_paypal',
                             hash: this.data.hash,
                             charge_id: transaction.id,
                         })
@@ -38,12 +38,12 @@ class PaypalCheckout {
             })
             .render(paypalButtonContainer[0])
 
-        this.form.find('.wpm_bmc_form_submit_wrapper, .wpm_bmc_no_signup, .wpm_bmc_input_content, .wpm_bmc_payment_input_content').hide();
-        this.form.find('.wpm_bmc_pay_methods')?.parent().append(paypalButtonContainer);
+        this.form.find('.buymecoffee_form_submit_wrapper, .buymecoffee_no_signup, .buymecoffee_input_content, .buymecoffee_payment_input_content').hide();
+        this.form.find('.buymecoffee_pay_methods')?.parent().append(paypalButtonContainer);
         this.form.prepend("<p class='complete_payment_instruction'>Please complete your donation with PayPal 👇</p>");
     }
 }
 
-window.addEventListener('wpm_bmc_payment_next_action_paypal', function (e) {
+window.addEventListener('buymecoffee_payment_next_action_paypal', function (e) {
     new PaypalCheckout(e.detail.form, e.detail.response).init()
 })

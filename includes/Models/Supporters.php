@@ -12,7 +12,7 @@ class Supporters
     {
         $offset = intval($args['page'] * $args['posts_per_page']);
 
-        $query = wpmBmcDB()->table('wpm_bmc_supporters')
+        $query = wpmBmcDB()->table('buymecoffee_supporters')
             ->offset($offset)
             ->limit($args['posts_per_page']);
 
@@ -24,7 +24,7 @@ class Supporters
             $query->where('payment_status', 'paid')
                 ->orderBy('payment_total', 'DESC');
 
-            $currencyTotalPending = wpmBmcDB()->table('wpm_bmc_supporters')
+            $currencyTotalPending = wpmBmcDB()->table('buymecoffee_supporters')
                 ->groupBy('currency')
                 ->where('payment_status', 'pending')
                 ->select(wpmBmcDB()->raw('SUM(payment_total) as total_amount, currency'))
@@ -42,11 +42,11 @@ class Supporters
             $supporter->amount_formatted = PaymentHelper::getFormattedAmount($supporter->payment_total, $supporter->currency);
         }
 
-        $count = wpmBmcDB()->table('wpm_bmc_supporters')
+        $count = wpmBmcDB()->table('buymecoffee_supporters')
             ->select(wpmBmcDB()->raw('SUM(coffee_count) as total_coffee'))
             ->first();
 
-        $currencyTotal = wpmBmcDB()->table('wpm_bmc_supporters')
+        $currencyTotal = wpmBmcDB()->table('buymecoffee_supporters')
             ->groupBy('currency')
             ->where('payment_status', 'paid')
             ->orWhere('payment_status', 'paid-initially')
@@ -75,17 +75,17 @@ class Supporters
 
     public function updateData($entryId, $data)
     {
-        $supporters = wpmBmcDB()->table('wpm_bmc_supporters')->where('id', $entryId)->update($data);
+        $supporters = wpmBmcDB()->table('buymecoffee_supporters')->where('id', $entryId)->update($data);
         return $supporters;
     }
 
     public function find($id)
     {
-        $supporter = wpmBmcDB()->table('wpm_bmc_supporters')
-            ->where('wpm_bmc_supporters.id', $id)
+        $supporter = wpmBmcDB()->table('buymecoffee_supporters')
+            ->where('buymecoffee_supporters.id', $id)
             ->first();
 
-        $transaction = wpmBmcDB()->table('wpm_bmc_transactions')
+        $transaction = wpmBmcDB()->table('buymecoffee_transactions')
             ->where('entry_id', $id)
             ->first();
 
@@ -97,12 +97,12 @@ class Supporters
 
     public static function getByHash($hash)
     {
-        $supporter = wpmBmcDB()->table('wpm_bmc_supporters')
+        $supporter = wpmBmcDB()->table('buymecoffee_supporters')
             ->where('entry_hash', $hash)
             ->first();
 
         if ($supporter) {
-            $transaction = wpmBmcDB()->table('wpm_bmc_transactions')
+            $transaction = wpmBmcDB()->table('buymecoffee_transactions')
                 ->where('entry_id', $supporter->id)
                 ->where('entry_hash', $hash)
                 ->first();
@@ -113,7 +113,7 @@ class Supporters
 
     public function getWeeklyRevenue()
     {
-        $revenue = wpmBmcDB()->table('wpm_bmc_supporters')->select(
+        $revenue = wpmBmcDB()->table('buymecoffee_supporters')->select(
             'currency',
             'payment_status',
             wpmBmcDB()->raw('Date(created_at) as date'),
@@ -161,7 +161,7 @@ class Supporters
 
     public function delete($id)
     {
-        $supporter = wpmBmcDB()->table('wpm_bmc_supporters')->where('id', $id)->delete();
+        $supporter = wpmBmcDB()->table('buymecoffee_supporters')->where('id', $id)->delete();
 
         return $supporter;
     }

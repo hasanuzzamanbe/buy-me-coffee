@@ -1,6 +1,6 @@
 <style>
     //confirmation
-    .wpm_bmc_confirmation{
+    .buymecoffee_confirmation{
         min-width: 300px;
         box-shadow: #959da533 0 8px 24px;
         border-left: 5px solid #00b574;
@@ -25,12 +25,12 @@
         box-shadow: rgb(0 150 136 / 38%) 0px 2px 8px;
         max-width: 460px;
     }
-    span.wpm_bmc_status_paid {
+    span.buymecoffee_status_paid {
         background: #e3fff0;
         padding: 0px 12px;
         border-radius: 5px;
     }
-    span.wpm_bmc_status_pending {
+    span.buymecoffee_status_pending {
         background: #ffefe3;
         padding: 0px 12px;
         border-radius: 5px;
@@ -48,23 +48,23 @@
     .content {
         margin-top: 10px;
     }
-    .wpm_bmc_receipt_row {
+    .buymecoffee_receipt_row {
         font-family: monospace;
         display: flex;
         justify-content: space-between;
         margin-bottom: 12px;
     }
-    .wpm_bmc_receipt_row strong {
+    .buymecoffee_receipt_row strong {
         font-weight: bold;
     }
-    .wpm_bmc_confirmation_thanks {
+    .buymecoffee_confirmation_thanks {
         position: relative;
         bottom: -52px;
         text-align: center;
         font-size: 12px;
         font-family: cursive;
     }
-    .wpm_bmc_receipt_coffee {
+    .buymecoffee_receipt_coffee {
         height: 30px;
         width: 30px;
         display: flex;
@@ -77,7 +77,7 @@
 
 <?php use BuyMeCoffee\Classes\Vite;
 
-if ($paymentData): ?> <div class="wpm_bmc_confirmation">
+if ($paymentData): ?> <div class="buymecoffee_confirmation">
     <div class='receipt'>
         <div class='header'>
             <img width="100" src="<?php echo esc_url(Vite::staticPath() . 'images/coffee.gif'); ?>">
@@ -93,38 +93,38 @@ if ($paymentData): ?> <div class="wpm_bmc_confirmation">
         </div>
         <hr/>
         <div class='content'>
-            <div class='wpm_bmc_receipt_row'>
+            <div class='buymecoffee_receipt_row'>
                 <strong>Coffee Donated:</strong>
-                <span class="wpm_bmc_receipt_coffee"><?php echo esc_html($paymentData->coffee_count??''); ?></span>
+                <span class="buymecoffee_receipt_coffee"><?php echo esc_html($paymentData->coffee_count??''); ?></span>
             </div>
-            <div class='wpm_bmc_receipt_row'>
+            <div class='buymecoffee_receipt_row'>
                 <strong>Name:</strong>
                 <span><?php echo esc_html($paymentData->supporters_name??''); ?></span>
             </div>
             <?php if($paymentData->supporters_email): ?>
-            <div class='wpm_bmc_receipt_row'>
+            <div class='buymecoffee_receipt_row'>
                 <strong>Email:</strong>
                 <span><?php echo esc_html($paymentData->supporters_email); ?></span>
             </div>
             <?php endif; ?>
-            <div class='wpm_bmc_receipt_row'>
+            <div class='buymecoffee_receipt_row'>
                 <strong>Pay Status:</strong>
-               <span class="<?php echo 'wpm_bmc_status_' . esc_html($paymentData->payment_status??''); ?>"><?php echo esc_html($paymentData->payment_status??''); ?></span>
+               <span class="<?php echo 'buymecoffee_status_' . esc_html($paymentData->payment_status??''); ?>"><?php echo esc_html($paymentData->payment_status??''); ?></span>
             </div>
-            <div class='wpm_bmc_receipt_row'>
+            <div class='buymecoffee_receipt_row'>
                 <strong>Payment Method:</strong>
                <?php echo esc_html($paymentData->payment_method??''); ?>
             </div>
-            <div class='wpm_bmc_receipt_row'>
+            <div class='buymecoffee_receipt_row'>
                 <strong>Amount Paid:</strong>
                <?php echo esc_html($paymentData->currency??'') .' '. esc_html(floatval($paymentData->payment_total ? $paymentData->payment_total/ 100 : 0)); ?>
             </div>
         </div>
-        <p class="wpm_bmc_confirmation_thanks">Thanks for your contribution 🖤</p><br/>
+        <p class="buymecoffee_confirmation_thanks">Thanks for your contribution 🖤</p><br/>
     </div>
 </div>
 <?php else: ?>
-    <div class="wpm_bmc_confirmation">
+    <div class="buymecoffee_confirmation">
         <p>Thanks for your contribution 🖤</p><br/>
     </div>
 <?php endif; ?>

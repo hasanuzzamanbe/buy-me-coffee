@@ -40,22 +40,22 @@
           prop="payment_status"
           label="Status">
         <template #default="scope">
-          <span :class="'wpm_bmc_status wpm_bmc_status_' + scope.row.payment_status" v-html="scope.row.payment_status"></span>
+          <span :class="'buymecoffee_status buymecoffee_status_' + scope.row.payment_status" v-html="scope.row.payment_status"></span>
         </template>
       </el-table-column>
       <el-table-column
           v-if="!hide_columns.includes('method')"
           label="Method">
         <template #default="scope">
-          <img width="48" class="wpm_bmc_paid_by_image" v-if="maybeGetMethodImage(scope.row.payment_method)" :src="maybeGetMethodImage(scope.row.payment_method)">
-          <span v-else :class="'wpm_bmc_payment_type wpm_bmc_payment_type_' + scope.row.payment_method" style="margin-left: 10px">{{ scope.row.payment_method ? scope.row.payment_method : '-' }}</span>
+          <img width="48" class="buymecoffee_paid_by_image" v-if="maybeGetMethodImage(scope.row.payment_method)" :src="maybeGetMethodImage(scope.row.payment_method)">
+          <span v-else :class="'buymecoffee_payment_type buymecoffee_payment_type_' + scope.row.payment_method" style="margin-left: 10px">{{ scope.row.payment_method ? scope.row.payment_method : '-' }}</span>
         </template>
       </el-table-column>
       <el-table-column
           v-if="!hide_columns.includes('mode')"
           label="Mode">
         <template #default="scope">
-          <span :class="'wpm_bmc_payment_mode wpm_bmc_payment_mode_' + scope.row.payment_mode" style="margin-left: 10px">{{ scope.row.payment_mode ? scope.row.payment_mode : '-' }}</span>
+          <span :class="'buymecoffee_payment_mode buymecoffee_payment_mode_' + scope.row.payment_mode" style="margin-left: 10px">{{ scope.row.payment_mode ? scope.row.payment_mode : '-' }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -135,12 +135,12 @@ export default {
     },
     handleDelete(id) {
       this.$post({
-        action: 'wpm_bmc_admin_ajax',
+        action: 'buymecoffee_admin_ajax',
         route: 'delete_supporter',
         data: {
           id: id,
         },
-        wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
+        buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
       }).then(() => {
         this.$handleSuccess('This record has been deleted.')
         this.$emit('fetchSupporters');

@@ -20,20 +20,20 @@ class AdminAjaxHandler
 {
     public function registerEndpoints()
     {
-        add_action('wp_ajax_wpm_bmc_admin_ajax', array($this, 'handleEndPoint'));
+        add_action('wp_ajax_buymecoffee_admin_ajax', array($this, 'handleEndPoint'));
     }
 
     public function handleEndPoint()
     {
-        if (!isset($_REQUEST['wpm_bmc_nonce']) ) {
+        if (!isset($_REQUEST['buymecoffee_nonce']) ) {
             wp_send_json_error(array(
                 'message' => __("Invalid nonce", 'buy-me-coffee')
             ), 403);
         }
 
-        if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['wpm_bmc_nonce'])), 'wpm_bmc_nonce')) {
+        if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['buymecoffee_nonce'])), 'buymecoffee_nonce')) {
             wp_send_json_error(array(
-                'message' => __("Invalid wpm_bmc_nonce", 'buy-me-coffee')
+                'message' => __("Invalid buymecoffee_nonce", 'buy-me-coffee')
             ), 403);
         }
 
@@ -60,8 +60,7 @@ class AdminAjaxHandler
         );
         if (isset($validRoutes[$route])) {
             do_action('buy-me-coffee/doing_ajax_forms_' . $route);
-            $data = isset($_REQUEST['data']) ? SanitizeHelper::sanitizeText($_REQUEST['data']) : [];
-            return $this->{$validRoutes[$route]}($data);
+            return $this->{$validRoutes[$route]}($_REQUEST['data']);
         }
         do_action('buy-me-coffee/admin_ajax_handler_catch', $route);
     }
@@ -76,7 +75,7 @@ class AdminAjaxHandler
     {
         $id = intval($request['id']);
         $status = sanitize_text_field($request['status']);
-        $supporter = wpmBmcDB()->table('wpm_bmc_supporters')->where('id', $id)->update(['payment_status' => $status]);
+        $supporter = wpmBmcDB()->table('buymecoffee_supporters')->where('id', $id)->update(['payment_status' => $status]);
         if ($supporter) {
             wp_send_json_success($supporter, 200);
         }
@@ -135,8 +134,8 @@ class AdminAjaxHandler
     public function resetDefaultSettings($request)
     {
         $settings = (new Buttons())->getButton($isDefault = true);
-        update_option('wpm_bmc_payment_setting', $settings, false);
-        do_action('wpm_bmc_after_reset_template', $settings);
+        update_option('buymecoffee_payment_setting', $settings, false);
+        do_action('buymecoffee_after_reset_template', $settings);
 
         wp_send_json_success(array(
             'settings' => $settings,
@@ -147,11 +146,12 @@ class AdminAjaxHandler
 
     public function saveSettings($request)
     {
-        $settings = $request['settings'] ?: array();
+        $settings = $request ?: array();
 
         $data = $this->sanitizeTextArray($settings);
-        update_option('wpm_bmc_payment_setting', $data, false);
-        do_action('wpm_bmc_after_save_template', $data);
+
+        update_option('buymecoffee_payment_setting', $data, false);
+        do_action('buymecoffee_after_save_template', $data);
 
         wp_send_json_success(array(
             'message' => __("Settings successfully updated", 'buy-me-coffee')

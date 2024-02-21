@@ -56,7 +56,7 @@ class API
 
     public function verifyIPN()
     {
-        if (!isset($_REQUEST['wpm_bmc_stripe_listener'])) {
+        if (!isset($_REQUEST['buymecoffee_stripe_listener'])) {
             return;
         }
 

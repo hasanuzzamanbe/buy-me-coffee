@@ -2,17 +2,17 @@
 defined('ABSPATH') or die;
 // Autoload plugin.
 require 'autoload.php';
-if (! function_exists('wpFluent')) {
+if (! function_exists('buyMeCoffeeDB')) {
     /**
      * @return \WpFluent\QueryBuilder\QueryBuilderHandler
      */
-    function wpFluent() {
-        static $wpFluent;
-        if (! $wpFluent) {
+    function buyMeCoffeeDB() {
+        static $buyMeCoffeeDB;
+        if (! $buyMeCoffeeDB) {
             global $wpdb;
             $connection = new WpFluent\Connection($wpdb, ['prefix' => $wpdb->prefix]);
-            $wpFluent = new \WpFluent\QueryBuilder\QueryBuilderHandler($connection);
+            $buyMeCoffeeDB = new \WpFluent\QueryBuilder\QueryBuilderHandler($connection);
         }
-        return $wpFluent;
+        return $buyMeCoffeeDB;
     }
 }

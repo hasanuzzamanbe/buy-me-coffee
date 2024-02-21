@@ -1,6 +1,6 @@
 <template>
-  <div v-loading="loading" class="wpm_bmc_supporter_main_container">
-    <h3 class="wpm_bmc_title">
+  <div v-loading="loading" class="buymecoffee_supporter_main_container">
+    <h3 class="buymecoffee_title">
       <router-link style="text-decoration: none;" :to="{name: 'Dashboard'}">Supporters / </router-link>{{$route.params.id}}
     </h3>
     <div class="wpm_supporter_profile_wrapper">
@@ -42,7 +42,7 @@
             </td>
           </tr>
           <tr>
-            <td>Payment Status</td><td><span :class="'wpm_bmc_status wpm_bmc_status_' + supporter.payment_status">
+            <td>Payment Status</td><td><span :class="'buymecoffee_status buymecoffee_status_' + supporter.payment_status">
             {{supporter.payment_status}}
             <a :href="getTransactionUrl()" v-if="supporter.payment_status === 'paid-initially'">Needs to verify</a>
             </span></td>
@@ -140,13 +140,13 @@ export default {
           .then(() => {
             this.$post(
                 {
-                  action: 'wpm_bmc_admin_ajax',
+                  action: 'buymecoffee_admin_ajax',
                   route: 'update_payment_status',
                   data: {
                     id: this.$route.params.id,
                     status: this.paymentStatus,
                   },
-                  wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
+                  buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
                 }
             ).then((response) => {
               this.getSupporter();
@@ -163,12 +163,12 @@ export default {
       getSupporter() {
         this.loading = true
         this.$get({
-          action: 'wpm_bmc_admin_ajax',
+          action: 'buymecoffee_admin_ajax',
           route: 'get_supporter',
           data: {
             id: this.$route.params.id,
           },
-          wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
+          buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
         }).then((response) => {
           this.supporter = response.data
           this.paymentStatus = response.data.payment_status
@@ -207,7 +207,7 @@ export default {
   //border: 1px solid #14a3b7;
   width: 133px;
 }
-.wpm_bmc_supporter_main_container {
+.buymecoffee_supporter_main_container {
   background: #ebfffea3;
   box-shadow: rgb(17 12 46 / 15%) 0px 48px 100px 0px;
   padding: 32px;

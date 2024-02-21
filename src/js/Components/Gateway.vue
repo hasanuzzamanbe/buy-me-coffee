@@ -1,10 +1,10 @@
 <template>
-    <div class="wpm_bmc_main_container">
-        <el-row class="wpm_bmc_gateways">
-            <h1 class="wpm_bmc_menu_title">Payment Gateways</h1>
-           <div class="wpm_bmc_gateway_menu">
-             <div v-for="(gateway, index) in gateways" :key="index" class="wpm_bmc_gateway_item" @click="() => this.$router.push({ name: gateway.route })">
-               <div :class="'wpm_bmc_gateway_' + gateway.route + (gateway.route === 'stripe' ? ' active' : '')">
+    <div class="buymecoffee_main_container">
+        <el-row class="buymecoffee_gateways">
+            <h1 class="buymecoffee_menu_title">Payment Gateways</h1>
+           <div class="buymecoffee_gateway_menu">
+             <div v-for="(gateway, index) in gateways" :key="index" class="buymecoffee_gateway_item" @click="() => this.$router.push({ name: gateway.route })">
+               <div :class="'buymecoffee_gateway_' + gateway.route + (gateway.route === 'stripe' ? ' active' : '')">
                  <img :src="gateway.image"
                       style="width:70px; max-width: 70px;"
                       class="image" />
@@ -36,9 +36,9 @@
         },
         getAllMethods() {
             this.$get({
-                action: 'wpm_bmc_admin_ajax',
+                action: 'buymecoffee_admin_ajax',
                 route: 'gateways',
-                wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
+                buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
             })
                 .then((response) => {
                     this.gateways = response.data;

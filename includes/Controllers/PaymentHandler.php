@@ -10,17 +10,17 @@ class PaymentHandler
 {
     public static function getAllMethods()
     {
-        $methods = apply_filters('wpm_bmc_get_all_methods', []);
+        $methods = apply_filters('buymecoffee_get_all_methods', []);
         return $methods;
     }
 
     public function saveSettings($method, $settings)
     {
-        $settings = apply_filters('wpm_bmc_before_save_' . $method, $settings);
+        $settings = apply_filters('buymecoffee_before_save_' . $method, $settings);
 
-        update_option('wpm_bmc_payment_settings_' . $method, $settings, false);
+        update_option('buymecoffee_payment_settings_' . $method, $settings, false);
 
-        do_action('wpm_bmc_after_save_' . $method, $settings);
+        do_action('buymecoffee_after_save_' . $method, $settings);
 
         wp_send_json_success(array(
             'message' => "Settings $method successfully updated"

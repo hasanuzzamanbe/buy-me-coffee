@@ -1,7 +1,7 @@
 <template>
-    <div class="wpm_bmc_main_container" v-loading="fetching">
-        <div class="wpm_bmc_wrapper wpm_bmc_payment_settings">
-                <h3 class="wpm_bmc_title">
+    <div class="buymecoffee_main_container" v-loading="fetching">
+        <div class="buymecoffee_wrapper buymecoffee_payment_settings">
+                <h3 class="buymecoffee_title">
                     <router-link style="text-decoration: none;" :to="{name: 'Gateway'}"></router-link>Stripe Gateway Settings:
                 </h3>
             <div style="margin-bottom: 23px;">
@@ -9,7 +9,7 @@
                     <el-switch active-value="yes" inactive-value="no" active-text="Enable stripe" v-model="settings.enable"></el-switch>
                 </label>
             </div>
-            <div class="wpm_bmc_section_body" :class="settings.enable !== 'yes' ? 'payment-inactive' : ''">
+            <div class="buymecoffee_section_body" :class="settings.enable !== 'yes' ? 'payment-inactive' : ''">
                 <el-form :label-position="labelPosition" rel="stripe_settings" :model="settings" label-width="220px">
                     <el-form-item label="Stripe Payment Mode">
                         <el-radio-group v-model="settings.payment_mode">
@@ -17,7 +17,7 @@
                             <el-radio label="live">Live Mode</el-radio>
                         </el-radio-group>
                     </el-form-item>
-                    <div v-if="settings.payment_mode !== 'live'" class="wpm_bmc_settings_section">
+                    <div v-if="settings.payment_mode !== 'live'" class="buymecoffee_settings_section">
                         <h3>Stripe Test Keys</h3>
                         <el-form-item label="Test Publishable key">
                             <el-input type="text" size="small" v-model="settings.test_pub_key"
@@ -29,7 +29,7 @@
                         </el-form-item>
                     </div>
 
-                    <div v-else class="wpm_bmc_settings_section">
+                    <div v-else class="buymecoffee_settings_section">
                         <h3>Stripe Live Keys</h3>
                         <el-form-item label="Live Publishable key">
                             <el-input type="text" size="small" v-model="settings.live_pub_key"
@@ -41,7 +41,7 @@
                         </el-form-item>
                     </div>
 
-                    <div class="wpm_bmc_settings_section">
+                    <div class="buymecoffee_settings_section">
                         <p>In order for Stripe to function completely for subscription/recurring payments, you must configure your Stripe webhooks. Visit
                             your <a href="https://dashboard.stripe.com/account/webhooks" target="_blank" rel="noopener">account
                                 dashboard</a> to configure them. Please add a webhook endpoint for the URL below.</p>
@@ -72,12 +72,12 @@
             getSettings() {
                 this.fetching = true;
                 this.$get({
-                    action: 'wpm_bmc_admin_ajax',
+                    action: 'buymecoffee_admin_ajax',
                     route: 'get_data',
                     data: {
                       method: this.$route.name,
                     },
-                    wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
+                    buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
                 })
                     .then((response) => {
                         this.settings = response.data.settings;
@@ -93,11 +93,13 @@
             saveSettings() {
                 this.saving = true;
                 this.$post({
-                    action: 'wpm_bmc_admin_ajax',
-                    settings: this.settings,
-                    method: this.$route.name,
+                    action: 'buymecoffee_admin_ajax',
+                    data: {
+                      settings: this.settings,
+                      method: this.$route.name,
+                    },
                     route: 'save_payment_settings',
-                    wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
+                    buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
                 })
                     .then(response => {
                         this.$handleSuccess(response.data.message);
@@ -117,7 +119,7 @@
 </script>
 
 <style lang="scss">
-   .wpm_bmc_settings_wrap {
+   .buymecoffee_settings_wrap {
         max-width: 800px;
         margin: 0 auto;
         padding:23px 12px;

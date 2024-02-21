@@ -8,7 +8,7 @@ class StripeSettings
 {
     public static function getSettings($key = null)
     {
-        $settings = get_option('wpm_bmc_payment_settings_stripe', []);
+        $settings = get_option('buymecoffee_payment_settings_stripe', []);
 
         $defaults = array(
             'enable' => 'no',

@@ -146,17 +146,17 @@ class Render
 
         ob_start();
         ?>
-        <form id="<?php echo esc_attr($formDynamicClass . '_main_wrapper');  ?>" class="wpm_bmc_form" data-wpm_currency="<?php echo esc_html($currency); ?>">
+        <form id="<?php echo esc_attr($formDynamicClass . '_main_wrapper');  ?>" class="buymecoffee_form" data-wpm_currency="<?php echo esc_html($currency); ?>">
             <input type="hidden" name="__buymecoffee_ref" value="<?php echo esc_html($template['yourName']); ?>"/>
-            <div class="wpm_bmc_payment_processor"></div>
+            <div class="buymecoffee_payment_processor"></div>
             <?php if (!$isCustomPay): ?>
-            <div class="wpm_bmc_input_content">
-                <input type="hidden" style="display: none!important;" type="number" class="wpm_bmc_payment" value="<?php echo esc_attr($defaultAmount); ?>"
+            <div class="buymecoffee_input_content">
+                <input type="hidden" style="display: none!important;" type="number" class="buymecoffee_payment" value="<?php echo esc_attr($defaultAmount); ?>"
                        data-price="<?php echo esc_attr($defaultAmount * 100); ?>" type="text"/>
             </div>
-            <div class="wpm_bmc_payment_item">
-                <div class="wpm_bmc_payment_input_content">
-                    <div class="wpm_bmc_coffee_selector">
+            <div class="buymecoffee_payment_item">
+                <div class="buymecoffee_payment_input_content">
+                    <div class="buymecoffee_coffee_selector">
                         <img width="50" src="<?php echo esc_url(Vite::staticPath() . 'images/coffee.png'); ?>">
                         <span>x</span>
 
@@ -173,7 +173,7 @@ class Render
                                    name="radio-group" type="radio">
                             <label for="three_coffee_select_radio_<?php echo esc_attr($formDynamicClass); ?>">3</label>
                         </div>
-                        <input class="wpm_bmc_custom_quantity" type="number" value="5" data-quantity="5">
+                        <input class="buymecoffee_custom_quantity" type="number" value="5" data-quantity="5">
 
                     </div>
                 </div>
@@ -182,11 +182,11 @@ class Render
             <?php endif; ?>
             <?php if ($isCustomPay): ?>
             <!--   This custom quantity will update in any future feature       /-->
-            <div class="wpm_bmc_payment_item" style="align-items: center;">
-                <div class="wpm_bmc_input_content">
+            <div class="buymecoffee_payment_item" style="align-items: center;">
+                <div class="buymecoffee_input_content">
                     <div style="display: flex;">
-                        <span class="wpm_bmc_currency_prefix"><?php echo esc_html($symbool); ?></span>
-                        <input type="number" class="wpm_bmc_payment"
+                        <span class="buymecoffee_currency_prefix"><?php echo esc_html($symbool); ?></span>
+                        <input type="number" class="buymecoffee_payment"
                                value="<?php echo esc_attr($customAmount); ?>"
                                data-price="<?php echo esc_attr($customAmount * 100); ?>"
                                type="text">
@@ -195,8 +195,8 @@ class Render
             </div>
             <?php endif; ?>
             <?php if ($enableName): ?>
-                <div data-element_type="input" class="wpm_bmc_form_item">
-                    <div class="wpm_bmc_input_content">
+                <div data-element_type="input" class="buymecoffee_form_item">
+                    <div class="buymecoffee_input_content">
                         <input <?php
                         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                         echo static::builtAttributes($nameAttributes); ?>></input>
@@ -205,8 +205,8 @@ class Render
             <?php endif; ?>
 
             <?php if ($enableEmail): ?>
-                <div data-element_type="email" class="wpm_bmc_form_item">
-                    <div class="wpm_bmc_input_content">
+                <div data-element_type="email" class="buymecoffee_form_item">
+                    <div class="buymecoffee_input_content">
                         <input <?php
                         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                         echo static::builtAttributes($emailAttributes); ?>></input>
@@ -215,8 +215,8 @@ class Render
             <?php endif; ?>
 
             <?php if ($enableMsg): ?>
-                <div data-element_type="textarea" class="wpm_bmc_form_item">
-                    <div class="wpm_bmc_input_content">
+                <div data-element_type="textarea" class="buymecoffee_form_item">
+                    <div class="buymecoffee_input_content">
                         <textarea rows="2" <?php
                         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                         echo static::builtAttributes($msgAttributes); ?>></textarea>
@@ -224,14 +224,14 @@ class Render
                 </div>
             <?php endif; ?>
 
-            <div class="wpm_bmc_form_item wpm_bmc_pay_methods" id="wpm_bmc_pay_methods">
-                <div class="wpm_bmc_pay_method" data-payment_selected="none">
+            <div class="buymecoffee_form_item buymecoffee_pay_methods" id="buymecoffee_pay_methods">
+                <div class="buymecoffee_pay_method" data-payment_selected="none">
                     <?php echo esc_html(static::payMethod($template)); ?>
                 </div>
             </div>
 
-            <div data-element_type="submit" class="wpm_bmc_form_item wpm_bmc_form_submit_wrapper">
-                <div class="wpm_bmc_input_content">
+            <div data-element_type="submit" class="buymecoffee_form_item buymecoffee_form_submit_wrapper">
+                <div class="buymecoffee_input_content">
                     <button <?php
                     // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo static::builtAttributes($btnAttributes); ?>>Support
@@ -253,7 +253,7 @@ class Render
                     </button>
                 </div>
             </div>
-            <p class="wpm_bmc_no_signup">No signup required</p>
+            <p class="buymecoffee_no_signup">No signup required</p>
         </form>
         <?php
         return ob_get_clean();
@@ -267,19 +267,19 @@ class Render
         foreach ($methods as $method) {
             if (isset($method['status']) && $method['status'] == 'yes') {
                 $hasActiveMethod = true;
-                do_action('wpm_bmc_render_component_' . $method['route'], $template);
+                do_action('buymecoffee_render_component_' . $method['route'], $template);
             }
         }
         if (!$hasActiveMethod) {
-            return '<p style="color:#fb7373; font-size:16px; margin: 0 auto;">Please active at least one payment method!</p>';
+            return "Please active at least one payment method!";
         }
     }
 
     public static function addAssets()
     {
-        Vite::enqueueStyle('wpm_bmc_css', 'scss/public/public-style.scss', array(), WPM_BMC_VERSION);
-        Vite::enqueueScript('wpm_bmc_public_js',  'js/BmcPublic.js', array('jquery'), WPM_BMC_VERSION, true);
-        wp_localize_script('wpm_bmc_public_js', 'wpm_bmc_general', array(
+        Vite::enqueueStyle('buymecoffee_css', 'scss/public/public-style.scss', array(), BUYMECOFFEE_VERSION);
+        Vite::enqueueScript('buymecoffee_public_js',  'js/BmcPublic.js', array('jquery'), BUYMECOFFEE_VERSION, true);
+        wp_localize_script('buymecoffee_public_js', 'buymecoffee_general', array(
             'ajax_url' => admin_url('admin-ajax.php')
         ));
     }

@@ -12,7 +12,11 @@ class SanitizeHelper
     {
         $sanitizedData = [];
         foreach ($dataArray as $key => $value) {
-            $sanitizedData[$key] = sanitize_text_field($value);
+            if (is_array($value)) {
+                self::sanitizeText($value);
+            } else {
+                $sanitizedData[$key] = sanitize_text_field($value);
+            }
         }
         return $sanitizedData;
     }

@@ -70,27 +70,27 @@ class Menu
                     <router-view></router-view>
                 </div>
             </div>
-            <div class="wpm_bmc_app_menu">
+            <div class="buymecoffee_app_menu">
                 <ul>
-                    <li class="wpm_bmc_menu_dashboard">
+                    <li class="buymecoffee_menu_dashboard">
                         <a href="<?php echo esc_url(admin_url('admin.php?page=buy-me-coffee.php#/')); ?>" >
                             <img width="30" src="<?php echo esc_url(Vite::staticPath() . 'images/dashboard.svg'); ?>" />
                             Report
                         </a>
                     </li>
-                    <li class="wpm_bmc_menu_supporters">
+                    <li class="buymecoffee_menu_supporters">
                         <a href="<?php echo esc_url(admin_url('admin.php?page=buy-me-coffee.php#/supporters')); ?>" >
                             <img width="30" src="<?php echo esc_url(Vite::staticPath() . 'images/handshake.svg'); ?>" />
                             Donor
                         </a>
                     </li>
-                    <li class="wpm_bmc_menu_settings">
+                    <li class="buymecoffee_menu_settings">
                         <a href="<?php echo esc_url(admin_url('admin.php?page=buy-me-coffee.php#/settings')); ?>" >
                             <img width="30" src="<?php echo esc_url(Vite::staticPath() . 'images/settings.svg'); ?>" />
                             Settings
                         </a>
                     </li>
-                    <li class="wpm_bmc_menu_gateway">
+                    <li class="buymecoffee_menu_gateway">
                         <a href="<?php echo esc_url(admin_url('admin.php?page=buy-me-coffee.php#/stripe')); ?>" >
                             <img width="30" src="<?php echo esc_url(Vite::staticPath() . 'images/bank.svg'); ?>" />
                             Gateways
@@ -112,7 +112,7 @@ class Menu
             'buy-me-coffee_boot',
             'js/boot.js',
             array(),
-            WPM_BMC_VERSION,
+            BUYMECOFFEE_VERSION,
             true
         );
 
@@ -123,18 +123,18 @@ class Menu
             'buy-me-coffee_js',
             'js/main.js',
             array('jquery'),
-            WPM_BMC_VERSION,
+            BUYMECOFFEE_VERSION,
             true
         );
 
         //enqueue css file using wp_enqueue (already compiled with vite)
-        Vite::enqueueStyle('buy-me-coffee_admin_css', 'scss/admin/app.scss', array(), WPM_BMC_VERSION, true);
+        Vite::enqueueStyle('buy-me-coffee_admin_css', 'scss/admin/app.scss', array(), BUYMECOFFEE_VERSION, true);
 
         $BuyMeCoffeeAdminVars = apply_filters('buy-me-coffee/admin_app_vars', array(
             'assets_url' => Vite::staticPath(),
             'ajaxurl' => admin_url('admin-ajax.php'),
             'preview_url' => site_url('?share_coffee'),
-            'wpm_bmc_nonce' => wp_create_nonce('wpm_bmc_nonce'),
+            'buymecoffee_nonce' => wp_create_nonce('buymecoffee_nonce'),
         ));
 
 

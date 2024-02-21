@@ -26,7 +26,7 @@ form.wpm_submitting_form {
     }
 }
 
-.wpm_bmc_pay_method {
+.buymecoffee_pay_method {
   .payment_method_name {
     font-size:12px;
     font-weight: lighter;
@@ -74,7 +74,7 @@ form.wpm_submitting_form {
   }
 }
 
-button#wpm_bmc_pay_now {
+button#buymecoffee_pay_now {
   color: #cdcdcd !important;
   font-size: 16px !important;
   padding: 8px !important;
@@ -88,7 +88,7 @@ button#wpm_bmc_pay_now {
 }
 
 .buymecoffee_form_preview_wrapper {
-  .wpm_bmc_form_receipt {
+  .buymecoffee_form_receipt {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -98,7 +98,7 @@ button#wpm_bmc_pay_now {
       color: #0e886b;
     }
   }
-  .wpm_bmc_loading_processor{
+  .buymecoffee_loading_processor{
     color: #48a891;font-size: 14px;
   }
 }

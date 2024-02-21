@@ -46,7 +46,7 @@ msgstr ""
 
 #: includes/Classes/AdminAjaxHandler.php:29
 #: includes/Classes/AdminAjaxHandler.php:35
-msgid "Invalid wpm_bmc_nonce"
+msgid "Invalid buymecoffee_nonce"
 msgstr ""
 
 #: includes/Builder/Methods/PayPal/PayPal.php:334

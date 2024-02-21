@@ -35,7 +35,7 @@ class Buttons
             return $defaults;
         }
 
-        $settings = get_option('wpm_bmc_payment_setting', array());
+        $settings = get_option('buymecoffee_payment_setting', array());
         return wp_parse_args($settings, $defaults);
     }
 }

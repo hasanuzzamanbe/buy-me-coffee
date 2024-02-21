@@ -5,16 +5,16 @@ let BuyMeCoffeeApp = {};
 (function ($) {
     BuyMeCoffeeApp = {
         forms: {},
-        general: window.wpm_bmc_general,
+        general: window.buymecoffee_general,
         formData: {},
         initiated: false,
         init() {
-            this.forms = $('.wpm_bmc_form');
+            this.forms = $('.buymecoffee_form');
 
             $.each(this.forms, function ($form) {
                 let form = $(this);
-                // let formInstance = form.attr('wpm_bmc_form');
-                let formSettings = window['wpm_bmc_settings'];
+                // let formInstance = form.attr('buymecoffee_form');
+                let formSettings = window['buymecoffee_settings'];
                 let formHandler = new BmcFormHandler(form, formSettings);
                 formHandler.initForm();
             });
@@ -23,10 +23,10 @@ let BuyMeCoffeeApp = {};
             this.initiated = true;
         },
         initOther() {
-            $('.wpm_bmc_form input').on('keypress', function (e) {
+            $('.buymecoffee_form input').on('keypress', function (e) {
                 return e.which !== 13;
             });
-            let $inputs = $('.wpm_bmc_form').find('input[data-required="yes"][data-type="input"],textarea[data-required="yes"],select[data-required="yes"]');
+            let $inputs = $('.buymecoffee_form').find('input[data-required="yes"][data-type="input"],textarea[data-required="yes"],select[data-required="yes"]');
             $inputs.on('keypress blur', function (e) {
                 if ($(this).val()) {
                     $(this).removeClass('wpf_has_error');

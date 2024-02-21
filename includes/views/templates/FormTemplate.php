@@ -15,15 +15,15 @@
         <?php
 
         // check if receipt page
-        if (isset($_REQUEST['wpm_bmc_success']) && isset($_REQUEST['hash'])) {
+        if (isset($_REQUEST['buymecoffee_success']) && isset($_REQUEST['hash'])) {
             $hash = sanitize_text_field($_REQUEST['hash']);
             $paymentData = \BuyMeCoffee\Models\Supporters::getByHash($hash);
-            include WPM_BMC_DIR . 'includes/views/templates/Confirmation.php';
+            include BUYMECOFFEE_DIR . 'includes/views/templates/Confirmation.php';
         } else {
-            include WPM_BMC_DIR . 'includes/views/templates/FormSection.php';
+            include BUYMECOFFEE_DIR . 'includes/views/templates/FormSection.php';
         }
 
-        if ($quote && !isset($_REQUEST['wpm_bmc_success'])):
+        if ($quote && !isset($_REQUEST['buymecoffee_success'])):
             ?>
             <div class="buymecoffee_your_content_wrapper">
                 <div class="buymecoffee_your_content">

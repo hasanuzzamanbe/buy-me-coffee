@@ -21,9 +21,9 @@ class PayPal extends BaseMethods
             'PayPal is the faster, safer way to send money, make an online payment, receive money or set up a merchant account.',
             Vite::staticPath() . 'images/PayPal.svg'
         );
-        add_action('wpm_bmc_make_payment_paypal', array($this, 'makePayment'), 10, 3);
-        add_action('wpm_bmc_paypal_action_web_accept', array($this, 'updateStatus'), 10, 2);
-        add_action("wpm_bmc_ipn_endpoint_paypal", array($this, 'verifyIpn'), 10, 2);
+        add_action('buymecoffee_make_payment_paypal', array($this, 'makePayment'), 10, 3);
+        add_action('buymecoffee_paypal_action_web_accept', array($this, 'updateStatus'), 10, 2);
+        add_action("buymecoffee_ipn_endpoint_paypal", array($this, 'verifyIpn'), 10, 2);
     }
 
     public function sanitize($settings)
@@ -56,7 +56,7 @@ class PayPal extends BaseMethods
     {
         wp_send_json_success(array(
             'settings' => $this->getSettings(),
-            'webhook_url' => site_url() . '?wpm_bmc_ipn_listener=1&method=paypal'
+            'webhook_url' => site_url() . '?buymecoffee_ipn_listener=1&method=paypal'
         ), 200);
     }
 
@@ -107,7 +107,7 @@ class PayPal extends BaseMethods
             ])
         ];
 
-        return apply_filters('wpm_bmc_paypal_modal_payment_intent', $intent, $transactions);
+        return apply_filters('buymecoffee_paypal_modal_payment_intent', $intent, $transactions);
     }
 
     public function makePayment($transactionId, $entryId, $form_data)
@@ -128,7 +128,7 @@ class PayPal extends BaseMethods
 
         $supportersModel = new Supporters();
         $supporter = $supportersModel->find($entryId);
-        $listener_url = apply_filters('wpm_bmc_paypal_ipn_url', site_url('?wpm_bmc_ipn_listener=1&method=paypal'), $supporter);
+        $listener_url = apply_filters('buymecoffee_paypal_ipn_url', site_url('?buymecoffee_ipn_listener=1&method=paypal'), $supporter);
 
         $paypal_args = array(
             'cmd' => '_cart',
@@ -153,7 +153,7 @@ class PayPal extends BaseMethods
         }
         $paypal_args = array_merge($payment_item, $paypal_args);
 
-        $paypal_args = apply_filters('wpm_bmc_paypal_payment_args', $paypal_args);
+        $paypal_args = apply_filters('buymecoffee_paypal_payment_args', $paypal_args);
 
         if (!$payment_item && $paypal_args['cmd'] == '_cart') {
             return;
@@ -195,7 +195,7 @@ class PayPal extends BaseMethods
     {
         return add_query_arg(array(
             'share_coffee' => '',
-            'wpm_bmc_success' => 1,
+            'buymecoffee_success' => 1,
             'hash' => $supporter->entry_hash,
             'payment_method' => 'paypal'
         ), home_url());
@@ -204,9 +204,9 @@ class PayPal extends BaseMethods
     public function failedUrl($supporter)
     {
         return add_query_arg(array(
-            'wpm_bmc_failed' => 1,
+            'buymecoffee_failed' => 1,
             'share_coffee' => '',
-            'wpm_bmc_submission' => $supporter->entry_hash,
+            'buymecoffee_submission' => $supporter->entry_hash,
             'payment_method' => 'paypal'
         ), home_url());
     }
@@ -338,11 +338,11 @@ class PayPal extends BaseMethods
             'updated_at' => current_time('mysql'),
         );
 
-        $transactionId = wpmBmcDB()->table('wpm_bmc_transactions')
+        $transactionId = wpmBmcDB()->table('buymecoffee_transactions')
             ->where('entry_hash', $hash)
             ->update($transaction);
 
-        wpmBmcDB()->table('wpm_bmc_supporters')
+        wpmBmcDB()->table('buymecoffee_supporters')
             ->where('entry_hash', $hash)
             ->update(['payment_status' => 'paid-initially']);
 

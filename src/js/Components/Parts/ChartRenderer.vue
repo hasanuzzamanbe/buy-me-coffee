@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       loading: false,
-      chartId: 'wpm_bmc_overview_chart_' + this.chartProps.id,
+      chartId: 'buymecoffee_overview_chart_' + this.chartProps.id,
       chartHeight: this.chartProps.height ? this.chartProps.height : 'auto',
       chartWidth: this.chartProps.width ? this.chartProps.width : 'auto',
     }

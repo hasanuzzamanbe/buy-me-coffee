@@ -6,10 +6,10 @@ glob("buy-me-coffee.php", function(err, files) {
         files.forEach(function(item, index, array) {
             const data = fs.readFileSync(item, 'utf8');
             const mapObj = {
-                WPM_BMC_PRODUCTION: "WPM_BMC_DEVELOPMENT"
+                BUYMECOFFEE_PRODUCTION: "BUYMECOFFEE_DEVELOPMENT"
             };
 
-            const result = data.replace(/WPM_BMC_PRODUCTION/gi, function (matched) {
+            const result = data.replace(/BUYMECOFFEE_PRODUCTION/gi, function (matched) {
                 return mapObj[matched];
             });
 

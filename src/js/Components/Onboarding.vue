@@ -32,9 +32,9 @@ export default {
   methods: {
     getSettings() {
       this.$get({
-        action: 'wpm_bmc_admin_ajax',
+        action: 'buymecoffee_admin_ajax',
         route: 'get_settings',
-        wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
+        buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
       }).then(res => {
         this.template = res.data.template;
         this.currencies = res.data.currencies;
@@ -59,12 +59,10 @@ export default {
       if (this.active == 1) {
         this.saving = true;
         this.$post({
-          action: 'wpm_bmc_admin_ajax',
+          action: 'buymecoffee_admin_ajax',
           route: 'save_settings',
-          data: {
-            settings: this.template,
-          },
-          wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
+          data: this.template,
+          buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
         })
             .then(response => {
               this.saving = false;
@@ -99,8 +97,8 @@ export default {
 
 <template>
   <div>
-      <div class="wpm_bmc_onboard_wrapper">
-        <div class="wpm_bmc_onboard_content">
+      <div class="buymecoffee_onboard_wrapper">
+        <div class="buymecoffee_onboard_content">
           <div>
               <div v-if="active == 1" class="profile_section">
                   <div class="profile_image">
@@ -176,7 +174,7 @@ export default {
             <el-button type="success" plain v-if="active == 3" @click="gotoPage()" >View Page</el-button>
           </div>
         </div>
-        <div class="wpm_bmc_onboard_stepper">
+        <div class="buymecoffee_onboard_stepper">
           <h3>Quick setup</h3>
           <el-steps direction="vertical" finish-status="success" style="margin-top:23px" :active="active">
             <el-step title="Profile" />
@@ -191,7 +189,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
-.wpm_bmc_onboard
+.buymecoffee_onboard
 {
   &_wrapper {
     display: flex;

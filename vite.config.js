@@ -32,9 +32,9 @@ export default defineConfig({
         [
             vue(),
             react(),
-            liveReload([
-                `${__dirname}/**/*\.php`,
-            ]),
+            // liveReload([
+            //     `${__dirname}/**/*\.php`,
+            // ]),
             viteStaticCopy({
                 targets: [
                     {src: 'src/images', dest: ''},

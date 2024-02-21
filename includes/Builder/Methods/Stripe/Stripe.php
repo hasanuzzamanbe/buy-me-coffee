@@ -21,8 +21,8 @@ class Stripe extends BaseMethods
             Vite::staticPath() . 'images/stripe.svg'
         );
 
-        add_action('wpm_bmc_make_payment_stripe', array($this, 'makePayment'), 10, 3);
-        add_action("wpm_bmc_ipn_endpoint_stripe", array($this, 'verifyIpn'), 10, 2);
+        add_action('buymecoffee_make_payment_stripe', array($this, 'makePayment'), 10, 3);
+        add_action("buymecoffee_ipn_endpoint_stripe", array($this, 'verifyIpn'), 10, 2);
     }
 
     public function makePayment($transactionId, $entryId, $form_data)
@@ -118,7 +118,7 @@ class Stripe extends BaseMethods
     {
         return add_query_arg(array(
             'share_coffee' => '',
-            'wpm_bmc_success' => 1,
+            'buymecoffee_success' => 1,
             'hash' => $supporter->entry_hash,
             'payment_method' => 'stripe'
         ), home_url());
@@ -165,7 +165,7 @@ class Stripe extends BaseMethods
 
         $transactions->updateData($transaction->id, ['payment_status' => $status]);
 
-        do_action('wpm_bmc_payment_status_updated', $transaction->id, $status);
+        do_action('buymecoffee_payment_status_updated', $transaction->id, $status);
     }
 
     public static function getOrderHash($event)
@@ -200,14 +200,14 @@ class Stripe extends BaseMethods
     {
         wp_send_json_success(array(
             'settings' => $this->getSettings(),
-            'webhook_url' => site_url() . '?wpm_bmc_stripe_listener=1'
+            'webhook_url' => site_url() . '?buymecoffee_stripe_listener=1'
         ), 200);
     }
 
     public function getSettings()
     {
-        $settings = get_option('wpm_bmc_payment_settings_' . $this->method, []);
-
+        $settings = get_option('buymecoffee_payment_settings_' . $this->method, []);
+//vdd($settings);
         $defaults = array(
             'enable' => 'no',
             'payment_mode' => 'test',

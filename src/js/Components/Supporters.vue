@@ -1,9 +1,9 @@
 <template>
-  <div class="wpm_bmc_main_container">
-    <div class="wpm_bmc_supporters">
+  <div class="buymecoffee_main_container">
+    <div class="buymecoffee_supporters">
       <el-row>
         <el-col :span="12">
-          <h1 class="wpm_bmc_menu_title">Supporters</h1>
+          <h1 class="buymecoffee_menu_title">Supporters</h1>
         </el-col>
         <el-col :span="12">
         </el-col>
@@ -37,14 +37,14 @@ export default {
     getSupporters () {
       this.fetching = true;
       this.$get({
-        action: 'wpm_bmc_admin_ajax',
+        action: 'buymecoffee_admin_ajax',
         route: 'get_supporters',
         data: {
           limit: this.limit,
           page: this.current,
           posts_per_page: this.posts_per_page,
         },
-        wpm_bmc_nonce: window.BuyMeCoffeeAdmin.wpm_bmc_nonce
+        buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
       })
           .then((response) => {
             this.supporters = response.data.supporters;
@@ -68,7 +68,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.wpm_bmc_supporters {
+.buymecoffee_supporters {
   box-shadow: rgb(17 12 46 / 15%) 0px 8px 100px 0px;
   background: #f6fffc;
   padding: 24px;
