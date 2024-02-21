@@ -75,10 +75,11 @@ class DemoPage
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo View::make('templates.BasicTemplate', [ 'template' => $template,
                 'type' => 'button',
-                'quote' => $quote,
-                'profile_image' => $profileImage,
-                'name' => ArrayHelper::get($template, 'yourName'),
-                'args' => $args,
+                'quote' => esc_html($quote),
+                'profile_image' => esc_url($profileImage),
+                'name' => esc_html(ArrayHelper::get($template, 'yourName')),
+                // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                'args' => static::getSanitizedArguments($args),
             ]);
             exit();
         }
@@ -89,5 +90,13 @@ class DemoPage
         add_filter('template_include', function ($original) {
             return locate_template(array('page.php', 'single.php', 'index.php'));
         }, 999);
+    }
+
+    public static function getSanitizedArguments($args): array
+    {
+        foreach ($args as $key => $value) {
+            $args[$key] = esc_html($value);
+        }
+        return $args;
     }
 }

@@ -19,8 +19,35 @@ class SanitizeHelper
 
     public static function allowedTags() : array
     {
-        $allowedTags = [];
-        foreach (['input','label','div','span','p','select','option','textarea'] as $tag){
+        $allowedTags = [
+            'img' => [
+                'title' => [],
+                'src'	=> [],
+                'alt'	=> [],
+                'width' => []
+            ],
+            'svg' => [
+                'class' => true,
+                'aria-hidden' => true,
+                'aria-labelledby' => true,
+                'role' => true,
+                'xmlns' => true,
+                'width' => true,
+                'height' => true,
+                'viewbox' => true,
+                'fill' => true
+            ],
+            'g' => [
+                'fill' => true
+            ],
+            'title' => ['title' => true],
+            'path' => [
+                'd' => true,
+                'fill' => true,
+                'stroke' => true
+            ],
+        ];
+        foreach (['input', 'label', 'div', 'span', 'p', 'select', 'option', 'textarea', 'button', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as $tag) {
             $allowedTags[$tag] = [
                 'type' => [],
                 'name' => [],
@@ -29,26 +56,22 @@ class SanitizeHelper
                 'placeholder' => [],
                 'data-required' => [],
                 'data-type' => [],
-                'data-payment_selected' => [],
                 'id' => [],
                 'class' => [],
                 'required' => [],
                 'disabled' => [],
-                'checked' => [],
-                'selected' => [],
-                'input' => [],
-                'image' => [],
-                'svg' => [],
-                'img' => array(
-                    'title' => array(),
-                    'src'	=> array(),
-                    'alt'	=> array(),
-                ),
                 'for' => [],
                 'style' => [],
+                'data-id' => [],
+                'data-wpm_currency' => [],
+                'data-quantity' => [],
+                'data-price' => [],
+                'data-element_type' => [],
+                'data-payment_selected' => [],
             ];
         }
 
         return $allowedTags;
     }
+
 }

@@ -96,7 +96,7 @@ class Vite
 
     private function viteManifest()
     {
-        if (!empty((static::$instance)->manifestData)) {
+        if (!empty( (static::$instance)->manifestData) ) {
             return;
         }
 
@@ -105,8 +105,16 @@ class Vite
             throw new Exception('Vite Manifest Not Found. Run : npm run dev or npm run prod');
         }
 
-        $manifestFile = fopen($manifestPath, "r");
-        $manifestData = fread($manifestFile, filesize($manifestPath));
+
+        if (!function_exists('get_filesystem_method')) {
+            require_once ABSPATH . 'wp-admin/includes/file.php';
+        }
+        $manifestData = '';
+        if (!(false === ($credentials = request_filesystem_credentials(site_url())) || !WP_Filesystem($credentials))) {
+            global $wp_filesystem;
+            $manifestData = $wp_filesystem->get_contents($manifestPath);
+        }
+
         (static::$instance)->manifestData = json_decode($manifestData, true);
     }
 

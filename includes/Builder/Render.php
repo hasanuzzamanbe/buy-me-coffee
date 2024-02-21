@@ -256,8 +256,7 @@ class Render
             <p class="wpm_bmc_no_signup">No signup required</p>
         </form>
         <?php
-        $content = ob_get_clean();
-        return $content;
+        return ob_get_clean();
     }
 
     public static function payMethod($template)
@@ -290,7 +289,7 @@ class Render
         $atts = "";
         foreach ($attributes as $attributeKey => $attribute) {
             if (is_array($attribute)) {
-                $attribute = json_encode($attribute);
+                $attribute = wp_json_encode($attribute);
             }
             $atts .= esc_attr($attributeKey) . "='" . esc_attr(htmlspecialchars($attribute, ENT_QUOTES)) . "' ";
 

@@ -15,6 +15,7 @@
     <?php
     ob_start();
     $form = \BuyMeCoffee\Builder\Render::renderInputElements($template, $args);
-    echo $form;
+
+    echo wp_kses($form, \BuyMeCoffee\Helpers\SanitizeHelper::allowedTags());
     ?>
 </div>

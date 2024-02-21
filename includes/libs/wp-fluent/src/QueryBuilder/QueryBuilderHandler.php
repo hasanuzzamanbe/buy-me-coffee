@@ -47,7 +47,7 @@ class QueryBuilderHandler
      * @var array
      */
 
-    protected $fetchParameters = array(\PDO::FETCH_OBJ);
+    protected $fetchParameters = array();
 
     /**
      * @param null|\WpFluent\Connection $connection
@@ -90,20 +90,6 @@ class QueryBuilderHandler
         $this->fetchParameters = func_get_args();
 
         return $this;
-    }
-
-    /**
-     * Fetch query results as object of specified type
-     *
-     * @param $className
-     * @param array $constructorArgs
-     * @return QueryBuilderHandler
-     */
-    public function asObject($className, $constructorArgs = array())
-    {
-        var_dump('need to implement this'); die();
-
-        return $this->setFetchMode(\PDO::FETCH_CLASS, $className, $constructorArgs);
     }
 
     /**
@@ -156,7 +142,7 @@ class QueryBuilderHandler
      *
     */
 
-    public function getArray()
+    public function getArray(): array
     {
         return array_map(function ($value) {
             return (array)$value;

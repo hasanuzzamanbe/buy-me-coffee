@@ -222,8 +222,8 @@ class Stripe extends BaseMethods
     public function maybeLoadModalScript()
     {
         //phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
-        wp_enqueue_script('wpm-buymecoffee-checkout-sdk-' . $this->method, 'https://js.stripe.com/v3/',null, false);
-        Vite::enqueueScript('wpm-buymecoffee-checkout-handler-' . $this->method, 'js/PaymentMethods/stripe-checkout.js', ['wpm-buymecoffee-checkout-sdk-stripe', 'jquery'], '1.0.1', false);
+        wp_enqueue_script('wpm-buymecoffee-checkout-sdk-' . $this->method, 'https://js.stripe.com/v3/');
+        Vite::enqueueScript('wpm-buymecoffee-checkout-handler-' . $this->method, 'js/PaymentMethods/stripe-checkout.js', ['wpm-buymecoffee-checkout-sdk-stripe', 'jquery'], '1.0.1', true);
     }
 
     public function render($template)
@@ -236,10 +236,7 @@ class Stripe extends BaseMethods
             <input
                     style="outline: none;"
                     type="radio" class="wpm_stripe_card" name="wpm_payment_method" id="<?php echo esc_attr($id); ?>"
-                    value="stripe">
-<!--                            <span class="payment_method_name">-->
-<!--                                Stripe-->
-<!--                            </span>-->
+                    value="stripe"/>
         </label>
         <?php
     }

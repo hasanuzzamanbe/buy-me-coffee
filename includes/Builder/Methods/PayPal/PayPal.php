@@ -224,7 +224,7 @@ class PayPal extends BaseMethods
         $transaction = (new Transactions())->find($payment_id);
 
         if (defined('PAYFORM_PAYPAL_IPN_DEBUG')) {
-            error_log('IPN For Transaction: ' . json_encode($transaction));
+            error_log('IPN For Transaction: ' . wp_json_encode($transaction));
         }
 
         if (!$transaction) {
@@ -281,7 +281,7 @@ class PayPal extends BaseMethods
             $updateData = [
                 'status' => $status,
                 'updated_at' => current_time('mysql'),
-                'payment_note' => json_encode($data),
+                'payment_note' => wp_json_encode($data),
                 'charge_id' => sanitize_text_field($data['txn_id'])
             ];
         }
@@ -318,10 +318,7 @@ class PayPal extends BaseMethods
             <input
                     style="outline: none;"
                     type="radio" name="wpm_payment_method" class="wpm_paypal_card" id="<?php echo esc_attr($id); ?>"
-                    value="paypal">
-<!--            <span class="payment_method_name">-->
-<!--                                PayPal-->
-<!--                            </span>-->
+                    value="paypal"/>
         </label>
         <?php
     }

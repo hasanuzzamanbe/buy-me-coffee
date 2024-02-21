@@ -76,10 +76,17 @@ class SubmissionHandler
             'updated_at' => current_time('mysql'),
         );
 
-        $transactionId = wpmBmcDB()->table('wpm_bmc_transactions')->insert($transaction);
+         $transactionTable = wpmBmcDB()->table('wpm_bmc_transactions');
+         $transactionTable->insert($transaction);
 
-        if ($paymentTotal > 0) {
-            do_action('wpm_bmc_make_payment_' . $paymentMethod, $transactionId, $entryId, $form_data);
+         $transactionId =
+             $transactionTable->select(['id'])
+            ->where('entry_hash', $hash)
+            ->where('entry_id', $entryId)
+            ->first();
+
+         if ($paymentTotal > 0) {
+            do_action('wpm_bmc_make_payment_' . $paymentMethod, $transactionId->id, $entryId, $form_data);
         }
 
         wp_send_json_success(array(
