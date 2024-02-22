@@ -47,12 +47,19 @@ Coffee counter
 * [PayPal SDK](https://developer.paypal.com/sdk/js/reference/)
      is used to create a PayPal donation button and collect donations from your visitors. It required to create a PayPal donation button. There is a clear documentation on PayPal's website link above about how PayPal manage user data.
 
+* [Stripe SDK](https://js.stripe.com/v3/)
+     is used to create a Stripe payment button and collect donations from your visitors. It required to create a Stripe payment element. There is a clear documentation on Stripe's website link above about how Stripe manage user data.
+
+
 == 3rd Party services ==
 * [PayPal](https://www.paypal.com/)
      is used to collect donations from your visitors. It is required to create a PayPal donation button. There is a clear documentation on PayPal's website link above about how PayPal manage user data.
      for PayPal sandbox you may use [PayPal Sandbox](https://developer.paypal.com/docs/api-basics/sandbox/accounts/).
      For PayPal IPN BuyMeCoffee plugin use [PayPal IPN](https://www.sandbox.paypal.com/cgi-bin/webscr/) to verify the payment.
      And for library SDK [PayPal SDK](https://www.paypal.com/sdk/js?client-id=) where it requires your clientId.
+
+* [Stripe] (https://www.stripe.com)
+    is used to collect payments from users. where the sdk client library is used. [Stripe SDK](https://js.stripe.com/v3/)
 
 ## Installation
 1. Download a release version and Upload the plugin files to the `/wp-content/plugins/buymecoffee` directory, or install the plugin through the WordPress plugins screen directly.

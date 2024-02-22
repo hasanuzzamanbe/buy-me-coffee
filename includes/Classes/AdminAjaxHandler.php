@@ -75,7 +75,7 @@ class AdminAjaxHandler
     {
         $id = intval($request['id']);
         $status = sanitize_text_field($request['status']);
-        $supporter = wpmBmcDB()->table('buymecoffee_supporters')->where('id', $id)->update(['payment_status' => $status]);
+        $supporter = buyMeCoffeeQuery()->table('buymecoffee_supporters')->where('id', $id)->update(['payment_status' => $status]);
         if ($supporter) {
             wp_send_json_success($supporter, 200);
         }

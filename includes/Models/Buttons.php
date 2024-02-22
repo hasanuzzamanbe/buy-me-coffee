@@ -1,6 +1,9 @@
 <?php
 
+
 namespace BuyMeCoffee\Models;
+
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 class Buttons
 {

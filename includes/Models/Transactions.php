@@ -8,13 +8,13 @@ class Transactions
 {
     public function updateData($id, $data)
     {
-        $supporters = wpmBmcDB()->table('buymecoffee_transactions')->where('id', $id)->update($data);
+        $supporters = buyMeCoffeeQuery()->table('buymecoffee_transactions')->where('id', $id)->update($data);
         return $supporters;
     }
 
     public function find($id, $column='id')
     {
-        $supporter = wpmBmcDB()->table('buymecoffee_transactions');
+        $supporter = buyMeCoffeeQuery()->table('buymecoffee_transactions');
         if ($id) {
             $supporter = $supporter->where($column, $id);
         }
@@ -23,12 +23,12 @@ class Transactions
 
     public function delete($id, $column='id')
     {
-        return wpmBmcDB()->table('buymecoffee_transactions')->where('entry_id', $id)->delete();
+        return buyMeCoffeeQuery()->table('buymecoffee_transactions')->where('entry_id', $id)->delete();
     }
 
     public function getByPaymentId($chargeId, $method = 'paypal')
     {
-        $payment = wpmBmcDB()->table('buymecoffee_transactions')
+        $payment = buyMeCoffeeQuery()->table('buymecoffee_transactions')
             ->where('charge_id', $chargeId)
             ->where('payment_method', $method)
             ->first();

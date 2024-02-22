@@ -12,7 +12,7 @@ class Supporters
     {
         $offset = intval($args['page'] * $args['posts_per_page']);
 
-        $query = wpmBmcDB()->table('buymecoffee_supporters')
+        $query = buyMeCoffeeQuery()->table('buymecoffee_supporters')
             ->offset($offset)
             ->limit($args['posts_per_page']);
 
@@ -24,10 +24,10 @@ class Supporters
             $query->where('payment_status', 'paid')
                 ->orderBy('payment_total', 'DESC');
 
-            $currencyTotalPending = wpmBmcDB()->table('buymecoffee_supporters')
+            $currencyTotalPending = buyMeCoffeeQuery()->table('buymecoffee_supporters')
                 ->groupBy('currency')
                 ->where('payment_status', 'pending')
-                ->select(wpmBmcDB()->raw('SUM(payment_total) as total_amount, currency'))
+                ->select(buyMeCoffeeQuery()->raw('SUM(payment_total) as total_amount, currency'))
                 ->get();
 
             foreach ($currencyTotalPending as $currency) {
@@ -42,15 +42,15 @@ class Supporters
             $supporter->amount_formatted = PaymentHelper::getFormattedAmount($supporter->payment_total, $supporter->currency);
         }
 
-        $count = wpmBmcDB()->table('buymecoffee_supporters')
-            ->select(wpmBmcDB()->raw('SUM(coffee_count) as total_coffee'))
+        $count = buyMeCoffeeQuery()->table('buymecoffee_supporters')
+            ->select(buyMeCoffeeQuery()->raw('SUM(coffee_count) as total_coffee'))
             ->first();
 
-        $currencyTotal = wpmBmcDB()->table('buymecoffee_supporters')
+        $currencyTotal = buyMeCoffeeQuery()->table('buymecoffee_supporters')
             ->groupBy('currency')
             ->where('payment_status', 'paid')
             ->orWhere('payment_status', 'paid-initially')
-            ->select(wpmBmcDB()->raw('SUM(payment_total) as total_amount, currency'))
+            ->select(buyMeCoffeeQuery()->raw('SUM(payment_total) as total_amount, currency'))
             ->get();
 
         foreach ($currencyTotal as $currency) {
@@ -75,17 +75,17 @@ class Supporters
 
     public function updateData($entryId, $data)
     {
-        $supporters = wpmBmcDB()->table('buymecoffee_supporters')->where('id', $entryId)->update($data);
+        $supporters = buyMeCoffeeQuery()->table('buymecoffee_supporters')->where('id', $entryId)->update($data);
         return $supporters;
     }
 
     public function find($id)
     {
-        $supporter = wpmBmcDB()->table('buymecoffee_supporters')
+        $supporter = buyMeCoffeeQuery()->table('buymecoffee_supporters')
             ->where('buymecoffee_supporters.id', $id)
             ->first();
 
-        $transaction = wpmBmcDB()->table('buymecoffee_transactions')
+        $transaction = buyMeCoffeeQuery()->table('buymecoffee_transactions')
             ->where('entry_id', $id)
             ->first();
 
@@ -97,12 +97,12 @@ class Supporters
 
     public static function getByHash($hash)
     {
-        $supporter = wpmBmcDB()->table('buymecoffee_supporters')
+        $supporter = buyMeCoffeeQuery()->table('buymecoffee_supporters')
             ->where('entry_hash', $hash)
             ->first();
 
         if ($supporter) {
-            $transaction = wpmBmcDB()->table('buymecoffee_transactions')
+            $transaction = buyMeCoffeeQuery()->table('buymecoffee_transactions')
                 ->where('entry_id', $supporter->id)
                 ->where('entry_hash', $hash)
                 ->first();
@@ -113,15 +113,15 @@ class Supporters
 
     public function getWeeklyRevenue()
     {
-        $revenue = wpmBmcDB()->table('buymecoffee_supporters')->select(
+        $revenue = buyMeCoffeeQuery()->table('buymecoffee_supporters')->select(
             'currency',
             'payment_status',
-            wpmBmcDB()->raw('Date(created_at) as date'),
-            wpmBmcDB()->raw("SUM(round(payment_total / 100, 2)) as total_paid"),
-            wpmBmcDB()->raw("COUNT(*) as submissions")
+            buyMeCoffeeQuery()->raw('Date(created_at) as date'),
+            buyMeCoffeeQuery()->raw("SUM(round(payment_total / 100, 2)) as total_paid"),
+            buyMeCoffeeQuery()->raw("COUNT(*) as submissions")
         )->whereIn('payment_status', ['paid'])
             ->where('payment_total', '>', 0)
-            ->groupBy([wpmBmcDB()->raw('Date(created_at)'), 'currency'])
+            ->groupBy([buyMeCoffeeQuery()->raw('Date(created_at)'), 'currency'])
             ->orderBy('id', 'desc')
             ->limit(50)
             ->getArray();
@@ -161,7 +161,7 @@ class Supporters
 
     public function delete($id)
     {
-        $supporter = wpmBmcDB()->table('buymecoffee_supporters')->where('id', $id)->delete();
+        $supporter = buyMeCoffeeQuery()->table('buymecoffee_supporters')->where('id', $id)->delete();
 
         return $supporter;
     }

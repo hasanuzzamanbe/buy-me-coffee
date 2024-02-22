@@ -1,3 +1,5 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly   ?>
+
 <div id="buy-me-coffee_app" class="buy-me-coffee_app">
     <div class="buymecoffee_app">
         <div class="buymecoffee_main-menu-items">

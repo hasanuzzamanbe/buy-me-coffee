@@ -1,3 +1,5 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly   ?>
+
 <div class="buymecoffee_form_preview_wrapper">
     <h3 class="buymecoffee_form_to">
         Buy
@@ -15,7 +17,6 @@
     <?php
     ob_start();
     $form = \BuyMeCoffee\Builder\Render::renderInputElements($template, $args);
-
     echo wp_kses($form, \BuyMeCoffee\Helpers\SanitizeHelper::allowedTags());
     ?>
 </div>
