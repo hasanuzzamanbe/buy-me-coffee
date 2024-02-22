@@ -60,7 +60,7 @@ class SubmissionHandler
         do_action('buymecoffee_before_supporters_data_insert', $entries);
 
         // DO ENTRIES INSERT
-        $entryId = wpmBmcDB()->table('buymecoffee_supporters')->insert($entries);
+        $entryId = buyMeCoffeeQuery()->table('buymecoffee_supporters')->insert($entries);
 
         do_action('buymecoffee_after_supporters_data_insert', $entries);
 
@@ -76,7 +76,7 @@ class SubmissionHandler
             'updated_at' => current_time('mysql'),
         );
 
-         $transactionTable = wpmBmcDB()->table('buymecoffee_transactions');
+         $transactionTable = buyMeCoffeeQuery()->table('buymecoffee_transactions');
          $transactionTable->insert($transaction);
 
          $transactionId =

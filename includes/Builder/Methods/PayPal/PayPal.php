@@ -338,11 +338,11 @@ class PayPal extends BaseMethods
             'updated_at' => current_time('mysql'),
         );
 
-        $transactionId = wpmBmcDB()->table('buymecoffee_transactions')
+        $transactionId = buyMeCoffeeQuery()->table('buymecoffee_transactions')
             ->where('entry_hash', $hash)
             ->update($transaction);
 
-        wpmBmcDB()->table('buymecoffee_supporters')
+        buyMeCoffeeQuery()->table('buymecoffee_supporters')
             ->where('entry_hash', $hash)
             ->update(['payment_status' => 'paid-initially']);
 

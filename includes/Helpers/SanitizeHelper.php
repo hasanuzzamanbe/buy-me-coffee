@@ -51,6 +51,7 @@ class SanitizeHelper
                 'stroke' => true
             ],
         ];
+
         foreach (['input', 'label', 'div', 'span', 'p', 'select', 'option', 'textarea', 'button', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as $tag) {
             $allowedTags[$tag] = [
                 'type' => [],

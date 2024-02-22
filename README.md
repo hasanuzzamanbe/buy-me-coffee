@@ -26,12 +26,12 @@ You can use it for free without any limitations. You can accept donations from y
 Donations are collected directly into your own PayPal or Stripe account merchant. You can accept donations in any currency supported by PayPal or Stripe.
 one-time donations are available now will implement recurring donations in the future.
 You can accept donations from your visitors using a PayPal donation button, Form, or template. Accept donations from your visitors using a shortcode or a widget.
-Will be available using a popup or a page.
+It Will be available using a popup or a page.
 
 You can accept donations from your visitors using custom amounts.
 
 Features:
-Custom amount of donations
+Custom number of donations
 Accept donations using PayPal or Stripe(upcoming)
 Customizable templates
 Form shortcode and widget
@@ -43,16 +43,23 @@ Coffee counter
 
 == Libraries Used ==
 * [WP Fluent DB library](https://github.com/hasanuzzamanbe/wp-fluent/)
-    This is just a Database library for WordPress. It is not a full-fledged ORM. It is a simple database library that makes working with the database easier. It is inspired by Laravel's Eloquent ORM. It's not collect any data from your site.
+  This is just a Database library for WordPress. It is not a full-fledged ORM. It is a simple database library that makes working with the database easier. It is inspired by Laravel's Eloquent ORM. It's not collect any data from your site.
 * [PayPal SDK](https://developer.paypal.com/sdk/js/reference/)
-     is used to create a PayPal donation button and collect donations from your visitors. It required to create a PayPal donation button. There is a clear documentation on PayPal's website link above about how PayPal manage user data.
+  is used to create a PayPal donation button and collect donations from your visitors. It required to create a PayPal donation button. There is a clear documentation on PayPal's website link above about how PayPal manage user data.
+
+* [Stripe SDK](https://js.stripe.com/v3/)
+  is used to create a Stripe payment button and collect donations from your visitors. It required to create a Stripe payment element. There is a clear documentation on Stripe's website link above about how Stripe manage user data.
+
 
 == 3rd Party services ==
 * [PayPal](https://www.paypal.com/)
-     is used to collect donations from your visitors. It is required to create a PayPal donation button. There is a clear documentation on PayPal's website link above about how PayPal manage user data.
-     for PayPal sandbox you may use [PayPal Sandbox](https://developer.paypal.com/docs/api-basics/sandbox/accounts/).
-     For PayPal IPN BuyMeCoffee plugin use [PayPal IPN](https://www.sandbox.paypal.com/cgi-bin/webscr/) to verify the payment.
-     And for library SDK [PayPal SDK](https://www.paypal.com/sdk/js?client-id=) where it requires your clientId.
+  is used to collect donations from your visitors. It is required to create a PayPal donation button. There is a clear documentation on PayPal's website link above about how PayPal manage user data.
+  for PayPal sandbox you may use [PayPal Sandbox](https://developer.paypal.com/docs/api-basics/sandbox/accounts/).
+  For PayPal IPN BuyMeCoffee plugin use [PayPal IPN](https://www.sandbox.paypal.com/cgi-bin/webscr/) to verify the payment.
+  And for library SDK [PayPal SDK](https://www.paypal.com/sdk/js?client-id=) where it requires your clientId.
+
+* [Stripe] (https://www.stripe.com)
+  is used to collect payments from users. where the sdk client library is used. [Stripe SDK](https://js.stripe.com/v3/)
 
 ## Installation
 1. Download a release version and Upload the plugin files to the `/wp-content/plugins/buymecoffee` directory, or install the plugin through the WordPress plugins screen directly.
