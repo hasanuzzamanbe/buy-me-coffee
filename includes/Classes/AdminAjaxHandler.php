@@ -60,7 +60,8 @@ class AdminAjaxHandler
         );
         if (isset($validRoutes[$route])) {
             do_action('buy-me-coffee/doing_ajax_forms_' . $route);
-            return $this->{$validRoutes[$route]}($_REQUEST['data']);
+            $data = $_REQUEST['data'] ?? [];
+            return $this->{$validRoutes[$route]}($data);
         }
         do_action('buy-me-coffee/admin_ajax_handler_catch', $route);
     }
