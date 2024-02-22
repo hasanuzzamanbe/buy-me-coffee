@@ -17,7 +17,6 @@ const inputs = {
     'js/plugin-main-js-file' : 'src/js/main.js',
     'js/BmcPublic' : 'src/js/BmcPublic.js',
     'js/BmcFormHandler' : 'src/js/BmcFormHandler.js',
-    'js/PaymentMethods/paypal-checkout' : 'src/js/PaymentMethods/paypal-checkout.js',
     'js/PaymentMethods/stripe-checkout' : 'src/js/PaymentMethods/stripe-checkout.js',
     //styles
     'css/element' : 'src/scss/admin/app.scss',
