@@ -117,8 +117,6 @@ if (!defined('BUYMECOFFEE_VERSION')) {
             //payment methods init
             require BUYMECOFFEE_DIR . 'includes/Builder/Methods/BaseMethods.php';
             require BUYMECOFFEE_DIR . 'includes/Builder/Methods/Stripe/Stripe.php';
-            require BUYMECOFFEE_DIR . 'includes/Builder/Methods/PayPal/PayPal.php';
-            new \BuyMeCoffee\Builder\Methods\PayPal\PayPal();
             new \BuyMeCoffee\Builder\Methods\Stripe\Stripe();
 
             // Submission Handler
