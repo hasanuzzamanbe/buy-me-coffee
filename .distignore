@@ -5,7 +5,7 @@ node_modules
 .github
 .idea
 .dev-docs.txt
-src
+/src
 .git
 composer.lock
 package.json
