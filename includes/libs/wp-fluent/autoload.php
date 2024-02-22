@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('ABSPATH')) exit; // Exit if accessed directly
+
 // Autoload Service Container.
 require 'libs/viocon/autoload.php';
 

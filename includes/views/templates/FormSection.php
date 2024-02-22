@@ -1,3 +1,5 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly   ?>
+
 <div class="buymecoffee_form_preview_wrapper">
     <h3 class="buymecoffee_form_to">
         Buy
