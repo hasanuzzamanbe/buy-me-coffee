@@ -150,9 +150,15 @@ span.buymecoffee_form_to {
     height: 60px;
     text-align: center;
 }
-.buymecoffee_input_content ::placeholder {
-    color: #ccc;
-    font-size: 12px;
+.buymecoffee_input_content
+{
+    ::placeholder {
+        color: #ccc;
+        font-size: 12px;
+    }
+    &_custom_pay {
+        display: flex;
+    }
 }
 
 .wpm_submit_button {

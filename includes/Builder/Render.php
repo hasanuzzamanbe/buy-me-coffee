@@ -184,7 +184,7 @@ class Render
             <!--   This custom quantity will update in any future feature       /-->
             <div class="buymecoffee_payment_item" style="align-items: center;">
                 <div class="buymecoffee_input_content">
-                    <div style="display: flex;">
+                    <div class="buymecoffee_input_content_custom_pay">
                         <span class="buymecoffee_currency_prefix"><?php echo esc_html($symbool); ?></span>
                         <input type="number" class="buymecoffee_payment"
                                value="<?php echo esc_attr($customAmount); ?>"
