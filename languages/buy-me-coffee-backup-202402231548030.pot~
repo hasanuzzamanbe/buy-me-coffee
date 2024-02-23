@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Buy me coffee widgets - fundraise into own account\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-23 15:48+0000\n"
+"POT-Creation-Date: 2023-12-04 18:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Loco-Version: 2.6.6; wp-6.3.1\n"
 "X-Domain: buy-me-coffee"
 
-#: includes/Classes/Menu.php:21 includes/views/templates/BasicTemplate.php:10
+#: includes/Classes/Menu.php:21 includes/views/templates/BasicTemplate.php:9
 msgid "Buy Me Coffee"
 msgstr ""
 
@@ -44,19 +44,12 @@ msgstr ""
 msgid "http://www.wpminers.com/"
 msgstr ""
 
-#: includes/Classes/AdminAjaxHandler.php:36
+#: includes/Classes/AdminAjaxHandler.php:29
+#: includes/Classes/AdminAjaxHandler.php:35
 msgid "Invalid buymecoffee_nonce"
 msgstr ""
 
-#: includes/Controllers/SubmissionHandler.php:16
-msgid "Invalid form data"
-msgstr ""
-
-#: includes/Classes/AdminAjaxHandler.php:30
-msgid "Invalid nonce"
-msgstr ""
-
-#: includes/Builder/Methods/PayPal/PayPal.php:331
+#: includes/Builder/Methods/PayPal/PayPal.php:334
 msgid "Invalid request"
 msgstr ""
 
@@ -65,7 +58,7 @@ msgstr ""
 msgid "Payment Modal is opening, Please complete the payment"
 msgstr ""
 
-#: includes/Builder/Methods/PayPal/PayPal.php:350
+#: includes/Builder/Methods/PayPal/PayPal.php:353
 msgid "Payment updated successfully"
 msgstr ""
 
@@ -73,8 +66,8 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/Classes/AdminAjaxHandler.php:143
-#: includes/Classes/AdminAjaxHandler.php:158
+#: includes/Classes/AdminAjaxHandler.php:141
+#: includes/Classes/AdminAjaxHandler.php:155
 msgid "Settings successfully updated"
 msgstr ""
 
@@ -82,7 +75,7 @@ msgstr ""
 msgid "Supporters"
 msgstr ""
 
-#: includes/Controllers/SubmissionHandler.php:93
+#: includes/Controllers/SubmissionHandler.php:82
 msgid "Thanks for your support! <3"
 msgstr ""
 

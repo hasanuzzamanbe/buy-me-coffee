@@ -7,7 +7,7 @@ class PaypalCheckout {
     init() {
         this.form.find('.wpm_submit_button, .buymecoffee_pay_method').hide()
 
-        let paypalButtonContainer = jQuery("<div style='padding: 12px;'></div>")
+        let paypalButtonContainer = jQuery("<div style='padding: 0px;'></div>")
         paypal
             .Buttons({
                 fundingSource: paypal.FUNDING.PAYPAL,
