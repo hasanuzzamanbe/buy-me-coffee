@@ -94,6 +94,10 @@ class DemoPage
 
     public static function getSanitizedArguments($args): array
     {
+        if (!is_array($args)) {
+            $args = [];
+        }
+
         foreach ($args as $key => $value) {
             $args[$key] = esc_html($value);
         }
