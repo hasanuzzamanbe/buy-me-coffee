@@ -121,9 +121,9 @@ class Render
         if (empty($template)) {
             $template = (new Buttons())->getButton();
         }
-        $enableName = Arr::get($template, 'enableName') == 'yes' ? true : false;
-        $enableEmail = Arr::get($template, 'enableEmail') == 'yes' ? true : false;
-        $enableMsg = Arr::get($template, 'enableMessage') == 'yes' ? true : false;
+        $enableName = Arr::get($template, 'enableName') == 'yes';
+        $enableEmail = Arr::get($template, 'enableEmail') == 'yes';
+        $enableMsg = Arr::get($template, 'enableMessage') == 'yes';
         $defaultAmount = intval(Arr::get($template, 'defaultAmount', '5'));
         $customCoffeeDefault = intval(Arr::get($template, 'custom_coffee', '5'));
 

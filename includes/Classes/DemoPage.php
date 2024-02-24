@@ -76,6 +76,7 @@ class DemoPage
             echo View::make('templates.BasicTemplate', [ 'template' => $template,
                 'type' => 'button',
                 'quote' => esc_html($quote),
+                'show_title' => ArrayHelper::get($template, 'formTitle') == 'yes',
                 'profile_image' => esc_url($profileImage),
                 'name' => esc_html(ArrayHelper::get($template, 'yourName')),
                 // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -94,6 +95,10 @@ class DemoPage
 
     public static function getSanitizedArguments($args): array
     {
+        if (!is_array($args)) {
+            $args = [];
+        }
+
         foreach ($args as $key => $value) {
             $args[$key] = esc_html($value);
         }
