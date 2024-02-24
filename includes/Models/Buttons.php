@@ -14,6 +14,7 @@ class Buttons
             "yourName" => $current_user->display_name,
             "buttonText" => 'Buy Me Coffee',
             "enableMessage" => 'yes',
+            "formTitle" => "yes",
             "enableName" => 'yes',
             "enableEmail" => 'no',
             "defaultAmount" => '5',

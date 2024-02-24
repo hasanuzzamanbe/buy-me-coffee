@@ -22,6 +22,7 @@ class Supporters
         // if top supporter filters add
         if (isset($args['filter_top'])) {
             $query->where('payment_status', 'paid')
+                ->orWhere('payment_status', 'paid-initially')
                 ->orderBy('payment_total', 'DESC');
 
             $currencyTotalPending = buyMeCoffeeQuery()->table('buymecoffee_supporters')
@@ -36,6 +37,7 @@ class Supporters
         } else {
             $query->orderBy('id', 'DESC');
         }
+
         $supporters = $query->get();
 
         foreach ($supporters as $supporter) {

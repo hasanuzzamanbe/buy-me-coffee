@@ -9,13 +9,13 @@
               <el-form label-position="left" label-width="140px" v-if="!fetching">
                 <el-tabs>
                   <el-tab-pane label="General">
-                    <el-form-item label="You Name">
+                    <el-form-item>
+                      <el-checkbox true-label="yes" false-label="no" v-model="template.formTitle">Show form title section</el-checkbox>
+                    </el-form-item>
+                    <el-form-item label="You Name" v-if="template.formTitle === 'yes'">
                       <el-input size="small" type="text" v-model="template.yourName"></el-input>
                       <span style="font-style: italic; font-size: 13px; color: #929292; line-height: 1.6em;">
                                           Also you can use data params Ex: https://page-link&<code>for=John</code></span>
-                    </el-form-item>
-                    <el-form-item label="Button text">
-                      <el-input size="small" type="text" v-model="template.buttonText"></el-input>
                     </el-form-item>
                     <el-form-item>
                       <el-checkbox true-label="yes" false-label="no" v-model="template.enableName">Collect name of supporter</el-checkbox>
@@ -46,6 +46,9 @@
                     </el-form-item>
                   </el-tab-pane>
                   <el-tab-pane label="Template Settings">
+                    <el-form-item label="Button text">
+                      <el-input size="small" type="text" v-model="template.buttonText"></el-input>
+                    </el-form-item>
                     <el-form-item label="Button color">
                       <el-color-picker
                           size="small"
