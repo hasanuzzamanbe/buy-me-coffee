@@ -6,10 +6,10 @@
         Buy
         <span class="buymecoffee_form_to"><?php
             if (isset($_GET['for'])) {
-                $template['yourName'] = esc_html($_GET['for']);
+                $template['yourName'] = sanitize_text_field($_GET['for']);
             }
             if (isset($_GET['custom_coffee'])) {
-                $template['custom_coffee'] = esc_html($_GET['custom_coffee']);
+                $template['custom_coffee'] = esc_html(sanitize_text_field($_GET['custom_coffee']));
             }
             echo esc_html($template['yourName'])
             ?></span> <br/>

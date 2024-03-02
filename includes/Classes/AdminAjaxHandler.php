@@ -60,7 +60,7 @@ class AdminAjaxHandler
         );
         if (isset($validRoutes[$route])) {
             do_action('buy-me-coffee/doing_ajax_forms_' . $route);
-            $data = $_REQUEST['data'] ?? [];
+            $data = isset($_REQUEST['data']) ? $this->sanitizeTextArray($_REQUEST['data']) : [];
             return $this->{$validRoutes[$route]}($data);
         }
         do_action('buy-me-coffee/admin_ajax_handler_catch', $route);
@@ -101,7 +101,7 @@ class AdminAjaxHandler
 
     public function editSupporter($request)
     {
-        $id = sanitize_text_field($request['id']);
+        $id = Arr::get($request, 'id');
         $supporter = (new Supporters())->find($id);
         if ($supporter) {
             $supporter->name = sanitize_text_field(Arr::get($request, 'name', ''));
@@ -115,7 +115,7 @@ class AdminAjaxHandler
 
     public function deleteSupporter($request)
     {
-        $id = sanitize_text_field($request['id']);
+        $id = Arr::get($request, 'id');
         $supporter = (new Supporters());
         $transactions = (new Transactions());
         if ($supporter->find($id)) {
@@ -128,7 +128,7 @@ class AdminAjaxHandler
 
     public function getPaymentSettings($request)
     {
-        $method = sanitize_text_field(Arr::get($request, 'method'));
+        $method = Arr::get($request, 'method');
         do_action('buy-me-coffee/get_payment_settings_' . $method);
     }
 
@@ -147,9 +147,7 @@ class AdminAjaxHandler
 
     public function saveSettings($request)
     {
-        $settings = $request ?: array();
-
-        $data = $this->sanitizeTextArray($settings);
+        $data = $request ?: array();
 
         update_option('buymecoffee_payment_setting', $data, false);
         do_action('buymecoffee_after_save_template', $data);

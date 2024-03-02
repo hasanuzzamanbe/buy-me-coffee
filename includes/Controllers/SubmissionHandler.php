@@ -17,12 +17,13 @@ class SubmissionHandler
             ), 403);
         }
 
-        parse_str($_REQUEST['form_data'], $form_data);
+        //Let's sanitize all data
+        $form_data = $this->sanitizeFormData($_REQUEST['form_data']);
 
-        $paymentMethod = isset($_REQUEST['payment_method']) ? sanitize_text_field($_REQUEST['payment_method']) : 'paypal';
-        $paymentTotal = isset($_REQUEST['payment_total']) ? intval($_REQUEST['payment_total']) : 0;
-        $quantity = isset($_REQUEST['coffee_count']) ? intval($_REQUEST['coffee_count']) : 1;
-        $currency = isset($_REQUEST['currency']) ? sanitize_text_field($_REQUEST['currency']) : false;
+        $paymentMethod = ArrayHelper::get($form_data, 'payment_method', 'stripe');
+        $paymentTotal = intval(ArrayHelper::get($form_data, 'payment_total', 0));
+        $quantity = intval(ArrayHelper::get($form_data, 'coffee_count', 1));
+        $currency = ArrayHelper::get($form_data, 'currency', false);
 
         if (!$currency) {
             $currency = PaymentHelper::getCurrency();
@@ -31,17 +32,17 @@ class SubmissionHandler
         $form_data['payment_method'] = $paymentMethod;
         $form_data['payment_total'] = $paymentTotal;
 
-        $supportersName = sanitize_text_field(ArrayHelper::get($form_data, 'wpm-supporter-name', 'Anonymous'));
-        $supportersEmail = sanitize_email(ArrayHelper::get($form_data, 'wpm-supporter-email'));
-        $supportersMessage = sanitize_text_field(ArrayHelper::get($form_data, 'wpm-supporter-message'));
+        $supporterName = ArrayHelper::get($form_data, 'wpm-supporter-name', 'Anonymous');
+        $supporterEmail = ArrayHelper::get($form_data, 'wpm-supporter-email');
+        $supporterMessage = ArrayHelper::get($form_data, 'wpm-supporter-message');
 
         $hash = sanitize_text_field($this->getHash());
-        $reference = sanitize_text_field(ArrayHelper::get($form_data, '__buymecoffee_ref', ''));
+        $reference = ArrayHelper::get($form_data, '__buymecoffee_ref', '');
 
         $entries = array(
-            'supporters_name' => $supportersName,
-            'supporters_email' => $supportersEmail,
-            'supporters_message' => $supportersMessage,
+            'supporters_name' => $supporterName,
+            'supporters_email' => $supporterEmail,
+            'supporters_message' => $supporterMessage,
             'form_data_raw' => maybe_serialize($form_data),
             'currency' => $currency,
             'payment_method' => $paymentMethod,
@@ -65,7 +66,7 @@ class SubmissionHandler
         do_action('buymecoffee_after_supporters_data_insert', $entries);
 
         $transaction = array(
-            'entry_hash' => sanitize_text_field($hash),
+            'entry_hash' => $hash,
             'entry_id' => $entryId,
             'charge_id' => '',
             'payment_method' => sanitize_text_field($paymentMethod),
@@ -94,6 +95,19 @@ class SubmissionHandler
             'submission_id' => $entryId
         ), 200);
 
+    }
+
+    private function sanitizeFormData($formDataArray)
+    {
+        $sanitizedData = [];
+        foreach ($formDataArray as $value) {
+            if ($value['name'] === 'wpm-supporter-email') {
+                $sanitizedData[$value['name']] = sanitize_email($value['value']);
+            } else {
+                $sanitizedData[$value['name']] = sanitize_text_field($value['value']);
+            }
+        }
+        return $sanitizedData;
     }
 
     private function getHash()

@@ -24,7 +24,7 @@ let BuyMeCoffeeApp = {};
         },
         initOther() {
             $('.buymecoffee_form input').on('keypress', function (e) {
-                return e.which !== 13;
+                return e?.which !== 13;
             });
             let $inputs = $('.buymecoffee_form').find('input[data-required="yes"][data-type="input"],textarea[data-required="yes"],select[data-required="yes"]');
             $inputs.on('keypress blur', function (e) {
