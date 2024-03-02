@@ -20,10 +20,10 @@ class SubmissionHandler
         //Let's sanitize all data
         $form_data = $this->sanitizeFormData($_REQUEST['form_data']);
 
-        $paymentMethod = ArrayHelper::get($form_data, 'payment_method', 'stripe');
-        $paymentTotal = intval(ArrayHelper::get($form_data, 'payment_total', 0));
-        $quantity = intval(ArrayHelper::get($form_data, 'coffee_count', 1));
-        $currency = ArrayHelper::get($form_data, 'currency', false);
+        $paymentMethod = isset($_REQUEST['payment_method']) ? sanitize_text_field($_REQUEST['payment_method']) : 'paypal';
+        $paymentTotal = isset($_REQUEST['payment_total']) ? intval($_REQUEST['payment_total']) : 0;
+        $quantity = isset($_REQUEST['coffee_count']) ? intval($_REQUEST['coffee_count']) : 1;
+        $currency = isset($_REQUEST['currency']) ? sanitize_text_field($_REQUEST['currency']) : false;
 
         if (!$currency) {
             $currency = PaymentHelper::getCurrency();
