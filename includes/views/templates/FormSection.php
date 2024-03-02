@@ -17,7 +17,6 @@
     </h3>
     <?php
     endif;
-    ob_start();
     $form = \BuyMeCoffee\Builder\Render::renderInputElements($template, $args);
     echo wp_kses($form, \BuyMeCoffee\Helpers\SanitizeHelper::allowedTags());
     ?>
