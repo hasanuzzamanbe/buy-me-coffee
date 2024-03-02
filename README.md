@@ -127,3 +127,14 @@ and the following files in the root folder:
 - `includes` - contains all the PHP files used in the plugin
 - `languages` - contains all the translation files
 - `src` - contains all the JS/Vue and SCSS files
+
+## Third Party NPM library used
+- [element-plus/icons-vue](https://www.npmjs.com/package/@element-plus/icons-vue)
+- [element-plus](https://www.npmjs.com/package/element-plus/)
+- [@wordpress/hooks](https://www.npmjs.com/package/@wordpress/hooks)
+- [chart.js](https://www.npmjs.com/package/chart.js)
+- [clipboard](https://www.npmjs.com/package/clipboard)
+- [lodash](https://www.npmjs.com/package/lodash)
+- [moment](https://www.npmjs.com/package/moment)
+- [vue](https://www.npmjs.com/package/vue)
+- [vue-router](https://www.npmjs.com/package/vue-router)
