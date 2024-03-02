@@ -60,7 +60,11 @@ Coffee counter
 
 * [Stripe] (https://www.stripe.com)
   is used to collect payments from users. where the sdk client library is used. [Stripe SDK](https://js.stripe.com/v3/)
-
+  We use [stripe api] (https://api.stripe.com/v1/) to authenticate and process payment through stripe. We won't store any card info
+  or other private data. Only required things are stored like a Stripe Public key, Secret key.
+  you may check the full privacy policy from here,
+  [Stripe privacy policy] (https://stripe.com/privacy)
+  
 ## Installation
 1. Download a release version and Upload the plugin files to the `/wp-content/plugins/buymecoffee` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress

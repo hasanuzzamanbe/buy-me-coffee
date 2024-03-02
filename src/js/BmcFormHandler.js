@@ -65,7 +65,7 @@ class BmcFormHandler {
             coffee_count: form.data('coffee_count'),
             payment_method: form.data('wpm_selected_payment_method'),
             currency: form.data('wpm_currency'),
-            form_data: jQuery(form).serialize()
+            form_data: jQuery(form).serializeArray()
         })
             .then(response => {
                 if (response.data?.redirectTo) {
