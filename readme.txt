@@ -41,30 +41,6 @@ Donation statistics/reports
 Quick setup mode
 Coffee counter
 
-== Libraries Used ==
-* [WP Fluent DB library](https://github.com/hasanuzzamanbe/wp-fluent/)
-  This is just a Database library for WordPress. It is not a full-fledged ORM. It is a simple database library that makes working with the database easier. It is inspired by Laravel's Eloquent ORM. It's not collect any data from your site.
-* [PayPal SDK](https://developer.paypal.com/sdk/js/reference/)
-  is used to create a PayPal donation button and collect donations from your visitors. It required to create a PayPal donation button. There is a clear documentation on PayPal's website link above about how PayPal manage user data.
-
-* [Stripe SDK](https://js.stripe.com/v3/)
-  is used to create a Stripe payment button and collect donations from your visitors. It required to create a Stripe payment element. There is a clear documentation on Stripe's website link above about how Stripe manage user data.
-
-
-== 3rd Party services ==
-* [PayPal](https://www.paypal.com/)
-  is used to collect donations from your visitors. It is required to create a PayPal donation button. There is a clear documentation on PayPal's website link above about how PayPal manage user data.
-  for PayPal sandbox you may use [PayPal Sandbox](https://developer.paypal.com/docs/api-basics/sandbox/accounts/).
-  For PayPal IPN BuyMeCoffee plugin use [PayPal IPN](https://www.sandbox.paypal.com/cgi-bin/webscr/) to verify the payment.
-  And for library SDK [PayPal SDK](https://www.paypal.com/sdk/js?client-id=) where it requires your clientId.
-
-* [Stripe] (https://www.stripe.com)
-  is used to collect payments from users. where the sdk client library is used. [Stripe SDK](https://js.stripe.com/v3/)
-  We use [stripe api] (https://api.stripe.com/v1/) to authenticate and process payment through stripe. We won't store any card info
-  or other private data. Only required things are stored like a Stripe Public key, Secret key.
-  you may check the full privacy policy from here,
-  [Stripe privacy policy] (https://stripe.com/privacy)
-
 ## Installation
 1. Download a release version and Upload the plugin files to the `/wp-content/plugins/buymecoffee` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
@@ -76,7 +52,7 @@ You can use the plugin for free without any limitations. You can accept donation
 Donations are collected directly into your own PayPal or Stripe account merchant. You can accept donations in any currency supported by PayPal or Stripe.
 
 #### How to accept donations?
-You can accept coffee using a PayPal donation button using PayPal pro or PayPal standard.
+You can accept coffee using a PayPal(Upcoming) donation button using PayPal pro or PayPal standard.
 
 #### Do you have a premium version?
 No, we don't have a premium version. You can use the plugin for free without any limitations.
@@ -105,30 +81,19 @@ Yes, it is secure. We don't store any data on our servers. All data is stored on
 = 1.0.0 =
 * Initial release
 
-## Development Docs
-Please see package.json for the full list of scripts and packages used in this project.
+# Development Docs
+#### PHP library used:
+* [WP Fluent DB library](https://github.com/hasanuzzamanbe/wp-fluent/)
+  This is just a Database library for WordPress. It is not a full-fledged ORM. It is a simple database library that makes working with the database easier. It is inspired by Laravel's Eloquent ORM. It's not collect any data from your site.
 
-1. Install dependencies with `npm install`
-2. Run `npm run build` to build the project
-3. For dev server, run `npm run dev`
+#### CDN used for Payments:
+* [PayPal SDK](https://developer.paypal.com/sdk/js/reference/)
+  is used to create a PayPal donation button and collect donations from your visitors. It required to create a PayPal donation button. There is a clear documentation on PayPal's website link above about how PayPal manage user data.
 
-== Enqueueing assets ==
-Build scrips will generate the following directories in the `assets` folder:
-- `assets` - contains all the CSS files
-- `js` - contains all the JS files
-- `images` - contains all the images
+* [Stripe SDK](https://js.stripe.com/v3/)
+  is used to create a Stripe payment button and collect donations from your visitors. It required to create a Stripe payment element. There is a clear documentation on Stripe's website link above about how Stripe manage user data.
 
-and the following files in the root folder:
-- manifest.json - contains the list of all the generated CSS and JS files
-- plugin_main_js_file.js - contains the list of all the generated CSS and JS files
-
-== Plugin structure ==
-- `assets` - contains all the assets used in the plugin
-- `includes` - contains all the PHP files used in the plugin
-- `languages` - contains all the translation files
-- `src` - contains all the JS/Vue and SCSS files
-
-## Third Party NPM library used
+#### NPM Package used:
 - [element-plus/icons-vue](https://www.npmjs.com/package/@element-plus/icons-vue)
 - [element-plus](https://www.npmjs.com/package/element-plus/)
 - [@wordpress/hooks](https://www.npmjs.com/package/@wordpress/hooks)
@@ -138,3 +103,30 @@ and the following files in the root folder:
 - [moment](https://www.npmjs.com/package/moment)
 - [vue](https://www.npmjs.com/package/vue)
 - [vue-router](https://www.npmjs.com/package/vue-router)
+
+#### 3rd Party services:
+* [PayPal](https://www.paypal.com/) (Upcoming feature)
+  is used to collect donations from your visitors. It is required to create a PayPal donation button. There is a clear documentation on PayPal's website link above about how PayPal manage user data.
+  for PayPal sandbox you may use [PayPal Sandbox](https://developer.paypal.com/docs/api-basics/sandbox/accounts/).
+  For PayPal IPN BuyMeCoffee plugin use [PayPal IPN](https://www.sandbox.paypal.com/cgi-bin/webscr/) to verify the payment.
+  And for library SDK [PayPal SDK](https://www.paypal.com/sdk/js?client-id=) where it requires your clientId.
+
+* [Stripe] (https://www.stripe.com)
+  is used to collect payments from users. where the sdk client library is used. [Stripe SDK](https://js.stripe.com/v3/)
+  We use [stripe api] (https://api.stripe.com/v1/) to authenticate and process payment through stripe. We won't store any card info
+  or other private data. Only required things are stored like a Stripe Public key, Secret key.
+  you may check the full privacy policy from here,
+  [Stripe privacy policy] (https://stripe.com/privacy)
+
+
+#### Contribution guideline:
+Go to [GitHub Repo](https://github.com/hasanuzzamanbe/buy-me-coffee) to see package.json for the full list of scripts and packages used in this project.
+
+1. Install dependencies with `npm install`
+2. Run `npm run build` to build the project
+3. For dev server, run `npm run dev`
+
+Build scrips will generate the following directories in the `assets` folder:
+- `assets` - contains all the CSS files
+- `js` - contains all the JS files
+- `images` - contains all the images
