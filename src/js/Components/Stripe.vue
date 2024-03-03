@@ -96,7 +96,7 @@
                     action: 'buymecoffee_admin_ajax',
                     data: {
                       settings: this.settings,
-                      method: this.$route.name,
+                      method: 'stripe',
                     },
                     route: 'save_payment_settings',
                     buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
