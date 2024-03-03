@@ -4,7 +4,7 @@
             <h1 class="buymecoffee_menu_title">Payment Gateways</h1>
            <div class="buymecoffee_gateway_menu">
              <div v-for="(gateway, index) in gateways" :key="index" class="buymecoffee_gateway_item" @click="() => this.$router.push({ name: gateway.route })">
-               <div :class="'buymecoffee_gateway_' + gateway.route + (gateway.route === 'stripe' ? ' active' : '')">
+               <div :class="'buymecoffee_gateway_' + gateway.route + (gateway.route === current_route ? ' active' : '')">
                  <img :src="gateway.image"
                       style="width:70px; max-width: 70px;"
                       class="image" />
@@ -23,7 +23,8 @@
     data() {
         return {
             gateways: [
-            ]
+            ],
+            current_route: this.$route.name
         }
     },
     methods: {

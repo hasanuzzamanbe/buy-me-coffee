@@ -84,7 +84,7 @@
                         this.webhook_url = response.data.webhook_url
                     })
                     .fail(error => {
-                        this.$message.error(error.responseJSON.data.message);
+                        this.$message.error(error?.responseJSON?.data?.message);
                     })
                     .always(() => {
                         this.fetching = false;
@@ -96,7 +96,7 @@
                     action: 'buymecoffee_admin_ajax',
                     data: {
                       settings: this.settings,
-                      method: this.$route.name,
+                      method: 'stripe',
                     },
                     route: 'save_payment_settings',
                     buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
@@ -105,7 +105,7 @@
                         this.$handleSuccess(response.data.message);
                     })
                     .fail(error => {
-                        this.$message.error(error.responseJSON.data.message);
+                        this.$message.error(error?.responseJSON?.data?.message);
                     })
                     .always(() => {
                         this.saving = false;

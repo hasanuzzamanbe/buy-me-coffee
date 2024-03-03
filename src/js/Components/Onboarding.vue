@@ -73,6 +73,10 @@ export default {
               this.saving = false;
             });
       }
+      if (this.active === 2 ) {
+        this.$refs.stripeRef.saveSettings();
+      }
+
       if (this.active < 3) this.active = this.active+1;
     }
   },
@@ -116,7 +120,7 @@ export default {
                   </div>
               </div>
               <div v-else-if="active == 2" class="quick_payment_section">
-                <Stripe/>
+                <Stripe ref="stripeRef" @save_settings="saveSettings"/>
               </div>
               <div v-else-if="active == 3" class="quick_done_section">
                 <h1 style="margin-bottom: 32px;">

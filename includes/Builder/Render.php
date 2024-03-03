@@ -271,7 +271,7 @@ class Render
             }
         }
         if (!$hasActiveMethod) {
-            return "Please active at least one payment method!";
+            return __("Please activate at least one payment method!", 'buy-me-coffee');
         }
     }
 

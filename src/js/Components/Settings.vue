@@ -300,7 +300,7 @@ export default {
             this.saving = false;
           })
           .fail(error => {
-            this.$message.error(error.responseJSON.data.message);
+            this.$message.error(error?.responseJSON?.data?.message);
           })
           .always(() => {
             this.saving = false;
@@ -320,7 +320,7 @@ export default {
           })
           .fail(error => {
             console.log(error)
-            this.$message.error(error.responseJSON.data.message);
+            this.$message.error(error?.responseJSON?.data?.message);
           })
           .always(() => {
             this.saving = false;

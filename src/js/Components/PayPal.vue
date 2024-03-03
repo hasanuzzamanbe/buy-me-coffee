@@ -118,10 +118,10 @@ import ClipboardJS from 'clipboard';
                     buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
                 })
                     .then(response => {
-                        this.$handleSuccess(response.data.message);
+                        this.$handleSuccess(response?.data?.message);
                     })
                     .fail(error => {
-                        this.$message.error(error.responseJSON.data.message);
+                        this.$message.error(error?.responseJSON?.data?.message);
                     })
                     .always(() => {
                         this.saving = false;
