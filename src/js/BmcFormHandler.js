@@ -75,6 +75,8 @@ class BmcFormHandler {
                     this.fireCustomEvent(response.data.nextAction, response);
                     return;
                 }
+            }).catch (error => {
+                alert(error?.responseJSON?.data?.message);
             });
     }
 

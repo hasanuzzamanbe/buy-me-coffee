@@ -42,6 +42,7 @@ class StripeCheckout {
                         }
                     })
                 }).catch(error => {
+                    console.log(error, 'kk')
                     jQuery(this).text(buttonText);
                 })
             })

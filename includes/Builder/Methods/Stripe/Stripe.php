@@ -77,6 +77,13 @@ class Stripe extends BaseMethods
             $intentData = $this->intentData($paymentArgs);
             $invoiceResponse = (new API())->makeRequest('payment_intents', $intentData, $apiKey, 'POST');
 
+            if (is_wp_error($invoiceResponse)) {
+                wp_send_json_error([
+                    'status' => 'failed',
+                    'message' => $invoiceResponse->get_error_message()
+                ], 423);
+            }
+
             $transaction->payment_args = $paymentArgs;
 
             $responseData = [
