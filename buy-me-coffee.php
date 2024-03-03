@@ -34,7 +34,7 @@ if (!defined('ABSPATH')) {
 }
 if (!defined('BUYMECOFFEE_VERSION')) {
     define('BUYMECOFFEE_VERSION_LITE', true);
-    define('BUYMECOFFEE_VERSION', '1.0.3');
+    define('BUYMECOFFEE_VERSION', '1.0.0');
     define('BUYMECOFFEE_MAIN_FILE', __FILE__);
     define('BUYMECOFFEE_URL', plugin_dir_url(__FILE__));
     define('BUYMECOFFEE_DIR', plugin_dir_path(__FILE__));
