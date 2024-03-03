@@ -75,7 +75,7 @@
                     action: 'buymecoffee_admin_ajax',
                     route: 'get_data',
                     data: {
-                      method: this.$route.name,
+                      method: 'stripe',
                     },
                     buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
                 })

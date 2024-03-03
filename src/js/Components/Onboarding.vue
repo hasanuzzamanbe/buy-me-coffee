@@ -1,7 +1,7 @@
 <script>
 import {DArrowLeft, DArrowRight, Share, InfoFilled, DocumentCopy} from '@element-plus/icons-vue';
 import MediaButton from './Parts/MediaButton.vue';
-import PayPal from './PayPal.vue';
+import Stripe from './Stripe.vue';
 import ClipboardJS from "clipboard";
 export default {
   name: 'Onboarding',
@@ -12,8 +12,7 @@ export default {
     Share,
     InfoFilled,
     DocumentCopy,
-    PayPal
-
+    Stripe,
   },
   data() {
     return {
@@ -117,7 +116,7 @@ export default {
                   </div>
               </div>
               <div v-else-if="active == 2" class="quick_payment_section">
-                <PayPal/>
+                <Stripe/>
               </div>
               <div v-else-if="active == 3" class="quick_done_section">
                 <h1 style="margin-bottom: 32px;">
