@@ -1,7 +1,8 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly   ?>
 
 <div class="buymecoffee_form_preview_wrapper">
-    <?php if ($show_title): ?>
+    <?php
+    if (isset($template['formTitle']) && sanitize_text_field($template['formTitle']) === 'yes'): ?>
     <h3 class="buymecoffee_form_to">
         Buy
         <span class="buymecoffee_form_to"><?php
