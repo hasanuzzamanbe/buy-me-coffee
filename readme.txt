@@ -7,7 +7,7 @@ Stable tag: 1.0.0
 Requires PHP: 7.4
 License: GPLv2 or later
 Text Domain: buy-me-coffee
-Collect donations from "buy me a coffee" widgets directly into your own Stripe or PayPal (upcoming feature) account.
+Collect donations from "buy me a coffee" widgets directly into your own Stripe or PayPal account (upcoming).
 
 [![Buy Me a Coffee](https://github.com/hasanuzzamanbe/buy-me-coffee/assets/43160844/11d39611-2195-439e-925b-77139c5f124d)](https://www.youtube.com/watch?v=m3T5LQ1DOEc&ab_channel=WPMiners)
 ### See Short Video
@@ -25,7 +25,7 @@ Collect donations from "buy me a coffee" widgets directly into your own Stripe o
 You can use it for free without any limitations. You can accept donations from your visitors without any commission.
 Donations are collected directly into your own PayPal or Stripe account merchant. You can accept donations in any currency supported by PayPal or Stripe.
 one-time donations are available now will implement recurring donations in the future.
-You can accept donations from your visitors using a PayPal donation button, Form, or template. Accept donations from your visitors using a shortcode or a widget.
+You can accept donations from your visitors using a Stripe and PayPal donation button, Form, or template. Accept donations from your visitors using a shortcode or a widget.
 It Will be available using a popup or a page.
 
 You can accept donations from your visitors using custom amounts.
@@ -44,7 +44,7 @@ Coffee counter
 ## Installation
 1. Download a release version and Upload the plugin files to the `/wp-content/plugins/buy-me-coffee` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
-3. Use the Dashboard->Quick setup screen to configure basic settings
+3. Use the Dashboard -> Quick setup screen to configure basic settings
 
 ## Frequently Asked Questions
 #### How to use the plugin?
@@ -52,7 +52,7 @@ You can use the plugin for free without any limitations. You can accept donation
 Donations are collected directly into your own PayPal or Stripe account merchant. You can accept donations in any currency supported by PayPal or Stripe.
 
 #### How to accept donations?
-You can accept coffee using a PayPal(Upcoming) donation button using PayPal pro or PayPal standard.
+You can accept coffee donation or custom amount donations by stripe pro, Also PayPal pro or PayPal standard from the next version.
 
 #### Do you have a premium version?
 No, we don't have a premium version. You can use the plugin for free without any limitations.

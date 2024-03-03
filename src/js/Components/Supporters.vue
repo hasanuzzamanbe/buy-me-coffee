@@ -47,13 +47,13 @@ export default {
         buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
       })
           .then((response) => {
-            this.supporters = response.data.supporters;
-            this.total = response.data.total;
-            this.reportData = response.data.reports;
+            this.supporters = response?.data?.supporters;
+            this.total = response?.data?.total;
+            this.reportData = response?.data?.reports;
             this.fetching = false;
           })
           .fail(error => {
-            this.$message.error(error.responseJSON.data.message);
+            this.$message.error(error?.responseJSON?.data?.message);
           })
           .always(() => {
             this.fetching = false;
