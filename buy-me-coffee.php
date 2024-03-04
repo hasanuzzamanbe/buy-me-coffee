@@ -170,7 +170,7 @@ if (!defined('BUYMECOFFEE_VERSION')) {
     });
 
     // Handle Exterior Pages
-    add_action('init', function () {
+    add_action('wp', function () {
         $demoPage = new \BuyMeCoffee\Classes\DemoPage();
         $demoPage->register();
     });
