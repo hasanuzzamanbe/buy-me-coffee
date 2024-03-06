@@ -1,12 +1,12 @@
 <?php
 
 /*
-Plugin Name: Fundraise into Stripe and PayPal, Buy me coffee button & widgets
+Plugin Name: Fundraise with Stripe and PayPal, Buy Me a Coffee button & widgets
 Plugin URI: http://www.wpminers.com/
-Description: Collect "buy me a coffee" amount directly your own Stripe and Paypal
+Description: Easy way to collect donations like "buy me a coffee" directly your own Stripe and PayPal for free
 Version: 1.0.1
 Author: wpminers
-Author URI: http://www.wpminers.com
+Author URI: http://www.wpminers.com/
 License: GPLv2 or later
 Text Domain: buy-me-coffee
 */
@@ -178,7 +178,8 @@ if (!defined('BUYMECOFFEE_VERSION')) {
     add_filter('plugin_row_meta', function($links, $file) {
         if ('buy-me-coffee/buy-me-coffee.php' == $file) {
             $row_meta = [
-                'preview' => '<a rel="noopener" href="'. site_url('?share_coffee') . '" style="color: #8BC34A;font-weight: 600;" aria-label="' . esc_attr(esc_html__('View Documentation', 'buy-me-coffee')) . '" target="_blank">' . esc_html__('Preview', 'buy-me-coffee') . '</a>',
+                'Dashboard' => '<a rel="noopener" href="'. esc_url(admin_url('?page=buy-me-coffee.php#/')) . '" style="color: #8BC34A;font-weight: 600;" aria-label="' . esc_attr(esc_html__('Dashboard', 'buy-me-coffee')) . '" target="_blank">' . esc_html__('Dashboard', 'buy-me-coffee') . '</a>',
+                'preview' => '<a rel="noopener" href="'. esc_url(site_url('?share_coffee')) . '" style="color: #8BC34A;font-weight: 600;" aria-label="' . esc_attr(esc_html__('Preview', 'buy-me-coffee')) . '" target="_blank">' . esc_html__('Preview', 'buy-me-coffee') . '</a>',
                 'docs' => '<a rel="noopener" href="https://wpminers.com/buymecoffee/docs/installation/install-buy-me-coffee-plugin/" style="color: #8BC34A;font-weight: 600;" aria-label="' . esc_attr(esc_html__('View Documentation', 'buy-me-coffee')) . '" target="_blank">' . esc_html__('Docs', 'buy-me-coffee') . '</a>',
                 'demo' => '<a rel="noopener" href="https://wpminers.com/buymecoffee-demo/" style="color: #8BC34A;font-weight: 600;" aria-label="' . esc_attr(esc_html__('Demo', 'buy-me-coffee')) . '" target="_blank">' . esc_html__('Demo', 'buy-me-coffee') . '</a>',
             ];

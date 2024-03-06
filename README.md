@@ -1,4 +1,4 @@
-=== Fundraise into Stripe and PayPal, Buy me coffee button & widgets ===
+=== Fundraise with Stripe and PayPal - Buy Me a Coffee button & widgets ===
 Contributors: wpminers, hasanuzzamanshamim
 Tags: buy me a coffee, donations, payments, stripe payments, fundraise
 Requires at least: 4.5
@@ -7,12 +7,13 @@ Stable tag: 1.0.1
 Requires PHP: 7.4
 License: GPLv2 or later
 Text Domain: buy-me-coffee
-Collect donations from "buy me a coffee" widgets directly into your own Stripe or PayPal account.
+Easy way to collect donations like "buy me a coffee" directly your own Stripe and PayPal for free.
 
 [![Buy Me a Coffee](https://github.com/hasanuzzamanbe/buy-me-coffee/assets/43160844/11d39611-2195-439e-925b-77139c5f124d)](https://www.youtube.com/watch?v=m3T5LQ1DOEc&ab_channel=WPMiners)
-### See Short Video
-<a href="https://www.youtube.com/watch?v=m3T5LQ1DOEc" target="_blank">https://www.youtube.com/watch?v=m3T5LQ1DOEc</a>
 
+Stripe onsite and PayPal pro module allow you to get paid right on your site. Buy Me a Coffee offers you different templates like donate a coffee or donate a custom amount.
+
+[youtube https://www.youtube.com/watch?v=m3T5LQ1DOEc&ab_channel=WPMiners]
 
 == Description ==
 
