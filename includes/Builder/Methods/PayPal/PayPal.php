@@ -223,7 +223,7 @@ class PayPal extends BaseMethods
 
         $transaction = (new Transactions())->find($payment_id);
 
-        if (defined('PAYFORM_PAYPAL_IPN_DEBUG')) {
+        if (defined('BUYMECOFFEE_PAYPAL_IPN_DEBUG')) {
             error_log('IPN For Transaction: ' . wp_json_encode($transaction));
         }
 

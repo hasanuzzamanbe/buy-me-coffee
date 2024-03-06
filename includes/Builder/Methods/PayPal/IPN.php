@@ -59,14 +59,7 @@ class IPN
         if (!is_array($encoded_data_array) && !empty($encoded_data_array)) {
             return;
         }
-
-        $defaults = array(
-            'txn_type' => '',
-            'payment_status' => '',
-            'custom' => ''
-        );
-
-        $encoded_data_array = wp_parse_args($encoded_data_array, $defaults);
+        
         $payment_id = 0;
         $transactions = new Transactions();
 

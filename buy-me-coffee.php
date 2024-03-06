@@ -1,10 +1,10 @@
 <?php
 
 /*
-Plugin Name: Buy me coffee widgets - fundraise into own account
+Plugin Name: Fundraise into Stripe and PayPal, Buy me coffee button & widgets
 Plugin URI: http://www.wpminers.com/
 Description: Collect "buy me a coffee" amount directly your own Stripe and Paypal
-Version: 1.0.0
+Version: 1.0.1
 Author: wpminers
 Author URI: http://www.wpminers.com
 License: GPLv2 or later
@@ -34,7 +34,7 @@ if (!defined('ABSPATH')) {
 }
 if (!defined('BUYMECOFFEE_VERSION')) {
     define('BUYMECOFFEE_VERSION_LITE', true);
-    define('BUYMECOFFEE_VERSION', '1.0.0');
+    define('BUYMECOFFEE_VERSION', '1.0.1');
     define('BUYMECOFFEE_MAIN_FILE', __FILE__);
     define('BUYMECOFFEE_URL', plugin_dir_url(__FILE__));
     define('BUYMECOFFEE_DIR', plugin_dir_path(__FILE__));
@@ -174,6 +174,19 @@ if (!defined('BUYMECOFFEE_VERSION')) {
         $demoPage = new \BuyMeCoffee\Classes\DemoPage();
         $demoPage->register();
     });
+
+    add_filter('plugin_row_meta', function($links, $file) {
+        if ('buy-me-coffee/buy-me-coffee.php' == $file) {
+            $row_meta = [
+                'preview' => '<a rel="noopener" href="'. site_url('?share_coffee') . '" style="color: #8BC34A;font-weight: 600;" aria-label="' . esc_attr(esc_html__('View Documentation', 'buy-me-coffee')) . '" target="_blank">' . esc_html__('Preview', 'buy-me-coffee') . '</a>',
+                'docs' => '<a rel="noopener" href="https://wpminers.com/buymecoffee/docs/installation/install-buy-me-coffee-plugin/" style="color: #8BC34A;font-weight: 600;" aria-label="' . esc_attr(esc_html__('View Documentation', 'buy-me-coffee')) . '" target="_blank">' . esc_html__('Docs', 'buy-me-coffee') . '</a>',
+                'demo' => '<a rel="noopener" href="https://wpminers.com/buymecoffee-demo/" style="color: #8BC34A;font-weight: 600;" aria-label="' . esc_attr(esc_html__('Demo', 'buy-me-coffee')) . '" target="_blank">' . esc_html__('Demo', 'buy-me-coffee') . '</a>',
+            ];
+            return array_merge($links, $row_meta);
+        }
+        return (array)$links;
+    }, 10, 2);
+
 
 } else {
     add_action('admin_init', function () {
