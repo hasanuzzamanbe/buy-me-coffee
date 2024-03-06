@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Buy me coffee widgets - fundraise into own account\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-03 04:41+0000\n"
+"POT-Creation-Date: 2024-03-06 17:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -20,27 +20,34 @@ msgstr ""
 msgid "Buy Me Coffee"
 msgstr ""
 
-#. Name of the plugin
-msgid "Buy me coffee widgets - fundraise into own account"
+#: buy-me-coffee.php:181 includes/Classes/Menu.php:37
+msgid "Dashboard"
+msgstr ""
+
+#: buy-me-coffee.php:184
+msgid "Demo"
+msgstr ""
+
+#: buy-me-coffee.php:183
+msgid "Docs"
 msgstr ""
 
 #. Description of the plugin
-msgid "Collect \"buy me a coffee\" amount directly your own Stripe and Paypal"
+msgid ""
+"Easy way to collect donations like \"buy me a coffee\" directly your own "
+"Stripe and PayPal for free"
 msgstr ""
 
-#: includes/Classes/Menu.php:37
-msgid "Dashboard"
+#. Name of the plugin
+msgid "Fundraise with Stripe and PayPal - Buy Me a Coffee button & widgets"
 msgstr ""
 
 #: includes/Classes/Menu.php:54
 msgid "Gateways"
 msgstr ""
 
-#. Author URI of the plugin
-msgid "http://www.wpminers.com"
-msgstr ""
-
 #. URI of the plugin
+#. Author URI of the plugin
 msgid "http://www.wpminers.com/"
 msgstr ""
 
@@ -61,12 +68,20 @@ msgid "Invalid request"
 msgstr ""
 
 #: includes/Builder/Methods/PayPal/PayPal.php:78
-#: includes/Builder/Methods/Stripe/Stripe.php:88
+#: includes/Builder/Methods/Stripe/Stripe.php:95
 msgid "Payment Modal is opening, Please complete the payment"
 msgstr ""
 
 #: includes/Builder/Methods/PayPal/PayPal.php:350
 msgid "Payment updated successfully"
+msgstr ""
+
+#: includes/Builder/Render.php:274
+msgid "Please activate at least one payment method!"
+msgstr ""
+
+#: buy-me-coffee.php:182
+msgid "Preview"
 msgstr ""
 
 #: includes/Classes/Menu.php:49
@@ -84,6 +99,10 @@ msgstr ""
 
 #: includes/Controllers/SubmissionHandler.php:94
 msgid "Thanks for your support! <3"
+msgstr ""
+
+#: buy-me-coffee.php:183
+msgid "View Documentation"
 msgstr ""
 
 #. Author of the plugin

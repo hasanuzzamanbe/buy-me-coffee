@@ -1,4 +1,4 @@
-=== Fundraise with Stripe and PayPal - Buy Me a Coffee button & widgets ===
+=== Buy Me a Coffee button & widgets - Fundraise with Stripe and PayPal ===
 Contributors: wpminers, hasanuzzamanshamim
 Tags: buy me a coffee, donations, payments, stripe payments, fundraise
 Requires at least: 4.5
@@ -9,15 +9,15 @@ License: GPLv2 or later
 Text Domain: buy-me-coffee
 Easy way to collect donations like "buy me a coffee" directly your own Stripe and PayPal for free.
 
+== Description ==
+
+[User Guide](https://wpminers.com/buymecoffee/docs/getting-started/quick-setup/) | [Demo](https://wpminers.com/buymecoffee-demo)
+
 [![Buy Me a Coffee](https://github.com/hasanuzzamanbe/buy-me-coffee/assets/43160844/11d39611-2195-439e-925b-77139c5f124d)](https://www.youtube.com/watch?v=m3T5LQ1DOEc&ab_channel=WPMiners)
 
 Stripe onsite and PayPal pro module allow you to get paid right on your site. Buy Me a Coffee offers you different templates like donate a coffee or donate a custom amount.
 
 [youtube https://www.youtube.com/watch?v=m3T5LQ1DOEc&ab_channel=WPMiners]
-
-== Description ==
-
-[User Guide](https://wpminers.com/buymecoffee/docs/getting-started/quick-setup/) | [Demo](https://wpminers.com/buymecoffee-demo)
 
 **Buy me a Coffee** is a free WordPress plugin that allows you to accept donations from your visitors. It is a simple and effective way to monetize your content. You can accept donations via PayPal or Stripe. The plugin is very easy to use and configure. You can add a PayPal donation button, Form, or template anywhere on your website using a shortcode or a widget.
 
@@ -79,7 +79,7 @@ Yes, it is secure. We don't store any data on our servers. All data is stored on
 5. Stripe Payment settings
 
 ## Changelog
-= 1.0.1 March 6, 2024=
+= 1.0.1 March 7, 2024=
 - Adds PayPal Pro Payment Gateway
 
 = 1.0.0 March 3, 2024=
