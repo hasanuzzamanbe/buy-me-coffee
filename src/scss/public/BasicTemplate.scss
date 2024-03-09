@@ -42,10 +42,13 @@ span.buymecoffee_form_to {
     align-items: center;
 }
 
+.buymecoffee_form_preview_shadow {
+    box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px;
+}
+
 .buymecoffee_form_preview_wrapper {
     min-width: 360px;
     width: 360px;
-    box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px;
     border: 1px solid #f4f4f4;
     padding: 20px;
     border-radius: 8px;
@@ -137,7 +140,7 @@ span.buymecoffee_form_to {
     min-height: 50px;
 }
 .buymecoffee_form_item {
-    margin-bottom: 14px;
+    margin-bottom: 18px;
 }
 
 .buymecoffee_currency_prefix {
@@ -259,19 +262,18 @@ input.buymecoffee_custom_quantity {
     justify-content: center;
     font-size: 16px;
 }
-.bmc_coffee input:checked+label {
-    background: #b9fff3 !important;
-    border-color: #b9fff3;
+.bmc_coffee input:checked+label, input.custom_quantity_active {
+    background: #929292 !important;
+    border-color: #929292;
+    font-weight: bold;
+    color: white !important;
 }
 .buymecoffee_custom_quantity {
     max-width: 60px !important;
     margin-left: 15px !important;
     text-align: center;
 }
-input.custom_quantity_active {
-    background: #b9fff3 !important;
-    border-color: #b9fff3;
-}
+
 .buymecoffee_main_container .buymecoffee_payment_item {
     min-width: 300px;
     border: 1px solid #72e0ce;

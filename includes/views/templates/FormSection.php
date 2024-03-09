@@ -1,6 +1,7 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly   ?>
+<?php use BuyMeCoffee\Helpers\ArrayHelper as Arr ;?>
 
-<div class="buymecoffee_form_preview_wrapper">
+<div class="buymecoffee_form_preview_wrapper <?php echo sanitize_text_field(Arr::get($template, 'advanced.formShadow')) == 'yes' ? 'buymecoffee_form_preview_shadow' : '' ;?>">
     <?php
     if (isset($template['formTitle']) && sanitize_text_field($template['formTitle']) === 'yes'): ?>
     <h3 class="buymecoffee_form_to">

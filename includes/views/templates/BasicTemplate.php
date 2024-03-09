@@ -12,6 +12,31 @@
     wp_head();
     ?>
     <?php
+    if (current_user_can('manage_options')):
+        ?>
+        <div class="wrapper">
+            <ul class="tab__content">
+                <li class="active">
+                    <div class="content__wrapper">
+                        <ul class="colors">
+                            <li data-color="rgb(255, 129, 63)"></li>
+                            <li data-color="rgb(255, 95, 95)"></li>
+                            <li data-color="rgb(95, 127, 255)"></li>
+                            <li data-color="rgb(137, 239, 232)" class="active-color"></li>
+                            <li data-color="rgb(189, 95, 255)"></li>
+                            <li data-color="rgb(244, 113, 255)"></li>
+                            <li data-color="rgb(38, 176, 161)"></li>
+                            <li data-color="rgb(253, 181, 0)"></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <div>
+                <button class="save_changes"> Save Changes</button>
+            </div>
+        </div>
+    <?php
+    endif;
 
     include BUYMECOFFEE_DIR . 'includes/views/templates/FormTemplate.php';
 

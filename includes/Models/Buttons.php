@@ -26,6 +26,7 @@ class Buttons
                 "enable" => 'yes',
                 "bgColor" => 'rgba(250, 212, 0, 1)',
                 "color" => 'rgba(0, 0, 0, 1)',
+                "formShadow" => 'yes',
                 "minWidth" => '180',
                 "textAlign" => 'center',
                 "minHeight" => '43',

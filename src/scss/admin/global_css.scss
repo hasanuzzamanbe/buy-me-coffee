@@ -80,6 +80,12 @@ input::placeholder {
         box-shadow: rgb(17 12 46 / 15%) 0px 48px 100px 0px;
         border-radius: 6px;
     }
+    &_template_section {
+        border: 1px solid #e7e7e7cc;
+        border-radius: 6px;
+        padding: 16px;
+        margin-bottom: 20px;
+    }
 }
 
 .buy-me-coffee_app{

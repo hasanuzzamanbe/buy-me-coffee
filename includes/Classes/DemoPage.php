@@ -61,6 +61,7 @@ class DemoPage
             wp_enqueue_style('dashicons');
             $this->loadDefaultPageTemplate();
             $this->loadTemplateStyles();
+            $this->loadCustomizer();
 
             $btnController = new Buttons();
             $template = $btnController->getButton();
@@ -70,10 +71,10 @@ class DemoPage
             if ($profileImage == '') {
                 $profileImage = Vite::staticPath() . 'images/profile.png';
             }
-
             //escaped in template, ignoring phpcs here now
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo View::make('templates.BasicTemplate', [ 'template' => $template,
+            echo View::make('templates.BasicTemplate', [
+                'template' => $template,
                 'type' => 'button',
                 'quote' => esc_html($quote),
                 'show_title' => ArrayHelper::get($template, 'formTitle') == 'yes',
@@ -84,6 +85,13 @@ class DemoPage
             ]);
             exit();
         }
+    }
+
+    public function loadCustomizer()
+    {
+        if (!current_user_can('manage_options')) return;
+        vite::enqueueScript('buymecoffee_customizer',  'js/customizer.js', array('jquery'), BUYMECOFFEE_VERSION, false);
+        Vite::enqueueStyle('buymecoffee_customizer_style', 'scss/admin/customizer.scss', array(), BUYMECOFFEE_VERSION);
     }
 
     public function loadDefaultPageTemplate()

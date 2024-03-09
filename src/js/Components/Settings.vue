@@ -46,65 +46,73 @@
                     </el-form-item>
                   </el-tab-pane>
                   <el-tab-pane label="Template Settings">
-                    <el-form-item label="Button text">
-                      <el-input size="small" type="text" v-model="template.buttonText"></el-input>
-                    </el-form-item>
-                    <el-form-item label="Button color">
-                      <el-color-picker
-                          size="small"
-                          @active-change="changeBgColor"
-                          v-model="template.advanced.bgColor"
-                          show-alpha
-                          :predefine="predefineColors">
-                      </el-color-picker>
-                    </el-form-item>
-                    <el-form-item label="Button Text color">
-                      <el-color-picker
-                          size="small"
-                          @active-change="changeFontColor"
-                          v-model="template.advanced.color"
-                          show-alpha
-                          :predefine="predefineColors">
-                      </el-color-picker>
-                    </el-form-item>
-                    <el-form-item label="Button Radius(px)">
-                      <el-input
-                          style="width:50%"
-                          type="number"
-                          size="small"
-                          v-model="template.advanced.radius"
-                      >
-                      </el-input>
-                    </el-form-item>
-                    <el-form-item label="Your Quotes">
-                      <el-input
-                          type="textarea"
-                          size="small"
-                          v-model="template.advanced.quote"
-                      >
-                      </el-input>
-                    </el-form-item>
-                    <el-form-item label="">
-                      <div class="buymecoffee_settings_image">
-                        <div>
-                          <MediaButton @onMediaSelected="onMediaSelected" />
+                    <div class="buymecoffee_template_section">
+                      <el-form-item label="Button text">
+                        <el-input size="small" type="text" v-model="template.buttonText"></el-input>
+                      </el-form-item>
+                      <el-form-item label="Button color">
+                        <el-color-picker
+                            size="small"
+                            @active-change="changeBgColor"
+                            v-model="template.advanced.bgColor"
+                            show-alpha
+                            :predefine="predefineColors">
+                        </el-color-picker>
+                      </el-form-item>
+                      <el-form-item label="Button Text color">
+                        <el-color-picker
+                            size="small"
+                            @active-change="changeFontColor"
+                            v-model="template.advanced.color"
+                            show-alpha
+                            :predefine="predefineColors">
+                        </el-color-picker>
+                      </el-form-item>
+
+                      <el-form-item label="Button Radius(px)">
+                        <el-input
+                            style="width:50%"
+                            type="number"
+                            size="small"
+                            v-model="template.advanced.radius"
+                        >
+                        </el-input>
+                      </el-form-item>
+                    </div>
+                    <div class="buymecoffee_template_section">
+                      <el-form-item label="Form shadow">
+                        <el-checkbox true-label="yes" false-label="no" v-model="template.advanced.formShadow">Enable form box shadow</el-checkbox>
+                      </el-form-item>
+                      <el-form-item label="Your Quotes">
+                        <el-input
+                            type="textarea"
+                            size="small"
+                            v-model="template.advanced.quote"
+                        >
+                        </el-input>
+                      </el-form-item>
+                      <el-form-item label="">
+                        <div class="buymecoffee_settings_image">
+                          <div>
+                            <MediaButton @onMediaSelected="onMediaSelected" />
+                          </div>
+                          <img width="120" height="120"
+                              v-if="template.advanced.image"
+                              :src="template.advanced.image"
+                          />
+                          <img v-else width="120" height="120"
+                               :src="fullPath('profile.png')"
+                          />
                         </div>
-                        <img width="120" height="120"
-                            v-if="template.advanced.image"
-                            :src="template.advanced.image"
-                        />
-                        <img v-else width="120" height="120"
-                             :src="fullPath('profile.png')"
-                        />
-                      </div>
-                    </el-form-item>
-                    <!--                                      will add modal-->
-                    <!--                                                <el-form-item label="Button click action">-->
-                    <!--                                                  <el-radio-group v-model="template.openMode">-->
-                    <!--                                                    <el-radio label="modal">Modal (recommended)</el-radio>-->
-                    <!--                                                    <el-radio label="page">Open in Page</el-radio>-->
-                    <!--                                                  </el-radio-group>-->
-                    <!--                                                </el-form-item>-->
+                      </el-form-item>
+                      <!--                                      will add modal-->
+                      <!--                                                <el-form-item label="Button click action">-->
+                      <!--                                                  <el-radio-group v-model="template.openMode">-->
+                      <!--                                                    <el-radio label="modal">Modal (recommended)</el-radio>-->
+                      <!--                                                    <el-radio label="page">Open in Page</el-radio>-->
+                      <!--                                                  </el-radio-group>-->
+                      <!--                                                </el-form-item>-->
+                    </div>
                   </el-tab-pane>
                   <div>
                     <el-popconfirm @confirm="resetDefault" title="Are you sure to reset to default settings?">

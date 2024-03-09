@@ -200,7 +200,6 @@ export default {
     justify-content: space-between;
     min-height: 50vh;
     background: #e0fffb45;
-    margin-top: 32px;
     border-radius: 10px;
     box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
   }
