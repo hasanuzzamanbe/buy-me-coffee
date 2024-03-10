@@ -53,9 +53,17 @@
             ?>
             <div class="buymecoffee_your_content_wrapper">
                 <div class="buymecoffee_your_content">
-                    <div class="buymecoffee_your_content_title">
+                    <div class="buymecoffee_your_content_title buymecoffee_quote_section">
                         <div style="margin:23px;">
-                            <blockquote>
+                            <?php if (current_user_can('manage_options')): ?>
+                                <div class="buymecoffee_edit_action_wrapper" style="display: none;">
+                                    <div class="buymecoffee_edit_action">✏️ Edit quotes</div>
+                                    <blockquote style="display: none;">
+                                        <input type="textarea" value="<?php echo esc_html($quote); ?>">
+                                    </blockquote>
+                                </div>
+                            <?php endif; ?>
+                            <blockquote class="buymecoffee_main_quote">
                                 <p class="bmc_appreciation_title"><?php echo esc_html($quote); ?></p>
                             </blockquote>
                         </div>

@@ -10,6 +10,7 @@ jQuery(document).ready(function($) {
     let buttonColor = null;
     let borderColor = null;
     let bgColor = null;
+    let quote = null;
 
     colorButton.on("click", function () {
         $(".colors > li").removeClass("active-color");
@@ -41,6 +42,7 @@ jQuery(document).ready(function($) {
                 button_style: buttonColor,
                 bg_style: bgColor,
                 border_style: borderColor,
+                quote: quote
             }
         })
             .then(res => {
@@ -51,8 +53,19 @@ jQuery(document).ready(function($) {
     });
 
     $('.controller').on("click", function () {
-        $('.wrapper').toggle();
+        $('.wrapper, .buymecoffee_edit_action_wrapper').toggle();
     });
+
+    $('.buymecoffee_edit_action, .bmc_appreciation_title').on("click", function () {
+        $('.buymecoffee_edit_action_wrapper blockquote').toggle();
+        $('.buymecoffee_quote_section .buymecoffee_main_quote').toggle();
+    })
+
+    $('.buymecoffee_edit_action_wrapper input').on('input', function() {
+        $('.buymecoffee_quote_section .buymecoffee_main_quote p')[0]
+            .innerHTML = quote = $(this).val();
+    });
+
 
     function rgbToRgba(rgb, alpha) {
         var values = rgb.substr(4, rgb.length - 5).split(", ");
@@ -60,6 +73,7 @@ jQuery(document).ready(function($) {
     }
 
     function hideSettings() {
-        $('.wrapper').hide();
+        $('.wrapper, .buymecoffee_edit_action_wrapper').hide();
+        $('.buymecoffee_quote_section .buymecoffee_main_quote').show();
     }
 });

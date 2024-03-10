@@ -168,11 +168,13 @@ class AdminAjaxHandler
             $settings['advanced']['button_style'] = $data['button_style'];
             $settings['advanced']['bg_style'] = $data['bg_style'];
             $settings['advanced']['border_style'] = $data['border_style'];
-            $this->saveSettings($settings);
         }
-        wp_send_json_error(array(
-            'message' => __("Please choose a template first!", 'buy-me-coffee')
-        ), 423);
+
+        if (!empty($data['quote'])) {
+            $settings['advanced']['quote'] = $data['quote'];
+        }
+
+        $this->saveSettings($settings);
 
     }
 
