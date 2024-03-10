@@ -3,7 +3,7 @@ Contributors: wpminers, hasanuzzamanshamim
 Tags: buy me a coffee, donations, payments, stripe payments, fundraise
 Requires at least: 4.5
 Tested up to: 6.4.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Requires PHP: 7.4
 License: GPLv2 or later
 Text Domain: buy-me-coffee
@@ -30,7 +30,7 @@ You can accept donations from your visitors using custom amounts.
 
 Features:
 Custom number of donations
-Accept donations using Stripe and PayPal
+Accept donations using Onsite Stripe and PayPal Pro
 Customizable templates
 Form shortcode and widget
 Buttons Shortcode and widget
@@ -38,6 +38,7 @@ Donor profiles
 Donation statistics/reports
 Quick setup mode
 Buy Me a Coffee counter
+Multiple theme templates
 
 ## Installation
 1. Download a release version and Upload the plugin files to the `/wp-content/plugins/buy-me-coffee` directory, or install the plugin through the WordPress plugins screen directly.
@@ -76,6 +77,9 @@ Yes, it is secure. We don't store any data on our servers. All data is stored on
 5. Stripe Payment settings
 
 ## Changelog
+= 1.0.2 March 10, 2024=
+- Adds Realtime theme customizer
+
 = 1.0.1 March 7, 2024=
 - Adds PayPal Pro Payment Gateway
 
@@ -109,7 +113,7 @@ Yes, it is secure. We don't store any data on our servers. All data is stored on
 * [WP Fluent DB library](https://github.com/hasanuzzamanbe/wp-fluent/)
   This is just a Database library for WordPress. It is not a full-fledged ORM. It is a simple database library that makes working with the database easier. It is inspired by Laravel's Eloquent ORM. It's not collect any data from your site.
 #### NPM Package used:
-[element-plus/icons-vue](https://www.npmjs.com/package/@element-plus/icons-vue),[element-plus](https://www.npmjs.com/package/element-plus/),[@wordpress/hooks](https://www.npmjs.com/package/@wordpress/hooks),[chart.js](https://www.npmjs.com/package/chart.js),[clipboard](https://www.npmjs.com/package/clipboard),[lodash](https://www.npmjs.com/package/lodash),[moment](https://www.npmjs.com/package/moment),[vue](https://www.npmjs.com/package/vue),[vue-router](https://www.npmjs.com/package/vue-router)
+[element-plus/icons-vue](https://www.npmjs.com/package/@element-plus/icons-vue),[element-plus](https://www.npmjs.com/package/element-plus/),[@wordpress/hooks](https://www.npmjs.com/package/@wordpress/hooks),[chart.js](https://www.npmjs.com/package/chart.js),[clipboard](https://www.npmjs.com/package/clipboard),[lodash](https://www.npmjs.com/package/lodash),[vue](https://www.npmjs.com/package/vue),[vue-router](https://www.npmjs.com/package/vue-router)
 
 #### Contribution guideline:
 Go to [GitHub Repo](https://github.com/hasanuzzamanbe/buy-me-coffee) to see package.json for the full list of scripts and packages used in this project.

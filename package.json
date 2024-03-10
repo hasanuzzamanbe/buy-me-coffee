@@ -17,7 +17,6 @@
     "clipboard": "^2.0.11",
     "element-plus": "^2.2.27",
     "lodash": "^4.17.21",
-    "moment": "^2.29.4",
     "vue": "^3.2.39",
     "vue-router": "^4.1.5"
   },
