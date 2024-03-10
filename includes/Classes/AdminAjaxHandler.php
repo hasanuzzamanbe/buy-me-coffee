@@ -42,7 +42,7 @@ class AdminAjaxHandler
         $validRoutes = array(
             'get_data' => 'getPaymentSettings',
             'save_payment_settings' => 'savePaymentSettings',
-
+            'save_form_design' => 'saveFormDesign',
             'gateways' => 'getAllMethods',
 
             'save_settings' => 'saveSettings',
@@ -145,9 +145,9 @@ class AdminAjaxHandler
 
     }
 
-    public function saveSettings($request)
+    public function saveSettings($data)
     {
-        $data = $request ?: array();
+        $data = $data ?: array();
 
         update_option('buymecoffee_payment_setting', $data, false);
         do_action('buymecoffee_after_save_template', $data);
@@ -155,6 +155,25 @@ class AdminAjaxHandler
         wp_send_json_success(array(
             'message' => __("Settings successfully updated", 'buy-me-coffee')
         ), 200);
+    }
+
+    public function saveFormDesign($data)
+    {
+        $settings = (new Buttons())->getButton();
+        if (!isset($settings['advanced'])) {
+            return;
+        }
+
+        if (!empty($data['button_style']) && !empty($data['bg_style']) && !empty($data['border_style'])) {
+            $settings['advanced']['button_style'] = $data['button_style'];
+            $settings['advanced']['bg_style'] = $data['bg_style'];
+            $settings['advanced']['border_style'] = $data['border_style'];
+            $this->saveSettings($settings);
+        }
+        wp_send_json_error(array(
+            'message' => __("Please choose a template first!", 'buy-me-coffee')
+        ), 423);
+
     }
 
     public function sanitizeTextArray($data)

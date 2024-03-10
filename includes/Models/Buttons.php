@@ -26,12 +26,15 @@ class Buttons
                 "enable" => 'yes',
                 "bgColor" => 'rgba(250, 212, 0, 1)',
                 "color" => 'rgba(0, 0, 0, 1)',
-                "formShadow" => 'yes',
+                "formShadow" => 'no',
                 "minWidth" => '180',
                 "textAlign" => 'center',
                 "minHeight" => '43',
                 "fontSize" => 21,
                 "radius" => 4,
+                "button_style" => "rgb(137, 239, 232)",
+                "bg_style" => "rgb(137, 239, 232, 5%)",
+                "border_style" => "rgb(137, 239, 232, 25%)",
                 "quote" => '🤝 Helping hands work together to accomplish great things.',
             )
         );

@@ -5,6 +5,8 @@
   margin: 0;
 }
 .wrapper {
+  position: sticky;
+  top: 0;
   background-color: #f1f1f1;
   display: flex;
   justify-content: space-between;
@@ -12,8 +14,9 @@
   border-top: 1px solid #f9f9f9;
   align-items: center;
   height: 60px;
+  z-index: 9999;
 }
-button.save_changes {
+button#buymecoffee_save_changes {
   height: 37px;
   display: flex;
   align-items: center;
@@ -23,7 +26,34 @@ button.save_changes {
   color: #5684ff;
   &:hover, &:active, &:focus{
     background: #0287d9;
+    color: white;
     border: none;
+  }
+}
+.controller {
+  width: 22px;
+  height: 142px;
+  padding: 12px;
+  background: white;
+  z-index: 999;
+  box-shadow: 4px 4px 6px 0px #ccc;
+  position: fixed;
+  top: 150px;
+  left: 0;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 22px;
+  p {
+    transform: rotate(-90deg);
+  }
+  &:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
   }
 }
 .bg-color {
