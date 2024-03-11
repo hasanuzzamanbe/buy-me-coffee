@@ -42,12 +42,17 @@
 }
 button#buymecoffee_save_changes {
   height: 37px;
+  min-width: 120px;
+  text-align: center;
   display: flex;
   align-items: center;
   margin-right: 25px;
   background: white;
   border: 1px solid #ccc;
   color: #5684ff;
+  justify-content: center;
+  border-radius: 20px;
+  cursor: pointer;
   &:hover, &:active, &:focus{
     background: #0287d9;
     color: white;
@@ -74,6 +79,8 @@ button#buymecoffee_save_changes {
   gap: 22px;
   p {
     transform: rotate(-90deg);
+    margin-bottom: 14px;
+    color: #848484;
   }
   &:hover {
     transform: scale(1.1);

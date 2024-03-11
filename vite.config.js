@@ -24,6 +24,7 @@ const inputs = {
     'css/element' : 'src/scss/admin/app.scss',
     'css/customizer' : 'src/scss/admin/customizer.scss',
     'css/public-style' : 'src/scss/public/public-style.scss',
+    'css/BasicTemplate' : 'src/scss/public/BasicTemplate.scss',
 
     //Block Editor assets
     'js/Editor/gutenBlock' : 'src/js/Editor/gutenBlock.jsx'

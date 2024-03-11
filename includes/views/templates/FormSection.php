@@ -2,6 +2,26 @@
 <?php use BuyMeCoffee\Helpers\ArrayHelper as Arr ;?>
 
 <div class="buymecoffee_form_preview_wrapper <?php echo sanitize_text_field(Arr::get($template, 'advanced.formShadow')) == 'yes' ? 'buymecoffee_form_preview_shadow' : '' ;?>">
+    <style>
+        <?php
+            $borderStyle = Arr::get($template, 'advanced.border_style');
+            $buttonStyle = Arr::get($template, 'advanced.button_style');
+        ?>
+        .buymecoffee_payment_input_content {
+            background: <?php echo esc_attr(Arr::get($template, 'advanced.bg_style')); ?>;
+            border: 1px solid <?php echo esc_attr($borderStyle); ?>;
+        }
+        .wpm_submit_button {
+            background-color: <?php echo esc_attr($buttonStyle); ?> !important;
+        }
+        .wpm_submit_button:hover {
+            background: <?php echo esc_attr($borderStyle); ?> !important;
+        }
+        .buymecoffee_currency_prefix {
+            background: <?php echo esc_attr($buttonStyle); ?>;
+        }
+
+    </style>
     <?php
     if (isset($template['formTitle']) && sanitize_text_field($template['formTitle']) === 'yes'): ?>
     <h3 class="buymecoffee_form_to">
