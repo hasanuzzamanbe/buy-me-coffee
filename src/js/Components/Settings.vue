@@ -210,7 +210,21 @@
                   </div>
                   <a style="margin-left:12px; color: #e88b0d;text-decoration: none;" :href="previewUrl" target="_blank">Preview</a>
                 </div>
-                For custom amount: <code>[buymecoffee_basic custom=10]</code><a style="color: #e88b0d;text-decoration: none;" target="_blank" :href="previewUrl + '&custom=10'">Preview</a>
+                <div>
+                  <p> For custom amount:</p>
+                  <el-tooltip effect="dark"
+                              content="Click to copy shortcode"
+                              title="Click to copy shortcode"
+                              placement="top">
+                    <code class="copy"
+                          data-clipboard-action="copy"
+                          data-clipboard-text='[buymecoffee_basic custom=10]'>
+                      <i class="el-icon-document"></i> [buymecoffee_basic custom=10]
+                    </code>
+                  </el-tooltip>
+                  <a style="color: #e88b0d;text-decoration: none;" target="_blank" :href="previewUrl + '&custom=10'">Preview</a>
+
+                </div>
                 <br/>
                 <p>Also you can use custom amount template by adding <code>&custom</code> &nbsp param with your page link like this:</p>
                 <p>{{ previewUrl }}&custom=10</p>

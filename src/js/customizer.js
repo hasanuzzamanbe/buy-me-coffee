@@ -35,6 +35,7 @@ jQuery(document).ready(function($) {
 
             $(".buymecoffee_profile_hr").css("background-color", borderColor);
             $(".buymecoffee_payment_item .buymecoffee_payment_input_content").css(groupStyle);
+            $(".buymecoffee_currency_prefix").css("background-color", buttonColor);
             $("button#wpm_submit_button")
                 .attr('style', $(this).attr('style') + 'background-color:' + buttonColor + '!important;');
         });
