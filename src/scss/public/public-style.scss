@@ -20,6 +20,9 @@ form.wpm_submitting_form {
   }
 }
 .wpm_submit_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     &:disabled {
       background: #f1cd16;
       opacity: 1!important;
