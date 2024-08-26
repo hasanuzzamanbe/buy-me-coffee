@@ -15,7 +15,7 @@
     &_menu {
       width: 22px;
       height: 142px;
-      padding: 12px;
+      padding: 4px;
       background: #ffffff;
       border: 1px solid #b1b1b1;
       z-index: 999;
@@ -31,6 +31,7 @@
       align-items: center;
       justify-content: flex-end;
       gap: 22px;
+      font-size: 16px;
       p {
         transform: rotate(-90deg);
         margin-bottom: 14px;
@@ -75,9 +76,9 @@
     > li {
       list-style: none;
       width: 20px;
-      height: 20px;
+      height: 16px;
       border-radius: 50%;
-      border-bottom: 5px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 4px solid rgba(0, 0, 0, 0.1);
       margin: 0 10px;
       cursor: pointer;
       transition-duration: 0.2s;
@@ -86,14 +87,14 @@
       &:hover {
         -webkit-transform: scale(1.2);
         transform: scale(1.2);
-        border-bottom: 10px solid rgba(0, 0, 0, 0.15);
+        border-bottom: 5px solid rgba(0, 0, 0, 0.15);
         box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
       }
       &.active-color {
         -webkit-transform: scale(1.2) translateY(-7px);
         transform: scale(1.2) translateY(-7px);
         box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
-        border-bottom: 20px solid rgba(0, 0, 0, 0.15);
+        border-bottom: 5px solid rgba(0, 0, 0, 0.15);
       }
     }
   }
