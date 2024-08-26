@@ -2,8 +2,8 @@
 Contributors: wpminers, hasanuzzamanshamim
 Tags: buy me a coffee, donations, payments, stripe payments, fundraise
 Requires at least: 4.5
-Tested up to: 6.4.1
-Stable tag: 1.0.2
+Tested up to: 6.6.1
+Stable tag: 1.0.3
 Requires PHP: 7.4
 License: GPLv2 or later
 Text Domain: buy-me-coffee
@@ -77,6 +77,11 @@ Yes, it is secure. We don't store any data on our servers. All data is stored on
 5. Stripe Payment settings
 
 ## Changelog
+= 1.0.3 August 26, 2024=
+- Fixes styling issue
+- Fixes customizer module issue
+- Fixes checkout button issue
+
 = 1.0.2 March 10, 2024=
 - Adds Realtime theme customizer
 
