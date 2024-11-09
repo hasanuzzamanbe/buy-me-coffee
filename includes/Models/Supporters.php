@@ -6,13 +6,14 @@ use BuyMeCoffee\Helpers\PaymentHelper;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
-class Supporters
+class Supporters extends Model
 {
+    protected $table = "buymecoffee_supporters";
     public function index($args)
     {
         $offset = intval($args['page'] * $args['posts_per_page']);
 
-        $query = buyMeCoffeeQuery()->table('buymecoffee_supporters')
+        $query = $this->getQuery()
             ->offset($offset)
             ->limit($args['posts_per_page']);
 
@@ -25,10 +26,10 @@ class Supporters
                 ->orWhere('payment_status', 'paid-initially')
                 ->orderBy('payment_total', 'DESC');
 
-            $currencyTotalPending = buyMeCoffeeQuery()->table('buymecoffee_supporters')
+            $currencyTotalPending = $this->getQuery()
                 ->groupBy('currency')
                 ->where('payment_status', 'pending')
-                ->select(buyMeCoffeeQuery()->raw('SUM(payment_total) as total_amount, currency'))
+                ->select($this->raw('SUM(payment_total) as total_amount, currency'))
                 ->get();
 
             foreach ($currencyTotalPending as $currency) {
@@ -44,15 +45,15 @@ class Supporters
             $supporter->amount_formatted = PaymentHelper::getFormattedAmount($supporter->payment_total, $supporter->currency);
         }
 
-        $count = buyMeCoffeeQuery()->table('buymecoffee_supporters')
-            ->select(buyMeCoffeeQuery()->raw('SUM(coffee_count) as total_coffee'))
+        $count = $this->getQuery()
+            ->select($this->raw('SUM(coffee_count) as total_coffee'))
             ->first();
 
-        $currencyTotal = buyMeCoffeeQuery()->table('buymecoffee_supporters')
+        $currencyTotal = $this->getQuery()
             ->groupBy('currency')
             ->where('payment_status', 'paid')
             ->orWhere('payment_status', 'paid-initially')
-            ->select(buyMeCoffeeQuery()->raw('SUM(payment_total) as total_amount, currency'))
+            ->select($this->raw('SUM(payment_total) as total_amount, currency'))
             ->get();
 
         foreach ($currencyTotal as $currency) {
@@ -77,17 +78,17 @@ class Supporters
 
     public function updateData($entryId, $data)
     {
-        $supporters = buyMeCoffeeQuery()->table('buymecoffee_supporters')->where('id', $entryId)->update($data);
+        $supporters = $this->getQuery()->where('id', $entryId)->update($data);
         return $supporters;
     }
 
     public function find($id)
     {
-        $supporter = buyMeCoffeeQuery()->table('buymecoffee_supporters')
+        $supporter = $this->getQuery()
             ->where('buymecoffee_supporters.id', $id)
             ->first();
 
-        $transaction = buyMeCoffeeQuery()->table('buymecoffee_transactions')
+        $transaction = $this->getQuery()
             ->where('entry_id', $id)
             ->first();
 
@@ -97,14 +98,14 @@ class Supporters
          return $supporter;
     }
 
-    public static function getByHash($hash)
+    public function getByHash($hash)
     {
-        $supporter = buyMeCoffeeQuery()->table('buymecoffee_supporters')
+        $supporter = $this->getQuery()
             ->where('entry_hash', $hash)
             ->first();
 
         if ($supporter) {
-            $transaction = buyMeCoffeeQuery()->table('buymecoffee_transactions')
+            $transaction = $this->getQuery()
                 ->where('entry_id', $supporter->id)
                 ->where('entry_hash', $hash)
                 ->first();
@@ -115,15 +116,15 @@ class Supporters
 
     public function getWeeklyRevenue()
     {
-        $revenue = buyMeCoffeeQuery()->table('buymecoffee_supporters')->select(
+        $revenue = $this->getQuery()->select(
             'currency',
             'payment_status',
-            buyMeCoffeeQuery()->raw('Date(created_at) as date'),
-            buyMeCoffeeQuery()->raw("SUM(round(payment_total / 100, 2)) as total_paid"),
-            buyMeCoffeeQuery()->raw("COUNT(*) as submissions")
+            $this->raw('Date(created_at) as date'),
+            $this->raw("SUM(round(payment_total / 100, 2)) as total_paid"),
+            $this->raw("COUNT(*) as submissions")
         )->whereIn('payment_status', ['paid'])
             ->where('payment_total', '>', 0)
-            ->groupBy([buyMeCoffeeQuery()->raw('Date(created_at)'), 'currency'])
+            ->groupBy([$this->raw('Date(created_at)'), 'currency'])
             ->orderBy('id', 'desc')
             ->limit(50)
             ->getArray();
@@ -163,9 +164,7 @@ class Supporters
 
     public function delete($id)
     {
-        $supporter = buyMeCoffeeQuery()->table('buymecoffee_supporters')->where('id', $id)->delete();
-
-        return $supporter;
+        return $this->getQuery()->where('id', $id)->delete();
     }
 
 }

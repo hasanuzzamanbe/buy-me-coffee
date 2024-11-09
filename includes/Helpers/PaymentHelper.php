@@ -22,7 +22,7 @@ class PaymentHelper
 
     public function getByHash($hash)
     {
-        return Supporters::getByHash($hash);
+        return (new Supporters())->getByHash($hash);
     }
 
     public function updatePaymentData($intentId)

@@ -4,31 +4,27 @@ namespace BuyMeCoffee\Models;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
-class Transactions
+class Transactions extends Model
 {
+    protected $table = "buymecoffee_transactions";
     public function updateData($id, $data)
     {
-        $supporters = buyMeCoffeeQuery()->table('buymecoffee_transactions')->where('id', $id)->update($data);
-        return $supporters;
+        return $this->getQuery()->where('id', $id)->update($data);
     }
 
     public function find($id, $column='id')
     {
-        $supporter = buyMeCoffeeQuery()->table('buymecoffee_transactions');
-        if ($id) {
-            $supporter = $supporter->where($column, $id);
-        }
-        return $supporter->first();
+        return $this->getQuery()->find($column, $id);
     }
 
     public function delete($id, $column='id')
     {
-        return buyMeCoffeeQuery()->table('buymecoffee_transactions')->where('entry_id', $id)->delete();
+        return $this->getQuery()->where('entry_id', $id)->delete();
     }
 
     public function getByPaymentId($chargeId, $method = 'paypal')
     {
-        $payment = buyMeCoffeeQuery()->table('buymecoffee_transactions')
+        $payment = $this->getQuery()
             ->where('charge_id', $chargeId)
             ->where('payment_method', $method)
             ->first();

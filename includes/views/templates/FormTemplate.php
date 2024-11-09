@@ -28,7 +28,7 @@
         // check if receipt page
         if (isset($_REQUEST['buymecoffee_success']) && isset($_REQUEST['hash'])) {
             $hash = sanitize_text_field($_REQUEST['hash']);
-            $paymentData = \BuyMeCoffee\Models\Supporters::getByHash($hash);
+            $paymentData = (new \BuyMeCoffee\Models\Supporters())->getByHash($hash);
             include BUYMECOFFEE_DIR . 'includes/views/templates/Confirmation.php';
         } else {
             include BUYMECOFFEE_DIR . 'includes/views/templates/FormSection.php';

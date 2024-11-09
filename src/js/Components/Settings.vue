@@ -235,6 +235,8 @@
       </div>
     </el-row>
     <!-- example content end -->
+
+    <child :template="template"></child>
   </div>
 </template>
 <script>

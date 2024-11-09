@@ -11,7 +11,7 @@ class Vite
     private static $instance = null;
     private string $viteHostProtocol = 'http://';
     private string $viteHost = 'localhost';
-    private string $vitePort = '2222';
+    private string $vitePort = '3000';
     private string $resourceDirectory = 'src/';
     private array $moduleScripts = [];
     private bool $isScriptFilterAdded = false;
