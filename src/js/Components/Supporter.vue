@@ -3,9 +3,9 @@
     <h3 class="buymecoffee_title">
       <router-link class="text-blue-500" :to="{name: 'Supporters'}">Supporters / </router-link># {{$route.params.id}}
     </h3>
-      <div class="max-w-7xl mx-auto p-6 flex">
+      <div class="max-w-7xl mx-auto p-6 flex flex-wrap">
         <!-- Left Sidebar -->
-        <div class="w-1/3 pr-6">
+        <div class="w-1/3 pr-6 mb-4">
           <div class="bg-white rounded-lg shadow-md p-4">
             <div class="flex items-center">
               <img :alt="supporter?.supporters_name" class="w-20 h-20 rounded-full" height="100" :src="supporter?.supporters_image" width="100"/>
@@ -22,7 +22,7 @@
               </div>
             </div>
             <div class="mt-4 flex space-x-2">
-              <a v-if="supporter?.supporters_email" :href="'mailto:' + supporter?.supporters_email" class="bg-gray-200 text-black px-4 py-2 align-center;  flex rounded-md">
+              <a v-if="supporter?.supporters_email" :href="'mailto:' + supporter?.supporters_email" class="bg-gray-200 text-black px-4 py-2 flex align-center rounded-md" style="align-items: center">
                 <el-icon class="mr-2"><Message/></el-icon> Send email
               </a>
             </div>
@@ -35,27 +35,28 @@
               </p>
             </div>
             <div class="mt-4">
-              <div class="mt-4">
-                <h3 class="text-lg font-semibold">
-                  Donated
-                </h3>
-                <div class="wpm_supporter_items">
-                  <div>
-                    <Coffee />
-                    <span>{{parseInt(supporter?.coffee_count)}}</span>
-                  </div>
-                  <div>
-                    <Money />
-                    <span>{{getFormatedAmount(supporter?.payment_total)}} {{supporter?.currency}}</span>
-                  </div>
-                </div>
-              </div>
+
               <div class="mt-4">
                 <h3 class="text-lg font-semibold">
                   Transaction <span :class="'buymecoffee_status buymecoffee_status_' + supporter.payment_status">
                     {{supporter.payment_status}} <span class="cursor-pointer" @click="statusModal = !statusModal"><el-icon><EditPen /></el-icon></span>
                   </span>
                 </h3>
+                <div class="">
+                  <p class="text-md font-semibold">
+                    Donated
+                  </p>
+                  <div class="wpm_supporter_items">
+                    <div>
+                      <Coffee />
+                      <span>{{parseInt(supporter?.coffee_count)}}</span>
+                    </div>
+                    <div>
+                      <Money />
+                      <span>{{getFormatedAmount(supporter?.payment_total)}} {{supporter?.currency}}</span>
+                    </div>
+                  </div>
+                </div>
                 <p class="text-[12px] border rounded-md bg-amber-200 p-1 mt-2" v-if="supporter.payment_status === 'paid-initially'">
                   <el-icon><Warning/></el-icon>  Please verify this transaction, before mark paid!
                 </p>
@@ -169,7 +170,7 @@ export default {
   methods: {
       handleGet(id) {
         this.$router.push({ name: 'Supporter', params: { id: id } }).then(()=>{
-          window.location.reload();
+          this.getSupporter()
         })
       },
       getFormatedAmount(amount) {
