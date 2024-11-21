@@ -4,12 +4,9 @@
         class="customers_table"
         :data="supporters"
         >
-      <el-table-column v-if="!hide_columns.includes('id')"
+      <el-table-column sortable prop="id" v-if="!hide_columns.includes('id')"
           width="80"
           label="Id">
-        <template #default="scope">
-          <a class="text-blue-700 cursor-pointer" @click="handleGet(scope.row.id)">{{ scope.row.id }}</a>
-        </template>
       </el-table-column>
       <el-table-column
           v-if="!hide_columns.includes('date')"
@@ -87,8 +84,10 @@
         v-if="hide_pagination !== 'yes'"
         @current-change="handleSizeChange"
         :page-size="posts_per_page"
+        :page-sizes="[50, 100, 200, 300]"
         background="background"
-        layout="size, prev, pager, next, total"
+        layout="size, sizes, prev, pager, next, total"
+        @size-change="sizeChanged"
         :page-count="Math.ceil(total / posts_per_page)"
         :total="total"
     />
@@ -126,6 +125,9 @@ export default {
     }
   },
   methods: {
+    sizeChanged(val) {
+      this.$emit('sizeChanged', val);
+    },
     handleSizeChange(val) {
       this.currentPage = val-1;
       this.$emit('pageChanged', this.currentPage);

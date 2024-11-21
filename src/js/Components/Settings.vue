@@ -5,7 +5,7 @@
         <div class="buymecoffee-editor">
           <el-row>
             <el-col :md="24" :lg="12" style="background: linear-gradient(122deg, #ffffff87, #c4fff654);border-radius:6px; padding: 24px;">
-              <h1 class="buymecoffee_menu_title">Buy Me <CoffeeCup style="width:23px;"/>- Global settings</h1>
+              <h1 class="buymecoffee_menu_title flex">Buy Me <CoffeeCup style="width:23px;"/>- Global settings</h1>
               <el-form label-position="left" label-width="140px" v-if="!fetching">
                 <el-tabs>
                   <el-tab-pane label="General">

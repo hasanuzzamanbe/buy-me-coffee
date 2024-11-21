@@ -1,7 +1,7 @@
 <template>
   <div v-loading="loading" class="buymecoffee_supporter_main_container">
     <h3 class="buymecoffee_title">
-      <router-link style="text-decoration: none;" :to="{name: 'Supporters'}">Supporters / </router-link>{{$route.params.id}}
+      <router-link class="text-blue-500" :to="{name: 'Supporters'}">Supporters / </router-link># {{$route.params.id}}
     </h3>
       <div class="max-w-7xl mx-auto p-6 flex">
         <!-- Left Sidebar -->
@@ -10,7 +10,6 @@
             <div class="flex items-center">
               <img :alt="supporter?.supporters_name" class="w-20 h-20 rounded-full" height="100" :src="supporter?.supporters_image" width="100"/>
               <div class="ml-4">
-
                 <h2 class="text-xl font-semibold">
                   {{supporter?.supporters_name}}
                 </h2>
@@ -23,8 +22,8 @@
               </div>
             </div>
             <div class="mt-4 flex space-x-2">
-              <a v-if="supporter?.supporters_email" :href="'mailto:' + supporter?.supporters_email" class="bg-orange-500 text-white px-4 py-2 rounded-lg">
-                Send email
+              <a v-if="supporter?.supporters_email" :href="'mailto:' + supporter?.supporters_email" class="bg-gray-200 text-black px-4 py-2 align-center;  flex rounded-md">
+                <el-icon class="mr-2"><Message/></el-icon> Send email
               </a>
             </div>
             <div class="mt-4">
@@ -36,20 +35,21 @@
               </p>
             </div>
             <div class="mt-4">
-              <h3 class="text-lg font-semibold">
-                Donated
-              </h3>
-              <div class="wpm_supporter_items">
-                <div>
-                  <Coffee />
-                  <span>{{parseInt(supporter?.coffee_count)}}</span>
-                </div>
-                <div>
-                  <Money />
-                  <span>{{getFormatedAmount(supporter?.payment_total)}} {{supporter?.currency}}</span>
+              <div class="mt-4">
+                <h3 class="text-lg font-semibold">
+                  Donated
+                </h3>
+                <div class="wpm_supporter_items">
+                  <div>
+                    <Coffee />
+                    <span>{{parseInt(supporter?.coffee_count)}}</span>
+                  </div>
+                  <div>
+                    <Money />
+                    <span>{{getFormatedAmount(supporter?.payment_total)}} {{supporter?.currency}}</span>
+                  </div>
                 </div>
               </div>
-
               <div class="mt-4">
                 <h3 class="text-lg font-semibold">
                   Transaction <span :class="'buymecoffee_status buymecoffee_status_' + supporter.payment_status">
@@ -57,7 +57,8 @@
                   </span>
                 </h3>
                 <p class="text-[12px] border rounded-md bg-amber-200 p-1 mt-2" v-if="supporter.payment_status === 'paid-initially'">
-                  <el-icon><Warning/></el-icon>  Please verify this transaction, before mark paid!</p>
+                  <el-icon><Warning/></el-icon>  Please verify this transaction, before mark paid!
+                </p>
                 <div class="wpm_supporter_items mt-2">
                   Transaction Hash: <code>{{supporter?.entry_hash}}</code>
                 </div>
@@ -95,6 +96,11 @@
           </div>
 
           <el-table class="w-full bg-white rounded-lg shadow-md" :data="supporter?.other_donations">
+            <el-table-column label="ID" width="100">
+                <template #default="scope">
+                  <a class="text-blue-700 cursor-pointer" @click="handleGet(scope.row.id)">{{ scope.row.id }}</a>
+                </template>
+            </el-table-column>
             <el-table-column label="Name">
               <template #default="scope">
                 {{scope?.row?.supporters_name}} <br/><span class="text-[10px]">{{scope?.row?.created_at}}</span>
@@ -130,7 +136,7 @@
   </el-dialog>
 </template>
 <script>
-import {Coffee, User, Money, EditPen, Warning} from '@element-plus/icons-vue';
+import {Coffee, User, Money, EditPen, Warning, Message} from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
     name: 'Supporter',
@@ -152,6 +158,7 @@ export default {
         }
     },
     components: {
+      Message,
       Warning,
       ElMessageBox,
       Coffee,
@@ -160,6 +167,11 @@ export default {
       EditPen
     },
   methods: {
+      handleGet(id) {
+        this.$router.push({ name: 'Supporter', params: { id: id } }).then(()=>{
+          window.location.reload();
+        })
+      },
       getFormatedAmount(amount) {
         return parseInt(amount / 100);
       },
@@ -281,7 +293,7 @@ export default {
   .wpm_supporter_items div {
     font-size: 20px;
     border: 1px dotted #055b28;
-    padding: 9px 16px;
+    padding: 0px 20px;
     border-radius: 6px;
     margin-right: 6px;
     margin-bottom: 12px;

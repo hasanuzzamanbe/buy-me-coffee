@@ -10,6 +10,7 @@
       </el-row>
     <SupportersTable
         @pageChanged="(val)=>{current = val; getSupporters()}"
+        @sizeChanged="(val) => {posts_per_page = val; getSupporters()}"
         @fetchSupporters="()=>getSupporters()"
         :supporters="supporters"
         :posts_per_page="posts_per_page"

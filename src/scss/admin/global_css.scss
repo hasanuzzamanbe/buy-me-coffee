@@ -48,6 +48,9 @@ a:active {
     font-weight: 200;
     font-size: 22px;
 }
+.buymecoffee_title {
+    font-size: 17px;
+}
 .buymecoffee_menu_graph_title {
     font-weight: 200;
     font-size: 18px;
@@ -121,6 +124,8 @@ input::placeholder {
         border: 4px solid #ccc;
     }
     button {
+        padding: 10px;
+        line-height: 16px;
         background: rgba(141, 202, 255, 0.84);
         border: none;
         border-radius: 6px;
@@ -281,7 +286,7 @@ div#buy-me-coffee_app {
 
 .buymecoffee_app_menu {
     padding: 16px;
-    max-width: 60px;
+    max-width: 72px;
     background: #f6fffc;
     box-shadow: rgb(17 12 46 / 15%) 0px 8px 100px 0px;
     border-radius: 6px;
