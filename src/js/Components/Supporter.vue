@@ -1,94 +1,136 @@
 <template>
   <div v-loading="loading" class="buymecoffee_supporter_main_container">
     <h3 class="buymecoffee_title">
-      <router-link style="text-decoration: none;" :to="{name: 'Dashboard'}">Supporters / </router-link>{{$route.params.id}}
+      <router-link style="text-decoration: none;" :to="{name: 'Supporters'}">Supporters / </router-link>{{$route.params.id}}
     </h3>
-    <div class="wpm_supporter_profile_wrapper">
-        <div class="wpm_supporter_profile_section">
-            <img v-if="supporter?.supporters_image" :src="supporter?.supporters_image" alt="Supporter's Image" class="wpm_supporter_profile_image">
-        </div>
-        <div>
-          <h3 v-if="supporter?.supporters_name" class="wpm_supporter_profile_name">{{supporter?.supporters_name}}</h3>
-          <h3 v-else class="wpm_supporter_profile_name">Anonymous</h3>
+      <div class="max-w-7xl mx-auto p-6 flex">
+        <!-- Left Sidebar -->
+        <div class="w-1/3 pr-6">
+          <div class="bg-white rounded-lg shadow-md p-4">
+            <div class="flex items-center">
+              <img :alt="supporter?.supporters_name" class="w-20 h-20 rounded-full" height="100" :src="supporter?.supporters_image" width="100"/>
+              <div class="ml-4">
 
-          <p v-if="supporter?.supporters_email" class="wpm_supporter_profile_email"><a :href="'mailto:' + supporter?.supporters_email" id="supporters_email">{{supporter?.supporters_email}}</a></p>
-          <p v-else class="wpm_supporter_profile_email"><p id="supporters_email">No Email</p></p>
+                <h2 class="text-xl font-semibold">
+                  {{supporter?.supporters_name}}
+                </h2>
+                <a v-if="supporter?.supporters_email" :href="'mailto:' + supporter?.supporters_email" class="text-gray-500">
+                  {{supporter?.supporters_email}}
+                </a>
+                <p>
+                  {{supporter?.created_at}}
+                </p>
+              </div>
+            </div>
+            <div class="mt-4 flex space-x-2">
+              <a v-if="supporter?.supporters_email" :href="'mailto:' + supporter?.supporters_email" class="bg-orange-500 text-white px-4 py-2 rounded-lg">
+                Send email
+              </a>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-semibold">
+                Message
+              </h3>
+              <p class="text-gray-500">
+                {{supporter?.supporters_message ?? 'No message'}}
+              </p>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-semibold">
+                Donated
+              </h3>
+              <div class="wpm_supporter_items">
+                <div>
+                  <Coffee />
+                  <span>{{parseInt(supporter?.coffee_count)}}</span>
+                </div>
+                <div>
+                  <Money />
+                  <span>{{getFormatedAmount(supporter?.payment_total)}} {{supporter?.currency}}</span>
+                </div>
+              </div>
 
-          <p class="wpm_supporter_message">{{supporter?.supporters_message}}</p>
-        </div>
-    </div>
-    <div class="wpm_supporter_payment_line"></div>
-    <div class="wpm_supporter_payment_wrapper">
-      <div>
-        <div class="wpm_supporter_items">
-          <div>
-            <Coffee />
-            <span>{{parseInt(supporter?.coffee_count)}}</span>
+              <div class="mt-4">
+                <h3 class="text-lg font-semibold">
+                  Transaction <span :class="'buymecoffee_status buymecoffee_status_' + supporter.payment_status">
+                    {{supporter.payment_status}} <span class="cursor-pointer" @click="statusModal = !statusModal"><el-icon><EditPen /></el-icon></span>
+                  </span>
+                </h3>
+                <p class="text-[12px] border rounded-md bg-amber-200 p-1 mt-2" v-if="supporter.payment_status === 'paid-initially'">
+                  <el-icon><Warning/></el-icon>  Please verify this transaction, before mark paid!</p>
+                <div class="wpm_supporter_items mt-2">
+                  Transaction Hash: <code>{{supporter?.entry_hash}}</code>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <Money />
-            <span>{{parseInt(supporter?.payment_total / 100)}} {{supporter?.currency}}</span>
-          </div>
         </div>
-        <table class="wpm_supporter_payments">
-          <thead>
-          </thead>
-          <tbody>
-          <tr>
-            <td>Payment Method</td>
-            <td>
-              <img v-if="supporter.payment_method === 'paypal'" width="64" :src="getImage('PayPal.svg')" />
-              <span v-else>{{supporter.payment_method}}</span>
-            </td>
-          </tr>
-          <tr>
-            <td>Payment Status</td><td><span :class="'buymecoffee_status buymecoffee_status_' + supporter.payment_status">
-            {{supporter.payment_status}}
-            <a :href="getTransactionUrl()" v-if="supporter.payment_status === 'paid-initially'">Needs to verify</a>
-            </span></td>
-          </tr>
-          <tr v-if="supporter.payment_mode">
-            <td>Payment Mode</td><td>{{supporter.payment_mode}}</td>
-          </tr>
-          <tr>
-            <td style="text-transform:capitalize;">Coffee For</td><td>{{supporter.reference}}</td>
-          </tr>
-          <tr v-if="supporter.supporters_message">
-            <td style="text-transform:capitalize;">Message</td><td>{{supporter.supporters_message}}</td>
-          </tr>
-          <tr>
-            <td>Submission Hash:</td>
-            <td style="font-family:monospace;">{{supporter.entry_hash}}</td>
-          </tr>
-          <tr>
-            <td>Transaction URL:</td>
-            <td style="font-family:monospace;">
-              <a target="_blank" :href="getTransactionUrl()">{{supporter?.transaction?.charge_id}}</a>
-            </td>
-          </tr>
-          <tr>
-            <td style="font-family:monospace;">{{supporter.created_at}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      <div>
-        <div class="wpm_supporter_payment_actions">
-          <el-select v-model="paymentStatus" @change="updateStatus">
-            <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-            </el-option>
-          </el-select>
+        <!-- Right Content -->
+        <div class="w-2/3">
+          <div class="flex items-center mb-4">
+            <div class="bg-blue-100 p-4 rounded-lg flex-1 text-center shadow-md">
+
+              <div class="flex items-center justify-center">
+                <span><Coffee style="width:20px"  class="mr-2"/></span>  <h3 class="text-2xl font-semibold" v-html="supporter?.all_time_total_coffee">
+              </h3>
+              </div>
+              <p class="text-gray-500">
+                All time total coffee
+              </p>
+            </div>
+            <div class="bg-green-100 p-4 rounded-lg flex-1 text-center ml-2 shadow-md">
+              <h3 class="text-2xl font-semibold text-green-600" v-html="supporter?.all_time_total_paid">
+              </h3>
+              <p class="text-gray-500">
+                All time total paid
+              </p>
+            </div>
+            <div class="bg-yellow-100 p-4 rounded-lg flex-1 text-center ml-2 shadow-md">
+              <h3 class="text-2xl font-semibold text-yellow-600" v-html="supporter?.all_time_total_pending">
+              </h3>
+              <p class="text-gray-500">
+                All time total pending
+              </p>
+            </div>
+          </div>
+
+          <el-table class="w-full bg-white rounded-lg shadow-md" :data="supporter?.other_donations">
+            <el-table-column label="Name">
+              <template #default="scope">
+                {{scope?.row?.supporters_name}} <br/><span class="text-[10px]">{{scope?.row?.created_at}}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="Donated For" prop="reference">
+            </el-table-column>
+            <el-table-column label="Amount">
+              <template #default="scope">
+                {{getFormatedAmount(scope?.row?.payment_total)}} {{scope?.row?.currency}}
+              </template>
+
+            </el-table-column>
+            <el-table-column label="Payment Status" prop="payment_status">
+            </el-table-column>
+          </el-table>
         </div>
       </div>
     </div>
+
+  <el-dialog v-model="statusModal" width="400px">
+    Change Payment Status
+    <div class="wpm_supporter_payment_actions">
+      <el-select v-model="paymentStatus" @change="updateStatus">
+        <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+        </el-option>
+      </el-select>
     </div>
+  </el-dialog>
 </template>
 <script>
-import {Coffee, User, Money} from '@element-plus/icons-vue';
+import {Coffee, User, Money, EditPen, Warning} from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
     name: 'Supporter',
@@ -97,6 +139,7 @@ export default {
             supporter: {},
             loading: false,
             paymentStatus: '',
+            statusModal: false,
             val: 'Hello from Supports',
             options: [
               { value: 'pending', label: 'Pending' },
@@ -109,12 +152,17 @@ export default {
         }
     },
     components: {
+      Warning,
       ElMessageBox,
       Coffee,
       User,
-      Money
+      Money,
+      EditPen
     },
   methods: {
+      getFormatedAmount(amount) {
+        return parseInt(amount / 100);
+      },
       getTransactionUrl() {
         if (this.supporter.payment_method === 'paypal') {
           if (this.supporter.payment_mode !== 'live') {
@@ -149,6 +197,7 @@ export default {
                   buymecoffee_nonce: window.BuyMeCoffeeAdmin.buymecoffee_nonce
                 }
             ).then((response) => {
+              this.statusModal = false;
               this.getSupporter();
               this.$handleSuccess('Updated Successfully');
             })
@@ -231,13 +280,13 @@ export default {
 
   .wpm_supporter_items div {
     font-size: 20px;
-    border: 1px solid #0c993a;
+    border: 1px dotted #055b28;
     padding: 9px 16px;
     border-radius: 6px;
     margin-right: 6px;
     margin-bottom: 12px;
     display: flex;
-    color: #0c993a;
+    color: #055b28;
   }
   .wpm_supporter_profile_wrapper {
     max-width: 350px;

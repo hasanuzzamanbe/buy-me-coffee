@@ -3,6 +3,8 @@
 namespace BuyMeCoffee\Models;
 
 use BuyMeCoffee\Helpers\PaymentHelper;
+use WpFluent\Exception;
+use WpFluent\QueryBuilder\Transaction;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
@@ -88,14 +90,42 @@ class Supporters extends Model
             ->where('buymecoffee_supporters.id', $id)
             ->first();
 
-        $transaction = $this->getQuery()
-            ->where('entry_id', $id)
-            ->first();
-
-        if ($supporter) {
-            $supporter->transaction = $transaction;
+        if (!$supporter) {
+            throw new Exception(__('No supporters found!', 'buy-me-coffee'));
         }
-         return $supporter;
+
+        $otherDonations = [];
+        if (!empty($supporter->supporters_email)) {
+            $otherDonations = $this->getQuery()
+                ->where('supporters_email', $supporter->supporters_email)
+                ->get();
+        } else {
+            $otherDonations = $this->getQuery()
+                ->where('buymecoffee_supporters.id', $id)->get();
+        }
+
+        $supporter->other_donations = $otherDonations;
+
+        $totalAmountPaid = 0;
+        $totalAmountPending = 0;
+        $totalCoffee = 0;
+        foreach ($otherDonations as $value) {
+            if (!$value) {
+                continue;
+            }
+            if ($value->payment_status === 'paid') {
+                $totalAmountPaid += floatval($value->payment_total);
+            }else {
+                $totalAmountPending += floatval($value->payment_total);
+            }
+            $totalCoffee +=  floatval($value->coffee_count);
+        }
+
+        $supporter->all_time_total_paid = PaymentHelper::currencySymbol($supporter->currency) .' '. ($totalAmountPaid / 100);
+        $supporter->all_time_total_pending = PaymentHelper::currencySymbol($supporter->currency) .' '. ($totalAmountPending / 100);
+        $supporter->all_time_total_coffee = $totalCoffee;
+
+        return $supporter;
     }
 
     public function getByHash($hash)

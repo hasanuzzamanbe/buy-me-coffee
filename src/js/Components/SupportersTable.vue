@@ -8,7 +8,7 @@
           width="80"
           label="Id">
         <template #default="scope">
-          <span>{{ scope.row.id }}</span>
+          <a class="text-blue-700 cursor-pointer" @click="handleGet(scope.row.id)">{{ scope.row.id }}</a>
         </template>
       </el-table-column>
       <el-table-column
@@ -25,7 +25,7 @@
           width="200"
           label="Name">
         <template #default="scope">
-          <a style="cursor:pointer;" @click="handleGet(scope.row.id)">{{ scope.row.supporters_name }}</a>
+          <a class="text-blue-700 cursor-pointer" @click="handleGet(scope.row.id)">{{ scope.row.supporters_name }}</a>
         </template>
       </el-table-column>
       <el-table-column

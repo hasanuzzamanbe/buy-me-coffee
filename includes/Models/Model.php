@@ -36,7 +36,7 @@ abstract class Model
         return $this->getQuery()->where('id', $id)->delete();
     }
 
-    protected function getQuery()
+    public function getQuery()
     {
         return buyMeCoffeeQuery()->table($this->table);
     }

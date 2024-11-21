@@ -1,4 +1,9 @@
-@import './element-plus.scss';
+@use './element-plus.scss';
+@use './global_css.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --el-color-primary: #14a3b7;
@@ -30,4 +35,3 @@
 .notice.notice-error {
   display: none !important;
 }
-@import './global_css.scss';

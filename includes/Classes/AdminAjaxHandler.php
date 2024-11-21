@@ -76,10 +76,9 @@ class AdminAjaxHandler
     {
         $id = intval($request['id']);
         $status = sanitize_text_field($request['status']);
-        $supporter = buyMeCoffeeQuery()->table('buymecoffee_supporters')->where('id', $id)->update(['payment_status' => $status]);
-        if ($supporter) {
-            wp_send_json_success($supporter, 200);
-        }
+        $supporter = (new Supporters())->getQuery()->where('id', $id)->update(['payment_status' => $status]);
+        (new Transactions())->getQuery()->where('entry_id', $id)->update(['status' => $status]);
+        wp_send_json_success($supporter, 200);
     }
 
     public function getSupporter($request)

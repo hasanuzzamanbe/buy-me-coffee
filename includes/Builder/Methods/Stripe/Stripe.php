@@ -32,6 +32,13 @@ class Stripe extends BaseMethods
 
         $supportersModel = new Supporters();
         $supporter = $supportersModel->find($entryId);
+        if (!$transaction || !$supporter) {
+            wp_send_json_error([
+                'status' => 'failed',
+                'message' => __('Sorry no transaction created!', 'buy-me-coffee')
+            ], 423);
+        }
+
         $hash = $transaction->entry_hash;
 
         $keys = StripeSettings::getKeys();
