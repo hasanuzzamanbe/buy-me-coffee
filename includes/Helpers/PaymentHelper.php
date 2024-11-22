@@ -47,11 +47,16 @@ class PaymentHelper
         }
 
         $status = Arr::get($response, 'status') === 'succeeded' ? 'paid' : 'pending';
-
+        $card = Arr::get($response, 'charges.data.0.payment_method_details.card');
+        $last4 = Arr::get($card, 'last4');
+        $cardBand = Arr::get($card, 'brand');
         $updateData = [
             'status' => sanitize_text_field($status),
             'charge_id' => sanitize_text_field($intentId),
-            'payment_mode' => Arr::get($response, 'livemode') ? 'live' : 'test'
+            'payment_mode' => Arr::get($response, 'livemode') ? 'live' : 'test',
+            'payment_note' => json_encode($response),
+            'card_last_4' => sanitize_text_field($last4),
+            'card_brand' => sanitize_text_field($cardBand)
         ];
 
         (new Supporters())->updateData($order->id, ['payment_status' => $status]);

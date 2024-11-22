@@ -61,6 +61,9 @@
                   <el-icon><Warning/></el-icon>  Please verify this transaction, before mark paid!
                 </p>
                 <div class="wpm_supporter_items mt-2">
+                  Card : {{supporter.transaction}}
+                </div>
+                <div class="wpm_supporter_items mt-2">
                   Transaction Hash: <code>{{supporter?.entry_hash}}</code>
                 </div>
               </div>

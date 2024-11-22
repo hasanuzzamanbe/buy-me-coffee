@@ -94,7 +94,9 @@ class Supporters extends Model
             throw new Exception(__('No supporters found!', 'buy-me-coffee'));
         }
 
-        $otherDonations = [];
+        //get transaction
+        $supporter->transaction = (new Transactions())->getQuery()->where('entry_id', $supporter->id)->first();
+
         if (!empty($supporter->supporters_email)) {
             $otherDonations = $this->getQuery()
                 ->where('supporters_email', $supporter->supporters_email)
