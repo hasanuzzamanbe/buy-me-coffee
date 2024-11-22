@@ -4,6 +4,7 @@ namespace BuyMeCoffee\Controllers;
 
 use BuyMeCoffee\Helpers\ArrayHelper;
 use BuyMeCoffee\Helpers\PaymentHelper;
+use BuyMeCoffee\Models\Transactions;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
@@ -77,7 +78,7 @@ class SubmissionHandler
             'updated_at' => current_time('mysql'),
         );
 
-         $transactionTable = buyMeCoffeeQuery()->table('buymecoffee_transactions');
+         $transactionTable = (new Transactions())->getQuery();
          $transactionTable->insert($transaction);
 
          $transactionId =

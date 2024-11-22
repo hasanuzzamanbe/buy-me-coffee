@@ -14,7 +14,7 @@ class Transactions extends Model
 
     public function find($id, $column='id')
     {
-        return $this->getQuery()->first($column, $id);
+        return $this->getQuery()->where($column, $id)->first();
     }
 
     public function delete($id, $column='id')

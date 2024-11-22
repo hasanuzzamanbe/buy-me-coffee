@@ -135,7 +135,7 @@ class Supporters extends Model
             ->first();
 
         if ($supporter) {
-            $transaction = $this->getQuery()
+            $transaction = (new Transactions())->getQuery()
                 ->where('entry_id', $supporter->id)
                 ->where('entry_hash', $hash)
                 ->first();
