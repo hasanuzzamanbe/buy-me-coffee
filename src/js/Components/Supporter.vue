@@ -6,7 +6,7 @@
       <div class="max-w-7xl mx-auto p-6 flex flex-wrap">
         <!-- Left Sidebar -->
         <div class="w-1/3 pr-6 mb-4">
-          <div class="bg-white rounded-lg shadow-md p-4">
+          <div class="rounded-lg shadow-md p-4" style="background: rgb(255 254 246);">
             <div class="flex items-center">
               <img :alt="supporter?.supporters_name" class="w-20 h-20 rounded-full" height="100" :src="supporter?.supporters_image" width="100"/>
               <div class="ml-4">
@@ -57,15 +57,22 @@
                     </div>
                   </div>
                 </div>
+                <div class="text-white rounded-lg p-6 relative" style="background-image: linear-gradient(22deg, rgb(196 144 255), rgb(30, 71, 65))">
+                  <div class="flex justify-between items-center mb-4">
+                    <div class="text-lg font-semibold">Card</div>
+                    <div class="absolute top-3 right-4 bg-gradient-to-r from-green-300 to-blue-300 rounded-full p-2">
+                      <span class="text-black font-semibold">{{supporter?.transaction?.card_brand}}</span>
+                    </div>
+                  </div>
+                  <div class="text-sm mb-4">**** **** **** {{supporter?.transaction?.card_last_4}}</div>
+                  <div class="flex justify-between items-center text-sm">
+                    <div>{{supporter?.supporters_name ?? 'Anonymous'}}</div>
+                    <div>{{supporter?.payment_method ?? '-'}}</div>
+                  </div>
+                </div>
                 <p class="text-[12px] border rounded-md bg-amber-200 p-1 mt-2" v-if="supporter.payment_status === 'paid-initially'">
                   <el-icon><Warning/></el-icon>  Please verify this transaction, before mark paid!
                 </p>
-                <div class="wpm_supporter_items mt-2">
-                  Card : {{supporter.transaction}}
-                </div>
-                <div class="wpm_supporter_items mt-2">
-                  Transaction Hash: <code>{{supporter?.entry_hash}}</code>
-                </div>
               </div>
             </div>
           </div>
