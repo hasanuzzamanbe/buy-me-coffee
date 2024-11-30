@@ -26,10 +26,18 @@
                           <el-input type="text" size="small" v-model="settings.test_public_key"
                                     placeholder="Public key from paypal dashboard"/>
                         </el-form-item>
+                        <el-form-item label="Test Secret key">
+                          <el-input type="password" size="small" v-model="settings.test_secret_key"
+                                    placeholder="Public key from paypal dashboard"/>
+                        </el-form-item>
                       </div>
                       <div v-else>
                         <el-form-item label="Live Public key">
                           <el-input type="text" size="small" v-model="settings.live_public_key"
+                                    placeholder="Public key from paypal dashboard"/>
+                        </el-form-item>
+                        <el-form-item label="Live Secret key">
+                          <el-input type="password" size="small" v-model="settings.live_secret_key"
                                     placeholder="Public key from paypal dashboard"/>
                         </el-form-item>
                       </div>

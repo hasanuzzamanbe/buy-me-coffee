@@ -32,7 +32,10 @@ abstract class BaseMethods
         add_filter('buymecoffee_get_all_methods', array($this, 'getAllMethods'), 10, 1);
 
         add_action('wp_ajax_nopriv_buymecoffee_payment_confirmation_'. $this->method, array($this, 'paymentConfirmation'));
+
         add_action('wp_ajax_buymecoffee_payment_confirmation_' . $this->method, array($this, 'paymentConfirmation'));
+
+        add_filter('buymecoffee/payment/get_transaction_url_' . $this->method, array($this, 'getTransactionUrl'), 10, 2);
     }
 
     public function getAllMethods()
@@ -53,6 +56,8 @@ abstract class BaseMethods
     }
 
     abstract public function isEnabled();
+
+    abstract public function getTransactionUrl($url, $transaction);
 
     public function getMode()
     {

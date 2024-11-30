@@ -25,6 +25,9 @@
               <a v-if="supporter?.supporters_email" :href="'mailto:' + supporter?.supporters_email" class="bg-gray-200 text-black px-4 py-2 flex align-center rounded-md" style="align-items: center">
                 <el-icon class="mr-2"><Message/></el-icon> Send email
               </a>
+              <a target="_blank" v-if="supporter?.transaction?.transaction_url" :href="supporter?.transaction?.transaction_url" class="bg-blue-300 text-black px-4 py-2 flex align-center rounded-md cursor-pointer" style="align-items: center">
+                <el-icon class="mr-2"><Link/></el-icon> View on {{supporter?.payment_method}}
+              </a>
             </div>
             <div class="mt-4">
               <h3 class="text-lg font-semibold">
@@ -147,7 +150,7 @@
   </el-dialog>
 </template>
 <script>
-import {Coffee, User, Money, EditPen, Warning, Message} from '@element-plus/icons-vue';
+import {Coffee, User, Money, EditPen, Warning, Message, Link} from '@element-plus/icons-vue';
 import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
     name: 'Supporter',
@@ -175,7 +178,8 @@ export default {
       Coffee,
       User,
       Money,
-      EditPen
+      EditPen,
+      Link
     },
   methods: {
       handleGet(id) {
@@ -185,15 +189,6 @@ export default {
       },
       getFormatedAmount(amount) {
         return parseInt(amount / 100);
-      },
-      getTransactionUrl() {
-        if (this.supporter.payment_method === 'paypal') {
-          if (this.supporter.payment_mode !== 'live') {
-            return 'https://www.sandbox.paypal.com/activity/payment/' + this.supporter?.transaction?.charge_id;
-          }
-          return 'https://www.paypal.com/activity/payment/' + this.supporter?.transaction?.charge_id;
-        }
-        return 'https://dashboard.stripe.com/test/payments/' + this.supporter?.transaction?.charge_id;
       },
     getImage(path) {
       return window.BuyMeCoffeeAdmin.assets_url + 'images/' + path;

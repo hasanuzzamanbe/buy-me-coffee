@@ -4,6 +4,7 @@ namespace BuyMeCoffee\Builder\Methods\Stripe;
 
 use BuyMeCoffee\Builder\Methods\BaseMethods;
 use BuyMeCoffee\Classes\Vite;
+use BuyMeCoffee\Helpers\ArrayHelper;
 use BuyMeCoffee\Helpers\PaymentHelper;
 use BuyMeCoffee\Models\Supporters;
 use BuyMeCoffee\Models\Transactions;
@@ -136,6 +137,11 @@ class Stripe extends BaseMethods
             'hash' => $supporter->entry_hash,
             'payment_method' => 'stripe'
         ), home_url());
+    }
+
+    public function getTransactionUrl($url, $transaction)
+    {
+        return 'https://dashboard.stripe.com/' . $transaction->payment_mode . '/payments/' . $transaction->charge_id;
     }
 
     public function verifyIpn()

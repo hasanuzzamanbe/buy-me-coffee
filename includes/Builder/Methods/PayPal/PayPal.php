@@ -211,6 +211,14 @@ class PayPal extends BaseMethods
         ), home_url());
     }
 
+    public function getTransactionUrl($url, $transaction)
+    {
+        if ($transaction->payment_mode === 'test') {
+            return 'https://www.sandbox.paypal.com/activity/payment/' . $transaction->charge_id;
+        }
+        return 'https://www.paypal.com/activity/payment/' . $transaction->charge_id;
+    }
+
     public function updateStatus($data, $payment_id)
     {
         if ($data['txn_type'] != 'web_accept' && $data['txn_type'] != 'cart' && $data['payment_status'] != 'Refunded') {
@@ -332,19 +340,37 @@ class PayPal extends BaseMethods
             ), 400);
         }
 
-        $transaction = array(
-            'charge_id' => $chargeId,
-            'status' => 'paid-initially',
+        $payment_intent = (new API())->verifyTransaction($chargeId);
+
+        if (!isset($payment_intent['status']) || $payment_intent['status'] != 'COMPLETED') {
+            return;
+        }
+
+        $purchaseUnit = ArrayHelper::get($payment_intent, 'purchase_units.0');
+        $vendorChargeId = ArrayHelper::get($purchaseUnit, 'payments.captures.0.id', '');
+        $amount = 100 * floatval(ArrayHelper::get($purchaseUnit, 'amount.value', 0));
+        $mode = $this->getSettings('payment_mode');
+
+        $updateData = array(
+            'charge_id' => sanitize_text_field($vendorChargeId),
+            'payment_mode' => sanitize_text_field($mode),
+            'payment_total' => $amount,
+            'payment_note' => wp_json_encode($payment_intent),
+            'status' => 'paid',
             'updated_at' => current_time('mysql'),
         );
 
         $transactionId = buyMeCoffeeQuery()->table('buymecoffee_transactions')
-            ->where('entry_hash', $hash)
-            ->update($transaction);
+            ->where('entry_hash', $hash)->update($updateData);
 
         buyMeCoffeeQuery()->table('buymecoffee_supporters')
             ->where('entry_hash', $hash)
-            ->update(['payment_status' => 'paid-initially']);
+            ->update([
+                    'payment_total' => $amount,
+                    'payment_status' => 'paid',
+                    'payment_mode' => sanitize_text_field($mode),
+                    'updated_at' => current_time('mysql')
+            ]);
 
         wp_send_json_success(array(
             'message' => __('Payment updated successfully', 'buy-me-coffee'),

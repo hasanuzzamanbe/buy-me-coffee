@@ -97,6 +97,10 @@ class Supporters extends Model
         //get transaction
         $supporter->transaction = (new Transactions())->getQuery()->where('entry_id', $supporter->id)->first();
 
+        if ($supporter->transaction) {
+            $supporter->transaction->transaction_url = apply_filters('buymecoffee/payment/get_transaction_url_' . $supporter->transaction->payment_method, '',  $supporter->transaction);
+        };
+
         if (!empty($supporter->supporters_email)) {
             $otherDonations = $this->getQuery()
                 ->where('supporters_email', $supporter->supporters_email)

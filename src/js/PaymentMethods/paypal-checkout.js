@@ -24,7 +24,8 @@ class PaypalCheckout {
                         jQuery.post(window.buymecoffee_general.ajax_url, {
                             action: 'buymecoffee_payment_confirmation_paypal',
                             hash: this.data.hash,
-                            charge_id: transaction.id,
+                            charge_id: details.id,
+                            'transaction_id': transaction.id,
                         })
                             .then(response => {
                                 window.location = this.data?.confirmation_url;

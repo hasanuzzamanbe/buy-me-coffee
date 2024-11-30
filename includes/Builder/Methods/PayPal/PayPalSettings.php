@@ -26,9 +26,14 @@ class PayPalSettings
         return $key && isset($data[$key]) ? $data[$key] : $data;
     }
 
+    public static function getMode()
+    {
+        return static::get('payment_mode');
+    }
+
     public static function getKeys($key = null)
     {
-        $settings = self::get();
+        $settings = static::get();
 
         if ($settings['payment_mode'] == 'test') {
             $data = array(
