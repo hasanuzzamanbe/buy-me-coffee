@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table
+    <el-table v-loading="fetching" element-loading-text="loading..."
         class="customers_table"
         :data="supporters"
         >
@@ -102,6 +102,10 @@ export default {
     }
   },
   props: {
+    fetching: {
+      type: Boolean,
+      required: true
+    },
     supporters: {
       type: Array,
       required: true

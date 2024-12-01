@@ -55,11 +55,11 @@ class Menu
             $menuPermission,
             'admin.php?page=buy-me-coffee.php#/stripe',
         );
-        $submenu['buy-me-coffee.php']['notifications'] = array(
-            __('Notifications', 'buy-me-coffee'),
-            $menuPermission,
-            'admin.php?page=buy-me-coffee.php#/notifications',
-        );
+//        $submenu['buy-me-coffee.php']['notifications'] = array(
+//            __('Notifications', 'buy-me-coffee'),
+//            $menuPermission,
+//            'admin.php?page=buy-me-coffee.php#/notifications',
+//        );
     }
 
     public function render()

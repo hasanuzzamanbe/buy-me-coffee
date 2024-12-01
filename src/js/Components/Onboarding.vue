@@ -100,7 +100,7 @@ export default {
 
 <template>
   <div>
-      <div class="buymecoffee_onboard_wrapper">
+      <div class="buymecoffee_onboard_wrapper input_green_border">
         <div class="buymecoffee_onboard_content">
           <div>
               <div v-if="active == 1" class="profile_section">
@@ -116,7 +116,7 @@ export default {
                   </div>
                   <div class="profile_name" style="margin-top:32px;">
                     <label>Collect donation for</label>
-                    <el-input size="large" v-model="template.yourName"></el-input>
+                    <el-input class="input_green_border" size="large" v-model="template.yourName"></el-input>
                   </div>
               </div>
               <div v-else-if="active == 2" class="quick_payment_section">

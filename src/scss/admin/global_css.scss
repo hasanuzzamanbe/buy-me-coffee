@@ -152,11 +152,11 @@ input::placeholder {
         font-size: 12px;
         &_paid {
             border: 1px solid #1affb280;
-            background: #1affb280;
+            background: #c6ffec80;
         }
         &_pending {
             border: 1px solid rgba(255, 235, 59, 0.55);
-            background: rgba(255, 235, 59, 0.55);
+            background: #fef9c3;
         }
         &_cancelled {
             border: 1px solid #ff0b0b;
@@ -165,13 +165,11 @@ input::placeholder {
         }
         &_failed {
             border: 1px solid #ff0b0b;
-            background: #ff0b0b;
-            color: #fff;
+            background: #ffa2a2;
         }
         &_refunded {
             border: 1px solid rgb(137, 137, 137);
-            background: rgb(137, 137, 137);
-            color: white;
+            background: #c0c0c0;
         }
     }
 

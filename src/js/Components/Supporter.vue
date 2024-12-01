@@ -128,7 +128,10 @@
               </template>
 
             </el-table-column>
-            <el-table-column label="Payment Status" prop="payment_status">
+            <el-table-column label="Payment Status">
+              <template #default="scope">
+                <span :class="'buymecoffee_status buymecoffee_status_' + scope.row.payment_status" v-html="scope.row.payment_status"></span>
+              </template>
             </el-table-column>
           </el-table>
         </div>
@@ -167,7 +170,6 @@ export default {
               { value: 'refunded', label: 'Refunded' },
               { value: 'cancelled', label: 'Cancelled'},
               { value: 'failed', label: 'Failed'},
-              { value: 'paid-initially', label: 'Paid Initially'}
             ]
         }
     },
@@ -190,19 +192,19 @@ export default {
       getFormatedAmount(amount) {
         return parseInt(amount / 100);
       },
-    getImage(path) {
-      return window.BuyMeCoffeeAdmin.assets_url + 'images/' + path;
-    },
-    updateStatus() {
-      ElMessageBox.confirm(
-          'Are you sure to change payment status?',
-          'Warning',
-          {
-            confirmButtonText: 'OK',
-            cancelButtonText: 'Cancel',
-            type: 'warning',
-          }
-      )
+      getImage(path) {
+        return window.BuyMeCoffeeAdmin.assets_url + 'images/' + path;
+      },
+      updateStatus() {
+        ElMessageBox.confirm(
+            'Are you sure to change payment status?',
+            'Warning',
+            {
+              confirmButtonText: 'OK',
+              cancelButtonText: 'Cancel',
+              type: 'warning',
+            }
+        )
           .then(() => {
             this.$post(
                 {

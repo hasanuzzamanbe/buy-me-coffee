@@ -12,7 +12,17 @@
 .el-input__wrapper {
   padding: 0px !important;
 }
-.el-textarea__inner, .el-input__inner {
+.input_fade_border {
+    .el-input__inner, .el-select__wrapper {
+        border: none !important;
+        box-shadow: none;
+        border-bottom: 1px solid #e4e7ed !important;
+        &:focus, &:active {
+          border: none !important;
+        }
+    }
+}
+.el-textarea__inner, .input_green_border .el-input__inner {
   &:focus, &:active {
     outline: none !important;
     box-shadow: none !important;

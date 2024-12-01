@@ -7,15 +7,15 @@
             content="Quick guided setup"
             placement="top"
         >
-          <a style="cursor:pointer;" @click="$router.push('quick-setup')">
-            <el-icon><Help /></el-icon>Setup |
+          <a class="cursor-pointer" @click="$router.push('quick-setup')">
+            <el-icon><Help /></el-icon><p class="ml-1">Setup</p> <p class="text-gray-400 ml-2 mr-2">|</p>
           </a>
         </el-tooltip>
-      <a :href="previewUrl" target="_blank"><el-icon style="margin-right:4px;">
-        <View/></el-icon> Preview</a>
+        <a :href="previewUrl" target="_blank"><el-icon>
+        <View/></el-icon><p class="ml-1">Preview</p></a>
     </div>
     <div class="quick_setup_tour" v-if="!supporters.length && !guidedTour && !fetching">
-      <p @click="setStore" style="float:right">x close </p>
+      <p class="float-right" @click="setStore">x close </p>
       <div>
         <el-icon><Setting /></el-icon>
       </div>
@@ -237,6 +237,7 @@ export default {
 
 .bmc_coffee_preview a {
   display: flex;
+  align-items: center;
   svg{
     width: 20px;
   }

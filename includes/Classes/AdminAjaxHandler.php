@@ -55,9 +55,11 @@ class AdminAjaxHandler
             'edit_supporter' => 'editSupporter',
             'get_supporter' => 'getSupporter',
             'delete_supporter' => 'deleteSupporter',
-            'update_payment_status' => 'updatePaymentStatus'
+            'update_payment_status' => 'updatePaymentStatus',
+            'status_report' => 'statusReport',
 
         );
+
         if (isset($validRoutes[$route])) {
             do_action('buy-me-coffee/doing_ajax_forms_' . $route);
             $data = isset($_REQUEST['data']) ? $this->sanitizeTextArray($_REQUEST['data']) : [];
@@ -70,6 +72,12 @@ class AdminAjaxHandler
     {
         $methods = PaymentHandler::getAllMethods();
         wp_send_json_success($methods, 200);
+    }
+
+    public function statusReport()
+    {
+        $report = (new Supporters())->statusReport();
+        wp_send_json_success($report, 200);
     }
 
     public function updatePaymentStatus($request)

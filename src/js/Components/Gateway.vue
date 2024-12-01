@@ -1,5 +1,5 @@
 <template>
-    <div class="buymecoffee_main_container">
+    <div class="buymecoffee_main_container input_green_border">
         <el-row class="buymecoffee_gateways">
             <h1 class="buymecoffee_menu_title">Payment Gateways</h1>
            <div class="buymecoffee_gateway_menu">

@@ -2,7 +2,7 @@
   <div class="buymecoffee_main_container">
     <el-row class="wpm-template" v-loading="saving">
       <div class="wpm-template-inner">
-        <div class="buymecoffee-editor">
+        <div class="buymecoffee-editor input_green_border">
           <el-row>
             <el-col :md="24" :lg="12" style="background: linear-gradient(122deg, #ffffff87, #c4fff654);border-radius:6px; padding: 24px;">
               <h1 class="buymecoffee_menu_title flex">Buy Me <CoffeeCup style="width:23px;"/>- Global settings</h1>

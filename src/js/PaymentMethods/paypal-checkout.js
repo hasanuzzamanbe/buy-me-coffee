@@ -7,7 +7,7 @@ class PaypalCheckout {
     init() {
         this.form.find('.wpm_submit_button, .buymecoffee_pay_method').hide()
 
-        let paypalButtonContainer = jQuery("<div style='padding: 0px;'></div>")
+        let paypalButtonContainer = jQuery("<div class='buymecoffee_paypal_button_wrap' style='padding: 0px;'></div>")
         paypal
             .Buttons({
                 fundingSource: paypal.FUNDING.PAYPAL,
@@ -21,6 +21,9 @@ class PaypalCheckout {
                 }, onApprove: (data, actions) => {
                     return actions.order.capture().then((details) => {
                         var transaction = details?.purchase_units[0].payments.captures[0];
+                        window.myform = this.form;
+                        this.form.find('.buymecoffee_paypal_button_wrap').hide();
+                        this.form.find('.complete_payment_instruction').html('Please wait, payment is being confirmed...');
                         jQuery.post(window.buymecoffee_general.ajax_url, {
                             action: 'buymecoffee_payment_confirmation_paypal',
                             hash: this.data.hash,

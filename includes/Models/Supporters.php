@@ -19,10 +19,6 @@ class Supporters extends Model
             ->offset($offset)
             ->limit($args['posts_per_page']);
 
-        $total = $query->count();
-        $lastPage = ceil($total / $args['posts_per_page']);
-
-        // if top supporter filters add
         if (isset($args['filter_top'])) {
             $query->where('payment_status', 'paid')
                 ->orWhere('payment_status', 'paid-initially')
@@ -39,6 +35,16 @@ class Supporters extends Model
             }
         } else {
             $query->orderBy('id', 'DESC');
+        }
+
+        if (isset($args['filter_status']) && $args['filter_status'] !== 'all') {
+            $query->where('payment_status', $args['filter_status']);
+        }
+
+        if (!empty($args['search'])) {
+            $query->where('supporters_name', 'LIKE', '%' . $args['search'] . '%')
+                ->orWhere('supporters_email', 'LIKE', '%' . $args['search'] . '%')
+                ->Where('payment_status', $args['filter_status']);
         }
 
         $supporters = $query->get();
@@ -61,6 +67,8 @@ class Supporters extends Model
         foreach ($currencyTotal as $currency) {
             $currency->formatted_total = PaymentHelper::getFormattedAmount($currency->total_amount, $currency->currency);
         }
+        $total = $query->count();
+        $lastPage = ceil($total / $args['posts_per_page']);
 
         wp_send_json_success(
             array(
@@ -73,6 +81,26 @@ class Supporters extends Model
                     'currency_total' => $currencyTotal,
                     'currency_total_pending' => $currencyTotalPending??[],
                 )
+            ),
+            200
+        );
+    }
+
+    public function statusReport()
+    {
+        $total = $this->getQuery()->count();
+        $totalPaid = $this->getQuery()->where('payment_status', 'paid')->count();
+        $totalPending = $this->getQuery()->where('payment_status', 'pending')->count();
+        $totalFailed = $this->getQuery()->where('payment_status', 'failed')->count();
+        $totalRefunded = $this->getQuery()->where('payment_status', 'refunded')->count();
+
+        wp_send_json_success(
+            array(
+                'total' => $total,
+                'total_paid' => $totalPaid,
+                'total_pending' => $totalPending,
+                'total_refunded' => $totalRefunded,
+                'total_failed' => $totalFailed,
             ),
             200
         );
