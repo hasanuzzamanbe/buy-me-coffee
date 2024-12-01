@@ -1,9 +1,9 @@
 === Buy Me a Coffee button & widgets - Fundraise with Stripe and PayPal ===
 Contributors: wpminers, hasanuzzamanshamim
-Tags: buy me a coffee, donations, payments, stripe payments, fundraise
+Tags: buy me a coffee, donation, payments, stripe payments, fundraising
 Requires at least: 4.5
-Tested up to: 6.6.1
-Stable tag: 1.0.3
+Tested up to: 6.7.1
+Stable tag: 1.0.4
 Requires PHP: 7.4
 License: GPLv2 or later
 Text Domain: buy-me-coffee
@@ -25,6 +25,43 @@ Donations are collected directly into your own PayPal or Stripe account merchant
 one-time donations are available now will implement recurring donations in the future.
 You can accept donations from your visitors using a Stripe and PayPal donation button, Form, or template. Accept donations from your visitors using a shortcode or a widget.
 It Will be available using a popup or a page.
+
+What is the purpose for "Buy Me a Coffee" Plugin?
+It's a Fundraising plugin with the most easy and flexible way for WordPress.
+In the age of digital content creation, monetizing your efforts has never been more important. Whether you're a blogger, artist, musician, or other form of content creation, the ability to take donations can dramatically improve your financial stability and allow you to continue producing high-quality content. The Buy Me a Coffee Donation Button & Widgets plugin for WordPress makes it simple to convert visitors into supporters by easily receiving donations using PayPal Pro and Stripe gateway.
+
+The Buy Me a Coffee donation button and widgets plugin is a strong fundraising tool that enables authors to collect monetary donations from their audience without any charge.
+
+To include a contribution button on the WordPress website or blog, asking fans to show their appreciation for efforts with donations. This method is particularly effective at motivating tiny, generous contributions that can accumulate to a significant income over time.
+
+Key Features
+1. Seamless Integration with Stripe and PayPal
+   One of the plugin's major features is its ability to interface with two of the most popular payment gateways: PayPal and Stripe. This provides your visitors with secure and familiar payment choices, resulting in a smooth transaction procedure.
+
+   PayPal Pro: Accept credit and debit card payments directly on your website, without redirecting people to another site, which improves the user experience.
+
+   Stripe: Stripe is always recommended for security and ease of use. It accepts multiple payment methods, making it simple for fans to donate using their favourite method.
+
+2. Customizable Donation Buttons.
+   Personalize your contribution button, and form easily even pages to match your requirements. You may easily change the colour, size, and create your own button to link it your own donation page.
+
+3. Flexible Donation Options
+   The Buy Me a Coffee plugin provides versatility by allowing you to select specified donation amounts or let users enter their own. This versatility is critical; some supporters may want to contribute more than the normal amount, while others may choose to offer a specified amount.
+
+4. Widget Support
+   There are some widgets to show buttons, forms and pages easily on your WordPress site using Gutenberg editor. Also, you may use shortcode for the old editors
+
+5. Reporting and Analytics
+   To get a clear report about recent donations and support no need to calculate manually. It is directly available on the dashboard.
+
+Why Take Donations Like Buy Me a Coffee?
+To establish a stronger bond with the audience by promoting donations, supporters can feel more connected when they can donate financially.
+
+Buy Me a Coffee button & widgets plugin is easy to set up plugin for WordPress websites. Set it up and encourage people to support your work by letting them know about the donation option via blog posts, newsletters, or social media sharing the link to your own site.
+
+To make an effective fundraising with PayPal Pro and Stripe seamlessly and personalise donation experiences Buy Me a Coffee is the quickest solution ever.
+
+In addition to improving audience engagement, adding a contribution button to your website creates a steady stream of revenue that lets you keep doing what you love. Use the Buy Me a Coffee donation button and widgets to begin fundraising right now, and change the way you connect with your supporters without spending a single penny.
 
 You can accept donations from your visitors using custom amounts.
 
@@ -75,20 +112,29 @@ Yes, it is secure. We don't store any data on our servers. All data is stored on
 3. Guided Quick setup
 4. Buy me a coffee Preview
 5. Stripe Payment settings
+6. Customizer for default template
+7. Filterable Donors/Supporters page
+8. Donor/Supporters Profile page
 
 ## Changelog
+= 1.0.4 December 01, 2024=
+- Adds PayPal Standard Payment on site confirmation
+- Adds New Supporters/Donor profile page
+- Adds Supporters table filter and search
+- Fixes Styling issues
+
 = 1.0.3 August 26, 2024=
-- Fixes styling issue
-- Fixes customizer module issue
-- Fixes checkout button issue
+- Fixes Styling issue
+- Fixes Customizer module issue
+- Fixes Checkout button issue
 
 = 1.0.2 March 10, 2024=
 - Adds Realtime theme customizer
 
-= 1.0.1 March 7, 2024=
+= 1.0.1 March 07, 2024=
 - Adds PayPal Pro Payment Gateway
 
-= 1.0.0 March 3, 2024=
+= 1.0.0 March 03, 2024=
 - Initial release
 
 # Development Docs
