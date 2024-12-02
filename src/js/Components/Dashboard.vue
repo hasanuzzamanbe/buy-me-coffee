@@ -43,7 +43,7 @@
           <div v-if="dummyChart" style="text-align: center; color:#e38110">
             NB: No actual data found! Once you receive some donations, this chart will be updated.
           </div>
-          <ChartRenderer v-if="renderChart" :chartProps="totalRevenue" :chartOptions="overviewOptions"></ChartRenderer>
+          <ChartRenderer v-if="renderChart" :chartProps="totalRevenue" :chartOptions="overviewOptions" height="400"></ChartRenderer>
         </div>
       </div>
     </div>
@@ -87,7 +87,7 @@ export default {
       totalRevenue: {
         id: 'revenue_chart',
         type: 'line',
-        height: '460',
+        height: '200',
         title: 'Total Revenue',
         color: 'rgba(111,194,255,0.51)',
         backgroundColor: 'rgba(24,220,244,0.32)',

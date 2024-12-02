@@ -8,26 +8,26 @@
         <el-col :span="12">
         </el-col>
       </el-row>
-      <div class="h-20 mt-5 flex flex-wrap gap-2.5 justify-around buymecoffee_supporters_stat_row">
-          <div v-loading="loading" element-loading-text="counting..." class="buymecoffee_supporters_stat buymecoffee_status_paid">
+      <div v-if="!loading" class="h-20 mt-5 flex flex-wrap gap-2.5 justify-around buymecoffee_supporters_stat_row">
+          <div class="buymecoffee_supporters_stat buymecoffee_status_paid">
             <div>
               <p class="buymecoffee_supporters_stat_count">{{statusReportData?.total_paid}} / {{statusReportData?.total}} of Total</p>
               <p class="buymecoffee_supporters_stat_status">Paid Transactions </p>
             </div>
           </div>
-          <div v-loading="loading" element-loading-text="counting..." class="buymecoffee_supporters_stat buymecoffee_status_pending">
+          <div class="buymecoffee_supporters_stat buymecoffee_status_pending">
             <div>
               <p class="buymecoffee_supporters_stat_count">{{statusReportData?.total_pending}}</p>
               <p class="buymecoffee_supporters_stat_status">Pending Transactions</p>
             </div>
           </div>
-          <div v-loading="loading" element-loading-text="counting..." class="buymecoffee_supporters_stat buymecoffee_status_failed">
+          <div class="buymecoffee_supporters_stat buymecoffee_status_failed">
             <div>
               <p class="buymecoffee_supporters_stat_count">{{statusReportData?.total_failed}}</p>
               <p class="buymecoffee_supporters_stat_status">Failed Transactions</p>
             </div>
           </div>
-        <div v-loading="loading" element-loading-text="counting..." class="buymecoffee_supporters_stat buymecoffee_status_refunded">
+        <div class="buymecoffee_supporters_stat buymecoffee_status_refunded">
           <div>
             <p class="buymecoffee_supporters_stat_count">{{statusReportData?.total_refunded}}</p>
             <p class="buymecoffee_supporters_stat_status ">Refunded Transactions</p>
