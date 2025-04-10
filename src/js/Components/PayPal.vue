@@ -70,7 +70,7 @@
                     </el-tooltip>
                   </div>
 
-                    <div class="action_right" style="margin-top: 24px;">
+                    <div class="action_right mt-4">
                         <el-button @click="saveSettings()" type="primary" size="default">Save PayPal Settings</el-button>
                     </div>
                 </el-form>

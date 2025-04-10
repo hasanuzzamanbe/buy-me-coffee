@@ -2,8 +2,8 @@
 Contributors: wpminers, hasanuzzamanshamim
 Tags: buy me a coffee, donation, payments, stripe payments, fundraising
 Requires at least: 4.5
-Tested up to: 6.7.1
-Stable tag: 1.0.4
+Tested up to: 6.7.2
+Stable tag: 1.0.5
 Requires PHP: 7.4
 License: GPLv2 or later
 Text Domain: buy-me-coffee
@@ -117,6 +117,10 @@ Yes, it is secure. We don't store any data on our servers. All data is stored on
 8. Donor/Supporters Profile page
 
 ## Changelog
+= 1.0.5 April 10, 2025=
+- Fixes Chart height issue
+- Fixes Styling issues
+
 = 1.0.4 December 01, 2024=
 - Adds PayPal Standard Payment on site confirmation
 - Adds New Supporters/Donor profile page

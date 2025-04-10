@@ -48,7 +48,7 @@
                         <p><b>Webhook URL: </b><code>{{webhook_url}}</code></p>
                     </div>
 
-                    <div class="action_right">
+                    <div class="action_right mt-4">
                         <el-button @click="saveSettings()" type="primary" size="default">Save Settings</el-button>
                     </div>
                 </el-form>

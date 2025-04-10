@@ -17,7 +17,6 @@ class API
             $payment_intent = $this->makeRequest('checkout/orders/' . $chargeId, 'v2', 'GET');
 
             if (is_wp_error($payment_intent)) {
-                dd($payment_intent, $chargeId);
                 throw new \Exception($payment_intent->get_error_message(), $payment_intent->get_error_code());
             }
             return $payment_intent;
